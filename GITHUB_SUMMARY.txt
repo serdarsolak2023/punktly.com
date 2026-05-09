@@ -1,6 +1,7 @@
-PIN-Vergessen-Funktion ergänzt:
-- Neuer Button „PIN vergessen?“ im Elternbereich
-- Eltern-PIN kann per Bestätigungsfenster zurückgesetzt werden
-- Nach dem Zurücksetzen kann direkt eine neue PIN erstellt werden
-- PIN wird lokal und in Firebase aktualisiert
-- Elternbereich-UX verbessert
+PIN-Reset mit Sicherheitsabfrage:
+- Soundtest aus dem Elternbereich entfernt
+- „PIN vergessen?“ bleibt als Reset-Funktion sichtbar
+- PIN-Reset jetzt nur mit Sicherheitsfrage und korrekter Antwort möglich
+- Neue Eltern-PIN kann nach richtiger Sicherheitsantwort gesetzt werden
+- Sicherheitsfrage und Antwort können nur im geöffneten Elternbereich geändert werden
+- Speicherung der Sicherheitsabfrage in Firebase ergänzt

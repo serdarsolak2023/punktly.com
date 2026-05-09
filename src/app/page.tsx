@@ -444,6 +444,10 @@ export default function PunktlyRoleSplit() {
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
+  const [parentSecurityQuestion, setParentSecurityQuestion] = useState("");
+  const [parentSecurityAnswer, setParentSecurityAnswer] = useState("");
+  const [resetSecurityAnswer, setResetSecurityAnswer] = useState("");
+  const [resetNewParentPin, setResetNewParentPin] = useState("");
 
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -565,21 +569,43 @@ function celebrate(message: string) {
 
   async function resetParentPin() {
     try {
-      setSavedParentPin("");
-      setPinInput("");
-      setParentUnlocked(false);
-      setShowPinReset(false);
-      localStorage.removeItem("punktlyParentPin");
+      if (!parentSecurityQuestion.trim() || !parentSecurityAnswer.trim()) {
+        celebrate("Noch keine Sicherheitsfrage im Elternbereich angelegt.");
+        return;
+      }
+
+      if (!resetSecurityAnswer.trim()) {
+        celebrate("Bitte Sicherheitsantwort eingeben.");
+        return;
+      }
+
+      if (resetSecurityAnswer.trim().toLowerCase() !== parentSecurityAnswer.trim().toLowerCase()) {
+        celebrate("Sicherheitsantwort ist falsch.");
+        return;
+      }
+
+      if (resetNewParentPin.trim().length < 4) {
+        celebrate("Neue PIN muss mindestens 4 Zeichen haben.");
+        return;
+      }
+
+      setSavedParentPin(resetNewParentPin.trim());
+      localStorage.setItem("punktlyParentPin", resetNewParentPin.trim());
 
       const user = firebaseUser || auth.currentUser;
       if (user) {
         await setDoc(doc(db, "users", user.uid), {
-          parentPin: "",
+          parentPin: resetNewParentPin.trim(),
           updatedAt: serverTimestamp(),
         }, { merge: true });
       }
 
-      celebrate("Eltern-PIN wurde zurückgesetzt. Bitte neue PIN erstellen.");
+      setPinInput("");
+      setResetSecurityAnswer("");
+      setResetNewParentPin("");
+      setShowPinReset(false);
+
+      celebrate("Eltern-PIN wurde zurückgesetzt.");
     } catch (error) {
       console.error(error);
       celebrate("PIN konnte nicht zurückgesetzt werden.");
@@ -1130,6 +1156,14 @@ function celebrate(message: string) {
         } else if (user.displayName) {
           setParentDisplayName(user.displayName);
         }
+        if (typeof data.parentSecurityQuestion === "string") {
+          setParentSecurityQuestion(data.parentSecurityQuestion);
+        }
+
+        if (typeof data.parentSecurityAnswer === "string") {
+          setParentSecurityAnswer(data.parentSecurityAnswer);
+        }
+
       } else {
         if (user.displayName) setParentDisplayName(user.displayName);
         const localPin = localStorage.getItem("punktlyParentPin");
@@ -1145,7 +1179,7 @@ function celebrate(message: string) {
   async function saveParentProfile() {
     const user = firebaseUser || auth.currentUser;
     if (!user) {
-      celebrate("Bitte zuerst mit Google einloggen.");
+      celebrate("Bitte zuerst einloggen.");
       return;
     }
 
@@ -1166,6 +1200,18 @@ function celebrate(message: string) {
       setSavedParentPin(newParentPin.trim());
       localStorage.setItem("punktlyParentPin", newParentPin.trim());
       setNewParentPin("");
+    }
+
+    if (parentSecurityQuestion.trim() || parentSecurityAnswer.trim()) {
+      if (!parentSecurityQuestion.trim() || !parentSecurityAnswer.trim()) {
+        celebrate("Bitte Sicherheitsfrage und Antwort ausfüllen.");
+        return;
+      }
+
+      updates.parentSecurityQuestion = parentSecurityQuestion.trim();
+      updates.parentSecurityAnswer = parentSecurityAnswer.trim().toLowerCase();
+      setParentSecurityQuestion(parentSecurityQuestion.trim());
+      setParentSecurityAnswer(parentSecurityAnswer.trim().toLowerCase());
     }
 
     await setDoc(doc(db, "users", user.uid), updates, { merge: true });
@@ -1726,25 +1772,66 @@ alert(JSON.stringify(data, null, 2));
               PIN vergessen?
             </h2>
 
-            <p className="mt-3 font-bold text-slate-600">
-              Wenn du die Eltern-PIN zurücksetzt, kannst du danach direkt eine neue PIN erstellen.
-            </p>
+            {parentSecurityQuestion.trim() ? (
+              <>
+                <p className="mt-3 font-bold text-slate-600">
+                  Beantworte die Sicherheitsfrage und lege direkt eine neue Eltern-PIN fest.
+                </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <button
-                onClick={() => setShowPinReset(false)}
-                className="rounded-[1.35rem] bg-slate-100 px-4 py-4 font-black text-slate-700"
-              >
-                Abbrechen
-              </button>
+                <div className="mt-5 rounded-[1.5rem] bg-sky-50 p-4 text-left">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-600">Sicherheitsfrage</p>
+                  <p className="mt-2 text-lg font-black text-sky-950">{parentSecurityQuestion}</p>
+                </div>
 
-              <button
-                onClick={resetParentPin}
-                className="rounded-[1.35rem] bg-gradient-to-br from-amber-300 via-orange-300 to-pink-300 px-4 py-4 font-black text-amber-950 shadow-[0_12px_30px_rgba(245,158,11,.30)]"
-              >
-                PIN zurücksetzen
-              </button>
-            </div>
+                <input
+                  value={resetSecurityAnswer}
+                  onChange={(e) => setResetSecurityAnswer(e.target.value)}
+                  placeholder="Antwort eingeben"
+                  className="mt-4 w-full rounded-[1.35rem] border-2 border-sky-100 bg-white px-4 py-3 text-center font-black outline-none"
+                />
+
+                <input
+                  value={resetNewParentPin}
+                  onChange={(e) => setResetNewParentPin(e.target.value)}
+                  placeholder="Neue Eltern-PIN"
+                  type="password"
+                  className="mt-3 w-full rounded-[1.35rem] border-2 border-sky-100 bg-white px-4 py-3 text-center font-black outline-none"
+                />
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <button
+                    onClick={() => {
+                      setShowPinReset(false);
+                      setResetSecurityAnswer("");
+                      setResetNewParentPin("");
+                    }}
+                    className="rounded-[1.35rem] bg-slate-100 px-4 py-4 font-black text-slate-700"
+                  >
+                    Abbrechen
+                  </button>
+
+                  <button
+                    onClick={resetParentPin}
+                    className="rounded-[1.35rem] bg-gradient-to-br from-amber-300 via-orange-300 to-pink-300 px-4 py-4 font-black text-amber-950 shadow-[0_12px_30px_rgba(245,158,11,.30)]"
+                  >
+                    PIN zurücksetzen
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="mt-4 rounded-[1.5rem] bg-amber-50 p-4 font-black text-amber-800">
+                  Noch keine Sicherheitsfrage angelegt. Öffne den Elternbereich und lege dort zuerst eine Sicherheitsfrage fest.
+                </p>
+
+                <button
+                  onClick={() => setShowPinReset(false)}
+                  className="mt-6 w-full rounded-[1.35rem] bg-slate-100 px-4 py-4 font-black text-slate-700"
+                >
+                  Schließen
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -1989,20 +2076,12 @@ alert(JSON.stringify(data, null, 2));
                   type="password"
                   className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-center text-xl font-black"
                 />
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <button
-                    onClick={() => playSound("click")}
-                    className="w-full rounded-[1.35rem] bg-blue-100 px-6 py-3 font-black text-sky-800"
-                  >
-                    🔊 Sound testen
-                  </button>
-                  <button
-                    onClick={() => setShowPinReset(true)}
-                    className="w-full rounded-[1.35rem] bg-amber-100 px-6 py-3 font-black text-amber-800"
-                  >
-                    🔁 PIN vergessen?
-                  </button>
-                </div>
+                <button
+                  onClick={() => setShowPinReset(true)}
+                  className="w-full rounded-[1.35rem] bg-amber-100 px-6 py-3 font-black text-amber-800"
+                >
+                  🔁 PIN vergessen?
+                </button>
                 {!savedParentPin ? (
                   <button
                     onClick={enterParent}
@@ -2655,8 +2734,32 @@ alert(JSON.stringify(data, null, 2));
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner font-bold"
                       />
 
+                      <div className="rounded-[1.8rem] bg-amber-50 p-4">
+                        <p className="mb-3 font-black text-amber-900">🔐 Sicherheitsabfrage für PIN-Reset</p>
+
+                        <input
+                          value={parentSecurityQuestion}
+                          onChange={e => setParentSecurityQuestion(e.target.value)}
+                          placeholder="Sicherheitsfrage, z. B. Wie heißt dein erstes Kind?"
+                          className="mb-3 w-full rounded-[1.4rem] border-[3px] border-amber-100 bg-white/90 p-4 shadow-inner font-bold"
+                        />
+
+                        <input
+                          value={parentSecurityAnswer}
+                          onChange={e => setParentSecurityAnswer(e.target.value)}
+                          placeholder="Antwort für PIN-Reset"
+                          className="w-full rounded-[1.4rem] border-[3px] border-amber-100 bg-white/90 p-4 shadow-inner font-bold"
+                        />
+
+                        <p className="mt-3 text-sm font-bold text-amber-700">
+                          Diese Sicherheitsabfrage kann nur hier im geöffneten Elternbereich geändert werden.
+                        </p>
+                      </div>
+
                       <div className="rounded-[1.35rem] bg-sky-50 p-4 font-bold text-sky-800">
                         Aktueller PIN-Status: {savedParentPin ? "✅ PIN gespeichert" : "❌ Noch keine PIN gespeichert"}
+                        <br />
+                        Sicherheitsfrage: {parentSecurityQuestion ? "✅ angelegt" : "❌ noch nicht angelegt"}
                       </div>
 
                       <button
