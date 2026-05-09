@@ -1582,7 +1582,7 @@ alert(JSON.stringify(data, null, 2));
 
             <button
               onClick={loginWithApple}
-              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-black px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] md:text-lg"
+              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-slate-950 px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] md:text-lg"
             >
                Mit Apple ID einloggen
             </button>
@@ -1653,7 +1653,7 @@ alert(JSON.stringify(data, null, 2));
           <button
             onClick={startApplePayCheckout}
             disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-black py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:bg-slate-400 disabled:opacity-70"
+            className="w-full rounded-[1.7rem] bg-slate-950 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:bg-slate-400 disabled:opacity-70"
           >
             🍎 Apple Pay
           </button>
@@ -1933,21 +1933,76 @@ alert(JSON.stringify(data, null, 2));
 <div className="mx-auto max-w-6xl">
         <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
           {area === "child" ? (
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="grid gap-5 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
               <div className="flex items-center gap-5">
                 <img
                   src="/PunktlyLogo.png"
                   alt="Punktly Logo"
-                  className="h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+                  className="h-24 w-24 flex-none object-contain drop-shadow-xl md:h-28 md:w-28"
                 />
 
-                <div>
-                  <h1 className="punktly-welcome-wipe text-xl font-black text-sky-950 md:text-2xl">
+                <div className="min-w-0">
+                  <h1 className="punktly-welcome-wipe text-2xl font-black leading-tight text-sky-950 md:text-3xl">
                     <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
                   </h1>
-                  <p className="punktly-rainbow-text mt-2 text-lg font-black md:text-xl">
+                  <p className="punktly-rainbow-text mt-2 text-xl font-black leading-tight md:text-2xl">
                     Punktly wünscht Ihnen Viel Spaß
                   </p>
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                <nav className="flex flex-wrap justify-start gap-2 lg:justify-end">
+                  {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setActiveLegalPage(page)}
+                      className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                    >
+                      {legalPages[page].title}
+                    </button>
+                  ))}
+                </nav>
+
+                <div className="flex flex-wrap justify-start gap-3 lg:justify-end">
+                  {firebaseUser && (
+                    <div className="rounded-[1.5rem] bg-white px-5 py-3 font-black text-sky-700 shadow-sm">
+                      Login: {firebaseUser.email}
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      setSoundEnabled(!soundEnabled);
+                      playSound("click");
+                    }}
+                    className={`rounded-[1.5rem] px-5 py-3 font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
+                  >
+                    🔊 Sounds: {soundEnabled ? "An" : "Aus"}
+                  </button>
+
+                  <button
+                    onClick={goStart}
+                    className="rounded-[1.5rem] bg-white px-5 py-3 font-black text-sky-700 shadow-sm"
+                  >
+                    <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : area === "parent" ? (
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <img
+                  src="/PunktlyLogo.png"
+                  alt="Punktly Logo"
+                  className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
+                />
+                <div>
+                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
+                    Punktly
+                  </h1>
+                  <p className="font-bold text-sky-700">Elternbereich</p>
                 </div>
               </div>
 
@@ -1969,6 +2024,16 @@ alert(JSON.stringify(data, null, 2));
                     Login: {firebaseUser.email}
                   </div>
                 )}
+
+                {firebaseUser && (
+                  <button
+                    onClick={logoutGoogle}
+                    className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
+                  >
+                    Google Logout
+                  </button>
+                )}
+
                 <button
                   onClick={() => {
                     setSoundEnabled(!soundEnabled);
@@ -1978,6 +2043,7 @@ alert(JSON.stringify(data, null, 2));
                 >
                   🔊 Sounds: {soundEnabled ? "An" : "Aus"}
                 </button>
+
                 <button onClick={goStart} className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
                   <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
                 </button>
@@ -1995,9 +2061,7 @@ alert(JSON.stringify(data, null, 2));
                   <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
                     Punktly
                   </h1>
-                  <p className="font-bold text-sky-700">
-                    {area === "parent" ? "Elternbereich" : "Bitte Bereich wählen"}
-                  </p>
+                  <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
                 </div>
               </div>
 
@@ -2012,36 +2076,6 @@ alert(JSON.stringify(data, null, 2));
                   </button>
                 ))}
               </nav>
-
-              {area === "parent" && (
-                <div className="flex flex-wrap gap-2">
-                  {firebaseUser && (
-                    <div className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
-                      Login: {firebaseUser.email}
-                    </div>
-                  )}
-                  {firebaseUser && (
-                    <button
-                      onClick={logoutGoogle}
-                      className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
-                    >
-                      Google Logout
-                    </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      setSoundEnabled(!soundEnabled);
-                      playSound("click");
-                    }}
-                    className={`rounded-[1.35rem] px-4 py-3 font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
-                  >
-                    🔊 Sounds: {soundEnabled ? "An" : "Aus"}
-                  </button>
-                  <button onClick={goStart} className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
-                    <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
-                  </button>
-                </div>
-              )}
             </div>
           )}
         </header>

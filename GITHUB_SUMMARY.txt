@@ -1,6 +1,7 @@
-Kinderbereich-Header angepasst:
-- Kompaktes Willkommen-Header-Layout nur im Kinderbereich aktiviert
-- Startseite und Elternbereich erhalten eigene Header-Darstellung
-- Login-, Sound- und Bereich-wechseln-Elemente im Kinderbereich modern angeordnet
-- Rechtliche Navigation bleibt erhalten
-- Kinderbereich wirkt jetzt eigenständiger und app-ähnlicher
+Kinderbereich-Header exakt getrennt:
+- Kinderbereich erhält eigenes Header-Layout nach gewünschtem Design
+- Logo links, Willkommenstext daneben, Rechtliches/Login/Sounds/Bereich wechseln rechts
+- Schwarzer Balken entfernt
+- Header erscheint nur bei area === "child"
+- Elternbereich und Startseite bleiben separat aufgebaut
+- Bessere Trennung von Hauptseite, Startseite, Kinderbereich und Elternbereich
