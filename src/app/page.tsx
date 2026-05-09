@@ -1977,50 +1977,51 @@ alert(JSON.stringify(data, null, 2));
 `}</style>
 
 <div className="mx-auto max-w-6xl">
+        {(area === "child" || area === "parent") && (
+          <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
+            area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
+          }`}>
+            {area === "child" ? "KINDERBEREICH HEADER" : "ELTERNBEREICH HEADER"}
+            <span>{area === "child" ? "👦" : "👥"}</span>
+          </div>
+        )}
+
         <header
           className={`relative mb-5 overflow-hidden rounded-[2.8rem] border-[3px] border-white p-5 shadow-[0_24px_70px_rgba(37,99,235,.18)] backdrop-blur-xl ${
             area === "parent"
-              ? "bg-gradient-to-br from-purple-100 via-sky-100 to-cyan-100"
+              ? "bg-gradient-to-br from-violet-100 via-fuchsia-100 to-purple-200"
               : area === "child"
-              ? "bg-gradient-to-br from-sky-100 via-white to-cyan-100"
+              ? "bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100"
               : "bg-white/90"
           }`}
         >
           {(area === "child" || area === "parent") && (
             <>
-              <img
-                src="/PunktlyLogo.png"
-                alt=""
-                aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -bottom-8 left-4 h-20 w-20 rotate-[-18deg] object-contain opacity-70"
-              />
-              <img
-                src="/PunktlyLogo.png"
-                alt=""
-                aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute bottom-3 left-[24%] h-16 w-16 rotate-[14deg] object-contain opacity-55"
-              />
-              <img
-                src="/PunktlyLogo.png"
-                alt=""
-                aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -bottom-5 left-[48%] h-14 w-14 rotate-[8deg] object-contain opacity-50"
-                style={{ animationDelay: "1s" }}
-              />
-              <img
-                src="/PunktlyLogo.png"
-                alt=""
-                aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute bottom-4 right-[18%] h-16 w-16 rotate-[-10deg] object-contain opacity-55"
-                style={{ animationDelay: ".7s" }}
-              />
-              <img
-                src="/PunktlyLogo.png"
-                alt=""
-                aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -right-5 -top-3 h-20 w-20 rotate-[18deg] object-contain opacity-55"
-                style={{ animationDelay: "1.4s" }}
-              />
+              <div className="pointer-events-none absolute inset-0 opacity-80">
+                <div className={`absolute inset-0 ${
+                  area === "parent"
+                    ? "bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,.95),transparent_32%),radial-gradient(circle_at_85%_75%,rgba(216,180,254,.70),transparent_36%)]"
+                    : "bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,.95),transparent_32%),radial-gradient(circle_at_85%_75%,rgba(125,211,252,.55),transparent_36%)]"
+                }`} />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-white/35" />
+              </div>
+
+              <img src="/badges/badge-01.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -bottom-8 left-3 h-24 w-24 rotate-[-18deg] rounded-full object-contain opacity-90" />
+              <img src="/badges/badge-02.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-5 left-[22%] h-20 w-20 rotate-[14deg] rounded-full object-contain opacity-80" />
+              <img src="/badges/badge-03.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -bottom-2 left-[38%] h-16 w-16 rotate-[8deg] rounded-full object-contain opacity-75"
+                style={{ animationDelay: "1s" }} />
+              <img src="/badges/badge-04.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-3 right-[30%] h-20 w-20 rotate-[-10deg] rounded-full object-contain opacity-75"
+                style={{ animationDelay: ".7s" }} />
+              <img src="/badges/badge-05.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -right-5 bottom-4 h-24 w-24 rotate-[18deg] rounded-full object-contain opacity-80"
+                style={{ animationDelay: "1.4s" }} />
+              <img src="/badges/badge-06.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute right-[8%] -top-5 h-16 w-16 rotate-[12deg] rounded-full object-contain opacity-65"
+                style={{ animationDelay: "2s" }} />
             </>
           )}
 
@@ -2049,7 +2050,7 @@ alert(JSON.stringify(data, null, 2));
                     <button
                       key={page}
                       onClick={() => setActiveLegalPage(page)}
-                      className="rounded-full bg-white/85 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white"
+                      className="rounded-full bg-white/90 px-4 py-2 text-xs font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white"
                     >
                       {legalPages[page].title}
                     </button>
@@ -2077,7 +2078,7 @@ alert(JSON.stringify(data, null, 2));
 
                   <button
                     onClick={goStart}
-                    className={`rounded-[1.6rem] bg-white/90 px-5 py-3 text-sm font-black shadow-[0_10px_24px_rgba(37,99,235,.18)] ring-2 transition hover:scale-[1.02] ${
+                    className={`rounded-[1.6rem] bg-white/95 px-5 py-3 text-base font-black shadow-[0_10px_24px_rgba(37,99,235,.18)] ring-2 transition hover:scale-[1.02] ${
                       area === "parent"
                         ? "text-purple-700 ring-purple-200"
                         : "text-sky-700 ring-sky-200"
@@ -2118,6 +2119,47 @@ alert(JSON.stringify(data, null, 2));
             </div>
           )}
         </header>
+
+        {area === "parent" && (
+          <section className="mb-5 rounded-[2.5rem] border-[3px] border-white bg-white/95 p-5 shadow-[0_20px_60px_rgba(37,99,235,.12)]">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-md">⭐</div>
+              <h2 className="text-2xl font-black text-sky-950">Zusammenfassung</h2>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">🎨</p>
+                <p className="mt-2 font-black text-sky-950">Einheitliches Design</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Kinder- und Elternbereich haben das gleiche moderne Design und Layout.</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">🛡️</p>
+                <p className="mt-2 font-black text-sky-950">Vertrauen & Sicherheit</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Klare rechtliche Links und sichere, grüne Login-Buttons für Vertrauen.</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">🪙</p>
+                <p className="mt-2 font-black text-sky-950">Motivierende Coins</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Verschiedene Coins aus den Badges sorgen für Dynamik und Motivation.</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">🔊</p>
+                <p className="mt-2 font-black text-sky-950">Sounds An/Aus</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Die Sound-Funktion bleibt sichtbar und kann jederzeit aktiviert werden.</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">🔁</p>
+                <p className="mt-2 font-black text-sky-950">Bereich wechseln</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Stylischer Button für den schnellen Wechsel zwischen Kinder- und Elternbereich.</p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {activeLegalPage && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-950/50 p-4 backdrop-blur-sm">
