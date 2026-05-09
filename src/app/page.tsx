@@ -1733,19 +1733,22 @@ alert(JSON.stringify(data, null, 2));
 
 
       <div className="mx-auto max-w-6xl">
-        <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="animate-floaty punktly-float grid h-16 w-16 place-items-center rounded-[1.8rem] bg-gradient-to-br from-blue-500 to-cyan-400 shadow-[0_12px_30px_rgba(37,99,235,.35)] overflow-hidden ring-4 ring-white"><FoxCoinImage className="h-14 w-14" /></div>
+        <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-5">
+              <img
+                src="/PunktlyLogo.png"
+                alt="Punktly Logo"
+                className="h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+              />
+
               <div>
-                <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
-        <img
-        src="/PUNKTLY.png"
-        alt="Punktly Logo"
-        className="mx-auto h-28 w-28 object-contain drop-shadow-xl"
-      />
-      </h1>
-                <p className="font-bold text-sky-700">{area === "child" ? "Kinderbereich" : area === "parent" ? "Elternbereich" : "Bitte Bereich wählen"}</p>
+                <h1 className="text-2xl font-black text-sky-950 md:text-3xl">
+                  ✨ Willkommen auf Punktly ✨
+                </h1>
+                <p className="mt-2 text-lg font-black text-slate-400 md:text-xl">
+                  Punktly wünscht Ihnen Viel Spaß
+                </p>
               </div>
             </div>
 
