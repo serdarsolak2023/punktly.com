@@ -1438,31 +1438,150 @@ alert(JSON.stringify(data, null, 2));
     return (
 <main className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-sky-50 via-cyan-50 to-amber-100">
         <div className="mx-auto max-w-6xl grid gap-6 lg:grid-cols-[1.1fr_.9fr] items-center min-h-screen">
-          <section className="rounded-[2.5rem] bg-white/90 border-2 border-white p-8 shadow-[0_24px_70px_rgba(37,99,235,.18)] backdrop-blur-xl">
-            <div className="flex justify-center">
-              <img
-                src="/FuchsCoin.png"
-                alt="Punktly FuchsCoin"
-                className="h-44 w-44 object-contain drop-shadow-xl animate-floaty"
-              />
-            </div>
+          
+<section className="mx-auto w-full max-w-2xl rounded-[3rem] bg-white/95 p-8 shadow-[0_30px_80px_rgba(14,165,233,.12)] ring-1 ring-white/80">
+  <div className="text-center">
+    <img
+      src="/PunktlyLogo.png"
+      alt="Punktly"
+      className="mx-auto h-36 w-36 object-contain drop-shadow-xl"
+    />
 
-            <h1 className="mt-6 text-center text-5xl md:text-6xl font-black text-sky-950">
-              Punktly freischalten
-            </h1>
+    <h1 className="mt-5 text-6xl font-black tracking-tight text-sky-950">
+      Punktly
+    </h1>
 
-            <p className="mt-4 text-center text-lg font-bold text-sky-700">
-              Die Familien-App für Aufgaben, Motivation, FuchsCoins,
-              Belohnungen und Elternkontrolle.
-            </p>
+    <p className="mt-3 text-2xl font-black text-sky-700">
+      Punktly freischalten
+    </p>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <div className="rounded-[1.35rem] bg-sky-50 p-4 font-black text-sky-900">✅ Aufgaben</div>
-              <div className="rounded-[1.35rem] bg-yellow-50 p-4 font-black text-amber-900">🪙 FuchsCoins</div>
-              <div className="rounded-[1.35rem] bg-green-50 p-4 font-black text-green-900">👨‍👩‍👧 Elternbereich</div>
-              <div className="rounded-[1.35rem] bg-purple-50 p-4 font-black text-purple-900">🎁 Schatzkisten</div>
-            </div>
-          </section>
+    <p className="mt-4 text-lg font-bold text-slate-600">
+      Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+    </p>
+  </div>
+
+  <div className="mt-8 grid gap-4 sm:grid-cols-2">
+    <div className="rounded-[2rem] bg-emerald-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-emerald-900">✅ Aufgaben & Motivation</p>
+    </div>
+
+    <div className="rounded-[2rem] bg-amber-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-amber-900">🎁 Schatzkisten & Belohnungen</p>
+    </div>
+
+    <div className="rounded-[2rem] bg-sky-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-sky-900">🏡 Eigenes Zimmer</p>
+    </div>
+
+    <div className="rounded-[2rem] bg-purple-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-purple-900">🎨 Eigene Motive</p>
+    </div>
+
+    <div className="rounded-[2rem] bg-pink-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-pink-900">🏆 Level & Erfolge</p>
+    </div>
+
+    <div className="rounded-[2rem] bg-cyan-50 p-5 text-left shadow-md">
+      <p className="text-xl font-black text-cyan-900">👨‍👩‍👧 Elternbereich</p>
+    </div>
+  </div>
+
+  <div className="mt-10 rounded-[2.5rem] bg-slate-50 p-6 shadow-inner">
+    <p className="mb-5 text-center text-3xl font-black text-slate-900">
+      🔐 Login
+    </p>
+
+    <div className="space-y-4">
+      <button
+        onClick={loginWithGoogle}
+        className="w-full rounded-[1.8rem] bg-white px-5 py-5 text-2xl font-black text-sky-700 shadow-xl"
+      >
+        🔐 Mit Google einloggen
+      </button>
+
+      <button
+        onClick={loginWithApple}
+        className="w-full rounded-[1.8rem] bg-black px-5 py-5 text-2xl font-black text-white shadow-xl"
+      >
+         Mit Apple ID einloggen
+      </button>
+
+      <div className="rounded-[2rem] bg-white p-5 shadow-lg">
+        <div className="mb-4 grid grid-cols-2 gap-3">
+          <button
+            onClick={() => setAuthMode("login")}
+            className={`rounded-[1.3rem] px-4 py-3 text-lg font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+          >
+            Einloggen
+          </button>
+
+          <button
+            onClick={() => setAuthMode("register")}
+            className={`rounded-[1.3rem] px-4 py-3 text-lg font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+          >
+            Registrieren
+          </button>
+        </div>
+
+        <input
+          value={authEmail}
+          onChange={(e) => setAuthEmail(e.target.value)}
+          placeholder="E-Mail-Adresse"
+          type="email"
+          className="mb-3 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 px-5 py-4 text-lg font-bold"
+        />
+
+        <input
+          value={authPassword}
+          onChange={(e) => setAuthPassword(e.target.value)}
+          placeholder="Passwort"
+          type="password"
+          className="mb-4 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 px-5 py-4 text-lg font-bold"
+        />
+
+        <button
+          onClick={loginOrRegisterWithEmail}
+          className="w-full rounded-[1.5rem] bg-gradient-to-r from-emerald-400 to-teal-500 px-5 py-4 text-xl font-black text-white shadow-lg"
+        >
+          ✉️ Mit E-Mail fortfahren
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div className="mt-10">
+    <p className="mb-5 text-center text-3xl font-black text-slate-900">
+      💳 Zahlungsmethoden
+    </p>
+
+    <div className="grid gap-4">
+      <button
+        onClick={startApplePayCheckout}
+        disabled={isPaying}
+        className="w-full rounded-[2rem] bg-black py-5 text-2xl font-black text-white shadow-xl"
+      >
+        🍎 Apple Pay
+      </button>
+
+      <button
+        onClick={startGooglePayCheckout}
+        disabled={isPaying}
+        className="w-full rounded-[2rem] bg-white py-5 text-2xl font-black text-slate-900 shadow-xl"
+      >
+        🌐 Google Pay
+      </button>
+
+      <button
+        onClick={startPaypalCheckout}
+        disabled={isPaying}
+        className="w-full rounded-[2rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-2xl font-black text-white shadow-xl"
+      >
+        🅿️ PayPal
+      </button>
+    </div>
+  </div>
+</section>
+
 
           <section className="rounded-[2.5rem] bg-white/95 border-4 border-yellow-300 p-8 shadow-[0_24px_70px_rgba(245,158,11,.22)] backdrop-blur-xl">
             <p className="text-sm font-black uppercase text-blue-600">
