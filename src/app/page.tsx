@@ -20,8 +20,8 @@ import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   return (
     <img
-      src="/FuchsCoin.png"
-      alt="Punktly FuchsCoin"
+      src="/PunktlyLogo.png"
+      alt="Punktly Logo"
       className={`${className} object-contain drop-shadow-xl`}
     />
   );
@@ -269,7 +269,7 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
         />
       ) : (
         <img
-          src="/FuchsCoin.png"
+          src="/PunktlyLogo.png"
           alt="Punktly Motiv"
           className="mx-auto h-64 w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
         />
@@ -287,8 +287,8 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
 function Coin({ className = "w-7 h-7" }: { className?: string }) {
   return (
     <img
-      src="/FuchsCoin.png"
-      alt="Punktly FuchsCoin"
+      src="/PunktlyLogo.png"
+      alt="Punktly Logo"
       className={`${className} inline-block object-contain drop-shadow-[0_12px_30px_rgba(37,99,235,.22)]`}
     />
   );
@@ -1446,9 +1446,7 @@ alert(JSON.stringify(data, null, 2));
         className="mx-auto h-32 w-32 object-contain drop-shadow-xl"
       />
 
-      <h1 className="mt-5 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
-        Punktly
-      </h1>
+      <h1 className="mt-5 text-5xl font-black tracking-tight text-sky-950 md:text-6xl"></h1>
 
       <p className="mt-2 text-xl font-black text-sky-700">
         Punktly freischalten
@@ -1739,10 +1737,10 @@ alert(JSON.stringify(data, null, 2));
               <div>
                 <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
         <img
-          src="/PunktlyLogo.png"
-          alt="Punktly Logo"
-          className="mx-auto h-20 w-20 object-contain drop-shadow-lg"
-        />
+        src="/PUNKTLY.png"
+        alt="Punktly Logo"
+        className="mx-auto h-28 w-28 object-contain drop-shadow-xl"
+      />
       </h1>
                 <p className="font-bold text-sky-700">{area === "child" ? "Kinderbereich" : area === "parent" ? "Elternbereich" : "Bitte Bereich wählen"}</p>
               </div>
