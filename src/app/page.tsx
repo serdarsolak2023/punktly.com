@@ -13,7 +13,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
@@ -406,6 +406,9 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
@@ -1005,6 +1008,64 @@ function celebrate(message: string) {
     }
   }
 
+  async function finishAuthLogin(user: FirebaseUser, message: string) {
+    setFirebaseUser(user);
+    await loadParentProfile(user);
+    await checkUserPaymentStatus(user);
+    playSound("success");
+    celebrate(message);
+  }
+
+  async function loginWithApple() {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      const provider = new OAuthProvider("apple.com");
+      provider.addScope("email");
+      provider.addScope("name");
+      const result = await signInWithPopup(auth, provider);
+      await finishAuthLogin(result.user, "Apple Login erfolgreich!");
+    } catch (error) {
+      console.error(error);
+      celebrate("Apple Login fehlgeschlagen. Prüfe Apple in Firebase.");
+    }
+  }
+
+  async function loginOrRegisterWithEmail() {
+    const email = authEmail.trim();
+    const password = authPassword.trim();
+
+    if (!email || !password) {
+      celebrate("Bitte E-Mail und Passwort eingeben.");
+      return;
+    }
+
+    if (password.length < 6) {
+      celebrate("Passwort braucht mindestens 6 Zeichen.");
+      return;
+    }
+
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+
+      const result = authMode === "register"
+        ? await createUserWithEmailAndPassword(auth, email, password)
+        : await signInWithEmailAndPassword(auth, email, password);
+
+      await finishAuthLogin(
+        result.user,
+        authMode === "register" ? "Konto erstellt!" : "E-Mail Login erfolgreich!"
+      );
+    } catch (error) {
+      console.error(error);
+      celebrate(authMode === "register" ? "Konto konnte nicht erstellt werden." : "E-Mail Login fehlgeschlagen.");
+    }
+  }
+
+  function loginWithPhoneSoon() {
+    celebrate("Telefon Login ist vorbereitet und braucht noch Firebase SMS/reCAPTCHA.");
+  }
+
+
   async function logoutGoogle() {
     try {
       await signOut(auth);
@@ -1259,7 +1320,7 @@ function celebrate(message: string) {
       }
 
       if (!currentUser) {
-        throw new Error("Google Login konnte nicht gestartet werden.");
+        throw new Error("Login konnte nicht gestartet werden.");
       }
 
       const response = await fetch("/api/paypal/create-order", {
@@ -1414,7 +1475,7 @@ alert(JSON.stringify(data, null, 2));
             <div className="mt-6 rounded-[1.8rem] bg-sky-50 p-4">
               {firebaseUser ? (
                 <div className="text-center">
-                  <p className="font-black text-sky-950">✅ Eingeloggt mit Google</p>
+                  <p className="font-black text-sky-950">✅ Eingeloggt</p>
                   <p className="mt-1 text-sm font-bold text-sky-700">{firebaseUser.email}</p>
                   {isCheckingPaid && <p className="mt-2 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
                   {hasPaid && <p className="mt-2 font-black text-emerald-700">✅ Bereits bezahlt – App freigeschaltet</p>}
@@ -1426,12 +1487,70 @@ alert(JSON.stringify(data, null, 2));
                   </button>
                 </div>
               ) : (
-                <button
-                  onClick={loginWithGoogle}
-                  className="w-full rounded-[1.35rem] bg-white px-5 py-4 text-xl font-black text-sky-700 shadow-[0_12px_30px_rgba(37,99,235,.22)]"
-                >
-                  🔐 Mit Google einloggen
-                </button>
+                <div className="space-y-3">
+                  <button
+                    onClick={loginWithGoogle}
+                    className="w-full rounded-[1.35rem] bg-white px-5 py-4 text-xl font-black text-sky-700 shadow-[0_12px_30px_rgba(37,99,235,.22)]"
+                  >
+                    🔐 Mit Google einloggen
+                  </button>
+
+                  <button
+                    onClick={loginWithApple}
+                    className="w-full rounded-[1.35rem] bg-slate-950 px-5 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(15,23,42,.22)]"
+                  >
+                     Mit Apple ID einloggen
+                  </button>
+
+                  <div className="rounded-[1.5rem] bg-white p-4 shadow-sm">
+                    <div className="mb-3 grid grid-cols-2 gap-2">
+                      <button
+                        onClick={() => setAuthMode("login")}
+                        className={`rounded-[1rem] px-3 py-2 font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                      >
+                        Einloggen
+                      </button>
+                      <button
+                        onClick={() => setAuthMode("register")}
+                        className={`rounded-[1rem] px-3 py-2 font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                      >
+                        Registrieren
+                      </button>
+                    </div>
+
+                    <input
+                      value={authEmail}
+                      onChange={(e) => setAuthEmail(e.target.value)}
+                      placeholder="E-Mail-Adresse"
+                      type="email"
+                      autoComplete="email"
+                      className="mb-2 w-full rounded-[1.2rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+                    />
+
+                    <input
+                      value={authPassword}
+                      onChange={(e) => setAuthPassword(e.target.value)}
+                      placeholder="Passwort"
+                      type="password"
+                      autoComplete={authMode === "register" ? "new-password" : "current-password"}
+                      className="mb-3 w-full rounded-[1.2rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+                    />
+
+                    <button
+                      onClick={loginOrRegisterWithEmail}
+                      className="w-full rounded-[1.2rem] bg-gradient-to-br from-emerald-400 to-teal-500 px-5 py-3 text-lg font-black text-white shadow-md"
+                    >
+                      {authMode === "register" ? "✉️ Konto mit E-Mail erstellen" : "✉️ Mit E-Mail einloggen"}
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={loginWithPhoneSoon}
+                    className="w-full rounded-[1.35rem] bg-amber-100 px-5 py-4 text-lg font-black text-amber-800 shadow-sm"
+                  >
+                    📱 Telefonnummer Login vorbereiten
+                  </button>
+                </div>
               )}
             </div>
 
@@ -1456,7 +1575,7 @@ alert(JSON.stringify(data, null, 2));
 <p className="mt-4 text-center text-sm font-bold text-blue-600">
   Nach dem Klick öffnet sich PayPal zur sicheren Zahlung.
   <br />
-  Dein Google-Konto wird danach automatisch freigeschaltet.
+  Dein Login-Konto wird danach automatisch freigeschaltet.
 </p>
           </section>
         </div>
@@ -1607,7 +1726,7 @@ alert(JSON.stringify(data, null, 2));
               <div className="flex flex-wrap gap-2">
                 {firebaseUser && (
                   <div className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
-                    Google: {firebaseUser.email}
+                    Login: {firebaseUser.email}
                   </div>
                 )}
                 {firebaseUser && area === "parent" && (

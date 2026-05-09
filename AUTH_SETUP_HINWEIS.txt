@@ -1,0 +1,26 @@
+Login-Erweiterung eingebaut:
+
+Aktiviert in der App:
+- Google Login
+- Apple ID Login
+- E-Mail Login
+- E-Mail Registrierung
+- Telefonnummer-Login als vorbereiteter Button
+
+Wichtig in Firebase aktivieren:
+Firebase Console > Authentication > Sign-in method:
+- Google aktiv
+- Apple aktiv
+- Email/Password aktiv
+- Phone nur aktivieren, wenn SMS/reCAPTCHA eingerichtet werden soll
+
+Apple Login braucht zusätzlich in Firebase:
+- Apple Service ID
+- Team ID
+- Key ID
+- Private Key aus dem Apple Developer Account
+
+Telefonnummer-Login braucht später:
+- Firebase Phone Provider
+- reCAPTCHA Einrichtung
+- SMS-Verifizierung
