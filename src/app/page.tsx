@@ -1957,7 +1957,7 @@ alert(JSON.stringify(data, null, 2));
                     <button
                       key={page}
                       onClick={() => setActiveLegalPage(page)}
-                      className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                      className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
                     >
                       {legalPages[page].title}
                     </button>
@@ -1966,7 +1966,7 @@ alert(JSON.stringify(data, null, 2));
 
                 <div className="flex flex-wrap justify-start gap-3 lg:justify-end">
                   {firebaseUser && (
-                    <div className="rounded-[1.5rem] bg-white px-5 py-3 font-black text-sky-700 shadow-sm">
+                    <div className="rounded-[1.3rem] bg-white px-4 py-2 text-sm font-black text-sky-700 shadow-sm">
                       Login: {firebaseUser.email}
                     </div>
                   )}
@@ -1976,14 +1976,14 @@ alert(JSON.stringify(data, null, 2));
                       setSoundEnabled(!soundEnabled);
                       playSound("click");
                     }}
-                    className={`rounded-[1.5rem] px-5 py-3 font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
+                    className={`rounded-[1.3rem] px-4 py-2 text-sm font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
                   >
                     🔊 Sounds: {soundEnabled ? "An" : "Aus"}
                   </button>
 
                   <button
                     onClick={goStart}
-                    className="rounded-[1.5rem] bg-white px-5 py-3 font-black text-sky-700 shadow-sm"
+                    className="rounded-[1.3rem] bg-white px-4 py-2 text-sm font-black text-sky-700 shadow-sm"
                   >
                     <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
                   </button>
@@ -2011,7 +2011,7 @@ alert(JSON.stringify(data, null, 2));
                   <button
                     key={page}
                     onClick={() => setActiveLegalPage(page)}
-                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                    className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
                   >
                     {legalPages[page].title}
                   </button>
@@ -2070,7 +2070,7 @@ alert(JSON.stringify(data, null, 2));
                   <button
                     key={page}
                     onClick={() => setActiveLegalPage(page)}
-                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                    className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
                   >
                     {legalPages[page].title}
                   </button>
