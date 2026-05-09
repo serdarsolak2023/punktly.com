@@ -1,6 +1,6 @@
-Animierter Startseiten-Header:
-- Willkommen-Text kleiner gemacht
-- Wipe-Animation für „Willkommen auf Punktly“ hinzugefügt
-- Animierte Farbverläufe für „Punktly wünscht Ihnen Viel Spaß“ integriert
-- Dezente Bewegungsanimationen und Sparkle-Effekte ergänzt
-- Header wirkt moderner, freundlicher und app-ähnlicher
+PIN-Vergessen-Funktion ergänzt:
+- Neuer Button „PIN vergessen?“ im Elternbereich
+- Eltern-PIN kann per Bestätigungsfenster zurückgesetzt werden
+- Nach dem Zurücksetzen kann direkt eine neue PIN erstellt werden
+- PIN wird lokal und in Firebase aktualisiert
+- Elternbereich-UX verbessert

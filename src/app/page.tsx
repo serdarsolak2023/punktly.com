@@ -443,6 +443,7 @@ export default function PunktlyRoleSplit() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
+  const [showPinReset, setShowPinReset] = useState(false);
 
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -558,6 +559,30 @@ function celebrate(message: string) {
       celebrate("Elternbereich geöffnet!");
     } else {
       celebrate("PIN falsch.");
+    }
+  }
+
+
+  async function resetParentPin() {
+    try {
+      setSavedParentPin("");
+      setPinInput("");
+      setParentUnlocked(false);
+      setShowPinReset(false);
+      localStorage.removeItem("punktlyParentPin");
+
+      const user = firebaseUser || auth.currentUser;
+      if (user) {
+        await setDoc(doc(db, "users", user.uid), {
+          parentPin: "",
+          updatedAt: serverTimestamp(),
+        }, { merge: true });
+      }
+
+      celebrate("Eltern-PIN wurde zurückgesetzt. Bitte neue PIN erstellen.");
+    } catch (error) {
+      console.error(error);
+      celebrate("PIN konnte nicht zurückgesetzt werden.");
     }
   }
 
@@ -1689,6 +1714,41 @@ alert(JSON.stringify(data, null, 2));
 
 
       
+
+      {showPinReset && (
+        <div className="fixed inset-0 z-[90] grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
+          <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-white bg-white p-6 text-center shadow-[0_24px_80px_rgba(15,23,42,.25)]">
+            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-amber-100 text-4xl shadow-md">
+              🔁
+            </div>
+
+            <h2 className="mt-4 text-3xl font-black text-sky-950">
+              PIN vergessen?
+            </h2>
+
+            <p className="mt-3 font-bold text-slate-600">
+              Wenn du die Eltern-PIN zurücksetzt, kannst du danach direkt eine neue PIN erstellen.
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <button
+                onClick={() => setShowPinReset(false)}
+                className="rounded-[1.35rem] bg-slate-100 px-4 py-4 font-black text-slate-700"
+              >
+                Abbrechen
+              </button>
+
+              <button
+                onClick={resetParentPin}
+                className="rounded-[1.35rem] bg-gradient-to-br from-amber-300 via-orange-300 to-pink-300 px-4 py-4 font-black text-amber-950 shadow-[0_12px_30px_rgba(245,158,11,.30)]"
+              >
+                PIN zurücksetzen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {resetConfirmKind && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
           <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_24px_80px_rgba(37,99,235,.25)]">
@@ -1929,7 +1989,20 @@ alert(JSON.stringify(data, null, 2));
                   type="password"
                   className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-center text-xl font-black"
                 />
-                <button onClick={() => playSound("click")} className="w-full rounded-[1.35rem] bg-blue-100 px-6 py-3 font-black text-sky-800">🔊 Sound testen</button>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <button
+                    onClick={() => playSound("click")}
+                    className="w-full rounded-[1.35rem] bg-blue-100 px-6 py-3 font-black text-sky-800"
+                  >
+                    🔊 Sound testen
+                  </button>
+                  <button
+                    onClick={() => setShowPinReset(true)}
+                    className="w-full rounded-[1.35rem] bg-amber-100 px-6 py-3 font-black text-amber-800"
+                  >
+                    🔁 PIN vergessen?
+                  </button>
+                </div>
                 {!savedParentPin ? (
                   <button
                     onClick={enterParent}
