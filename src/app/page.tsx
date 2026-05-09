@@ -15,7 +15,7 @@ import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, R
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
-import { collection, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   return (
@@ -28,6 +28,7 @@ function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
 }
 
 type Area = "start" | "child" | "parent";
+type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile";
 type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "calendar" | "family" | "stats" | "profile" | "settings";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
@@ -56,6 +57,7 @@ type Child = {
   activeAvatar?: string;
   activeBooster?: string;
   achievements: string[];
+  profileBadges?: string[];
 };
 
 type Task = { id: number; childId: number | "all"; title: string; coins: number; xp: number; repeat: Repeat; status: Status; day: string; };
@@ -65,6 +67,45 @@ type Challenge = { id: number; title: string; goal: number; current: number; rew
 type Chest = { id: number; title: string; price: number; tier: "Bronze" | "Silber" | "Gold"; content: string; opened: boolean; openedBy?: number; };
 
 const days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+const legalPages: Record<LegalPage, { title: string; intro: string; content: string[] }> = {
+  impressum: {
+    title: "Impressum",
+    intro: "Angaben gemäß § 5 TMG",
+    content: [
+      "Hier kannst du später deine offiziellen Anbieterangaben eintragen.",
+      "Name / Firma, Anschrift, Kontakt-E-Mail, Telefon und verantwortliche Person ergänzen.",
+      "Wichtig: Bitte prüfe das Impressum rechtlich, bevor die App öffentlich genutzt wird."
+    ],
+  },
+  datenschutz: {
+    title: "Datenschutzerklärung",
+    intro: "Informationen zum Datenschutz",
+    content: [
+      "Hier kannst du später deine vollständige Datenschutzerklärung einfügen.",
+      "Beschreibe, welche Daten gespeichert werden, wie Firebase/Google genutzt wird und wie Nutzer ihre Rechte ausüben können.",
+      "Wichtig: Bitte rechtlich prüfen lassen, besonders wegen Kinderkonten und Firebase-Speicherung."
+    ],
+  },
+  widerruf: {
+    title: "Widerrufsbelehrung",
+    intro: "Informationen zum Widerrufsrecht",
+    content: [
+      "Hier kannst du später deine Widerrufsbelehrung einfügen.",
+      "Ergänze Fristen, Kontaktweg und Hinweise zu digitalen Produkten oder Dienstleistungen.",
+      "Wichtig: Bitte rechtlich prüfen lassen, bevor Zahlungen oder Käufe öffentlich angeboten werden."
+    ],
+  },
+  agb: {
+    title: "AGB",
+    intro: "Allgemeine Geschäftsbedingungen",
+    content: [
+      "Hier kannst du später deine AGB einfügen.",
+      "Regle Nutzung, Zahlungsbedingungen, Rechte, Pflichten, Kündigung und Haftung.",
+      "Wichtig: Bitte rechtlich prüfen lassen, bevor die App öffentlich genutzt wird."
+    ],
+  },
+};
 
 
 const taskPresets: TaskPreset[] = [
@@ -91,6 +132,36 @@ const taskPresets: TaskPreset[] = [
 ];
 
 
+type TaskPack = { id: string; title: string; description: string; presets: string[] };
+
+const taskPacks: TaskPack[] = [
+  {
+    id: "morgenroutine",
+    title: "🌞 Morgenroutine",
+    description: "Schnell startklar vor Kita oder Schule.",
+    presets: ["Zähne putzen morgens", "Bett machen", "Schultasche packen", "Wasserflasche auffüllen"],
+  },
+  {
+    id: "schulheld",
+    title: "🎒 Schulheld",
+    description: "Lernen, Lesen und Vorbereitung gebündelt.",
+    presets: ["Hausaufgaben machen", "Lesen üben", "Vokabeln lernen", "Schultasche packen"],
+  },
+  {
+    id: "haushaltsprofi",
+    title: "🏠 Haushaltsprofi",
+    description: "Kleine Hilfen im Familienalltag.",
+    presets: ["Tisch decken", "Tisch abräumen", "Kleidung wegräumen", "Zimmer aufräumen"],
+  },
+  {
+    id: "gesundundleicht",
+    title: "🍎 Gesund & leicht",
+    description: "Motivation für Bewegung, Schlaf und gute Gewohnheiten.",
+    presets: ["Obst oder Gemüse essen", "Sport / Bewegung", "Pünktlich schlafen gehen", "Kein Streit heute"],
+  },
+];
+
+
 const initialChildren: Child[] = [];
 
 const initialTasks: Task[] = [];
@@ -113,6 +184,15 @@ const rareBadges = [
   "💎 Schatzjäger",
   "🌙 Nachteule"
 ];
+
+const profileBadgeOptions = Array.from({ length: 30 }, (_, index) => {
+  const number = String(index + 1).padStart(2, "0");
+  return {
+    id: `badge-${number}`,
+    label: `Motiv ${index + 1}`,
+    src: `/badges/badge-${number}.png`,
+  };
+});
 
 const initialRewards: Reward[] = [];
 
@@ -163,12 +243,13 @@ function getFoxMood(child: Child, waitingTasks: number) {
 }
 
 function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }) {
+  const activeMotiv = (child.profileBadges || [])[0];
   const message =
     child.streak >= 5
-      ? "Ich lächle, weil deine Serie richtig stark ist! 🔥"
+      ? "Deine Serie ist richtig stark! 🔥"
       : waitingCount > 0
-      ? "Ich lächle und warte mit dir auf die Bestätigung."
-      : "Ich lächle, weil du heute Punkte sammeln kannst!";
+      ? "Ich warte mit dir auf die Bestätigung."
+      : "Heute kannst du wieder Punkte sammeln!";
 
   return (
     <div className="relative overflow-hidden rounded-[1.8rem] border border-white bg-gradient-to-br from-yellow-100 via-white to-orange-100 p-6 text-center shadow-[0_20px_55px_rgba(14,165,233,.15)]">
@@ -177,14 +258,22 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
 
       <div className="mx-auto mb-4 max-w-sm rounded-[1.8rem] bg-gradient-to-br from-white via-sky-50 to-yellow-50 p-4 shadow-sm">
         <p className="text-lg font-black text-sky-950">„{message}“</p>
-        <p className="mt-1 text-sm font-bold text-blue-600">Dein lächelnder Fuchs-Coin</p>
+        <p className="mt-1 text-sm font-bold text-blue-600">Dein eigenes Zimmer</p>
       </div>
 
-      <img
-        src="/FuchsCoin.png"
-        alt="Original Punktly FuchsCoin"
-        className="mx-auto h-64 w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
-      />
+      {activeMotiv ? (
+        <img
+          src={activeMotiv}
+          alt="Gewähltes Motiv"
+          className="mx-auto h-64 w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl md:h-80 md:w-80"
+        />
+      ) : (
+        <img
+          src="/FuchsCoin.png"
+          alt="Punktly Motiv"
+          className="mx-auto h-64 w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
+        />
+      )}
 
       <div className="mt-4 grid grid-cols-3 gap-2">
         <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-sky-800">Level {child.level}</div>
@@ -333,6 +422,7 @@ export default function PunktlyRoleSplit() {
   const [newTaskTarget, setNewTaskTarget] = useState<number | "all">("all");
   const [newTaskDay, setNewTaskDay] = useState("Mo");
   const [selectedPreset, setSelectedPreset] = useState("");
+  const [selectedTaskPack, setSelectedTaskPack] = useState(taskPacks[0]?.id || "");
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
 
   const [newRewardTitle, setNewRewardTitle] = useState("");
@@ -347,6 +437,8 @@ export default function PunktlyRoleSplit() {
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [showBadgeChooser, setShowBadgeChooser] = useState(false);
+  const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
 
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -367,7 +459,8 @@ export default function PunktlyRoleSplit() {
     activeBackground: "",
     activeAvatar: "",
     activeBooster: "",
-    achievements: []
+    achievements: [],
+    profileBadges: []
   };
   const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
@@ -611,6 +704,44 @@ function celebrate(message: string) {
     setSelectedPreset("");
   }
 
+  function addTaskPack() {
+    const pack = taskPacks.find((item) => item.id === selectedTaskPack);
+    if (!pack) return celebrate("Bitte ein Aufgabenpaket auswählen.");
+
+    const existingTitles = new Set(tasks.map((task) => `${task.title}-${task.childId}`));
+    const tasksToAdd = pack.presets
+      .map((title, index) => {
+        const preset = taskPresets.find((item) => item.title === title);
+        if (!preset) return null;
+
+        const childId = newTaskTarget;
+        const dedupeKey = `${preset.title}-${childId}`;
+        if (existingTitles.has(dedupeKey)) return null;
+
+        return {
+          id: Date.now() + index,
+          childId,
+          title: preset.title,
+          coins: preset.coins,
+          xp: Math.max(5, preset.coins * 2),
+          repeat: preset.repeat,
+          status: "offen" as Status,
+          day: preset.day,
+        };
+      })
+      .filter((task): task is Task => task !== null);
+
+    if (tasksToAdd.length === 0) {
+      celebrate("Dieses Paket ist für die Auswahl schon angelegt.");
+      return;
+    }
+
+    setTasks(prev => [...prev, ...tasksToAdd]);
+    tasksToAdd.forEach(task => saveFamilyItem("tasks", task));
+    playSound("click");
+    celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
+  }
+
   function editTask(task: Task) {
     setEditingTaskId(task.id);
     setNewTaskTitle(task.title);
@@ -624,6 +755,7 @@ function celebrate(message: string) {
 
   function deleteTask(id: number) {
     setTasks(prev => prev.filter(t => t.id !== id));
+    deleteFamilyItem("tasks", id);
     celebrate("Aufgabe gelöscht.");
   }
 
@@ -681,6 +813,7 @@ function celebrate(message: string) {
 
   function deleteReward(id: number) {
     setRewards(prev => prev.filter(r => r.id !== id));
+    deleteFamilyItem("rewards", id);
     celebrate("Belohnung gelöscht.");
   }
 
@@ -757,6 +890,7 @@ function celebrate(message: string) {
 
   function deleteChest(id: number) {
     setChests(prev => prev.filter(ch => ch.id !== id));
+    deleteFamilyItem("chests", id);
     celebrate("Schatzkiste gelöscht.");
   }
 
@@ -820,7 +954,7 @@ function celebrate(message: string) {
   function addChild() {
     if (!newChildName.trim()) return;
     const id = Date.now();
-    const newChild = { id, name: newChildName, coins: 0, xp: 0, level: 1, prestige: 0, prestigeStars: 0, streak: 0, completedCount: 0, weeklyPoints: 0, theme: "hell" as Theme, goal: "Neue Belohnung", goalCoins: 500, equipped: [], activePet: "", activeBackground: "", activeAvatar: "", activeBooster: "", achievements: [] };
+    const newChild = { id, name: newChildName, coins: 0, xp: 0, level: 1, prestige: 0, prestigeStars: 0, streak: 0, completedCount: 0, weeklyPoints: 0, theme: "hell" as Theme, goal: "Neue Belohnung", goalCoins: 500, equipped: [], activePet: "", activeBackground: "", activeAvatar: "", activeBooster: "", achievements: [], profileBadges: [] };
     setChildren(prev => [...prev, newChild]);
     saveFamilyItem("children", newChild);
     setSelectedChildId(id);
@@ -829,7 +963,28 @@ function celebrate(message: string) {
   }
 
   function setChildTheme(theme: Theme) {
-    setChildren(prev => prev.map(c => c.id === child.id ? { ...c, theme } : c));
+    const updatedChild = { ...child, theme };
+    setChildren(prev => prev.map(c => c.id === child.id ? updatedChild : c));
+    saveFamilyItem("children", updatedChild);
+  }
+
+  function toggleProfileBadge(badgeSrc: string) {
+    let childToSave: Child | null = null;
+
+    setChildren(prev => prev.map(c => {
+      if (c.id !== child.id) return c;
+
+      const currentBadges = c.profileBadges || [];
+      const nextBadges = currentBadges.includes(badgeSrc) ? [] : [badgeSrc];
+
+      const updatedChild = { ...c, profileBadges: nextBadges };
+      childToSave = updatedChild;
+      return updatedChild;
+    }));
+
+    if (childToSave) {
+      saveFamilyItem("children", childToSave);
+    }
   }
 
 
@@ -1037,6 +1192,23 @@ function celebrate(message: string) {
     }
   }
 
+  async function deleteFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests", id: number) {
+    const user = auth.currentUser || firebaseUser;
+
+    if (!user) {
+      console.warn("Punktly Firebase Delete: Kein eingeloggter Nutzer gefunden.", collectionName, id);
+      return;
+    }
+
+    try {
+      await deleteDoc(doc(db, "users", user.uid, collectionName, String(id)));
+      console.log("Punktly Firebase Delete OK:", collectionName, id);
+    } catch (error) {
+      console.error("Punktly Firebase Delete Fehler:", error);
+      celebrate("Firebase konnte den Eintrag nicht löschen.");
+    }
+  }
+
   async function saveFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests", item: { id: number }) {
     const user = auth.currentUser || firebaseUser;
 
@@ -1068,7 +1240,7 @@ function celebrate(message: string) {
   }
 
   async function saveTaskNow(updatedTask: Task) {
-    await saveTaskNow(updatedTask);
+    await saveFamilyItem("tasks", updatedTask);
   }
 
   async function startPaypalCheckout() {
@@ -1298,7 +1470,7 @@ alert(JSON.stringify(data, null, 2));
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
           <div className="absolute left-8 top-12 animate-coin"><Coin className="h-10 w-10" /></div>
-          <div className="absolute right-10 top-14 animate-coin"><Coin className="h-8 w-8" /></div>
+          <div className="absolute right-10 top-14 animate-coin"><Coin className="h-10 w-10 object-cover" /></div>
         </div>
       )}
 
@@ -1419,6 +1591,18 @@ alert(JSON.stringify(data, null, 2));
               </div>
             </div>
 
+            <nav className="flex flex-wrap items-center gap-2">
+              {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setActiveLegalPage(page)}
+                  className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                >
+                  {legalPages[page].title}
+                </button>
+              ))}
+            </nav>
+
             {area !== "start" && (
               <div className="flex flex-wrap gap-2">
                 {firebaseUser && (
@@ -1426,7 +1610,7 @@ alert(JSON.stringify(data, null, 2));
                     Google: {firebaseUser.email}
                   </div>
                 )}
-                {firebaseUser && (
+                {firebaseUser && area === "parent" && (
                   <button
                     onClick={logoutGoogle}
                     className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
@@ -1450,6 +1634,42 @@ alert(JSON.stringify(data, null, 2));
             )}
           </div>
         </header>
+
+        {activeLegalPage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-950/50 p-4 backdrop-blur-sm">
+            <div className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border-4 border-white bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,.35)]">
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-sky-500">Rechtliches</p>
+                  <h2 className="text-3xl font-black text-sky-950">{legalPages[activeLegalPage].title}</h2>
+                  <p className="mt-1 font-bold text-sky-700">{legalPages[activeLegalPage].intro}</p>
+                </div>
+                <button
+                  onClick={() => setActiveLegalPage(null)}
+                  className="rounded-full bg-slate-100 p-3 text-slate-700 shadow-sm transition hover:bg-slate-200"
+                  aria-label="Fenster schließen"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="space-y-3 rounded-[1.5rem] bg-sky-50 p-5 text-left font-bold text-sky-900">
+                {legalPages[activeLegalPage].content.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+
+              <div className="mt-5 text-right">
+                <button
+                  onClick={() => setActiveLegalPage(null)}
+                  className="rounded-[1.25rem] bg-gradient-to-br from-sky-500 to-cyan-400 px-5 py-3 font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.25)]"
+                >
+                  Schließen
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {area === "start" && (
           <section className="grid gap-5 md:grid-cols-2">
@@ -1521,17 +1741,141 @@ alert(JSON.stringify(data, null, 2));
         {area === "child" && (
           <>
             <ChildTabs view={childView} setView={setChildView} />
+
+            <div className="mt-4 rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[.18em] text-sky-500">Profil von {child.name}</p>
+                  <h2 className="text-2xl font-black text-sky-950">Mein Motiv</h2>
+                  <p className="text-sm font-bold text-sky-700">Jedes Kind speichert sein eigenes Motiv.</p>
+                </div>
+
+                {children.length > 1 && (
+                  <select
+                    value={selectedChildId}
+                    onChange={(e) => {
+                      setSelectedChildId(Number(e.target.value));
+                      setShowBadgeChooser(false);
+                    }}
+                    className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-black text-sky-900 shadow-inner"
+                  >
+                    {children.map((kid) => (
+                      <option key={kid.id} value={kid.id}>{kid.name}</option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {(child.profileBadges || []).length > 0 ? (
+                  (child.profileBadges || []).map(src => (
+                    <span key={src} className="flex h-12 w-12 items-center justify-center rounded-full bg-white p-1 shadow-sm">
+                      <img src={src} alt="Ausgewähltes Motiv" className="h-full w-full rounded-full object-contain" />
+                    </span>
+                  ))
+                ) : (
+                  <span className="rounded-full bg-sky-50 px-4 py-2 font-black text-sky-800">Noch kein Motiv gewählt ✨</span>
+                )}
+
+                <button
+                  onClick={() => setShowBadgeChooser(!showBadgeChooser)}
+                  className="rounded-full bg-gradient-to-br from-pink-300 via-purple-300 to-sky-300 px-5 py-3 font-black text-white shadow-[0_12px_28px_rgba(14,165,233,.24)] hover:scale-[1.02] active:scale-[.98] transition"
+                >
+                  🎨 Motiv auswählen
+                </button>
+              </div>
+
+              {showBadgeChooser && (
+                <div className="mt-4 rounded-[1.8rem] bg-sky-50/90 p-3 shadow-inner">
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="text-sm font-black text-sky-900">{child.name} kann genau ein Motiv auswählen.</p>
+                    <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-sky-700">{(child.profileBadges || []).length}/1</span>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10">
+                    {profileBadgeOptions.map(badge => {
+                      const active = (child.profileBadges || []).includes(badge.src);
+                      return (
+                        <button
+                          key={badge.id}
+                          onClick={() => toggleProfileBadge(badge.src)}
+                          className={`rounded-2xl border-2 p-2 shadow-sm transition hover:scale-105 active:scale-95 ${active ? "border-sky-500 bg-white" : "border-white bg-white/80"}`}
+                          title={badge.label}
+                        >
+                          <img
+                            src={badge.src}
+                            alt={badge.label}
+                            className="mx-auto h-10 w-10 object-contain"
+                            onError={(event) => { event.currentTarget.style.opacity = "0.2"; }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs font-bold text-sky-700">Die Dateien müssen in public/badges liegen und badge-01.png bis badge-30.png heißen. Es kann immer nur ein Motiv aktiv sein.</p>
+                </div>
+              )}
+            </div>
+
             <div className="mt-5">
               {childView === "home" && (
                 <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
                   <div className="space-y-5">
                     <div className={`rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                        <div className="flex items-center justify-center"><FoxCoinImage className="h-28 w-28 animate-floaty" /></div>
+                        <div className="flex items-center justify-center">
+                          {(child.profileBadges || [])[0] ? (
+                            <img
+                              src={(child.profileBadges || [])[0]}
+                              alt="Gewähltes Profil-Motiv"
+                              className="h-28 w-28 animate-floaty rounded-full object-cover shadow-sm overflow-hidden"
+                            />
+                          ) : (
+                            <FoxCoinImage className="h-28 w-28 animate-floaty" />
+                          )}
+                        </div>
                         <div className="flex-1">
                           <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
                           <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
-                          <div className="mt-3 flex flex-wrap gap-2">{child.equipped.map(i => <span key={i} className="rounded-full bg-white/70 px-3 py-1 font-black">{i} ausgerüstet</span>)}</div>
+                          {!(child.profileBadges || [])[0] && (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              <span className="rounded-full bg-white/70 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
+                            </div>
+                          )}
+                          <button
+                            onClick={() => setShowBadgeChooser(!showBadgeChooser)}
+                            className="mt-3 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-sky-800 shadow-sm hover:scale-[1.02] active:scale-[.98] transition"
+                          >
+                            🎨 Mein Motiv auswählen
+                          </button>
+                          {showBadgeChooser && (
+                            <div className="mt-4 rounded-[1.8rem] bg-white/80 p-3 shadow-inner">
+                              <div className="mb-2 flex items-center justify-between gap-3">
+                                <p className="text-sm font-black text-sky-900">Wähle ein Motiv für dein Profil.</p>
+                                <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-black text-sky-700">{(child.profileBadges || []).length}/1</span>
+                              </div>
+                              <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10">
+                                {profileBadgeOptions.map(badge => {
+                                  const active = (child.profileBadges || []).includes(badge.src);
+                                  return (
+                                    <button
+                                      key={badge.id}
+                                      onClick={() => toggleProfileBadge(badge.src)}
+                                      className={`rounded-2xl border-2 p-2 shadow-sm transition hover:scale-105 active:scale-95 ${active ? "border-sky-500 bg-sky-100" : "border-white bg-white/90"}`}
+                                      title={badge.label}
+                                    >
+                                      <img
+                                        src={badge.src}
+                                        alt={badge.label}
+                                        className="mx-auto h-9 w-9 object-contain"
+                                        onError={(event) => { event.currentTarget.style.opacity = "0.2"; }}
+                                      />
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                              <p className="mt-2 text-xs font-bold text-sky-700">PNG-Dateien bitte als badge-01.png bis badge-30.png in public/badges ablegen. Es kann immer nur ein Motiv aktiv sein.</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -1585,7 +1929,7 @@ alert(JSON.stringify(data, null, 2));
                     <Panel title="🏆 Deine Abzeichen">
                       <div className="flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
                     </Panel>
-                    <Panel title="🦊 Dein Fuchs-Zimmer">
+                    <Panel title="Dein Zimmer">
                       <LiveFox child={child} waitingCount={childTasks.filter((t) => t.status === "wartet").length} />
                     </Panel>
                   </div>
@@ -1820,7 +2164,18 @@ alert(JSON.stringify(data, null, 2));
                       <button onClick={saveTask} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(16,185,129,.25)] hover:scale-[1.02] active:scale-[.98] transition">{editingTaskId ? "Änderung speichern" : "Aufgabe hinzufügen"}</button>
                     </div>
 
-                    
+                    <div className="mt-5 rounded-[1.8rem] border-[3px] border-sky-100 bg-sky-50/80 p-4">
+                      <h3 className="text-xl font-black text-sky-950">⚡ Aufgabenpakete</h3>
+                      <p className="mt-1 font-bold text-sky-700">Füge mehrere passende Aufgaben auf einmal hinzu. Das aktuell gewählte Zielkind oben wird übernommen.</p>
+                      <div className="mt-3 grid gap-3 md:grid-cols-[1fr_auto]">
+                        <select value={selectedTaskPack} onChange={e => setSelectedTaskPack(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3 font-bold">
+                          {taskPacks.map((pack) => (
+                            <option key={pack.id} value={pack.id}>{pack.title} · {pack.description}</option>
+                          ))}
+                        </select>
+                        <button onClick={addTaskPack} className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-3 font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]">Paket hinzufügen</button>
+                      </div>
+                    </div>
                   </Panel>
 
                   <Panel title="✅ Bestätigungen & Aufgabenliste">

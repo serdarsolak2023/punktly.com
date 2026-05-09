@@ -1,1 +1,6 @@
-Punktly – korrigierte Datei aus deiner ZIP, doppelten Reset-Code entfernt und TSX Buildfehler behoben.
+Kinderprofil angepasst:
+- Kinder können jetzt genau ein persönliches Motiv auswählen
+- Gewähltes Motiv ersetzt das Icon links neben „Hallo“
+- Gewähltes Motiv erscheint auch im Zimmerbereich
+- „Dein Fuchs-Zimmer“ wurde zu „Dein Zimmer“ geändert
+- Badge-Auswahl bleibt pro Kind/userbezogen gespeichert
