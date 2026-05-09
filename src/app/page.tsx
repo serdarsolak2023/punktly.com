@@ -20,7 +20,7 @@ import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   return (
     <img
-      src="/PunktlyLogo.png"
+      src="/PunktlyLogo.png"	
       alt="Punktly Logo"
       className={`${className} object-contain drop-shadow-xl`}
     />
@@ -73,9 +73,9 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
     title: "Impressum",
     intro: "Angaben gemäß § 5 TMG",
     content: [
-      "Hier kannst du später deine offiziellen Anbieterangaben eintragen.",
-      "Name / Firma, Anschrift, Kontakt-E-Mail, Telefon und verantwortliche Person ergänzen.",
-      "Wichtig: Bitte prüfe das Impressum rechtlich, bevor die App öffentlich genutzt wird."
+      "www.punktly.comDD",
+      "Punktly, info@punktly.com, Administrator",
+      "Steuer.-."
     ],
   },
   datenschutz: {
