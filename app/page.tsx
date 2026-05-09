@@ -1,39 +1,287 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { Header } from "@/components/Header";
-import { children, coins, rewards, tasks } from "@/lib/demo-data";
-import { ArrowRight, Coins, Gift, ShieldCheck, Star } from "lucide-react";
+import {
+  CheckCircle,
+  Coins,
+  Gift,
+  Plus,
+  Star,
+  Trophy,
+  UserRound,
+} from "lucide-react";
+
+type Child = {
+  id: number;
+  name: string;
+  coins: number;
+  xp: number;
+  level: number;
+};
+
+type Task = {
+  id: number;
+  title: string;
+  coins: number;
+  xp: number;
+  done: boolean;
+};
+
+type Reward = {
+  id: number;
+  title: string;
+  price: number;
+};
 
 export default function HomePage() {
+  const [view, setView] = useState<"kids" | "parents">("kids");
+
+  const [child, setChild] = useState<Child>({
+    id: 1,
+    name: "Mila",
+    coins: 12,
+    xp: 40,
+    level: 2,
+  });
+
+  const [tasks, setTasks] = useState<Task[]>([
+    { id: 1, title: "Mathe 10 Minuten üben", coins: 5, xp: 15, done: false },
+    { id: 2, title: "Zimmer aufräumen", coins: 8, xp: 20, done: false },
+    { id: 3, title: "Lesen 15 Minuten", coins: 6, xp: 18, done: false },
+  ]);
+
+  const [rewards] = useState<Reward[]>([
+    { id: 1, title: "30 Min. Bildschirmzeit", price: 20 },
+    { id: 2, title: "Lieblingssnack", price: 15 },
+    { id: 3, title: "Kleines Geschenk", price: 50 },
+  ]);
+
+  const [newTask, setNewTask] = useState("");
+
+  function completeTask(taskId: number) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task || task.done) return;
+
+    const newXp = child.xp + task.xp;
+    const newLevel = Math.floor(newXp / 100) + 1;
+
+    setChild({
+      ...child,
+      coins: child.coins + task.coins,
+      xp: newXp,
+      level: newLevel,
+    });
+
+    setTasks(tasks.map((t) => (t.id === taskId ? { ...t, done: true } : t)));
+  }
+
+  function buyReward(reward: Reward) {
+    if (child.coins < reward.price) {
+      alert("Du hast noch nicht genug Coins.");
+      return;
+    }
+
+    setChild({
+      ...child,
+      coins: child.coins - reward.price,
+    });
+
+    alert(`Belohnung eingelöst: ${reward.title}`);
+  }
+
+  function addTask() {
+    if (!newTask.trim()) return;
+
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        title: newTask,
+        coins: 5,
+        xp: 10,
+        done: false,
+      },
+    ]);
+
+    setNewTask("");
+  }
+
   return (
-    <main>
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 text-slate-900">
       <Header />
-      <section className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-        <div>
-          <p className="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-black shadow-sm">Deutsch · Familien · Aufgaben · Coins</p>
-          <h1 className="text-5xl font-black leading-tight md:text-7xl">Motivation für Kinder, Übersicht für Eltern.</h1>
-          <p className="mt-5 max-w-xl text-lg font-semibold text-slate-600">Punktly ist eine Familien-App, in der Kinder Aufgaben erledigen, Coins und XP sammeln, Level aufsteigen und Belohnungen einlösen.</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/kinder" className="inline-flex items-center gap-2 rounded-full bg-punktly-coral px-6 py-4 font-black text-white shadow-soft">Kinderbereich <ArrowRight size={18} /></Link>
-            <Link href="/eltern" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-4 font-black shadow-soft">Elternbereich</Link>
+
+      <section className="mx-auto max-w-6xl px-5 py-8">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-black md:text-6xl">Punktly</h1>
+            <p className="mt-2 text-lg font-semibold text-slate-600">
+              Aufgaben erledigen, Coins sammeln und Belohnungen freischalten.
+            </p>
+          </div>
+
+          <div className="flex rounded-full bg-white p-2 shadow-lg">
+            <button
+              onClick={() => setView("kids")}
+              className={`rounded-full px-5 py-3 font-black ${
+                view === "kids" ? "bg-indigo-600 text-white" : "text-slate-700"
+              }`}
+            >
+              Kinderbereich
+            </button>
+            <button
+              onClick={() => setView("parents")}
+              className={`rounded-full px-5 py-3 font-black ${
+                view === "parents" ? "bg-indigo-600 text-white" : "text-slate-700"
+              }`}
+            >
+              Elternbereich
+            </button>
           </div>
         </div>
-        <div className="rounded-[2.5rem] bg-white p-6 shadow-soft">
-          <div className="grid grid-cols-2 gap-3">
-            <Stat icon={<Coins />} label="Coins" value={`${coins.length} Avatare`} />
-            <Stat icon={<Star />} label="XP" value="Level-System" />
-            <Stat icon={<Gift />} label="Belohnungen" value={`${rewards.length} Demo`} />
-            <Stat icon={<ShieldCheck />} label="Familie" value={`${children.length} Kinder`} />
+
+        <div className="grid gap-6 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="rounded-3xl bg-white p-6 shadow-xl">
+            <div className="flex items-center gap-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-100">
+                <UserRound className="text-indigo-600" size={34} />
+              </div>
+              <div>
+                <p className="text-sm font-black text-slate-500">Kind</p>
+                <h2 className="text-3xl font-black">{child.name}</h2>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              <Stat icon={<Coins />} label="Coins" value={child.coins} />
+              <Stat icon={<Star />} label="XP" value={child.xp} />
+              <Stat icon={<Trophy />} label="Level" value={child.level} />
+            </div>
+
+            <div className="mt-6">
+              <p className="mb-2 font-black">Level Fortschritt</p>
+              <div className="h-4 rounded-full bg-slate-200">
+                <div
+                  className="h-4 rounded-full bg-indigo-600"
+                  style={{ width: `${child.xp % 100}%` }}
+                />
+              </div>
+            </div>
           </div>
-          <div className="mt-5 rounded-[2rem] bg-punktly-cream p-5">
-            <h2 className="text-xl font-black">Heute offen</h2>
-            <p className="mt-2 font-semibold text-slate-600">{tasks.length} Beispiel-Aufgaben sind bereits vorbereitet.</p>
-          </div>
+
+          {view === "kids" ? (
+            <div className="rounded-3xl bg-white p-6 shadow-xl">
+              <h2 className="mb-5 text-3xl font-black">Deine Aufgaben</h2>
+
+              <div className="space-y-4">
+                {tasks.map((task) => (
+                  <div
+                    key={task.id}
+                    className="flex items-center justify-between rounded-2xl bg-slate-50 p-5"
+                  >
+                    <div>
+                      <h3 className="text-xl font-black">{task.title}</h3>
+                      <p className="font-semibold text-slate-500">
+                        +{task.coins} Coins · +{task.xp} XP
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => completeTask(task.id)}
+                      disabled={task.done}
+                      className={`rounded-full px-5 py-3 font-black ${
+                        task.done
+                          ? "bg-green-100 text-green-700"
+                          : "bg-indigo-600 text-white"
+                      }`}
+                    >
+                      {task.done ? "Erledigt" : "Fertig"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <h2 className="mt-8 mb-5 text-3xl font-black">Belohnungen</h2>
+
+              <div className="grid gap-4 md:grid-cols-3">
+                {rewards.map((reward) => (
+                  <button
+                    key={reward.id}
+                    onClick={() => buyReward(reward)}
+                    className="rounded-2xl bg-yellow-50 p-5 text-left shadow-sm"
+                  >
+                    <Gift className="mb-3 text-yellow-600" />
+                    <h3 className="font-black">{reward.title}</h3>
+                    <p className="font-bold text-slate-500">
+                      {reward.price} Coins
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-3xl bg-white p-6 shadow-xl">
+              <h2 className="mb-5 text-3xl font-black">Elternbereich</h2>
+
+              <div className="flex gap-3">
+                <input
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
+                  placeholder="Neue Aufgabe eingeben..."
+                  className="flex-1 rounded-2xl border border-slate-200 px-5 py-4 font-semibold outline-none"
+                />
+                <button
+                  onClick={addTask}
+                  className="flex items-center gap-2 rounded-2xl bg-indigo-600 px-5 py-4 font-black text-white"
+                >
+                  <Plus size={18} />
+                  Hinzufügen
+                </button>
+              </div>
+
+              <div className="mt-6 space-y-3">
+                {tasks.map((task) => (
+                  <div
+                    key={task.id}
+                    className="flex items-center justify-between rounded-2xl bg-slate-50 p-5"
+                  >
+                    <div>
+                      <h3 className="font-black">{task.title}</h3>
+                      <p className="text-sm font-bold text-slate-500">
+                        {task.coins} Coins · {task.xp} XP
+                      </p>
+                    </div>
+
+                    {task.done ? (
+                      <CheckCircle className="text-green-600" />
+                    ) : (
+                      <span className="font-black text-slate-400">Offen</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>
   );
 }
 
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-  return <div className="rounded-[1.5rem] bg-punktly-cream p-4"><div className="text-punktly-coral">{icon}</div><p className="mt-3 text-sm font-black text-slate-500">{label}</p><p className="text-lg font-black">{value}</p></div>;
+function Stat({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="rounded-2xl bg-slate-50 p-4">
+      <div className="text-indigo-600">{icon}</div>
+      <p className="mt-2 text-sm font-black text-slate-500">{label}</p>
+      <p className="text-2xl font-black">{value}</p>
+    </div>
+  );
 }
