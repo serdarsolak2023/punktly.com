@@ -1436,301 +1436,182 @@ alert(JSON.stringify(data, null, 2));
 
   if (!isPurchased) {
     return (
-<main className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-sky-50 via-cyan-50 to-amber-100">
-        <div className="mx-auto max-w-6xl grid gap-6 lg:grid-cols-[1.1fr_.9fr] items-center min-h-screen">
-          
-<section className="mx-auto w-full max-w-2xl rounded-[3rem] bg-white/95 p-8 shadow-[0_30px_80px_rgba(14,165,233,.12)] ring-1 ring-white/80">
-  <div className="text-center">
-    <img
-      src="/PunktlyLogo.png"
-      alt="Punktly"
-      className="mx-auto h-36 w-36 object-contain drop-shadow-xl"
-    />
 
-    <h1 className="mt-5 text-6xl font-black tracking-tight text-sky-950">
-      Punktly
-    </h1>
+<main className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-8">
+  <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6">
+    <section className="w-full max-w-2xl rounded-[3rem] bg-white/95 px-8 py-10 text-center shadow-[0_30px_90px_rgba(14,165,233,.16)] ring-1 ring-white/80">
+      <img
+        src="/PunktlyLogo.png"
+        alt="Punktly"
+        className="mx-auto h-32 w-32 object-contain drop-shadow-xl"
+      />
 
-    <p className="mt-3 text-2xl font-black text-sky-700">
-      Punktly freischalten
-    </p>
+      <h1 className="mt-5 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
+        Punktly
+      </h1>
 
-    <p className="mt-4 text-lg font-bold text-slate-600">
-      Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
-    </p>
-  </div>
+      <p className="mt-2 text-xl font-black text-sky-700">
+        Punktly freischalten
+      </p>
 
-  <div className="mt-8 grid gap-4 sm:grid-cols-2">
-    <div className="rounded-[2rem] bg-emerald-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-emerald-900">✅ Aufgaben & Motivation</p>
-    </div>
+      <p className="mx-auto mt-4 max-w-lg text-base font-bold leading-relaxed text-sky-950">
+        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+      </p>
 
-    <div className="rounded-[2rem] bg-amber-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-amber-900">🎁 Schatzkisten & Belohnungen</p>
-    </div>
-
-    <div className="rounded-[2rem] bg-sky-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-sky-900">🏡 Eigenes Zimmer</p>
-    </div>
-
-    <div className="rounded-[2rem] bg-purple-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-purple-900">🎨 Eigene Motive</p>
-    </div>
-
-    <div className="rounded-[2rem] bg-pink-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-pink-900">🏆 Level & Erfolge</p>
-    </div>
-
-    <div className="rounded-[2rem] bg-cyan-50 p-5 text-left shadow-md">
-      <p className="text-xl font-black text-cyan-900">👨‍👩‍👧 Elternbereich</p>
-    </div>
-  </div>
-
-  <div className="mt-10 rounded-[2.5rem] bg-slate-50 p-6 shadow-inner">
-    <p className="mb-5 text-center text-3xl font-black text-slate-900">
-      🔐 Login
-    </p>
-
-    <div className="space-y-4">
-      <button
-        onClick={loginWithGoogle}
-        className="w-full rounded-[1.8rem] bg-white px-5 py-5 text-2xl font-black text-sky-700 shadow-xl"
-      >
-        🔐 Mit Google einloggen
-      </button>
-
-      <button
-        onClick={loginWithApple}
-        className="w-full rounded-[1.8rem] bg-black px-5 py-5 text-2xl font-black text-white shadow-xl"
-      >
-         Mit Apple ID einloggen
-      </button>
-
-      <div className="rounded-[2rem] bg-white p-5 shadow-lg">
-        <div className="mb-4 grid grid-cols-2 gap-3">
-          <button
-            onClick={() => setAuthMode("login")}
-            className={`rounded-[1.3rem] px-4 py-3 text-lg font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
-          >
-            Einloggen
-          </button>
-
-          <button
-            onClick={() => setAuthMode("register")}
-            className={`rounded-[1.3rem] px-4 py-3 text-lg font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
-          >
-            Registrieren
-          </button>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-[1.6rem] bg-emerald-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-emerald-900">✅ Aufgaben & Motivation</p>
         </div>
-
-        <input
-          value={authEmail}
-          onChange={(e) => setAuthEmail(e.target.value)}
-          placeholder="E-Mail-Adresse"
-          type="email"
-          className="mb-3 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 px-5 py-4 text-lg font-bold"
-        />
-
-        <input
-          value={authPassword}
-          onChange={(e) => setAuthPassword(e.target.value)}
-          placeholder="Passwort"
-          type="password"
-          className="mb-4 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 px-5 py-4 text-lg font-bold"
-        />
-
-        <button
-          onClick={loginOrRegisterWithEmail}
-          className="w-full rounded-[1.5rem] bg-gradient-to-r from-emerald-400 to-teal-500 px-5 py-4 text-xl font-black text-white shadow-lg"
-        >
-          ✉️ Mit E-Mail fortfahren
-        </button>
+        <div className="rounded-[1.6rem] bg-amber-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-amber-900">🎁 Schatzkisten & Belohnungen</p>
+        </div>
+        <div className="rounded-[1.6rem] bg-sky-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-sky-900">🏡 Eigenes Zimmer</p>
+        </div>
+        <div className="rounded-[1.6rem] bg-purple-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-purple-900">🎨 Eigene Motive</p>
+        </div>
+        <div className="rounded-[1.6rem] bg-pink-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-pink-900">🏆 Level & Erfolge</p>
+        </div>
+        <div className="rounded-[1.6rem] bg-cyan-50 px-5 py-4 text-left shadow-md">
+          <p className="font-black text-cyan-900">👨‍👩‍👧 Elternbereich</p>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div className="mt-10">
-    <p className="mb-5 text-center text-3xl font-black text-slate-900">
-      💳 Zahlungsmethoden
-    </p>
+    <div className="grid w-full max-w-5xl gap-6 lg:grid-cols-2 lg:items-start">
+      <section className="rounded-[2.5rem] bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,.12)] ring-1 ring-white/80">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          🔐 Login
+        </p>
 
-    <div className="grid gap-4">
-      <button
-        onClick={startApplePayCheckout}
-        disabled={isPaying}
-        className="w-full rounded-[2rem] bg-black py-5 text-2xl font-black text-white shadow-xl"
-      >
-        🍎 Apple Pay
-      </button>
+        {firebaseUser ? (
+          <div className="rounded-[2rem] bg-emerald-50 p-5 text-center">
+            <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
+            <p className="mt-2 font-bold text-emerald-700">{firebaseUser.email}</p>
+            {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
+            {hasPaid && <p className="mt-3 font-black text-emerald-700">✅ Bereits freigeschaltet</p>}
+            <button
+              onClick={logoutGoogle}
+              className="mt-4 rounded-[1.4rem] bg-white px-5 py-3 font-black text-sky-700 shadow-md"
+            >
+              Abmelden
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <button
+              onClick={loginWithGoogle}
+              className="w-full rounded-[1.6rem] bg-white px-5 py-4 text-lg font-black text-sky-700 shadow-xl"
+            >
+              🔐 Mit Google einloggen
+            </button>
 
-      <button
-        onClick={startGooglePayCheckout}
-        disabled={isPaying}
-        className="w-full rounded-[2rem] bg-white py-5 text-2xl font-black text-slate-900 shadow-xl"
-      >
-        🌐 Google Pay
-      </button>
+            <button
+              onClick={loginWithApple}
+              className="w-full rounded-[1.6rem] bg-black px-5 py-4 text-lg font-black text-white shadow-xl"
+            >
+               Mit Apple ID einloggen
+            </button>
 
-      <button
-        onClick={startPaypalCheckout}
-        disabled={isPaying}
-        className="w-full rounded-[2rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-2xl font-black text-white shadow-xl"
-      >
-        🅿️ PayPal
-      </button>
-    </div>
-  </div>
-</section>
+            <div className="rounded-[2rem] bg-white p-4 shadow-xl">
+              <div className="mb-3 grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setAuthMode("login")}
+                  className={`rounded-[1.2rem] px-4 py-3 font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                >
+                  Einloggen
+                </button>
+                <button
+                  onClick={() => setAuthMode("register")}
+                  className={`rounded-[1.2rem] px-4 py-3 font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                >
+                  Registrieren
+                </button>
+              </div>
 
+              <input
+                value={authEmail}
+                onChange={(e) => setAuthEmail(e.target.value)}
+                placeholder="E-Mail-Adresse"
+                type="email"
+                autoComplete="email"
+                className="mb-3 w-full rounded-[1.3rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+              />
 
-          <section className="rounded-[2.5rem] bg-white/95 border-4 border-yellow-300 p-8 shadow-[0_24px_70px_rgba(245,158,11,.22)] backdrop-blur-xl">
-            <p className="text-sm font-black uppercase text-blue-600">
-              Einmalige Freischaltung
-            </p>
+              <input
+                value={authPassword}
+                onChange={(e) => setAuthPassword(e.target.value)}
+                placeholder="Passwort"
+                type="password"
+                autoComplete={authMode === "register" ? "new-password" : "current-password"}
+                className="mb-4 w-full rounded-[1.3rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+              />
 
-            <div className="mt-3 text-7xl font-black text-sky-950">
-              9,99 €
+              <button
+                onClick={loginOrRegisterWithEmail}
+                className="w-full rounded-[1.4rem] bg-gradient-to-r from-emerald-400 to-teal-500 px-5 py-4 font-black text-white shadow-lg"
+              >
+                ✉️ Mit E-Mail fortfahren
+              </button>
             </div>
+          </div>
+        )}
+      </section>
 
-            <p className="mt-4 font-bold text-sky-700">
-              Punktly komplett freischalten und sicher per PayPal bezahlen.
-            </p>
+      <section className="rounded-[2.5rem] bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,.12)] ring-1 ring-white/80">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          💳 Zahlungsmethoden
+        </p>
 
-            <div className="mt-6 space-y-3 font-bold text-sky-900">
-              <p>🧒 mehrere Kinderprofile</p>
-              <p>🎯 Aufgaben, XP, Level & Streaks</p>
-              <p>🎁 Belohnungen & Schatzkisten</p>
-              <p>📊 Eltern-Statistiken</p>
-              <p>🔊 Sounds & Motivation</p>
-            </div>
+        {!firebaseUser && (
+          <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
+            Bitte zuerst einloggen, dann bezahlen.
+          </p>
+        )}
 
-            
-            <div className="mt-6 rounded-[1.8rem] bg-sky-50 p-4">
-              {firebaseUser ? (
-                <div className="text-center">
-                  <p className="font-black text-sky-950">✅ Eingeloggt</p>
-                  <p className="mt-1 text-sm font-bold text-sky-700">{firebaseUser.email}</p>
-                  {isCheckingPaid && <p className="mt-2 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
-                  {hasPaid && <p className="mt-2 font-black text-emerald-700">✅ Bereits bezahlt – App freigeschaltet</p>}
-                  <button
-                    onClick={logoutGoogle}
-                    className="mt-3 rounded-[1.35rem] bg-white px-4 py-2 font-black text-sky-700 shadow-sm"
-                  >
-                    Abmelden
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <button
-                    onClick={loginWithGoogle}
-                    className="w-full rounded-[1.35rem] bg-white px-5 py-4 text-xl font-black text-sky-700 shadow-[0_12px_30px_rgba(37,99,235,.22)]"
-                  >
-                    🔐 Mit Google einloggen
-                  </button>
+        {paymentStatus && (
+          <p className="mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
+            {paymentStatus}
+          </p>
+        )}
 
-                  <button
-                    onClick={loginWithApple}
-                    className="w-full rounded-[1.35rem] bg-slate-950 px-5 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(15,23,42,.22)]"
-                  >
-                     Mit Apple ID einloggen
-                  </button>
+        <div className="grid gap-4">
+          <button
+            onClick={startApplePayCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-black py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+          >
+            🍎 Apple Pay
+          </button>
 
-                  <div className="rounded-[1.5rem] bg-white p-4 shadow-sm">
-                    <div className="mb-3 grid grid-cols-2 gap-2">
-                      <button
-                        onClick={() => setAuthMode("login")}
-                        className={`rounded-[1rem] px-3 py-2 font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
-                      >
-                        Einloggen
-                      </button>
-                      <button
-                        onClick={() => setAuthMode("register")}
-                        className={`rounded-[1rem] px-3 py-2 font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
-                      >
-                        Registrieren
-                      </button>
-                    </div>
+          <button
+            onClick={startGooglePayCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+          >
+            🌐 Google Pay
+          </button>
 
-                    <input
-                      value={authEmail}
-                      onChange={(e) => setAuthEmail(e.target.value)}
-                      placeholder="E-Mail-Adresse"
-                      type="email"
-                      autoComplete="email"
-                      className="mb-2 w-full rounded-[1.2rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
-                    />
-
-                    <input
-                      value={authPassword}
-                      onChange={(e) => setAuthPassword(e.target.value)}
-                      placeholder="Passwort"
-                      type="password"
-                      autoComplete={authMode === "register" ? "new-password" : "current-password"}
-                      className="mb-3 w-full rounded-[1.2rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
-                    />
-
-                    <button
-                      onClick={loginOrRegisterWithEmail}
-                      className="w-full rounded-[1.2rem] bg-gradient-to-br from-emerald-400 to-teal-500 px-5 py-3 text-lg font-black text-white shadow-md"
-                    >
-                      {authMode === "register" ? "✉️ Konto mit E-Mail erstellen" : "✉️ Mit E-Mail einloggen"}
-                    </button>
-                  </div>
-
-                  <button
-                    onClick={loginWithPhoneSoon}
-                    className="w-full rounded-[1.35rem] bg-amber-100 px-5 py-4 text-lg font-black text-amber-800 shadow-sm"
-                  >
-                    📱 Telefonnummer Login vorbereiten
-                  </button>
-                </div>
-              )}
-            </div>
-
-{paymentStatus && (
-              <p className="mt-4 rounded-[1.35rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
-                {paymentStatus}
-              </p>
-            )}
-
-<div className="mt-8 grid gap-4">
-  <button
-    onClick={startApplePayCheckout}
-    disabled={isPaying}
-    className="w-full rounded-[1.8rem] bg-black py-5 text-2xl font-black text-white shadow-[0_12px_30px_rgba(15,23,42,.22)] transition hover:scale-[1.01] disabled:opacity-60"
-  >
-    🍎 Mit Apple Pay bezahlen
-  </button>
-
-  <button
-    onClick={startGooglePayCheckout}
-    disabled={isPaying}
-    className="w-full rounded-[1.8rem] bg-white py-5 text-2xl font-black text-slate-900 shadow-[0_12px_30px_rgba(37,99,235,.18)] transition hover:scale-[1.01] disabled:opacity-60"
-  >
-    🌐 Mit Google Pay bezahlen
-  </button>
-
-  <button
-    onClick={startPaypalCheckout}
-    disabled={isPaying}
-    className="w-full rounded-[1.8rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 py-5 text-2xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)] transition hover:scale-[1.01] disabled:opacity-60"
-  >
-    {isPaying
-      ? "🔄 Zahlung wird vorbereitet..."
-      : hasPaid
-      ? "✅ Bereits freigeschaltet"
-      : "🅿️ Mit PayPal bezahlen"}
-  </button>
-</div>
-
-<p className="mt-4 text-center text-sm font-bold text-blue-600">
-  Nach dem Klick öffnet sich die gewählte Zahlungsmethode zur sicheren Zahlung.
-  <br />
-  Dein Login-Konto wird danach automatisch freigeschaltet.
-</p>
-          </section>
+          <button
+            onClick={startPaypalCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+          >
+            🅿️ PayPal
+          </button>
         </div>
-      </main>
+
+        <p className="mt-5 text-center text-sm font-bold text-blue-600">
+          Nach dem Klick öffnet sich die gewählte Zahlungsmethode zur sicheren Zahlung.
+          <br />
+          Dein Login-Konto wird danach automatisch freigeschaltet.
+        </p>
+      </section>
+    </div>
+  </div>
+</main>
     );
   }
 
