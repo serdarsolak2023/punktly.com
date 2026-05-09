@@ -1437,49 +1437,52 @@ alert(JSON.stringify(data, null, 2));
   if (!isPurchased) {
     return (
 
-<main className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-8">
-  <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6">
-    <section className="w-full max-w-2xl rounded-[3rem] bg-white/95 px-8 py-10 text-center shadow-[0_30px_90px_rgba(14,165,233,.16)] ring-1 ring-white/80">
+
+<main className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-6 md:px-6">
+  <div className="mx-auto flex w-full max-w-[760px] flex-col gap-5">
+    <section className="w-full rounded-[2.8rem] bg-white/95 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] ring-1 ring-white/80 md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
-        alt="Punktly"
-        className="mx-auto h-32 w-32 object-contain drop-shadow-xl"
+        alt="Punktly Logo"
+        className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 
-      <h1 className="mt-5 text-5xl font-black tracking-tight text-sky-950 md:text-6xl"></h1>
+      <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
+        Punktly
+      </h1>
 
-      <p className="mt-2 text-xl font-black text-sky-700">
+      <p className="mt-2 text-xl font-black text-sky-600 md:text-2xl">
         Punktly freischalten
       </p>
 
-      <p className="mx-auto mt-4 max-w-lg text-base font-bold leading-relaxed text-sky-950">
+      <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
         Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.6rem] bg-emerald-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-emerald-900">✅ Aufgaben & Motivation</p>
+        <div className="rounded-[1.7rem] bg-emerald-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-emerald-900 md:text-lg">✅ Aufgaben & Motivation</p>
         </div>
-        <div className="rounded-[1.6rem] bg-amber-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-amber-900">🎁 Schatzkisten & Belohnungen</p>
+        <div className="rounded-[1.7rem] bg-amber-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
         </div>
-        <div className="rounded-[1.6rem] bg-sky-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-sky-900">🏡 Eigenes Zimmer</p>
+        <div className="rounded-[1.7rem] bg-sky-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
         </div>
-        <div className="rounded-[1.6rem] bg-purple-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-purple-900">🎨 Eigene Motive</p>
+        <div className="rounded-[1.7rem] bg-purple-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
         </div>
-        <div className="rounded-[1.6rem] bg-pink-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-pink-900">🏆 Level & Erfolge</p>
+        <div className="rounded-[1.7rem] bg-pink-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
         </div>
-        <div className="rounded-[1.6rem] bg-cyan-50 px-5 py-4 text-left shadow-md">
-          <p className="font-black text-cyan-900">👨‍👩‍👧 Elternbereich</p>
+        <div className="rounded-[1.7rem] bg-cyan-50 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
         </div>
       </div>
     </section>
 
-    <div className="grid w-full max-w-5xl gap-6 lg:grid-cols-2 lg:items-start">
-      <section className="rounded-[2.5rem] bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,.12)] ring-1 ring-white/80">
+    <div className="grid w-full gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[2.4rem] bg-white/95 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
@@ -1487,7 +1490,7 @@ alert(JSON.stringify(data, null, 2));
         {firebaseUser ? (
           <div className="rounded-[2rem] bg-emerald-50 p-5 text-center">
             <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
-            <p className="mt-2 font-bold text-emerald-700">{firebaseUser.email}</p>
+            <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
             {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
             {hasPaid && <p className="mt-3 font-black text-emerald-700">✅ Bereits freigeschaltet</p>}
             <button
@@ -1501,14 +1504,14 @@ alert(JSON.stringify(data, null, 2));
           <div className="space-y-4">
             <button
               onClick={loginWithGoogle}
-              className="w-full rounded-[1.6rem] bg-white px-5 py-4 text-lg font-black text-sky-700 shadow-xl"
+              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
             >
               🔐 Mit Google einloggen
             </button>
 
             <button
               onClick={loginWithApple}
-              className="w-full rounded-[1.6rem] bg-black px-5 py-4 text-lg font-black text-white shadow-xl"
+              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-black px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] md:text-lg"
             >
                Mit Apple ID einloggen
             </button>
@@ -1558,14 +1561,14 @@ alert(JSON.stringify(data, null, 2));
         )}
       </section>
 
-      <section className="rounded-[2.5rem] bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,.12)] ring-1 ring-white/80">
+      <section className="w-full rounded-[2.4rem] bg-white/95 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
 
         {!firebaseUser && (
           <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
-            Bitte zuerst einloggen, dann bezahlen.
+            🔒 Bitte zuerst einloggen, dann bezahlen.
           </p>
         )}
 
@@ -1579,7 +1582,7 @@ alert(JSON.stringify(data, null, 2));
           <button
             onClick={startApplePayCheckout}
             disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-black py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+            className="w-full rounded-[1.7rem] bg-black py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:bg-slate-400 disabled:opacity-70"
           >
             🍎 Apple Pay
           </button>
@@ -1587,7 +1590,7 @@ alert(JSON.stringify(data, null, 2));
           <button
             onClick={startGooglePayCheckout}
             disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
           >
             🌐 Google Pay
           </button>
@@ -1595,13 +1598,13 @@ alert(JSON.stringify(data, null, 2));
           <button
             onClick={startPaypalCheckout}
             disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-50"
+            className="w-full rounded-[1.7rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-70"
           >
             🅿️ PayPal
           </button>
         </div>
 
-        <p className="mt-5 text-center text-sm font-bold text-blue-600">
+        <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
           Nach dem Klick öffnet sich die gewählte Zahlungsmethode zur sicheren Zahlung.
           <br />
           Dein Login-Konto wird danach automatisch freigeschaltet.
