@@ -1737,7 +1737,13 @@ alert(JSON.stringify(data, null, 2));
             <div className="flex items-center gap-3">
               <div className="animate-floaty punktly-float grid h-16 w-16 place-items-center rounded-[1.8rem] bg-gradient-to-br from-blue-500 to-cyan-400 shadow-[0_12px_30px_rgba(37,99,235,.35)] overflow-hidden ring-4 ring-white"><FoxCoinImage className="h-14 w-14" /></div>
               <div>
-                <h1 className="text-3xl font-black text-sky-950 md:text-4xl">Punktly</h1>
+                <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
+        <img
+          src="/PunktlyLogo.png"
+          alt="Punktly Logo"
+          className="mx-auto h-20 w-20 object-contain drop-shadow-lg"
+        />
+      </h1>
                 <p className="font-bold text-sky-700">{area === "child" ? "Kinderbereich" : area === "parent" ? "Elternbereich" : "Bitte Bereich wählen"}</p>
               </div>
             </div>
