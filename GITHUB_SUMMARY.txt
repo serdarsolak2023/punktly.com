@@ -1,0 +1,1 @@
+Punktly – korrigierte Datei aus deiner ZIP, doppelten Reset-Code entfernt und TSX Buildfehler behoben.
