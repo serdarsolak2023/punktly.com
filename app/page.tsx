@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "@/components/Header";
 import {
   CheckCircle,
@@ -9,6 +9,7 @@ import {
   Gift,
   Heart,
   Home,
+  Lock,
   Plus,
   School,
   ShieldCheck,
@@ -20,8 +21,8 @@ import {
 } from "lucide-react";
 
 type Area = "Haushalt" | "Schule" | "Gesundheit" | "Verhalten" | "Extra";
-
 type TaskStatus = "open" | "waiting" | "approved" | "rejected";
+type AppUser = { name: string; email: string; trialStartedAt: number };
 
 type Child = {
   id: number;
@@ -48,15 +49,23 @@ type Reward = {
   price: number;
 };
 
-const areas: { name: Area; icon: React.ReactNode; color: string }[] = [
-  { name: "Haushalt", icon: <Home />, color: "bg-orange-100 text-orange-700" },
-  { name: "Schule", icon: <School />, color: "bg-blue-100 text-blue-700" },
-  { name: "Gesundheit", icon: <Heart />, color: "bg-rose-100 text-rose-700" },
-  { name: "Verhalten", icon: <Star />, color: "bg-purple-100 text-purple-700" },
-  { name: "Extra", icon: <Sparkles />, color: "bg-yellow-100 text-yellow-700" },
+const TRIAL_DAYS = 3;
+const TRIAL_MS = TRIAL_DAYS * 24 * 60 * 60 * 1000;
+const USER_STORAGE_KEY = "punktly_demo_user";
+
+const areas: { name: Area; icon: React.ReactNode }[] = [
+  { name: "Haushalt", icon: <Home /> },
+  { name: "Schule", icon: <School /> },
+  { name: "Gesundheit", icon: <Heart /> },
+  { name: "Verhalten", icon: <Star /> },
+  { name: "Extra", icon: <Sparkles /> },
 ];
 
 export default function HomePage() {
+  const [user, setUser] = useState<AppUser | null>(null);
+  const [loginName, setLoginName] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+
   const [started, setStarted] = useState(false);
   const [view, setView] = useState<"kids" | "parents">("kids");
   const [selectedChildId, setSelectedChildId] = useState(1);
@@ -106,7 +115,7 @@ export default function HomePage() {
     },
   ]);
 
-  const [rewards, setRewards] = useState<Reward[]>([
+  const [rewards] = useState<Reward[]>([
     { id: 1, title: "30 Minuten Bildschirmzeit", price: 20 },
     { id: 2, title: "Lieblingssnack", price: 15 },
     { id: 3, title: "Gemeinsamer Ausflug", price: 60 },
@@ -116,7 +125,35 @@ export default function HomePage() {
   const [newTaskCoins, setNewTaskCoins] = useState(5);
   const [newTaskArea, setNewTaskArea] = useState<Area>("Haushalt");
 
-  const child = children.find((c) => c.id === selectedChildId) ?? children[0];
+  useEffect(() => {
+    const savedUser = window.localStorage.getItem(USER_STORAGE_KEY);
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const trialInfo = useMemo(() => {
+    if (!user) {
+      return {
+        daysLeft: TRIAL_DAYS,
+        expired: false,
+        endsAt: null as Date | null,
+      };
+    }
+
+    const endsAtMs = user.trialStartedAt + TRIAL_MS;
+    const now = Date.now();
+    const remainingMs = Math.max(endsAtMs - now, 0);
+    const daysLeft = Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+
+    return {
+      daysLeft,
+      expired: now >= endsAtMs,
+      endsAt: new Date(endsAtMs),
+    };
+  }, [user]);
+
+  const child = children.find((item) => item.id === selectedChildId) ?? children[0];
 
   const visibleTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -129,7 +166,45 @@ export default function HomePage() {
   const waitingTasks = tasks.filter((task) => task.status === "waiting");
   const approvedTasks = tasks.filter((task) => task.status === "approved");
 
+  function loginAndStartTrial() {
+    if (!loginName.trim() || !loginEmail.trim()) {
+      alert("Bitte Name und E-Mail eingeben.");
+      return;
+    }
+
+    const newUser: AppUser = {
+      name: loginName.trim(),
+      email: loginEmail.trim(),
+      trialStartedAt: Date.now(),
+    };
+
+    window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+    setUser(newUser);
+  }
+
+  function logout() {
+    window.localStorage.removeItem(USER_STORAGE_KEY);
+    setUser(null);
+    setStarted(false);
+    setLoginName("");
+    setLoginEmail("");
+  }
+
+  function simulateTrialExpired() {
+    if (!user) return;
+
+    const expiredUser = {
+      ...user,
+      trialStartedAt: Date.now() - TRIAL_MS - 1000,
+    };
+
+    window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(expiredUser));
+    setUser(expiredUser);
+  }
+
   function markTaskDone(taskId: number) {
+    if (trialInfo.expired) return;
+
     setTasks((current) =>
       current.map((task) =>
         task.id === taskId ? { ...task, status: "waiting" } : task
@@ -138,6 +213,8 @@ export default function HomePage() {
   }
 
   function approveTask(taskId: number) {
+    if (trialInfo.expired) return;
+
     const task = tasks.find((item) => item.id === taskId);
     if (!task || task.status !== "waiting") return;
 
@@ -164,6 +241,8 @@ export default function HomePage() {
   }
 
   function rejectTask(taskId: number) {
+    if (trialInfo.expired) return;
+
     setTasks((current) =>
       current.map((task) =>
         task.id === taskId ? { ...task, status: "rejected" } : task
@@ -172,6 +251,7 @@ export default function HomePage() {
   }
 
   function addTask() {
+    if (trialInfo.expired) return;
     if (!newTaskTitle.trim()) return;
 
     setTasks((current) => [
@@ -192,6 +272,8 @@ export default function HomePage() {
   }
 
   function buyReward(reward: Reward) {
+    if (trialInfo.expired) return;
+
     if (child.coins < reward.price) {
       alert("Du hast noch nicht genug Coins.");
       return;
@@ -208,18 +290,120 @@ export default function HomePage() {
     alert(`Belohnung angefragt: ${reward.title}`);
   }
 
+  if (!user) {
+    return (
+      <main className="min-h-screen bg-[#fff8ec] px-5 py-8">
+        <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl items-center justify-center">
+          <div className="grid w-full gap-8 rounded-[3rem] bg-white p-6 shadow-2xl md:grid-cols-[0.9fr_1.1fr] md:p-10">
+            <div className="flex flex-col items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-yellow-100 via-orange-50 to-blue-100 p-8 text-center">
+              <img src="/logo.png" alt="Punktly" className="h-40 w-40 rounded-full shadow-xl" />
+              <h1 className="mt-7 text-5xl font-black text-slate-800 md:text-6xl">
+                Punktly
+              </h1>
+              <p className="mt-4 max-w-md text-lg font-bold leading-relaxed text-slate-600">
+                3 Tage kostenlos testen. Danach einmalig kaufen und dauerhaft nutzen.
+              </p>
+
+              <div className="mt-7 rounded-[2rem] bg-white/80 px-10 py-6 shadow-inner">
+                <p className="text-2xl font-black text-red-500 line-through">49,99 €</p>
+                <p className="mt-1 text-6xl font-black text-emerald-600">29,99 €</p>
+                <p className="mt-2 text-sm font-black uppercase tracking-wide text-slate-500">
+                  Einmalzahlung • Familienzugang
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center">
+              <p className="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-4 py-2 text-sm font-black text-indigo-700">
+                Login erforderlich
+              </p>
+              <h2 className="text-4xl font-black leading-tight text-slate-900 md:text-5xl">
+                Starte deine 3‑Tage Demo
+              </h2>
+              <p className="mt-4 font-semibold leading-relaxed text-slate-500">
+                Gib deine Daten ein. Später wird hier Firebase Login angebunden.
+              </p>
+
+              <div className="mt-8 grid gap-4">
+                <input
+                  value={loginName}
+                  onChange={(event) => setLoginName(event.target.value)}
+                  placeholder="Dein Name"
+                  className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-5 text-lg font-bold outline-none"
+                />
+
+                <input
+                  value={loginEmail}
+                  onChange={(event) => setLoginEmail(event.target.value)}
+                  placeholder="E-Mail-Adresse"
+                  type="email"
+                  className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-5 text-lg font-bold outline-none"
+                />
+
+                <button
+                  onClick={loginAndStartTrial}
+                  className="rounded-3xl bg-indigo-600 px-6 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.02]"
+                >
+                  Kostenlos testen
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (trialInfo.expired) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#fff8ec] px-5 py-10">
+        <section className="w-full max-w-xl rounded-[3rem] bg-white p-8 text-center shadow-2xl">
+          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[2rem] bg-red-100">
+            <Lock className="text-red-600" size={44} />
+          </div>
+
+          <h1 className="mt-7 text-5xl font-black text-slate-900">
+            Demo abgelaufen
+          </h1>
+
+          <p className="mt-4 text-lg font-bold leading-relaxed text-slate-500">
+            Deine 3 Tage kostenlose Testversion sind beendet. Kaufe Punktly jetzt,
+            um Kinderbereich, Elternbereich, Aufgaben und Coins weiter zu nutzen.
+          </p>
+
+          <div className="mt-8 rounded-[2rem] bg-gradient-to-r from-red-50 to-emerald-50 px-8 py-6">
+            <p className="text-2xl font-black text-red-500 line-through">49,99 €</p>
+            <p className="mt-1 text-6xl font-black text-emerald-600">29,99 €</p>
+            <p className="mt-2 text-sm font-black uppercase tracking-wide text-slate-500">
+              Einmalzahlung • Familienzugang
+            </p>
+          </div>
+
+          <button
+            onClick={() => alert("Hier später Stripe/PayPal Kauf verbinden.")}
+            className="mt-8 w-full rounded-3xl bg-emerald-600 px-6 py-5 text-xl font-black text-white shadow-xl"
+          >
+            Jetzt kaufen – 29,99 €
+          </button>
+
+          <button
+            onClick={logout}
+            className="mt-4 w-full rounded-3xl bg-slate-100 px-6 py-4 font-black text-slate-700"
+          >
+            Abmelden
+          </button>
+        </section>
+      </main>
+    );
+  }
+
   if (!started) {
     return (
       <main className="min-h-screen bg-[#fff8ec] px-5 py-8">
         <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center justify-center">
           <div className="grid w-full gap-8 rounded-[3rem] bg-white p-6 shadow-2xl md:grid-cols-[0.9fr_1.1fr] md:p-10">
             <div className="flex flex-col items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-yellow-100 via-orange-50 to-blue-100 p-8 text-center">
-              <img
-                src="/logo.png"
-                alt="Punktly"
-                className="h-40 w-40 rounded-full shadow-xl"
-              />
-
+              <img src="/logo.png" alt="Punktly" className="h-40 w-40 rounded-full shadow-xl" />
               <h1 className="mt-7 text-5xl font-black text-slate-800 md:text-6xl">
                 Punktly
               </h1>
@@ -230,14 +414,10 @@ export default function HomePage() {
               </p>
 
               <div className="mt-7 rounded-[2rem] bg-white/80 px-10 py-6 shadow-inner">
-                <p className="text-2xl font-black text-red-500 line-through">
-                  49,99 €
-                </p>
-                <p className="mt-1 text-6xl font-black text-emerald-600">
-                  29,99 €
-                </p>
+                <p className="text-2xl font-black text-red-500 line-through">49,99 €</p>
+                <p className="mt-1 text-6xl font-black text-emerald-600">29,99 €</p>
                 <p className="mt-2 text-sm font-black uppercase tracking-wide text-slate-500">
-                  Einmalzahlung • Familienzugang
+                  Noch {trialInfo.daysLeft} Tage kostenlos
                 </p>
               </div>
             </div>
@@ -245,7 +425,7 @@ export default function HomePage() {
             <div className="flex flex-col justify-center">
               <div className="mb-7">
                 <p className="mb-3 inline-flex rounded-full bg-indigo-50 px-4 py-2 text-sm font-black text-indigo-700">
-                  Familien-App für Verantwortung & Motivation
+                  Angemeldet als {user.name}
                 </p>
                 <h2 className="text-4xl font-black leading-tight text-slate-900 md:text-5xl">
                   Aufgaben machen.
@@ -292,6 +472,13 @@ export default function HomePage() {
                     Kompletten Ablauf ausprobieren
                   </span>
                 </button>
+
+                <button
+                  onClick={simulateTrialExpired}
+                  className="rounded-[2rem] bg-slate-100 px-6 py-4 text-left font-black text-slate-600"
+                >
+                  Demo-Ablauf testen: Testversion ablaufen lassen
+                </button>
               </div>
             </div>
           </div>
@@ -308,7 +495,7 @@ export default function HomePage() {
         <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="mb-2 inline-flex rounded-full bg-white px-4 py-2 text-sm font-black text-slate-500 shadow-sm">
-              Punktly Familien-Dashboard
+              Noch {trialInfo.daysLeft} Tage Demo • {user.email}
             </p>
             <h1 className="text-4xl font-black md:text-6xl">
               {view === "kids" ? "Kinderbereich" : "Elternbereich"}
@@ -352,9 +539,7 @@ export default function HomePage() {
                   >
                     <span className="text-4xl">{item.avatar}</span>
                     <span>
-                      <span className="block text-lg font-black">
-                        {item.name}
-                      </span>
+                      <span className="block text-lg font-black">{item.name}</span>
                       <span className="block text-sm font-bold opacity-80">
                         Level {item.level} • {item.coins} Coins
                       </span>
@@ -367,11 +552,7 @@ export default function HomePage() {
             <div className="rounded-[2rem] bg-white p-5 shadow-xl">
               <h2 className="mb-4 text-xl font-black">Aufgabenbereiche</h2>
               <div className="grid gap-3">
-                <AreaButton
-                  active={selectedArea === "Alle"}
-                  label="Alle"
-                  onClick={() => setSelectedArea("Alle")}
-                />
+                <AreaButton active={selectedArea === "Alle"} label="Alle" onClick={() => setSelectedArea("Alle")} />
                 {areas.map((area) => (
                   <AreaButton
                     key={area.name}
@@ -393,9 +574,7 @@ export default function HomePage() {
                     {child.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-black text-slate-500">
-                      Ausgewähltes Kind
-                    </p>
+                    <p className="text-sm font-black text-slate-500">Ausgewähltes Kind</p>
                     <h2 className="text-3xl font-black">{child.name}</h2>
                   </div>
                 </div>
@@ -422,12 +601,7 @@ export default function HomePage() {
             </div>
 
             {view === "kids" ? (
-              <KidsPanel
-                tasks={visibleTasks}
-                rewards={rewards}
-                onDone={markTaskDone}
-                onBuyReward={buyReward}
-              />
+              <KidsPanel tasks={visibleTasks} rewards={rewards} onDone={markTaskDone} onBuyReward={buyReward} />
             ) : (
               <ParentsPanel
                 selectedChildName={child.name}
@@ -464,6 +638,13 @@ export default function HomePage() {
                 <StatusCard label="Bestätigt" value={approvedTasks.length} />
                 <StatusCard label="Belohnungen" value={rewards.length} />
               </div>
+
+              <button
+                onClick={logout}
+                className="mt-4 w-full rounded-2xl bg-slate-100 px-4 py-3 font-black text-slate-600"
+              >
+                Abmelden
+              </button>
             </div>
           </aside>
         </div>
@@ -487,7 +668,6 @@ function KidsPanel({
     <div className="space-y-6">
       <div className="rounded-[2rem] bg-white p-6 shadow-xl">
         <h2 className="mb-5 text-3xl font-black">Meine Aufgaben</h2>
-
         <div className="space-y-4">
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task} onDone={onDone} />
@@ -497,7 +677,6 @@ function KidsPanel({
 
       <div className="rounded-[2rem] bg-white p-6 shadow-xl">
         <h2 className="mb-5 text-3xl font-black">Belohnungsshop</h2>
-
         <div className="grid gap-4 md:grid-cols-3">
           {rewards.map((reward) => (
             <button
@@ -558,15 +737,10 @@ function ParentsPanel({
             </div>
           ) : (
             waitingTasks.map((task) => (
-              <div
-                key={task.id}
-                className="rounded-[1.5rem] bg-orange-50 p-5"
-              >
+              <div key={task.id} className="rounded-[1.5rem] bg-orange-50 p-5">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-black text-orange-600">
-                      Wartet auf Prüfung
-                    </p>
+                    <p className="text-sm font-black text-orange-600">Wartet auf Prüfung</p>
                     <h3 className="text-xl font-black">{task.title}</h3>
                     <p className="font-bold text-slate-500">
                       {task.area} • +{task.coins} Coins
@@ -574,16 +748,10 @@ function ParentsPanel({
                   </div>
 
                   <div className="flex gap-3">
-                    <button
-                      onClick={() => onReject(task.id)}
-                      className="rounded-2xl bg-white px-4 py-3 font-black text-red-600"
-                    >
+                    <button onClick={() => onReject(task.id)} className="rounded-2xl bg-white px-4 py-3 font-black text-red-600">
                       Ablehnen
                     </button>
-                    <button
-                      onClick={() => onApprove(task.id)}
-                      className="rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white"
-                    >
+                    <button onClick={() => onApprove(task.id)} className="rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white">
                       Bestätigen
                     </button>
                   </div>
@@ -625,10 +793,7 @@ function ParentsPanel({
             ))}
           </select>
 
-          <button
-            onClick={onAddTask}
-            className="flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-4 font-black text-white"
-          >
+          <button onClick={onAddTask} className="flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-4 font-black text-white">
             <Plus size={18} />
             Hinzufügen
           </button>
@@ -662,12 +827,8 @@ function TaskCard({ task, onDone }: { task: Task; onDone: (taskId: number) => vo
 
       <div className="flex items-center gap-3">
         <StatusBadge status={task.status} />
-
         {isOpen && (
-          <button
-            onClick={() => onDone(task.id)}
-            className="rounded-2xl bg-indigo-600 px-5 py-3 font-black text-white"
-          >
+          <button onClick={() => onDone(task.id)} className="rounded-2xl bg-indigo-600 px-5 py-3 font-black text-white">
             Erledigt
           </button>
         )}
@@ -692,11 +853,7 @@ function TaskStatusRow({ task }: { task: Task }) {
 
 function StatusBadge({ status }: { status: TaskStatus }) {
   if (status === "open") {
-    return (
-      <span className="inline-flex items-center gap-2 rounded-full bg-slate-200 px-3 py-2 text-sm font-black text-slate-700">
-        Offen
-      </span>
-    );
+    return <span className="inline-flex items-center gap-2 rounded-full bg-slate-200 px-3 py-2 text-sm font-black text-slate-700">Offen</span>;
   }
 
   if (status === "waiting") {
