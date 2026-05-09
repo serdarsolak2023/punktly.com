@@ -1732,7 +1732,58 @@ alert(JSON.stringify(data, null, 2));
       )}
 
 
-      <div className="mx-auto max-w-6xl">
+      
+<style jsx global>{`
+  @keyframes punktlyWelcomeWipe {
+    0%, 100% {
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+    45% {
+      transform: translateY(-7px);
+      clip-path: inset(0 0 18% 0);
+      opacity: .92;
+    }
+    75% {
+      transform: translateY(6px);
+      clip-path: inset(14% 0 0 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes punktlyRainbowText {
+    0% { background-position: 0% 50%; transform: translateY(0) scale(1); }
+    35% { transform: translateY(-4px) scale(1.015); }
+    70% { transform: translateY(3px) scale(1); }
+    100% { background-position: 100% 50%; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes punktlySparklePulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: .85; }
+    50% { transform: scale(1.25) rotate(8deg); opacity: 1; }
+  }
+
+  .punktly-welcome-wipe {
+    animation: punktlyWelcomeWipe 3.2s ease-in-out infinite;
+  }
+
+  .punktly-rainbow-text {
+    background: linear-gradient(90deg, #f472b6, #a78bfa, #38bdf8, #34d399, #facc15, #fb7185, #60a5fa);
+    background-size: 350% 350%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: punktlyRainbowText 4s ease-in-out infinite alternate;
+  }
+
+  .punktly-sparkle {
+    display: inline-block;
+    animation: punktlySparklePulse 1.8s ease-in-out infinite;
+  }
+`}</style>
+
+<div className="mx-auto max-w-6xl">
         <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-5">
@@ -1743,10 +1794,10 @@ alert(JSON.stringify(data, null, 2));
               />
 
               <div>
-                <h1 className="text-2xl font-black text-sky-950 md:text-3xl">
-                  ✨ Willkommen auf Punktly ✨
+                <h1 className="punktly-welcome-wipe text-xl font-black text-sky-950 md:text-2xl">
+                  <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
                 </h1>
-                <p className="mt-2 text-lg font-black text-slate-400 md:text-xl">
+                <p className="punktly-rainbow-text mt-2 text-lg font-black md:text-xl">
                   Punktly wünscht Ihnen Viel Spaß
                 </p>
               </div>

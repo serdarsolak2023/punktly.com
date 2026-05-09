@@ -1,6 +1,6 @@
-Kinderprofil angepasst:
-- Kinder können jetzt genau ein persönliches Motiv auswählen
-- Gewähltes Motiv ersetzt das Icon links neben „Hallo“
-- Gewähltes Motiv erscheint auch im Zimmerbereich
-- „Dein Fuchs-Zimmer“ wurde zu „Dein Zimmer“ geändert
-- Badge-Auswahl bleibt pro Kind/userbezogen gespeichert
+Animierter Startseiten-Header:
+- Willkommen-Text kleiner gemacht
+- Wipe-Animation für „Willkommen auf Punktly“ hinzugefügt
+- Animierte Farbverläufe für „Punktly wünscht Ihnen Viel Spaß“ integriert
+- Dezente Bewegungsanimationen und Sparkle-Effekte ergänzt
+- Header wirkt moderner, freundlicher und app-ähnlicher
