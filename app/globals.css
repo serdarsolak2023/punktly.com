@@ -13,3 +13,22 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, #fff8dc 0%, transparent 25%),
+    radial-gradient(circle at top right, #dbeafe 0%, transparent 20%),
+    linear-gradient(180deg, #fffdf7 0%, #f8fafc 100%);
+  color: #1e293b;
+}
+
+* {
+  box-sizing: border-box;
+}
