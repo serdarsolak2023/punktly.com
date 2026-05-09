@@ -1,3 +1,6 @@
+# app/page.tsx
+
+```tsx
 "use client";
 
 import { useState } from "react";
@@ -35,6 +38,7 @@ type Reward = {
 };
 
 export default function HomePage() {
+  const [started, setStarted] = useState(false);
   const [view, setView] = useState<"kids" | "parents">("kids");
 
   const [child, setChild] = useState<Child>({
@@ -105,6 +109,74 @@ export default function HomePage() {
     ]);
 
     setNewTask("");
+  }
+
+  if (!started) {
+    return (
+      <main className="flex min-h-screen items-center justify-center px-5 py-10 bg-gradient-to-br from-yellow-50 via-white to-blue-50">
+        <div className="w-full max-w-xl rounded-[3rem] bg-white p-10 shadow-2xl border border-white">
+          <div className="flex flex-col items-center text-center">
+            <img
+              src="/logo.png"
+              alt="Punktly"
+              className="h-36 w-36 rounded-full shadow-xl"
+            />
+
+            <h1 className="mt-8 text-5xl font-black text-slate-800">
+              Willkommen bei Punktly
+            </h1>
+
+            <p className="mt-5 text-lg font-semibold leading-relaxed text-slate-500">
+              Die moderne Familien-App für Aufgaben, Lernen,
+              Motivation, Coins, XP und Belohnungen.
+            </p>
+
+            <div className="mt-8 rounded-3xl bg-gradient-to-r from-red-50 to-emerald-50 px-10 py-6 shadow-inner">
+              <p className="text-2xl font-black text-red-500 line-through">
+                49,99 €
+              </p>
+
+              <p className="mt-2 text-6xl font-black text-emerald-600">
+                29,99 €
+              </p>
+
+              <p className="mt-3 text-sm font-bold uppercase tracking-wide text-slate-500">
+                Einmalzahlung • Familienzugang • Alle Funktionen
+              </p>
+            </div>
+
+            <div className="mt-10 flex w-full flex-col gap-4">
+              <button
+                onClick={() => {
+                  setView("kids");
+                  setStarted(true);
+                }}
+                className="rounded-3xl bg-indigo-600 px-6 py-5 text-xl font-black text-white shadow-lg transition hover:scale-[1.02]"
+              >
+                Kinderbereich
+              </button>
+
+              <button
+                onClick={() => {
+                  setView("parents");
+                  setStarted(true);
+                }}
+                className="rounded-3xl bg-pink-500 px-6 py-5 text-xl font-black text-white shadow-lg transition hover:scale-[1.02]"
+              >
+                Elternbereich
+              </button>
+
+              <button
+                onClick={() => setStarted(true)}
+                className="rounded-3xl bg-yellow-400 px-6 py-5 text-xl font-black text-slate-900 shadow-lg transition hover:scale-[1.02]"
+              >
+                Demo starten
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -285,3 +357,10 @@ function Stat({
     </div>
   );
 }
+```
+
+# GitHub Summary
+
+```txt
+add punktly app welcome screen and app logic
+```
