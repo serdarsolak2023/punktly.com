@@ -20,7 +20,7 @@ import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   return (
     <img
-      src="/PunktlyLogo.png"	
+      src="/PunktlyLogo.png"
       alt="Punktly Logo"
       className={`${className} object-contain drop-shadow-xl`}
     />
@@ -73,9 +73,9 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
     title: "Impressum",
     intro: "Angaben gemäß § 5 TMG",
     content: [
-      "www.punktly.comDD",
-      "Punktly, info@punktly.com, Administrator",
-      "Steuer.-."
+      "Hier kannst du später deine offiziellen Anbieterangaben eintragen.",
+      "Name / Firma, Anschrift, Kontakt-E-Mail, Telefon und verantwortliche Person ergänzen.",
+      "Wichtig: Bitte prüfe das Impressum rechtlich, bevor die App öffentlich genutzt wird."
     ],
   },
   datenschutz: {
@@ -1932,50 +1932,42 @@ alert(JSON.stringify(data, null, 2));
 
 <div className="mx-auto max-w-6xl">
         <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
-          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-5">
-              <img
-                src="/PunktlyLogo.png"
-                alt="Punktly Logo"
-                className="h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
-              />
+          {area === "child" ? (
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-5">
+                <img
+                  src="/PunktlyLogo.png"
+                  alt="Punktly Logo"
+                  className="h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+                />
 
-              <div>
-                <h1 className="punktly-welcome-wipe text-xl font-black text-sky-950 md:text-2xl">
-                  <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
-                </h1>
-                <p className="punktly-rainbow-text mt-2 text-lg font-black md:text-xl">
-                  Punktly wünscht Ihnen Viel Spaß
-                </p>
+                <div>
+                  <h1 className="punktly-welcome-wipe text-xl font-black text-sky-950 md:text-2xl">
+                    <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
+                  </h1>
+                  <p className="punktly-rainbow-text mt-2 text-lg font-black md:text-xl">
+                    Punktly wünscht Ihnen Viel Spaß
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <nav className="flex flex-wrap items-center gap-2">
-              {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setActiveLegalPage(page)}
-                  className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
-                >
-                  {legalPages[page].title}
-                </button>
-              ))}
-            </nav>
+              <nav className="flex flex-wrap items-center gap-2">
+                {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setActiveLegalPage(page)}
+                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                  >
+                    {legalPages[page].title}
+                  </button>
+                ))}
+              </nav>
 
-            {area !== "start" && (
               <div className="flex flex-wrap gap-2">
                 {firebaseUser && (
                   <div className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
                     Login: {firebaseUser.email}
                   </div>
-                )}
-                {firebaseUser && area === "parent" && (
-                  <button
-                    onClick={logoutGoogle}
-                    className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
-                  >
-                    Google Logout
-                  </button>
                 )}
                 <button
                   onClick={() => {
@@ -1990,8 +1982,68 @@ alert(JSON.stringify(data, null, 2));
                   <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
                 </button>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <img
+                  src="/PunktlyLogo.png"
+                  alt="Punktly Logo"
+                  className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
+                />
+                <div>
+                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
+                    Punktly
+                  </h1>
+                  <p className="font-bold text-sky-700">
+                    {area === "parent" ? "Elternbereich" : "Bitte Bereich wählen"}
+                  </p>
+                </div>
+              </div>
+
+              <nav className="flex flex-wrap items-center gap-2">
+                {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setActiveLegalPage(page)}
+                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                  >
+                    {legalPages[page].title}
+                  </button>
+                ))}
+              </nav>
+
+              {area === "parent" && (
+                <div className="flex flex-wrap gap-2">
+                  {firebaseUser && (
+                    <div className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
+                      Login: {firebaseUser.email}
+                    </div>
+                  )}
+                  {firebaseUser && (
+                    <button
+                      onClick={logoutGoogle}
+                      className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
+                    >
+                      Google Logout
+                    </button>
+                  )}
+                  <button
+                    onClick={() => {
+                      setSoundEnabled(!soundEnabled);
+                      playSound("click");
+                    }}
+                    className={`rounded-[1.35rem] px-4 py-3 font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
+                  >
+                    🔊 Sounds: {soundEnabled ? "An" : "Aus"}
+                  </button>
+                  <button onClick={goStart} className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
+                    <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </header>
 
         {activeLegalPage && (

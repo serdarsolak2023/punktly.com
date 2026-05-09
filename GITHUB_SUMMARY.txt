@@ -1,7 +1,6 @@
-PIN-Reset mit Sicherheitsabfrage:
-- Soundtest aus dem Elternbereich entfernt
-- „PIN vergessen?“ bleibt als Reset-Funktion sichtbar
-- PIN-Reset jetzt nur mit Sicherheitsfrage und korrekter Antwort möglich
-- Neue Eltern-PIN kann nach richtiger Sicherheitsantwort gesetzt werden
-- Sicherheitsfrage und Antwort können nur im geöffneten Elternbereich geändert werden
-- Speicherung der Sicherheitsabfrage in Firebase ergänzt
+Kinderbereich-Header angepasst:
+- Kompaktes Willkommen-Header-Layout nur im Kinderbereich aktiviert
+- Startseite und Elternbereich erhalten eigene Header-Darstellung
+- Login-, Sound- und Bereich-wechseln-Elemente im Kinderbereich modern angeordnet
+- Rechtliche Navigation bleibt erhalten
+- Kinderbereich wirkt jetzt eigenständiger und app-ähnlicher
