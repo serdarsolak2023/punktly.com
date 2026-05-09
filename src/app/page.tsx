@@ -1930,15 +1930,107 @@ alert(JSON.stringify(data, null, 2));
   }
 `}</style>
 
+
+<style jsx global>{`
+  @keyframes punktlyWelcomeWipe {
+    0%, 100% { transform: translateY(0); clip-path: inset(0 0 0 0); opacity: 1; }
+    45% { transform: translateY(-6px); clip-path: inset(0 0 14% 0); opacity: .95; }
+    75% { transform: translateY(5px); clip-path: inset(12% 0 0 0); opacity: 1; }
+  }
+
+  @keyframes punktlyRainbowText {
+    0% { background-position: 0% 50%; transform: translateY(0) scale(1); }
+    35% { transform: translateY(-3px) scale(1.01); }
+    70% { transform: translateY(3px) scale(1); }
+    100% { background-position: 100% 50%; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes punktlySparklePulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: .85; }
+    50% { transform: scale(1.22) rotate(8deg); opacity: 1; }
+  }
+
+  @keyframes punktlyCoinFloat {
+    0% { transform: translateY(0) rotate(-10deg) scale(1); opacity: .75; }
+    50% { transform: translateY(-16px) rotate(14deg) scale(1.08); opacity: 1; }
+    100% { transform: translateY(0) rotate(-10deg) scale(1); opacity: .75; }
+  }
+
+  @keyframes punktlyCoinDrift {
+    0% { transform: translateX(-10px) translateY(0) rotate(0deg); }
+    50% { transform: translateX(12px) translateY(-8px) rotate(18deg); }
+    100% { transform: translateX(-10px) translateY(0) rotate(0deg); }
+  }
+
+  .punktly-welcome-wipe { animation: punktlyWelcomeWipe 3.2s ease-in-out infinite; }
+  .punktly-rainbow-text {
+    background: linear-gradient(90deg, #38bdf8, #34d399, #facc15, #fb7185, #a78bfa, #38bdf8);
+    background-size: 350% 350%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: punktlyRainbowText 4s ease-in-out infinite alternate;
+  }
+  .punktly-sparkle { display: inline-block; animation: punktlySparklePulse 1.8s ease-in-out infinite; }
+  .punktly-coin-float { animation: punktlyCoinFloat 4.2s ease-in-out infinite; }
+  .punktly-coin-drift { animation: punktlyCoinDrift 5s ease-in-out infinite; }
+`}</style>
+
 <div className="mx-auto max-w-6xl">
-        <header className="mb-5 rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_20px_60px_rgba(37,99,235,.15)] backdrop-blur-xl">
-          {area === "child" ? (
-            <div className="grid gap-5 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+        <header
+          className={`relative mb-5 overflow-hidden rounded-[2.8rem] border-[3px] border-white p-5 shadow-[0_24px_70px_rgba(37,99,235,.18)] backdrop-blur-xl ${
+            area === "parent"
+              ? "bg-gradient-to-br from-purple-100 via-sky-100 to-cyan-100"
+              : area === "child"
+              ? "bg-gradient-to-br from-sky-100 via-white to-cyan-100"
+              : "bg-white/90"
+          }`}
+        >
+          {(area === "child" || area === "parent") && (
+            <>
+              <img
+                src="/PunktlyLogo.png"
+                alt=""
+                aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -bottom-8 left-4 h-20 w-20 rotate-[-18deg] object-contain opacity-70"
+              />
+              <img
+                src="/PunktlyLogo.png"
+                alt=""
+                aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-3 left-[24%] h-16 w-16 rotate-[14deg] object-contain opacity-55"
+              />
+              <img
+                src="/PunktlyLogo.png"
+                alt=""
+                aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -bottom-5 left-[48%] h-14 w-14 rotate-[8deg] object-contain opacity-50"
+                style={{ animationDelay: "1s" }}
+              />
+              <img
+                src="/PunktlyLogo.png"
+                alt=""
+                aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-4 right-[18%] h-16 w-16 rotate-[-10deg] object-contain opacity-55"
+                style={{ animationDelay: ".7s" }}
+              />
+              <img
+                src="/PunktlyLogo.png"
+                alt=""
+                aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute -right-5 -top-3 h-20 w-20 rotate-[18deg] object-contain opacity-55"
+                style={{ animationDelay: "1.4s" }}
+              />
+            </>
+          )}
+
+          {area === "child" || area === "parent" ? (
+            <div className="relative z-10 grid gap-5 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
               <div className="flex items-center gap-5">
                 <img
                   src="/PunktlyLogo.png"
                   alt="Punktly Logo"
-                  className="h-24 w-24 flex-none object-contain drop-shadow-xl md:h-28 md:w-28"
+                  className="h-24 w-24 flex-none rounded-full object-contain drop-shadow-xl md:h-28 md:w-28"
                 />
 
                 <div className="min-w-0">
@@ -1957,7 +2049,7 @@ alert(JSON.stringify(data, null, 2));
                     <button
                       key={page}
                       onClick={() => setActiveLegalPage(page)}
-                      className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                      className="rounded-full bg-white/85 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white"
                     >
                       {legalPages[page].title}
                     </button>
@@ -1966,8 +2058,8 @@ alert(JSON.stringify(data, null, 2));
 
                 <div className="flex flex-wrap justify-start gap-3 lg:justify-end">
                   {firebaseUser && (
-                    <div className="rounded-[1.3rem] bg-white px-4 py-2 text-sm font-black text-sky-700 shadow-sm">
-                      Login: {firebaseUser.email}
+                    <div className="rounded-[1.6rem] bg-gradient-to-r from-emerald-500 to-green-400 px-5 py-3 text-sm font-black text-white shadow-[0_10px_24px_rgba(16,185,129,.30)] ring-2 ring-white/80">
+                      👤 Login: {firebaseUser.email}
                     </div>
                   )}
 
@@ -1976,81 +2068,28 @@ alert(JSON.stringify(data, null, 2));
                       setSoundEnabled(!soundEnabled);
                       playSound("click");
                     }}
-                    className={`rounded-[1.3rem] px-4 py-2 text-sm font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
+                    className={`rounded-[1.6rem] px-5 py-3 text-sm font-black shadow-sm ring-2 ring-white/80 ${
+                      soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"
+                    }`}
                   >
                     🔊 Sounds: {soundEnabled ? "An" : "Aus"}
                   </button>
 
                   <button
                     onClick={goStart}
-                    className="rounded-[1.3rem] bg-white px-4 py-2 text-sm font-black text-sky-700 shadow-sm"
+                    className={`rounded-[1.6rem] bg-white/90 px-5 py-3 text-sm font-black shadow-[0_10px_24px_rgba(37,99,235,.18)] ring-2 transition hover:scale-[1.02] ${
+                      area === "parent"
+                        ? "text-purple-700 ring-purple-200"
+                        : "text-sky-700 ring-sky-200"
+                    }`}
                   >
                     <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
                   </button>
                 </div>
               </div>
             </div>
-          ) : area === "parent" ? (
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center gap-4">
-                <img
-                  src="/PunktlyLogo.png"
-                  alt="Punktly Logo"
-                  className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
-                />
-                <div>
-                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
-                    Punktly
-                  </h1>
-                  <p className="font-bold text-sky-700">Elternbereich</p>
-                </div>
-              </div>
-
-              <nav className="flex flex-wrap items-center gap-2">
-                {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
-                  <button
-                    key={page}
-                    onClick={() => setActiveLegalPage(page)}
-                    className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
-                  >
-                    {legalPages[page].title}
-                  </button>
-                ))}
-              </nav>
-
-              <div className="flex flex-wrap gap-2">
-                {firebaseUser && (
-                  <div className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
-                    Login: {firebaseUser.email}
-                  </div>
-                )}
-
-                {firebaseUser && (
-                  <button
-                    onClick={logoutGoogle}
-                    className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700 shadow-sm"
-                  >
-                    Google Logout
-                  </button>
-                )}
-
-                <button
-                  onClick={() => {
-                    setSoundEnabled(!soundEnabled);
-                    playSound("click");
-                  }}
-                  className={`rounded-[1.35rem] px-4 py-3 font-black shadow-sm ${soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"}`}
-                >
-                  🔊 Sounds: {soundEnabled ? "An" : "Aus"}
-                </button>
-
-                <button onClick={goStart} className="rounded-[1.35rem] bg-white px-4 py-3 font-black text-sky-700 shadow-sm">
-                  <LogOut className="mr-2 inline h-5 w-5" /> Bereich wechseln
-                </button>
-              </div>
-            </div>
           ) : (
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <img
                   src="/PunktlyLogo.png"
@@ -2070,7 +2109,7 @@ alert(JSON.stringify(data, null, 2));
                   <button
                     key={page}
                     onClick={() => setActiveLegalPage(page)}
-                    className="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
                   >
                     {legalPages[page].title}
                   </button>
