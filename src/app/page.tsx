@@ -395,6 +395,7 @@ export default function PunktlyRoleSplit() {
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"paypal" | "apple" | "google">("paypal");
   const [hasPaid, setHasPaid] = useState(false);
   const [isCheckingPaid, setIsCheckingPaid] = useState(false);
   const [area, setArea] = useState<Area>("start");
@@ -1304,6 +1305,19 @@ function celebrate(message: string) {
     await saveFamilyItem("tasks", updatedTask);
   }
 
+
+  async function startApplePayCheckout() {
+    setSelectedPaymentMethod("apple");
+    celebrate("🍎 Apple Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
+  async function startGooglePayCheckout() {
+    setSelectedPaymentMethod("google");
+    celebrate("🌐 Google Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
   async function startPaypalCheckout() {
     try {
       setIsPaying(true);
@@ -1560,20 +1574,38 @@ alert(JSON.stringify(data, null, 2));
               </p>
             )}
 
-<button
-  onClick={startPaypalCheckout}
-  disabled={isPaying}
-  className="mt-8 w-full rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 py-5 text-2xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)] transition hover:bg-blue-700 disabled:opacity-60"
->
-  {isPaying
-    ? "🔄 PayPal wird geöffnet..."
-    : hasPaid
-    ? "✅ Bereits freigeschaltet"
-    : "💳 Mit PayPal-Konto bezahlen"}
-</button>
+<div className="mt-8 grid gap-4">
+  <button
+    onClick={startApplePayCheckout}
+    disabled={isPaying}
+    className="w-full rounded-[1.8rem] bg-black py-5 text-2xl font-black text-white shadow-[0_12px_30px_rgba(15,23,42,.22)] transition hover:scale-[1.01] disabled:opacity-60"
+  >
+    🍎 Mit Apple Pay bezahlen
+  </button>
+
+  <button
+    onClick={startGooglePayCheckout}
+    disabled={isPaying}
+    className="w-full rounded-[1.8rem] bg-white py-5 text-2xl font-black text-slate-900 shadow-[0_12px_30px_rgba(37,99,235,.18)] transition hover:scale-[1.01] disabled:opacity-60"
+  >
+    🌐 Mit Google Pay bezahlen
+  </button>
+
+  <button
+    onClick={startPaypalCheckout}
+    disabled={isPaying}
+    className="w-full rounded-[1.8rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 py-5 text-2xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)] transition hover:scale-[1.01] disabled:opacity-60"
+  >
+    {isPaying
+      ? "🔄 Zahlung wird vorbereitet..."
+      : hasPaid
+      ? "✅ Bereits freigeschaltet"
+      : "🅿️ Mit PayPal bezahlen"}
+  </button>
+</div>
 
 <p className="mt-4 text-center text-sm font-bold text-blue-600">
-  Nach dem Klick öffnet sich PayPal zur sicheren Zahlung.
+  Nach dem Klick öffnet sich die gewählte Zahlungsmethode zur sicheren Zahlung.
   <br />
   Dein Login-Konto wird danach automatisch freigeschaltet.
 </p>
