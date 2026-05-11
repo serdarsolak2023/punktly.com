@@ -1,5 +1,6 @@
-Header-Rechtsnavigation optimiert:
-- Impressum-, Datenschutzerklärung-, Widerrufsbelehrung- und AGB-Buttons kleiner gemacht
-- Alle vier rechtlichen Buttons stehen im Kinderbereich und Elternbereich nebeneinander
-- Restliches Header-Design bleibt unverändert
-- Login, Sounds An/Aus, Bereich wechseln und Coin-Animationen bleiben erhalten
+Kinderbereich aufgeräumt:
+- Separater „Profil von … / Mein Motiv“-Bereich entfernt
+- Motiv-Auswahl bleibt direkt in der „Hallo [Kind]“-Karte erhalten
+- Kind-Auswahl wurde in die „Hallo [Kind]“-Karte integriert
+- Userbezogene Motiv-Auswahl bleibt weiterhin pro Kind gespeichert
+- Kinderbereich wirkt kompakter und weniger doppelt
