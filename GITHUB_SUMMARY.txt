@@ -1,9 +1,7 @@
-Globales Coin-Hintergrundsystem integriert:
-- Gesamte Webapp jetzt mit animierten Coins im Hintergrund
-- Coins stammen vollständig aus /public/badges
-- 32 animierte Coins über die komplette App verteilt
-- Coins bewegen sich weich und dynamisch im Hintergrund
-- Alle Inhalte bleiben weiterhin vollständig sichtbar
-- Keine Änderung an Layout, Funktionen oder Design
-- Kinder- und Elternbereich behalten ihr bestehendes Layout 1:1
-- Premium-Hintergrund mit mehr Tiefe und lebendiger Animation ergänzt
+Globaler Coin-Hintergrund Build-Fix:
+- Syntaxfehler durch falsch eingefügten Coin-Hintergrund behoben
+- Coin-Hintergrund korrekt innerhalb des JSX-Main-Bereichs platziert
+- 32 animierte Coins bleiben im globalen Hintergrund aktiv
+- Inhalte bleiben über dem Hintergrund sichtbar
+- Layout und Funktionen bleiben unverändert
+- Projekt wieder GitHub- und Vercel-kompatibel
