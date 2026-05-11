@@ -3146,6 +3146,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
+        
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
       </div>
     </nav>

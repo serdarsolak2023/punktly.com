@@ -1,9 +1,7 @@
-Elternverwalteter Shop korrekt umgesetzt:
-- Alter vorgefertigter Kinder-Shop entfernt
-- Kinderbereich zeigt nur noch Produkte, die Eltern im Elternbereich anlegen
-- Neuer Elternbereich-Tab „Shop“ hinzugefügt
-- Eltern können Shop-Produkte anlegen, bearbeiten und löschen
-- Produkte haben Titel, Icon, Beschreibung und Coin-Preis
-- Beispielprodukt „Nintendo Spiel – Mario Kart“ für 1500 Coins integriert
-- Shop-Produkte werden in Firebase unter users/{uid}/shop gespeichert
-- Kinder können Produkte nur einlösen, wenn genug Coins vorhanden sind
+Shop-System korrigiert:
+- Doppelten Shop-Button im Kinderbereich entfernt
+- Shop-Tab im Elternbereich korrekt integriert
+- Eltern-Shop funktioniert jetzt separat vom Kinderbereich
+- Kinder sehen weiterhin nur Produkte von Eltern
+- Navigation zwischen Kinder- und Elternbereich bereinigt
+- Projekt erneut für GitHub/Vercel vorbereitet
