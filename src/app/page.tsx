@@ -1570,7 +1570,7 @@ alert(JSON.stringify(data, null, 2));
 
 
 <main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
               key={`global-coin-${i}`}
@@ -1589,7 +1589,7 @@ alert(JSON.stringify(data, null, 2));
           ))}
         </div>
 
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {Array.from({ length: 24 }).map((_, i) => (
             <span
               key={`star-${i}`}
@@ -1607,8 +1607,8 @@ alert(JSON.stringify(data, null, 2));
           ))}
         </div>
 
-<div className="relative z-10 mx-auto flex w-full max-w-[760px] flex-col gap-5">
-    <section className="w-full rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
+<div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
+    <section className="w-full rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
@@ -1619,7 +1619,7 @@ alert(JSON.stringify(data, null, 2));
         Punktly
       </h1>
 
-      <p className="mt-2 text-xl font-black text-sky-600 md:text-2xl">
+      <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
         Punktly freischalten
       </p>
 
@@ -1649,14 +1649,14 @@ alert(JSON.stringify(data, null, 2));
       </div>
     </section>
 
-    <div className="grid w-full gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
 
         {firebaseUser ? (
-          <div className="rounded-[2rem] bg-emerald-50 p-5 text-center">
+          <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
             <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
             <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
             {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
@@ -1684,7 +1684,7 @@ alert(JSON.stringify(data, null, 2));
                Mit Apple ID einloggen
             </button>
 
-            <div className="rounded-[2rem] bg-white p-4 shadow-xl">
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-white p-4 shadow-xl">
               <div className="mb-3 grid grid-cols-2 gap-3">
                 <button
                   onClick={() => setAuthMode("login")}
@@ -1729,7 +1729,7 @@ alert(JSON.stringify(data, null, 2));
         )}
       </section>
 
-      <section className="w-full rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -1785,8 +1785,8 @@ alert(JSON.stringify(data, null, 2));
   }
 
   return (
-    <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
+    <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
               key={`global-coin-${i}`}
@@ -1806,7 +1806,7 @@ alert(JSON.stringify(data, null, 2));
         </div>
 
       {celebration && (
-        <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
+        <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
           <div className="absolute left-8 top-12 animate-coin"><Coin className="h-10 w-10" /></div>
           <div className="absolute right-10 top-14 animate-coin"><Coin className="h-10 w-10 object-cover" /></div>
@@ -1815,7 +1815,7 @@ alert(JSON.stringify(data, null, 2));
 
       {showLoginWelcomePopup && isPurchased && (
         <div className="fixed inset-0 z-[80] grid place-items-center bg-slate-950/60 p-4 backdrop-blur-md">
-          <div className="w-full max-w-2xl rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_30px_90px_rgba(15,23,42,.35)]">
+          <div className="w-full max-w-2xl rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_30px_90px_rgba(15,23,42,.35)]">
             <div className="relative z-10 mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
               <FoxCoinImage className="h-24 w-24" />
             </div>
@@ -1879,7 +1879,7 @@ alert(JSON.stringify(data, null, 2));
 
       {showPinReset && (
         <div className="fixed inset-0 z-[90] grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
-          <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-white bg-white p-6 text-center shadow-[0_24px_80px_rgba(15,23,42,.25)]">
+          <div className="w-full max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-4 border-white bg-white p-6 text-center shadow-[0_24px_80px_rgba(15,23,42,.25)]">
             <div className="relative z-10 mx-auto grid h-20 w-20 place-items-center rounded-full bg-amber-100 text-4xl shadow-md">
               🔁
             </div>
@@ -1954,7 +1954,7 @@ alert(JSON.stringify(data, null, 2));
 
       {resetConfirmKind && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
-          <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_24px_80px_rgba(37,99,235,.25)]">
+          <div className="w-full max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_24px_80px_rgba(37,99,235,.25)]">
             <div className="relative z-10 mx-auto grid h-20 w-20 place-items-center rounded-full bg-yellow-100 text-4xl">
               ⚠️
             </div>
@@ -2134,7 +2134,7 @@ alert(JSON.stringify(data, null, 2));
   .punktly-coin-drift { animation: punktlyCoinDrift 5s ease-in-out infinite; }
 `}</style>
 
-<div className="relative z-10 mx-auto max-w-6xl">
+<div className="relative z-10 mx-auto max-w-[92rem]">
         {(area === "child" || area === "parent") && (
           <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
             area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
@@ -2145,7 +2145,7 @@ alert(JSON.stringify(data, null, 2));
         )}
 
         <header
-          className={`relative mb-5 overflow-hidden rounded-[2.8rem] border-[3px] border-white p-5 shadow-[0_24px_70px_rgba(37,99,235,.18)] backdrop-blur-xl ${
+          className={`relative mb-5 overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white p-5 shadow-[0_24px_70px_rgba(37,99,235,.18)] backdrop-blur-xl ${
             area === "parent"
               ? "bg-gradient-to-br from-violet-100 via-fuchsia-100 to-purple-200"
               : area === "child"
@@ -2226,19 +2226,19 @@ alert(JSON.stringify(data, null, 2));
           )}
 
           {area === "child" || area === "parent" ? (
-            <div className="relative z-10 grid gap-5 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
+            <div className="relative z-10 grid gap-5 xl:grid-cols-[1.15fr_.85fr] lg:items-center">
               <div className="flex items-center gap-5">
                 <img
                   src="/PunktlyLogo.png"
                   alt="Punktly Logo"
-                  className="h-24 w-24 flex-none rounded-full object-contain drop-shadow-xl md:h-28 md:w-28"
+                  className="h-20 w-20 flex-none sm:h-24 sm:w-24 rounded-full object-contain drop-shadow-xl md:h-28 md:w-28"
                 />
 
                 <div className="min-w-0">
-                  <h1 className="punktly-welcome-wipe text-2xl font-black leading-tight text-sky-950 md:text-3xl">
+                  <h1 className="punktly-welcome-wipe text-2xl font-black leading-tight text-sky-950 sm:text-3xl">
                     <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
                   </h1>
-                  <p className="punktly-rainbow-text mt-2 text-xl font-black leading-tight md:text-2xl">
+                  <p className="punktly-rainbow-text mt-2 text-xl font-black leading-tight sm:text-2xl">
                     Punktly wünscht Ihnen Viel Spaß
                   </p>
                 </div>
@@ -2321,7 +2321,7 @@ alert(JSON.stringify(data, null, 2));
         </header>
 
         {area === "parent" && (
-          <section className="mb-5 rounded-[2.5rem] border-[3px] border-white bg-white/95 p-5 shadow-[0_20px_60px_rgba(37,99,235,.12)]">
+          <section className="mb-5 rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-[3px] border-white bg-white/95 p-5 shadow-[0_20px_60px_rgba(37,99,235,.12)]">
             <div className="mb-4 flex items-center gap-3">
               <div className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-md">⭐</div>
               <h2 className="text-2xl font-black text-sky-950">Zusammenfassung</h2>
@@ -2363,7 +2363,7 @@ alert(JSON.stringify(data, null, 2));
 
         {activeLegalPage && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-950/50 p-4 backdrop-blur-sm">
-            <div className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border-4 border-white bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,.35)]">
+            <div className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-[1.5rem] sm:rounded-[2rem] border-4 border-white bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,.35)]">
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.25em] text-sky-500">Rechtliches</p>
@@ -2399,7 +2399,7 @@ alert(JSON.stringify(data, null, 2));
 
         {area === "start" && (
           <section className="grid gap-5 md:grid-cols-2">
-            <div className="rounded-[2.5rem] border-2 border-white bg-gradient-to-br from-yellow-100 via-orange-50 to-white p-6 text-center shadow-[0_24px_70px_rgba(245,158,11,.18)]">
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-gradient-to-br from-yellow-100 via-orange-50 to-white p-6 text-center shadow-[0_24px_70px_rgba(245,158,11,.18)]">
               <div className="flex justify-center"><FoxCoinImage className="h-36 w-36 animate-floaty" /></div>
               <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
@@ -2431,7 +2431,7 @@ alert(JSON.stringify(data, null, 2));
               </button>
             </div>
 
-            <div className="rounded-[2.5rem] border-2 border-white bg-white/90 p-6 shadow-[0_24px_70px_rgba(37,99,235,.16)] backdrop-blur-xl">
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-white/90 p-6 shadow-[0_24px_70px_rgba(37,99,235,.16)] backdrop-blur-xl">
               <div className="text-center text-7xl">👨‍👩‍👧</div>
               <h2 className="mt-4 text-center text-4xl font-black text-sky-950">Elternbereich</h2>
               <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
@@ -2473,7 +2473,7 @@ alert(JSON.stringify(data, null, 2));
           <>
             <ChildTabs view={childView} setView={setChildView} />
 
-            <div className="mt-4 rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
+            <div className="mt-4 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[.18em] text-sky-500">Profil von {child.name}</p>
@@ -2551,7 +2551,7 @@ alert(JSON.stringify(data, null, 2));
               {childView === "home" && (
                 <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
                   <div className="space-y-5">
-                    <div className={`rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
+                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                         <div className="flex items-center justify-center">
                           {(child.profileBadges || [])[0] ? (
@@ -2660,7 +2660,7 @@ alert(JSON.stringify(data, null, 2));
                   </p>
 
                   {openedChestMessage && (
-                    <div className="mb-5 rounded-[2.8rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_20px_55px_rgba(14,165,233,.15)]">
+                    <div className="mb-5 rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_20px_55px_rgba(14,165,233,.15)]">
                       <div className="text-6xl">🎉</div>
                       <h3 className="mt-2 text-3xl font-black text-sky-950">In deiner Schatzkiste war:</h3>
                       <p className="mt-3 text-xl font-black text-amber-700">{openedChestMessage}</p>
@@ -2674,7 +2674,7 @@ alert(JSON.stringify(data, null, 2));
                     {chests.map((chest) => {
                       const alreadyOpened = chest.opened && chest.openedBy === child.id;
                       return (
-                        <div key={chest.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 text-center shadow-[0_14px_40px_rgba(37,99,235,.10)]">
+                        <div key={chest.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 text-center shadow-[0_14px_40px_rgba(37,99,235,.10)]">
                           <div className="text-6xl">{chest.tier === "Gold" ? "🏆" : chest.tier === "Silber" ? "🥈" : "🥉"}</div>
                           <h3 className="mt-2 text-xl font-black text-sky-950">{chest.title}</h3>
                           <p className="mt-1 font-bold text-sky-700">{chest.tier}-Schatzkiste</p>
@@ -2717,7 +2717,7 @@ alert(JSON.stringify(data, null, 2));
                   </p>
 
                   {shop.length === 0 ? (
-                    <div className="rounded-[2rem] bg-yellow-50 p-5 font-black text-amber-800">
+                    <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-yellow-50 p-5 font-black text-amber-800">
                       Der Shop ist noch leer. Bitte im Elternbereich Produkte anlegen.
                     </div>
                   ) : (
@@ -2727,7 +2727,7 @@ alert(JSON.stringify(data, null, 2));
                         const canBuy = child.coins >= item.price && !owned;
 
                         return (
-                          <div key={item.id} className="rounded-[2rem] border-2 border-white bg-white/90 p-5 shadow-[0_16px_45px_rgba(14,165,233,.12)]">
+                          <div key={item.id} className="rounded-[1.5rem] sm:rounded-[2rem] border-2 border-white bg-white/90 p-5 shadow-[0_16px_45px_rgba(14,165,233,.12)]">
                             <div className="text-5xl">{item.icon}</div>
                             <h3 className="mt-3 text-xl font-black text-sky-950">{item.title}</h3>
                             {item.description && <p className="mt-1 text-sm font-bold text-sky-700">{item.description}</p>}
@@ -2764,7 +2764,7 @@ alert(JSON.stringify(data, null, 2));
                 <Panel title="👤 Dein Profil">
                   <div className="grid gap-5 md:grid-cols-2">
                     <LiveFox child={child} waitingCount={childTasks.filter((t) => t.status === "wartet").length} />
-                    <div className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
+                    <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
                       <h3 className="text-2xl font-black text-sky-950">Deine Abzeichen</h3>
                       <div className="mt-3 flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
                     </div>
@@ -3057,14 +3057,14 @@ alert(JSON.stringify(data, null, 2));
               {parentView === "family" && (
                 <Panel title="👨‍👩‍👧 Familien-Challenges">
                   <div className="grid gap-4 md:grid-cols-2">
-                    {challenges.map(ch => <div key={ch.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
+                    {challenges.map(ch => <div key={ch.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
                   </div>
                 </Panel>
               )}
 
               {parentView === "stats" && (
                 <Panel title="📊 Eltern-Statistik">
-                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
+                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
                 </Panel>
               )}
 
@@ -3072,7 +3072,7 @@ alert(JSON.stringify(data, null, 2));
               {parentView === "profile" && (
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title="👤 Eltern-Profil">
-                    <div className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
+                    <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
                       <div className="flex items-center gap-4">
                         <div className="animate-floaty punktly-float grid h-16 w-16 place-items-center rounded-[1.8rem] bg-blue-100 text-3xl">👨‍👩‍👧</div>
                         <div>
@@ -3196,7 +3196,7 @@ alert(JSON.stringify(data, null, 2));
                         {children.map((c) => (
                           <div
                             key={c.id}
-                            className={`rounded-[2.8rem] border bg-gradient-to-br ${
+                            className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border bg-gradient-to-br ${
                               c.theme === "hell"
                                 ? "from-orange-100 to-yellow-100"
                                 : c.theme === "nacht"
@@ -3265,7 +3265,7 @@ alert(JSON.stringify(data, null, 2));
 
 function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView) => void }) {
   return (
-    <nav className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
+    <nav className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
       <div className="grid grid-cols-5 gap-1">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
@@ -3280,8 +3280,8 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
 
 function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentView) => void }) {
   return (
-    <nav className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
-      <div className="grid grid-cols-4 gap-1 md:grid-cols-10">
+    <nav className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
+      <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
@@ -3302,7 +3302,7 @@ function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () =>
 }
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
-  return <section className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_18px_55px_rgba(37,99,235,.12)] backdrop-blur-xl"><h2 className="mb-4 text-2xl font-black tracking-tight text-sky-950">{title}</h2>{children}</section>;
+  return <section className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_18px_55px_rgba(37,99,235,.12)] backdrop-blur-xl"><h2 className="mb-4 text-2xl font-black tracking-tight text-sky-950">{title}</h2>{children}</section>;
 }
 
 function BigNumber({ value, label }: { value: number; label: string }) {

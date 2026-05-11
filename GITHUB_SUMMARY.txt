@@ -1,10 +1,11 @@
-Code wirklich auf Premium-Mockup umgeschrieben:
-- Hauptseite optisch an das Referenzbild angepasst
-- Sehr heller, weicher Premium-Blau-Hintergrund eingebaut
-- Hauptkarte und Login/Zahlungskarten deutlich transparenter als Glassmorphism umgesetzt
-- Globale Coins mit festen, sauberen Positionen verteilt
-- Weiße PNG-Kanten durch Masking, Blend-Modus und transparente Rundung stark reduziert
-- Coins überlagern sich natürlicher und wirken wie freigestellt
-- Sterne weich und dezent im Hintergrund integriert
-- Header, Kinderbereich, Elternbereich und Funktionen bleiben unverändert
+Punktly als echte responsive App vorbereitet:
+- Mobile-first Layout für Handy, Tablet und Desktop optimiert
+- App nutzt jetzt 100dvh und Safe-Area-Abstände für iPhone/Android
+- Hintergrund-Coins auf kleinen Displays dezenter gemacht
+- Karten, Panels und Navigation für Handy/Tablet besser skaliert
+- Eingabefelder bleiben auf Mobile zoomfrei mit 16px optimiert
+- PWA manifest.json hinzugefügt
+- Service Worker Datei für App-Shell vorbereitet
+- Theme-Color, Standalone-Modus und App-Icons konfiguriert
+- Bestehende Funktionen, Header und Inhalte bleiben erhalten
 - GitHub-/Vercel-kompatible ZIP erstellt
