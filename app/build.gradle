@@ -23,7 +23,7 @@ plugins {
 def twaManifest = [
     applicationId: 'de.punktlycoinly.app',
     hostName: 'punktly-com.vercel.app', // The domain being opened in the TWA.
-    launchUrl: 'punktly-com.vercel.app', // The start path for the TWA. Must be relative to the domain.
+    launchUrl: '/', // The start path for the TWA. Must be relative to the domain.
     name: 'PunktlyCoinly', // The application name.
     launcherName: 'Punktly', // The name shown on the Android Launcher.
     themeColor: '#38BDF8', // The color used for the status bar.

@@ -10,7 +10,8 @@
 
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import {
+  useRef, useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
@@ -21,6 +22,27 @@ function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
 
 
+
+
+  useEffect(() => {
+    if (!bgMusicRef.current) {
+      bgMusicRef.current = new Audio("/sounds/background-music.mp3");
+      bgMusicRef.current.loop = true;
+      bgMusicRef.current.volume = 0.35;
+    }
+
+    const music = bgMusicRef.current;
+
+    if (musicEnabled) {
+      music.play().catch(() => {});
+    } else {
+      music.pause();
+    }
+
+    return () => {
+      music.pause();
+    };
+  }, [musicEnabled]);
 
 return (
     <img
@@ -451,6 +473,8 @@ export default function PunktlyRoleSplit() {
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(true);
+  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
@@ -2349,6 +2373,17 @@ alert(JSON.stringify(data, null, 2));
                     }`}
                   >
                     🔊 Sounds: {soundEnabled ? "An" : "Aus"}
+                  </button>
+
+                  <button
+                    onClick={() => setMusicEnabled(!musicEnabled)}
+                    className={`rounded-[1.6rem] px-5 py-3 text-sm font-black shadow-sm ring-2 ring-white/80 ${
+                      musicEnabled
+                        ? "bg-pink-100 text-pink-800"
+                        : "bg-slate-100 text-slate-700"
+                    }`}
+                  >
+                    🎵 Musik: {musicEnabled ? "An" : "Aus"}
                   </button>
 
                   <button
