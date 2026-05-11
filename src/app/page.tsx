@@ -190,10 +190,10 @@ const rareBadges = [
 ];
 
 const profileBadgeOptions = Array.from({ length: 30 }, (_, index) => {
-  const number = String(index + 1).padStart(2, "0");
+  const number = String(index ⭐ 1).padStart(2, "0");
   return {
     id: `badge-${number}`,
-    label: `Motiv ${index + 1}`,
+    label: `Motiv ${index ⭐ 1}`,
     src: `/badges/badge-${number}.png`,
   };
 });
@@ -306,13 +306,13 @@ function cleanAchievements(list: string[]) {
 
 function cleanLevelAchievements(list: string[]) {
   const levelBadges = list
-    .filter((item) => /^Level \d+ erreicht$/.test(item))
-    .map((item) => Number(item.match(/\d+/)?.[0] || 0))
+    .filter((item) => /^Level \d⭐ erreicht$/.test(item))
+    .map((item) => Number(item.match(/\d⭐/)?.[0] || 0))
     .filter((num) => num > 0);
 
   const highestLevel = levelBadges.length > 0 ? Math.max(...levelBadges) : null;
 
-  const withoutOldLevels = list.filter((item) => !/^Level \d+ erreicht$/.test(item));
+  const withoutOldLevels = list.filter((item) => !/^Level \d⭐ erreicht$/.test(item));
 
   return highestLevel ? [...withoutOldLevels, `Level ${highestLevel} erreicht`] : withoutOldLevels;
 }
@@ -320,8 +320,8 @@ function cleanLevelAchievements(list: string[]) {
 function addAchievement(list: string[], title: string) {
   let nextList = list || [];
 
-  if (/^Level \d+ erreicht$/.test(title)) {
-    nextList = nextList.filter((item) => !/^Level \d+ erreicht$/.test(item));
+  if (/^Level \d⭐ erreicht$/.test(title)) {
+    nextList = nextList.filter((item) => !/^Level \d⭐ erreicht$/.test(item));
   }
 
   if (!nextList.includes(title)) {
@@ -350,7 +350,7 @@ function countPrestigeStars(child: Child) {
     item.includes("💫")
   ).length;
 
-  return Math.max(storedStars, equippedStars + achievementStars);
+  return Math.max(storedStars, equippedStars ⭐ achievementStars);
 }
 
 function prestigeFromStars(child: Child) {
@@ -487,15 +487,15 @@ export default function PunktlyRoleSplit() {
       const [startFreq, endFreq] = soundMap[type];
 
       osc.frequency.setValueAtTime(startFreq, now);
-      osc.frequency.exponentialRampToValueAtTime(endFreq, now + 0.16);
+      osc.frequency.exponentialRampToValueAtTime(endFreq, now ⭐ 0.16);
 
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      gain.gain.exponentialRampToValueAtTime(0.18, now ⭐ 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now ⭐ 0.22);
 
       osc.type = type === "chest" ? "triangle" : "sine";
       osc.start(now);
-      osc.stop(now + 0.24);
+      osc.stop(now ⭐ 0.24);
     } catch {
       // Sound ist optional.
     }
@@ -628,14 +628,14 @@ function celebrate(message: string) {
         const receives = task.childId === "all" ? c.id === selectedChildId : c.id === task.childId;
         if (!receives) return c;
 
-        let coins = c.coins + task.coins;
-        let xp = c.xp + task.xp;
+        let coins = c.coins ⭐ task.coins;
+        let xp = c.xp ⭐ task.xp;
         let level = c.level;
-        let streak = c.streak + (task.repeat === "täglich" ? 1 : 0);
+        let streak = c.streak ⭐ (task.repeat === "täglich" ? 1 : 0);
         let achievements = [...c.achievements];
 
         if (streak > 0 && streak % 3 === 0) {
-          coins += 10;
+          coins ⭐= 10;
           achievements = addAchievement(achievements, "3-Tage-Bonus");
         }
 
@@ -644,8 +644,8 @@ function celebrate(message: string) {
 
           if (level >= MAX_LEVEL) {
             level = 1;
-            const nextPrestige = (c.prestige || 0) + 1;
-            coins += 250;
+            const nextPrestige = (c.prestige || 0) ⭐ 1;
+            coins ⭐= 250;
             achievements = addAchievement(achievements, `Prestige ${nextPrestige} erreicht`);
 
             const updatedChild: Child = {
@@ -656,8 +656,8 @@ function celebrate(message: string) {
               prestige: nextPrestige,
               prestigeStars: nextPrestige,
               streak,
-              completedCount: c.completedCount + 1,
-              weeklyPoints: c.weeklyPoints + task.coins,
+              completedCount: c.completedCount ⭐ 1,
+              weeklyPoints: c.weeklyPoints ⭐ task.coins,
               achievements
             };
 
@@ -665,8 +665,8 @@ function celebrate(message: string) {
             return childToSave;
           }
 
-          level += 1;
-          coins += 25;
+          level ⭐= 1;
+          coins ⭐= 25;
           achievements = addAchievement(achievements, `Level ${level} erreicht`);
 
           if (level === 10) achievements = addAchievement(achievements, "Silber-Rang erreicht");
@@ -683,8 +683,8 @@ function celebrate(message: string) {
           xp,
           level,
           streak,
-          completedCount: c.completedCount + 1,
-          weeklyPoints: c.weeklyPoints + task.coins,
+          completedCount: c.completedCount ⭐ 1,
+          weeklyPoints: c.weeklyPoints ⭐ task.coins,
           achievements
         };
 
@@ -706,9 +706,9 @@ function celebrate(message: string) {
       saveTaskNow(approvedTask);
     }, 250);
 
-    setChallenges(prev => prev.map(ch => ({ ...ch, current: Math.min(ch.goal, ch.current + 1) })));
+    setChallenges(prev => prev.map(ch => ({ ...ch, current: Math.min(ch.goal, ch.current ⭐ 1) })));
     playSound("coin");
-    celebrate("🎉 Bestätigt! Coins + XP gespeichert!");
+    celebrate("🎉 Bestätigt! Coins ⭐ XP gespeichert!");
   }
 
   function rejectTask(taskId: number) {
@@ -757,7 +757,7 @@ function celebrate(message: string) {
         if (existingTitles.has(dedupeKey)) return null;
 
         return {
-          id: Date.now() + index,
+          id: Date.now() ⭐ index,
           childId,
           title: preset.title,
           coins: preset.coins,
@@ -1547,13 +1547,13 @@ alert(JSON.stringify(data, null, 2));
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
-              src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+              src={`/badges/badge-${String((i % 12) ⭐ 1).padStart(2, "0")}.png`}
               alt=""
               aria-hidden="true"
               className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
               style={{
-                width: `${50 + (i % 5) * 14}px`,
-                height: `${50 + (i % 5) * 14}px`,
+                width: `${50 ⭐ (i % 5) * 14}px`,
+                height: `${50 ⭐ (i % 5) * 14}px`,
                 left: `${(i * 11) % 100}%`,
                 top: `${(i * 17) % 100}%`,
                 animationDelay: `${i * 0.35}s`,
@@ -1745,13 +1745,13 @@ alert(JSON.stringify(data, null, 2));
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
-              src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+              src={`/badges/badge-${String((i % 12) ⭐ 1).padStart(2, "0")}.png`}
               alt=""
               aria-hidden="true"
               className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
               style={{
-                width: `${50 + (i % 5) * 14}px`,
-                height: `${50 + (i % 5) * 14}px`,
+                width: `${50 ⭐ (i % 5) * 14}px`,
+                height: `${50 ⭐ (i % 5) * 14}px`,
                 left: `${(i * 11) % 100}%`,
                 top: `${(i * 17) % 100}%`,
                 animationDelay: `${i * 0.35}s`,
@@ -2548,7 +2548,7 @@ alert(JSON.stringify(data, null, 2));
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
                       </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
+                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level ⭐ 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
                         <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>Ziel: {child.goal}</span><span>{child.coins}/{child.goalCoins}</span></div><Progress value={child.coins} max={child.goalCoins} /></div>
                       </div>
                     </Panel>
@@ -2568,7 +2568,7 @@ alert(JSON.stringify(data, null, 2));
                     {childTasks.map(task => (
                       <div key={task.id} className="rounded-[1.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_25px_70px_rgba(14,165,233,.18)]">
                         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                          <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3><p className="font-bold text-sky-700">{task.day} · {task.repeat} · +{task.coins} Coins · +{task.xp} XP</p></div>
+                          <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3><p className="font-bold text-sky-700">{task.day} · {task.repeat} · ⭐{task.coins} Coins · ⭐{task.xp} XP</p></div>
                           <StatusBadge status={task.status} />
                         </div>
                         {task.status === "offen" && <button onClick={() => submitTask(task.id)} className="mt-3 w-full rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(37,99,235,.25)] hover:scale-[1.02] active:scale-[.98] transition">Ich habe es gemacht</button>}
@@ -2755,7 +2755,7 @@ alert(JSON.stringify(data, null, 2));
                       {waitingTasks.length === 0 && <p className="font-bold text-sky-700">Keine offenen Aufgaben.</p>}
                       {waitingTasks.map(task => (
                         <div key={task.id} className="rounded-[1.8rem] bg-yellow-50 p-4">
-                          <p className="font-black text-sky-950">{task.title}</p><p className="font-bold text-sky-700">+{task.coins} Coins · +{task.xp} XP</p>
+                          <p className="font-black text-sky-950">{task.title}</p><p className="font-bold text-sky-700">⭐{task.coins} Coins · ⭐{task.xp} XP</p>
                           <div className="mt-3 grid grid-cols-2 gap-2"><button onClick={() => approveTask(task)} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 p-3 font-black text-white"><Check className="inline h-4 w-4" /> bestätigen</button><button onClick={() => rejectTask(task.id)} className="rounded-[1.35rem] bg-red-400 p-3 font-black text-white"><X className="inline h-4 w-4" /> ablehnen</button></div>
                         </div>
                       ))}
@@ -2845,7 +2845,7 @@ alert(JSON.stringify(data, null, 2));
                         onClick={saveShopItem}
                         className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
                       >
-                        {editingShopId ? "Shop-Produkt speichern" : "+ Shop-Produkt hinzufügen"}
+                        {editingShopId ? "Shop-Produkt speichern" : "⭐ Shop-Produkt hinzufügen"}
                       </button>
 
                       {editingShopId && (
@@ -2983,7 +2983,7 @@ alert(JSON.stringify(data, null, 2));
               {parentView === "family" && (
                 <Panel title="👨‍👩‍👧 Familien-Challenges">
                   <div className="grid gap-4 md:grid-cols-2">
-                    {challenges.map(ch => <div key={ch.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
+                    {challenges.map(ch => <div key={ch.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: ⭐{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
                   </div>
                 </Panel>
               )}
@@ -3101,7 +3101,7 @@ alert(JSON.stringify(data, null, 2));
                         onClick={addChild}
                         className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
                       >
-                        + Kind hinzufügen
+                        ⭐ Kind hinzufügen
                       </button>
                     </div>
 

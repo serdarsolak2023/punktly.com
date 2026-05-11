@@ -1,7 +1,6 @@
-Globaler Coin-Hintergrund auf alle Bereiche erweitert:
-- Animierte Coins erscheinen jetzt auf Haupt-/Premiumseite, Startbereich, Kinderbereich und Elternbereich
-- Coin-Layer in alle Main-Layouts integriert
-- Coins bleiben im Hintergrund und verändern keine Funktionen
-- Alle Inhalte bleiben über dem Coin-Hintergrund sichtbar
-- Bestehendes Layout bleibt 1:1 erhalten
-- Coins stammen weiterhin aus /public/badges
+Globaler Hintergrund verbessert:
+- Plus-Symbole im Hintergrund vollständig durch Sterne ersetzt
+- Coins bleiben weiterhin animiert im Hintergrund aktiv
+- Header-Bereiche von Kinder- und Elternbereich bleiben unverändert
+- Keine Änderungen an Layout, Funktionen oder bestehenden Bereichen
+- Sterne sorgen für deutlich harmonischeren und hochwertigeren Look
