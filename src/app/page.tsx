@@ -2638,11 +2638,11 @@ alert(JSON.stringify(data, null, 2));
                     </div>
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
-                        <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} showCoinly motivSrc={selectedChildMotiv} />
-                        <StatCard icon="🎮" label="Level" value={child.level.toString()} showCoinly motivSrc={selectedChildMotiv} />
-                        <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} showCoinly motivSrc={selectedChildMotiv} />
-                        <StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} showCoinly motivSrc={selectedChildMotiv} />
-                        <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} showCoinly motivSrc={selectedChildMotiv} />
+                        <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
+<StatCard icon="🎮" label="Level" value={child.level.toString()} />
+<StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
+<StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
+<StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
                       </div>
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
