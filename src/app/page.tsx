@@ -1543,7 +1543,7 @@ alert(JSON.stringify(data, null, 2));
 
 
 <main className="relative min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-30">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
@@ -1759,7 +1759,7 @@ alert(JSON.stringify(data, null, 2));
 
   return (
     <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-30">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
@@ -2033,7 +2033,10 @@ alert(JSON.stringify(data, null, 2));
   .punktly-global-coin {
     filter: drop-shadow(0 10px 18px rgba(255, 215, 0, .24));
     will-change: transform;
-  }
+  
+    mix-blend-mode: multiply;
+    background: transparent !important;
+    border-radius: 9999px;}
 
   .punktly-global-coin-float {
     animation: punktlyGlobalFloat 7s ease-in-out infinite;
@@ -2176,6 +2179,18 @@ alert(JSON.stringify(data, null, 2));
               <img src="/badges/badge-12.png" alt="" aria-hidden="true"
                 className="punktly-coin-drift pointer-events-none absolute bottom-8 left-[70%] h-16 w-16 rotate-[18deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: "1.2s" }} />
+
+              <img src="/badges/badge-13.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute top-[18%] left-[32%] h-12 w-12 rotate-[-12deg] rounded-full object-contain opacity-65"
+                style={{ animationDelay: "2.1s" }} />
+
+              <img src="/badges/badge-14.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-[14%] right-[22%] h-14 w-14 rotate-[10deg] rounded-full object-contain opacity-70"
+                style={{ animationDelay: "2.8s" }} />
+
+              <img src="/badges/badge-15.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute top-[8%] right-[34%] h-12 w-12 rotate-[16deg] rounded-full object-contain opacity-60"
+                style={{ animationDelay: "3.3s" }} />
             </>
           )}
 
