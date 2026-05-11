@@ -1,7 +1,9 @@
-Header-Animationen erweitert:
-- Header jetzt mit 12 animierten Coins ausgestattet
-- Coins bewegen sich dynamisch im Hintergrund
-- Löwen-Coin weiter nach rechts oben verschoben
-- Coins bleiben ausschließlich im Header-Bereich
-- Kinder- und Elternbereich nutzen identisches modernes Header-Design
-- Mehr Tiefe, Bewegung und professioneller Look integriert
+Globales Coin-Hintergrundsystem integriert:
+- Gesamte Webapp jetzt mit animierten Coins im Hintergrund
+- Coins stammen vollständig aus /public/badges
+- 32 animierte Coins über die komplette App verteilt
+- Coins bewegen sich weich und dynamisch im Hintergrund
+- Alle Inhalte bleiben weiterhin vollständig sichtbar
+- Keine Änderung an Layout, Funktionen oder Design
+- Kinder- und Elternbereich behalten ihr bestehendes Layout 1:1
+- Premium-Hintergrund mit mehr Tiefe und lebendiger Animation ergänzt

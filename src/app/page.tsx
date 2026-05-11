@@ -18,7 +18,36 @@ import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
-  return (
+  
+<style jsx global>{`
+.punktly-global-coin{
+  filter: drop-shadow(0 10px 18px rgba(255,215,0,.25));
+  will-change: transform;
+}
+
+@keyframes punktlyFloat {
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) translateX(8px) rotate(8deg); }
+  100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+}
+
+@keyframes punktlyDrift {
+  0% { transform: translateX(0px) rotate(0deg); }
+  50% { transform: translateX(18px) translateY(8px) rotate(-10deg); }
+  100% { transform: translateX(0px) rotate(0deg); }
+}
+
+.punktly-coin-float{
+  animation: punktlyFloat 7s ease-in-out infinite;
+}
+
+.punktly-coin-drift{
+  animation: punktlyDrift 10s ease-in-out infinite;
+}
+`}</style>
+
+
+return (
     <img
       src="/PunktlyLogo.png"
       alt="Punktly Logo"
@@ -1537,7 +1566,28 @@ alert(JSON.stringify(data, null, 2));
     return (
 
 
-<main className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-6 md:px-6">
+
+      {/* GLOBAL COIN BACKGROUND */}
+      <div className="punktly-global-coins pointer-events-none fixed inset-0 overflow-hidden z-0 opacity-30">
+        {Array.from({ length: 32 }).map((_, i) => (
+          <img
+            key={i}
+            src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+            alt=""
+            aria-hidden="true"
+            className={`absolute object-contain punktly-global-coin ${i % 2 === 0 ? "punktly-coin-float" : "punktly-coin-drift"}`}
+            style={{
+              width: `${50 + (i % 5) * 14}px`,
+              height: `${50 + (i % 5) * 14}px`,
+              left: `${(i * 11) % 100}%`,
+              top: `${(i * 17) % 100}%`,
+              animationDelay: `${i * 0.35}s`,
+            }}
+          />
+        ))}
+      </div>
+
+<main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-6 md:px-6">
   <div className="mx-auto flex w-full max-w-[760px] flex-col gap-5">
     <section className="w-full rounded-[2.8rem] bg-white/95 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] ring-1 ring-white/80 md:px-10 md:py-10">
       <img
@@ -1716,7 +1766,7 @@ alert(JSON.stringify(data, null, 2));
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
+    <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
       {celebration && (
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
