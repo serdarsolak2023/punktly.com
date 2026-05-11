@@ -2045,12 +2045,12 @@ alert(JSON.stringify(data, null, 2));
               </div>
 
               <div className="grid gap-3">
-                <nav className="flex flex-wrap justify-start gap-2 lg:justify-end">
+                <nav className="flex flex-nowrap justify-start gap-1.5 lg:justify-end">
                   {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
                     <button
                       key={page}
                       onClick={() => setActiveLegalPage(page)}
-                      className="rounded-full bg-white/90 px-4 py-2 text-xs font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white"
+                      className="rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white whitespace-nowrap"
                     >
                       {legalPages[page].title}
                     </button>
@@ -2110,7 +2110,7 @@ alert(JSON.stringify(data, null, 2));
                   <button
                     key={page}
                     onClick={() => setActiveLegalPage(page)}
-                    className="rounded-full bg-sky-50 px-4 py-2 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-100"
+                    className="rounded-full bg-sky-50 px-2.5 py-1 text-[10px] font-black text-sky-700 shadow-sm transition hover:bg-sky-100 whitespace-nowrap"
                   >
                     {legalPages[page].title}
                   </button>
