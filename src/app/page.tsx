@@ -483,8 +483,29 @@ export default function PunktlyRoleSplit() {
   };
   const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
-  const waitingRewards = rewards.filter((r) => r.status === "wartet");
-  const completedPercent = useMemo(() => childTasks.length ? Math.round(childTasks.filter(t => t.status === "erledigt").length / childTasks.length * 100) : 0, [childTasks]);
+const waitingRewards = rewards.filter((r) => r.status === "wartet");
+
+const rewardGoalTotal = useMemo(
+  () => rewards.reduce((sum, reward) => sum + Math.max(0, Number(reward.coins) || 0), 0),
+  [rewards]
+);
+
+const rewardGoalLabel =
+  rewards.length > 0
+    ? rewards.map((reward) => reward.title).join(" + ")
+    : child.goal;
+
+const completedPercent = useMemo(
+  () =>
+    childTasks.length
+      ? Math.round(
+          (childTasks.filter((t) => t.status === "erledigt").length /
+            childTasks.length) *
+            100
+        )
+      : 0,
+  [childTasks]
+);
   const themeClass = { hell: "from-orange-300 to-amber-200", nacht: "from-indigo-400 to-slate-300", wald: "from-emerald-300 to-lime-200", bonbon: "from-pink-300 to-purple-200" }[child.theme];
 
   
@@ -2623,7 +2644,14 @@ alert(JSON.stringify(data, null, 2));
                       </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
                         <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
-                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>Ziel: {child.goal}</span><span>{child.coins}/{child.goalCoins}</span></div><Progress value={child.coins} max={child.goalCoins} /></div>
+                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>Ziel: {rewardGoalLabel}</span>
+<span>{child.coins}/{rewardGoalTotal || child.goalCoins}</span>
+</div>
+
+<Progress
+  value={child.coins}
+  max={rewardGoalTotal || child.goalCoins}
+/></div>
                       </div>
                     </Panel>
 
