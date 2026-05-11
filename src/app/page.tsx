@@ -485,15 +485,19 @@ export default function PunktlyRoleSplit() {
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
 const waitingRewards = rewards.filter((r) => r.status === "wartet");
 
-const rewardGoalTotal = useMemo(
-  () => rewards.reduce((sum, reward) => sum + Math.max(0, Number(reward.coins) || 0), 0),
+const childRewardGoalTotal = useMemo(
+  () =>
+    rewards
+      .filter((reward) => reward.status === "frei")
+      .reduce(
+        (sum, reward) => sum + Math.max(0, Number(reward.coins) || 0),
+        0
+      ),
   [rewards]
 );
 
-const rewardGoalLabel =
-  rewards.length > 0
-    ? rewards.map((reward) => reward.title).join(" + ")
-    : child.goal;
+const childRewardGoalLabel =
+  childRewardGoalTotal > 0 ? "Belohnungen" : "Keine Belohnung";
 
 const completedPercent = useMemo(
   () =>
@@ -2644,14 +2648,16 @@ alert(JSON.stringify(data, null, 2));
                       </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
                         <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
-                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>Ziel: {rewardGoalLabel}</span>
-<span>{child.coins}/{rewardGoalTotal || child.goalCoins}</span>
+                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
+<span>Ziel: {childRewardGoalLabel}</span>
+<span>{child.coins}/{childRewardGoalTotal}</span>
 </div>
 
 <Progress
   value={child.coins}
-  max={rewardGoalTotal || child.goalCoins}
-/></div>
+  max={childRewardGoalTotal || 1}
+/>
+</div>
                       </div>
                     </Panel>
 
