@@ -10,8 +10,7 @@
 
 "use client";
 
-import {
-  useRef, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
@@ -19,6 +18,10 @@ import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
+  
+
+
+
 return (
     <img
       src="/PunktlyLogo.png"
@@ -448,27 +451,6 @@ export default function PunktlyRoleSplit() {
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [musicEnabled, setMusicEnabled] = useState(false);
-  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    if (!bgMusicRef.current) {
-      bgMusicRef.current = new Audio("/sounds/background-music.mp3");
-      bgMusicRef.current.loop = true;
-      bgMusicRef.current.volume = 0.35;
-    }
-
-    const music = bgMusicRef.current;
-
-    if (musicEnabled) {
-      music.play().catch(() => {});
-    } else {
-      music.pause();
-    }
-  }, [musicEnabled]);
-
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
@@ -2194,58 +2176,9 @@ alert(JSON.stringify(data, null, 2));
               ? "bg-gradient-to-br from-violet-100 via-fuchsia-100 to-purple-200"
               : area === "child"
               ? "bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100"
-              : "bg-gradient-to-br from-yellow-100 via-orange-50 to-sky-100"
+              : "bg-white/90"
           }`}
         >
-          {area !== "child" && area !== "parent" && (
-            <>
-              <div className="pointer-events-none absolute inset-0 opacity-90">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(255,255,255,.85),transparent_34%),radial-gradient(circle_at_82%_72%,rgba(125,211,252,.35),transparent_38%)]" />
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-100/55 via-orange-50/40 to-sky-100/55" />
-              </div>
-
-              <img src="/badges/badge-01.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-4 left-[22%] h-14 w-14 rotate-[12deg] rounded-full object-contain opacity-80"
-                style={{ animationDelay: ".2s" }} />
-
-              <img src="/badges/badge-02.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-4 left-[34%] h-11 w-11 rotate-[-10deg] rounded-full object-contain opacity-70"
-                style={{ animationDelay: ".8s" }} />
-
-              <img src="/badges/badge-03.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-3 left-[48%] h-12 w-12 rotate-[16deg] rounded-full object-contain opacity-75"
-                style={{ animationDelay: "1.2s" }} />
-
-              <img src="/badges/badge-04.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-7 left-[61%] h-10 w-10 rotate-[-14deg] rounded-full object-contain opacity-65"
-                style={{ animationDelay: "1.7s" }} />
-
-              <img src="/badges/badge-05.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-5 right-[19%] h-16 w-16 rotate-[9deg] rounded-full object-contain opacity-75"
-                style={{ animationDelay: "2.1s" }} />
-
-              <img src="/badges/badge-06.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-6 right-[10%] h-12 w-12 rotate-[-7deg] rounded-full object-contain opacity-70"
-                style={{ animationDelay: "2.5s" }} />
-
-              <img src="/badges/badge-07.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute bottom-2 left-[28%] h-10 w-10 rotate-[18deg] rounded-full object-contain opacity-65"
-                style={{ animationDelay: "1s" }} />
-
-              <img src="/badges/badge-08.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute bottom-3 left-[43%] h-12 w-12 rotate-[-18deg] rounded-full object-contain opacity-70"
-                style={{ animationDelay: "1.9s" }} />
-
-              <img src="/badges/badge-09.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute bottom-1 right-[30%] h-11 w-11 rotate-[10deg] rounded-full object-contain opacity-65"
-                style={{ animationDelay: "2.8s" }} />
-
-              <img src="/badges/badge-10.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute -bottom-4 right-[5%] h-16 w-16 rotate-[20deg] rounded-full object-contain opacity-75"
-                style={{ animationDelay: "3.2s" }} />
-            </>
-          )}
-
           {(area === "child" || area === "parent") && (
             <>
               <div className="pointer-events-none absolute inset-0 opacity-80">
@@ -2367,17 +2300,6 @@ alert(JSON.stringify(data, null, 2));
                     }`}
                   >
                     🔊 Sounds: {soundEnabled ? "An" : "Aus"}
-                  </button>
-
-                  <button
-                    onClick={() => setMusicEnabled(!musicEnabled)}
-                    className={`rounded-[1.6rem] px-5 py-3 text-sm font-black shadow-sm ring-2 ring-white/80 ${
-                      musicEnabled
-                        ? "bg-pink-100 text-pink-800"
-                        : "bg-slate-100 text-slate-700"
-                    }`}
-                  >
-                    🎵 Musik: {musicEnabled ? "An" : "Aus"}
                   </button>
 
                   <button
