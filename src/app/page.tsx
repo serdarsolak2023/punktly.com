@@ -30,7 +30,7 @@ function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile";
-type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "calendar" | "family" | "stats" | "profile" | "settings";
+type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "calendar" | "family" | "stats" | "profile" | "settings";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
 type Status = "offen" | "wartet" | "erledigt";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
@@ -203,30 +203,16 @@ const extraShopItems = [
 ];
 
 const initialShop: ShopItem[] = [
-  { id: 1, title: "Zauberhut", price: 80, icon: "🎩", ownedBy: [], category: "Avatar", rarity: "Gewöhnlich", description: "Ein lustiger Hut für dein Profil." },
-  { id: 2, title: "Sternenkrone", price: 120, icon: "👑", ownedBy: [], category: "Avatar", rarity: "Selten", description: "Eine glänzende Krone für starke Sammler." },
-  { id: 3, title: "Raketenrucksack", price: 150, icon: "🚀", ownedBy: [], category: "Spezial", rarity: "Episch", description: "Für echte Abenteuer-Missionen." },
-  { id: 4, title: "Glitzerstern", price: 60, icon: "🌟", ownedBy: [], category: "Avatar", rarity: "Gewöhnlich", description: "Ein funkelnder Stern für dein Inventar." },
-  { id: 5, title: "Supercape", price: 140, icon: "🦸", ownedBy: [], category: "Avatar", rarity: "Selten", description: "Ein Umhang für kleine Helden." },
-  { id: 6, title: "Waldhintergrund", price: 100, icon: "🌲", ownedBy: [], category: "Hintergrund", rarity: "Gewöhnlich", description: "Ein ruhiger Wald für dein Profil." },
-
-  { id: 101, title: "Kleiner Fuchsfreund", price: 180, icon: "🦊", ownedBy: [], category: "Haustier", rarity: "Selten", description: "Dein erster treuer Begleiter." },
-  { id: 102, title: "Mini Drache", price: 450, icon: "🐉", ownedBy: [], category: "Haustier", rarity: "Legendär", description: "Ein seltener Drache für mutige Kinder.", limited: true },
-  { id: 103, title: "Schlaue Eule", price: 260, icon: "🦉", ownedBy: [], category: "Haustier", rarity: "Episch", description: "Hilft dir beim Lernen." },
-  { id: 104, title: "Panda Buddy", price: 220, icon: "🐼", ownedBy: [], category: "Haustier", rarity: "Selten", description: "Ein gemütlicher Freund." },
-  { id: 105, title: "Roboter Kumpel", price: 300, icon: "🤖", ownedBy: [], category: "Haustier", rarity: "Episch", description: "Ein cooler Technik-Begleiter." },
-
-  { id: 201, title: "Abenteuer Hintergrund", price: 160, icon: "🏞️", ownedBy: [], category: "Hintergrund", rarity: "Selten", description: "Für ein echtes Abenteuergefühl." },
-  { id: 202, title: "Weltraum Zimmer", price: 280, icon: "🌌", ownedBy: [], category: "Hintergrund", rarity: "Episch", description: "Dein Zimmer im Weltall." },
-  { id: 203, title: "Candy Welt", price: 200, icon: "🍭", ownedBy: [], category: "Hintergrund", rarity: "Selten", description: "Bunt, süß und fröhlich." },
-  { id: 204, title: "Nachtlicht Raum", price: 180, icon: "🌙", ownedBy: [], category: "Hintergrund", rarity: "Gewöhnlich", description: "Ruhige Farben für den Abend." },
-
-  { id: 301, title: "2x XP Booster", price: 250, icon: "⚡", ownedBy: [], category: "Booster", rarity: "Episch", description: "Motivationsbooster für mehr XP." },
-  { id: 302, title: "Coin Magnet", price: 350, icon: "🧲", ownedBy: [], category: "Booster", rarity: "Legendär", description: "Ein seltener Bonus für Sammler.", limited: true },
-
-  { id: 401, title: "Goldener Rahmen", price: 400, icon: "🖼️", ownedBy: [], category: "Spezial", rarity: "Episch", description: "Ein besonderer Profilrahmen." },
-  { id: 402, title: "Legendärer Stern", price: 700, icon: "💫", ownedBy: [], category: "Limited", rarity: "Legendär", description: "Nur für kurze Zeit verfügbar.", daily: true, limited: true },
-  { id: 403, title: "Tages-Angebot Schatz", price: 90, icon: "🎁", ownedBy: [], category: "Limited", rarity: "Selten", description: "Tägliches Shop-Angebot.", daily: true },
+  {
+    id: 1,
+    title: "Nintendo Spiel – Mario Kart",
+    price: 1500,
+    icon: "🎮",
+    ownedBy: [],
+    category: "Spezial",
+    rarity: "Legendär",
+    description: "Von Eltern angelegte Shop-Belohnung."
+  },
 ];
 
 
@@ -436,6 +422,11 @@ export default function PunktlyRoleSplit() {
   const [newChestPrice, setNewChestPrice] = useState(100);
   const [newChestTier, setNewChestTier] = useState<"Bronze" | "Silber" | "Gold">("Bronze");
   const [newChestContent, setNewChestContent] = useState("");
+  const [newShopTitle, setNewShopTitle] = useState("Nintendo Spiel – Mario Kart");
+  const [newShopPrice, setNewShopPrice] = useState(1500);
+  const [newShopIcon, setNewShopIcon] = useState("🎮");
+  const [newShopDescription, setNewShopDescription] = useState("Von Eltern angelegte Shop-Belohnung.");
+  const [editingShopId, setEditingShopId] = useState<number | null>(null);
   const [openedChestMessage, setOpenedChestMessage] = useState<string | null>(null);
   const [celebration, setCelebration] = useState<string | null>(null);
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
@@ -974,11 +965,14 @@ function celebrate(message: string) {
 
   function buyItem(item: ShopItem) {
     if (item.ownedBy.includes(child.id)) {
-      equipShopItem(item);
+      celebrate("Dieses Shop-Produkt wurde schon eingelöst.");
       return;
     }
 
-    if (child.coins < item.price) return celebrate("Nicht genug Coins!");
+    if (child.coins < item.price) {
+      celebrate("Nicht genug Coins!");
+      return;
+    }
 
     const updatedItem: ShopItem = { ...item, ownedBy: [...item.ownedBy, child.id] };
 
@@ -986,12 +980,6 @@ function celebrate(message: string) {
       ...child,
       coins: child.coins - item.price,
       equipped: [...child.equipped, item.icon],
-      activePet: item.category === "Haustier" ? item.icon : child.activePet,
-      activeBackground: item.category === "Hintergrund" ? item.title : child.activeBackground,
-      activeAvatar: item.category === "Avatar" ? item.icon : child.activeAvatar,
-      activeBooster: item.category === "Booster" ? item.title : child.activeBooster,
-      prestigeStars: (item.icon.includes("⭐") || item.icon.includes("🌟") || item.icon.includes("💫")) ? (child.prestigeStars || 0) + 1 : (child.prestigeStars || 0),
-      prestige: (item.icon.includes("⭐") || item.icon.includes("🌟") || item.icon.includes("💫")) ? Math.max((child.prestige || 0), (child.prestigeStars || 0) + 1) : (child.prestige || 0),
       achievements: addAchievement(child.achievements, "Shop-Fan")
     };
 
@@ -1000,10 +988,61 @@ function celebrate(message: string) {
     setChildren(prev => prev.map(c => c.id === child.id ? prestigeSyncedChild : c));
     setShop(prev => prev.map(i => i.id === item.id ? updatedItem : i));
 
-    saveFamilyItem("children", updatedChild);
+    saveFamilyItem("children", prestigeSyncedChild);
+    saveFamilyItem("shop", updatedItem);
 
     playSound("coin");
-    celebrate(`${item.title} gekauft und aktiviert!`);
+    celebrate(`${item.title} wurde eingelöst!`);
+  }
+
+
+  function saveShopItem() {
+    if (!newShopTitle.trim()) {
+      celebrate("Bitte Shop-Produkt eingeben.");
+      return;
+    }
+
+    const item: ShopItem = {
+      id: editingShopId || Date.now(),
+      title: newShopTitle.trim(),
+      price: Math.max(1, newShopPrice),
+      icon: newShopIcon.trim() || "🎁",
+      ownedBy: editingShopId ? (shop.find((entry) => entry.id === editingShopId)?.ownedBy || []) : [],
+      category: "Spezial",
+      rarity: "Gewöhnlich",
+      description: newShopDescription.trim() || "Von Eltern angelegte Shop-Belohnung."
+    };
+
+    if (editingShopId) {
+      setShop(prev => prev.map(entry => entry.id === editingShopId ? item : entry));
+      celebrate("Shop-Produkt gespeichert!");
+    } else {
+      setShop(prev => [...prev, item]);
+      celebrate("Shop-Produkt angelegt!");
+    }
+
+    saveFamilyItem("shop", item);
+
+    setEditingShopId(null);
+    setNewShopTitle("");
+    setNewShopPrice(100);
+    setNewShopIcon("🎁");
+    setNewShopDescription("");
+  }
+
+  function editShopItem(item: ShopItem) {
+    setEditingShopId(item.id);
+    setNewShopTitle(item.title);
+    setNewShopPrice(item.price);
+    setNewShopIcon(item.icon);
+    setNewShopDescription(item.description || "");
+    setParentView("shop");
+  }
+
+  function deleteShopItem(id: number) {
+    setShop(prev => prev.filter(item => item.id !== id));
+    deleteFamilyItem("shop", id);
+    celebrate("Shop-Produkt gelöscht.");
   }
 
   function addChild() {
@@ -1294,12 +1333,14 @@ function celebrate(message: string) {
       const loadedTasks = await loadCollection<Task>("tasks");
       const loadedRewards = await loadCollection<Reward>("rewards");
       const loadedChests = await loadCollection<Chest>("chests");
+      const loadedShop = await loadCollection<ShopItem>("shop");
 
       console.log("Punktly Firebase Load:", {
         children: loadedChildren,
         tasks: loadedTasks,
         rewards: loadedRewards,
-        chests: loadedChests
+        chests: loadedChests,
+        shop: loadedShop
       });
 
       const syncedChildren = loadedChildren.map(syncPrestigeStars);
@@ -1313,6 +1354,7 @@ function celebrate(message: string) {
       setTasks(loadedTasks);
       setRewards(loadedRewards);
       setChests(loadedChests);
+      setShop(loadedShop.length > 0 ? loadedShop : initialShop);
 
       if (syncedChildren.length > 0) {
         setSelectedChildId(syncedChildren[0].id);
@@ -1325,7 +1367,7 @@ function celebrate(message: string) {
     }
   }
 
-  async function deleteFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests", id: number) {
+  async function deleteFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop", id: number) {
     const user = auth.currentUser || firebaseUser;
 
     if (!user) {
@@ -1342,7 +1384,7 @@ function celebrate(message: string) {
     }
   }
 
-  async function saveFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests", item: { id: number }) {
+  async function saveFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop", item: { id: number }) {
     const user = auth.currentUser || firebaseUser;
 
     if (!user) {
@@ -2410,31 +2452,6 @@ alert(JSON.stringify(data, null, 2));
                         </div>
                       </div>
                     </div>
-                    <Panel title="🛒 Familien-Shop">
-                      <div className="grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[2rem] bg-white p-5 shadow-md">
-                          <h3 className="text-xl font-black text-sky-950">🎮 Nintendo Spiel – Mario Kart</h3>
-                          <p className="mt-2 font-bold text-slate-600">Von Eltern angelegte Belohnung</p>
-                          <div className="mt-4 inline-flex rounded-full bg-yellow-100 px-4 py-2 font-black text-yellow-800">
-                            🪙 1500 Coins
-                          </div>
-                          <button className="mt-5 w-full rounded-[1.2rem] bg-gradient-to-r from-sky-400 to-blue-500 px-5 py-3 font-black text-white shadow-lg">
-                            Jetzt einlösen
-                          </button>
-                        </div>
-
-                        <div className="rounded-[2rem] bg-sky-50 p-5 shadow-inner">
-                          <h3 className="text-xl font-black text-sky-950">👨‍👩‍👧 Eltern verwalten den Shop</h3>
-                          <ul className="mt-3 space-y-2 font-bold text-sky-800">
-                            <li>✅ Produkte hinzufügen</li>
-                            <li>✅ Coin-Preis festlegen</li>
-                            <li>✅ Belohnungen bearbeiten</li>
-                            <li>✅ Produkte löschen</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </Panel>
-
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
                         <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
@@ -2567,106 +2584,52 @@ alert(JSON.stringify(data, null, 2));
               )}
 
               {childView === "shop" && (
-                <Panel title="🛍️ Abenteuer-Shop">
+                <Panel title="🛍️ Familien-Shop">
                   <p className="mb-4 font-bold text-sky-700">
-                    Kaufe Haustiere, Avatare, Hintergründe, Booster und limitierte Items. Gekaufte Items bleiben in deinem Inventar.
+                    Hier erscheinen nur Produkte, die Eltern im Elternbereich angelegt haben.
                   </p>
 
-                  <div className="mb-5 grid gap-3 md:grid-cols-4">
-                    <div className="rounded-[1.8rem] bg-yellow-50 p-4 text-center font-black text-amber-800">⭐ Seltene Items</div>
-                    <div className="rounded-[1.8rem] bg-purple-50 p-4 text-center font-black text-purple-800">💎 Episch & Legendär</div>
-                    <div className="rounded-[1.8rem] bg-sky-50 p-4 text-center font-black text-sky-800">🔁 Täglicher Shop</div>
-                    <div className="rounded-[1.8rem] bg-green-50 p-4 text-center font-black text-green-800">🎒 Inventar</div>
-                  </div>
-
-                  {(["Haustier","Avatar","Hintergrund","Booster","Spezial","Limited"] as const).map((category) => {
-                    const items = shop.filter(item => item.category === category);
-                    if (items.length === 0) return null;
-
-                    return (
-                      <div key={category} className="mb-8">
-                        <h3 className="mb-3 text-2xl font-black text-sky-950">
-                          {category === "Haustier" ? "🐾 Haustiere" :
-                           category === "Avatar" ? "😀 Avatare & Outfits" :
-                           category === "Hintergrund" ? "🎨 Hintergründe" :
-                           category === "Booster" ? "⚡ Booster" :
-                           category === "Spezial" ? "✨ Spezialitems" :
-                           "⏳ Limitierte Items"}
-                        </h3>
-
-                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                          {items.map(item => {
-                            const owned = item.ownedBy.includes(child.id);
-                            const rarityClass =
-                              item.rarity === "Legendär"
-                                ? "bg-purple-100 text-purple-800"
-                                : item.rarity === "Episch"
-                                ? "bg-cyan-100 text-cyan-800"
-                                : item.rarity === "Selten"
-                                ? "bg-amber-100 text-amber-800"
-                                : "bg-slate-100 text-slate-700";
-
-                            return (
-                              <div key={item.id} className="rounded-[2rem] border-[3px] border-white bg-white/95 p-5 text-center shadow-[0_20px_50px_rgba(14,165,233,.16)]">
-                                <div className="text-6xl">{item.icon}</div>
-
-                                <div className="mt-3 flex flex-wrap justify-center gap-2">
-                                  <span className={`rounded-full px-3 py-1 text-xs font-black ${rarityClass}`}>
-                                    {item.rarity || "Gewöhnlich"}
-                                  </span>
-                                  {item.daily && <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-sky-800">Täglich</span>}
-                                  {item.limited && <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-black text-red-700">Limitiert</span>}
-                                </div>
-
-                                <h3 className="mt-3 text-xl font-black text-sky-950">{item.title}</h3>
-                                <p className="mt-1 min-h-[42px] text-sm font-bold text-sky-700">{item.description}</p>
-
-                                <p className="mt-3 flex items-center justify-center gap-2 font-black text-amber-700">
-                                  <Coin /> {item.price}
-                                </p>
-
-                                <button
-                                  onClick={() => buyItem(item)}
-                                  className={`mt-4 w-full rounded-[1.8rem] p-3 font-black transition active:scale-95 ${
-                                    owned
-                                      ? "bg-emerald-100 text-emerald-800"
-                                      : "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_12px_30px_rgba(14,165,233,.25)]"
-                                  }`}
-                                >
-                                  {owned ? "Im Inventar" : "Kaufen"}
-                                </button>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  <div className="mt-6 rounded-[2rem] bg-white/90 p-5 shadow-[0_16px_45px_rgba(14,165,233,.12)]">
-                    <h3 className="text-2xl font-black text-sky-950">🎒 Dein Inventar</h3>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {shop.filter(item => item.ownedBy.includes(child.id)).length === 0 ? (
-                        <p className="font-bold text-sky-700">Noch keine Items gekauft.</p>
-                      ) : (
-                        shop
-                          .filter(item => item.ownedBy.includes(child.id))
-                          .map(item => (
-                            <span key={item.id} className="inline-flex items-center gap-2 rounded-full bg-yellow-100 px-4 py-2 font-black text-amber-800">
-                              {item.icon} {item.title}
-                              {["Haustier","Avatar","Hintergrund","Booster"].includes(item.category || "") && (
-                                <button
-                                  onClick={() => equipShopItem(item)}
-                                  className="rounded-full bg-white px-3 py-1 text-xs font-black text-sky-700 shadow-sm"
-                                >
-                                  Aktivieren
-                                </button>
-                              )}
-                            </span>
-                          ))
-                      )}
+                  {shop.length === 0 ? (
+                    <div className="rounded-[2rem] bg-yellow-50 p-5 font-black text-amber-800">
+                      Der Shop ist noch leer. Bitte im Elternbereich Produkte anlegen.
                     </div>
-                  </div>
+                  ) : (
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      {shop.map(item => {
+                        const owned = item.ownedBy.includes(child.id);
+                        const canBuy = child.coins >= item.price && !owned;
+
+                        return (
+                          <div key={item.id} className="rounded-[2rem] border-2 border-white bg-white/90 p-5 shadow-[0_16px_45px_rgba(14,165,233,.12)]">
+                            <div className="text-5xl">{item.icon}</div>
+                            <h3 className="mt-3 text-xl font-black text-sky-950">{item.title}</h3>
+                            {item.description && <p className="mt-1 text-sm font-bold text-sky-700">{item.description}</p>}
+                            <p className="mt-3 rounded-full bg-yellow-100 px-4 py-2 text-center font-black text-amber-800">
+                              🪙 {item.price} Coins
+                            </p>
+
+                            {owned ? (
+                              <div className="mt-4 rounded-[1.2rem] bg-emerald-100 p-3 text-center font-black text-emerald-800">
+                                ✅ Bereits eingelöst
+                              </div>
+                            ) : (
+                              <button
+                                onClick={() => buyItem(item)}
+                                disabled={!canBuy}
+                                className={`mt-4 w-full rounded-[1.35rem] px-4 py-3 font-black shadow-md transition ${
+                                  canBuy
+                                    ? "bg-gradient-to-r from-sky-500 to-cyan-400 text-white hover:scale-[1.02]"
+                                    : "bg-slate-100 text-slate-400"
+                                }`}
+                              >
+                                {canBuy ? "Einlösen" : "Nicht genug Coins"}
+                              </button>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </Panel>
               )}
 
@@ -2788,6 +2751,107 @@ alert(JSON.stringify(data, null, 2));
               )}
 
               
+              {parentView === "shop" && (
+                <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
+                  <Panel title={editingShopId ? "✏️ Shop-Produkt bearbeiten" : "🛒 Shop-Produkt anlegen"}>
+                    <p className="mb-4 font-bold text-sky-700">
+                      Eltern bestimmen hier den kompletten Shop. Kinder sehen nur diese Produkte.
+                    </p>
+
+                    <div className="grid gap-3">
+                      <input
+                        value={newShopTitle}
+                        onChange={e => setNewShopTitle(e.target.value)}
+                        placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
+                        className="w-full rounded-[1.35rem] border p-3"
+                      />
+
+                      <input
+                        value={newShopPrice}
+                        onChange={e => setNewShopPrice(Number(e.target.value))}
+                        type="number"
+                        placeholder="Preis in Coins"
+                        className="w-full rounded-[1.35rem] border p-3"
+                      />
+
+                      <input
+                        value={newShopIcon}
+                        onChange={e => setNewShopIcon(e.target.value)}
+                        placeholder="Icon, z. B. 🎮"
+                        className="w-full rounded-[1.35rem] border p-3"
+                      />
+
+                      <textarea
+                        value={newShopDescription}
+                        onChange={e => setNewShopDescription(e.target.value)}
+                        placeholder="Beschreibung, z. B. Nintendo Spiel Mario Kart"
+                        className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
+                      />
+
+                      <button
+                        onClick={saveShopItem}
+                        className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
+                      >
+                        {editingShopId ? "Shop-Produkt speichern" : "+ Shop-Produkt hinzufügen"}
+                      </button>
+
+                      {editingShopId && (
+                        <button
+                          onClick={() => {
+                            setEditingShopId(null);
+                            setNewShopTitle("");
+                            setNewShopPrice(100);
+                            setNewShopIcon("🎁");
+                            setNewShopDescription("");
+                          }}
+                          className="rounded-[1.35rem] bg-slate-100 px-4 py-3 font-black text-slate-700"
+                        >
+                          Bearbeitung abbrechen
+                        </button>
+                      )}
+                    </div>
+                  </Panel>
+
+                  <Panel title="🛍️ Aktueller Familien-Shop">
+                    {shop.length === 0 ? (
+                      <p className="font-bold text-sky-700">Noch keine Shop-Produkte angelegt.</p>
+                    ) : (
+                      <div className="grid gap-3">
+                        {shop.map(item => (
+                          <div key={item.id} className="rounded-[1.8rem] bg-white p-4 shadow-sm border">
+                            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                              <div>
+                                <p className="text-xl font-black text-sky-950">{item.icon} {item.title}</p>
+                                <p className="font-bold text-sky-700">🪙 {item.price} Coins</p>
+                                {item.description && <p className="mt-1 text-sm font-bold text-slate-500">{item.description}</p>}
+                                <p className="mt-1 text-xs font-black text-emerald-700">
+                                  Eingelöst von: {item.ownedBy.length} Kind(er)
+                                </p>
+                              </div>
+
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => editShopItem(item)}
+                                  className="rounded-xl bg-blue-100 p-3 text-sky-700"
+                                >
+                                  <Edit3 className="h-4 w-4" />
+                                </button>
+                                <button
+                                  onClick={() => deleteShopItem(item.id)}
+                                  className="rounded-xl bg-red-100 p-3 text-red-700"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </Panel>
+                </section>
+              )}
+
               {parentView === "chests" && (
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title="🎁 Schatzkiste anlegen">
@@ -3081,6 +3145,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
+        <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
       </div>
     </nav>
@@ -3090,7 +3155,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
 function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentView) => void }) {
   return (
     <nav className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
-      <div className="grid grid-cols-4 gap-1 md:grid-cols-9">
+      <div className="grid grid-cols-4 gap-1 md:grid-cols-10">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
