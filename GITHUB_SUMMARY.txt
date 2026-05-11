@@ -1,7 +1,9 @@
-Shop-System korrigiert:
-- Doppelten Shop-Button im Kinderbereich entfernt
-- Shop-Tab im Elternbereich korrekt integriert
-- Eltern-Shop funktioniert jetzt separat vom Kinderbereich
-- Kinder sehen weiterhin nur Produkte von Eltern
-- Navigation zwischen Kinder- und Elternbereich bereinigt
-- Projekt erneut für GitHub/Vercel vorbereitet
+Elternverwalteter Shop korrekt verknüpft:
+- Elternbereich enthält jetzt eigenen Shop-Tab
+- Eltern können Shop-Produkte wie Schatzkisten anlegen, bearbeiten und löschen
+- Kinderbereich-Shop ist mit dem Eltern-Shop verknüpft
+- Kinder sehen nur Produkte, die Eltern angelegt haben
+- Alter vorgefertigter Kinder-Shop wurde entfernt
+- Doppelter Shop-Tab im Kinderbereich verhindert
+- Shop-Produkte werden in Firebase unter users/{uid}/shop gespeichert
+- Beispiel „Nintendo Spiel – Mario Kart“ für 1500 Coins integriert

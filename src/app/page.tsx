@@ -215,7 +215,6 @@ const initialShop: ShopItem[] = [
   },
 ];
 
-
 const initialChests: Chest[] = [];
 
 
@@ -975,7 +974,6 @@ function celebrate(message: string) {
     }
 
     const updatedItem: ShopItem = { ...item, ownedBy: [...item.ownedBy, child.id] };
-
     const updatedChild: Child = {
       ...child,
       coins: child.coins - item.price,
@@ -983,18 +981,17 @@ function celebrate(message: string) {
       achievements: addAchievement(child.achievements, "Shop-Fan")
     };
 
-    const prestigeSyncedChild = syncPrestigeStars(updatedChild);
+    const syncedChild = syncPrestigeStars(updatedChild);
 
-    setChildren(prev => prev.map(c => c.id === child.id ? prestigeSyncedChild : c));
+    setChildren(prev => prev.map(c => c.id === child.id ? syncedChild : c));
     setShop(prev => prev.map(i => i.id === item.id ? updatedItem : i));
 
-    saveFamilyItem("children", prestigeSyncedChild);
+    saveFamilyItem("children", syncedChild);
     saveFamilyItem("shop", updatedItem);
 
     playSound("coin");
     celebrate(`${item.title} wurde eingelöst!`);
   }
-
 
   function saveShopItem() {
     if (!newShopTitle.trim()) {
@@ -2586,7 +2583,7 @@ alert(JSON.stringify(data, null, 2));
               {childView === "shop" && (
                 <Panel title="🛍️ Familien-Shop">
                   <p className="mb-4 font-bold text-sky-700">
-                    Hier erscheinen nur Produkte, die Eltern im Elternbereich angelegt haben.
+                    Hier erscheinen nur Produkte, die Eltern im Elternbereich-Shop angelegt haben.
                   </p>
 
                   {shop.length === 0 ? (
@@ -2755,7 +2752,7 @@ alert(JSON.stringify(data, null, 2));
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title={editingShopId ? "✏️ Shop-Produkt bearbeiten" : "🛒 Shop-Produkt anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">
-                      Eltern bestimmen hier den kompletten Shop. Kinder sehen nur diese Produkte.
+                      Eltern legen hier den kompletten Shop an. Der Kinderbereich zeigt nur diese Produkte.
                     </p>
 
                     <div className="grid gap-3">
@@ -3145,8 +3142,6 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
-        <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
-        
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
       </div>
     </nav>
@@ -3161,6 +3156,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
+        <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
         <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" />
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
