@@ -2759,7 +2759,7 @@ alert(JSON.stringify(data, null, 2));
                       <input
                         value={newShopTitle}
                         onChange={e => setNewShopTitle(e.target.value)}
-                        placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
+                        placeholder="Produkt, z. B. Spiel, Unternehmungen, Reise ..."
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 
@@ -2781,7 +2781,7 @@ alert(JSON.stringify(data, null, 2));
                       <textarea
                         value={newShopDescription}
                         onChange={e => setNewShopDescription(e.target.value)}
-                        placeholder="Beschreibung, z. B. Nintendo Spiel Mario Kart"
+                        placeholder="Beschreibung, z. B. Spiel, Unternehmungen, Reise ..."
                         className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
                       />
 
