@@ -296,11 +296,11 @@ function isValidAchievement(title: string) {
   return true;
 }
 
-function cleanAchievements(list: string[]) {
-  return cleanLevelAchievements((list || []).filter(isValidAchievement));
+function cleanDeine Abzeichen(list: string[]) {
+  return cleanLevelDeine Abzeichen((list || []).filter(isValidAchievement));
 }
 
-function cleanLevelAchievements(list: string[]) {
+function cleanLevelDeine Abzeichen(list: string[]) {
   const levelBadges = list
     .filter((item) => /^Level \d+ erreicht$/.test(item))
     .map((item) => Number(item.match(/\d+/)?.[0] || 0))
@@ -324,11 +324,11 @@ function addAchievement(list: string[], title: string) {
     nextList = [...nextList, title];
   }
 
-  return cleanAchievements(nextList);
+  return cleanDeine Abzeichen(nextList);
 }
 
-function starsFromAchievements(child: Child) {
-  return cleanAchievements(child.achievements || []).length;
+function starsFromDeine Abzeichen(child: Child) {
+  return cleanDeine Abzeichen(child.achievements || []).length;
 }
 
 function countPrestigeStars(child: Child) {
@@ -360,7 +360,7 @@ function syncPrestigeStars(child: Child): Child {
     ...child,
     prestige: syncedPrestige,
     prestigeStars: Math.max(Number(child.prestigeStars || 0), countPrestigeStars(child)),
-    achievements: cleanAchievements(child.achievements || []),
+    achievements: cleanDeine Abzeichen(child.achievements || []),
   };
 }
 
@@ -890,12 +890,12 @@ function celebrate(message: string) {
     setChildren(prev => prev.map(c => c.id === child.id ? {
       ...c,
       coins: c.coins - chest.price,
-      achievements: cleanAchievements(c.achievements || [])
+      achievements: cleanDeine Abzeichen(c.achievements || [])
     } : c));
     const openedChest: Chest = { ...chest, opened: true, openedBy: child.id };
     setChests(prev => prev.map(ch => ch.id === chest.id ? openedChest : ch));
     saveFamilyItem("chests", openedChest);
-    const updatedChild: Child = { ...child, coins: child.coins - chest.price, achievements: cleanAchievements(child.achievements || []) };
+    const updatedChild: Child = { ...child, coins: child.coins - chest.price, achievements: cleanDeine Abzeichen(child.achievements || []) };
     saveFamilyItem("children", updatedChild);
     setOpenedChestMessage(chest.content);
     playSound("chest");
@@ -1315,7 +1315,7 @@ function celebrate(message: string) {
         return snap.docs.map((d) => d.data() as T);
       };
 
-      const loadedChildren = (await loadCollection<Child>("children")).map((loadedChild) => syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
+      const loadedChildren = (await loadCollection<Child>("children")).map((loadedChild) => syncPrestigeStars({ ...loadedChild, achievements: cleanDeine Abzeichen(loadedChild.achievements || []) }));
       const loadedTasks = await loadCollection<Task>("tasks");
       const loadedRewards = await loadCollection<Reward>("rewards");
       const loadedChests = await loadCollection<Chest>("chests");
@@ -1332,7 +1332,7 @@ function celebrate(message: string) {
       const syncedChildren = loadedChildren.map(syncPrestigeStars);
       setChildren(syncedChildren);
       syncedChildren.forEach((loadedChild) => {
-        saveFamilyItem("children", syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
+        saveFamilyItem("children", syncPrestigeStars({ ...loadedChild, achievements: cleanDeine Abzeichen(loadedChild.achievements || []) }));
       });
       loadedChildren.forEach((loadedChild) => {
         saveFamilyItem("children", syncPrestigeStars(loadedChild));
@@ -2394,7 +2394,7 @@ alert(JSON.stringify(data, null, 2));
                         </div>
                         <div className="flex-1">
                           <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
-                          <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
+                          <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromDeine Abzeichen(child)}</p>
                           {!(child.profileBadges || [])[0] && (
                             <div className="mt-3 flex flex-wrap gap-2">
                               <span className="rounded-full bg-white/70 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
@@ -2442,7 +2442,7 @@ alert(JSON.stringify(data, null, 2));
                       <div className="grid gap-4 md:grid-cols-5">
                         <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
                         <StatCard icon="🎮" label="Level" value={child.level.toString()} />
-                        <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
+                        <StatCard icon="⭐" label="Sterne" value={`${starsFromDeine Abzeichen(child)}`} />
                         <StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
                         <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
                       </div>
@@ -2458,7 +2458,7 @@ alert(JSON.stringify(data, null, 2));
                   </div>
                   <div className="space-y-5">
                     <Panel title="🏆 Deine Abzeichen">
-                      <div className="flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
+                      <div className="flex flex-wrap gap-2">{cleanDeine Abzeichen(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
                     </Panel>
                   </div>
                 </section>
@@ -2593,8 +2593,8 @@ alert(JSON.stringify(data, null, 2));
                   <div className="grid gap-5 md:grid-cols-2">
                     <LiveFox child={child} waitingCount={childTasks.filter((t) => t.status === "wartet").length} />
                     <div className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
-                      <h3 className="text-2xl font-black text-sky-950">Achievements</h3>
-                      <div className="mt-3 flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
+                      <h3 className="text-2xl font-black text-sky-950">Deine Abzeichen</h3>
+                      <div className="mt-3 flex flex-wrap gap-2">{cleanDeine Abzeichen(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
                     </div>
                   </div>
                 </Panel>
@@ -2892,7 +2892,7 @@ alert(JSON.stringify(data, null, 2));
 
               {parentView === "stats" && (
                 <Panel title="📊 Eltern-Statistik">
-                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
+                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromDeine Abzeichen(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelDeine Abzeichen(c.achievements).length}`} /></div></div>)}</div>
                 </Panel>
               )}
 
@@ -3040,7 +3040,7 @@ alert(JSON.stringify(data, null, 2));
                                 <div>
                                   <h3 className="text-2xl font-black text-sky-950">{c.name}</h3>
                                   <p className="font-bold text-sky-700">
-                                    Level {c.level} · Sterne {starsFromAchievements(c)} · {levelRank(c.level).emoji} {levelRank(c.level).title} · {c.coins} Coins · 🔥 {c.streak} Tage
+                                    Level {c.level} · Sterne {starsFromDeine Abzeichen(c)} · {levelRank(c.level).emoji} {levelRank(c.level).title} · {c.coins} Coins · 🔥 {c.streak} Tage
                                   </p>
                                 </div>
                               </div>
