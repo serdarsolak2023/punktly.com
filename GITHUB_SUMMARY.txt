@@ -1,6 +1,7 @@
-Kinderbereich aufgeräumt:
-- Separater „Profil von … / Mein Motiv“-Bereich entfernt
-- Motiv-Auswahl bleibt direkt in der „Hallo [Kind]“-Karte erhalten
-- Kind-Auswahl wurde in die „Hallo [Kind]“-Karte integriert
-- Userbezogene Motiv-Auswahl bleibt weiterhin pro Kind gespeichert
-- Kinderbereich wirkt kompakter und weniger doppelt
+Elternverwalteter Shop integriert:
+- Neuer Familien-Shop im Kinderbereich hinzugefügt
+- Eltern können Shop-Produkte und Belohnungen verwalten
+- Coin-Preise für Produkte definierbar
+- Beispielprodukt „Nintendo Spiel – Mario Kart“ für 1500 Coins integriert
+- Kinder können Produkte mit gesammelten Coins einlösen
+- Shop-System verbindet Kinderbereich und Elternbereich stärker miteinander

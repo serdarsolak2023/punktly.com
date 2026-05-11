@@ -2273,6 +2273,80 @@ alert(JSON.stringify(data, null, 2));
           <>
             <ChildTabs view={childView} setView={setChildView} />
 
+            <div className="mt-4 rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[.18em] text-sky-500">Profil von {child.name}</p>
+                  <h2 className="text-2xl font-black text-sky-950">Mein Motiv</h2>
+                  <p className="text-sm font-bold text-sky-700">Jedes Kind speichert sein eigenes Motiv.</p>
+                </div>
+
+                {children.length > 1 && (
+                  <select
+                    value={selectedChildId}
+                    onChange={(e) => {
+                      setSelectedChildId(Number(e.target.value));
+                      setShowBadgeChooser(false);
+                    }}
+                    className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-black text-sky-900 shadow-inner"
+                  >
+                    {children.map((kid) => (
+                      <option key={kid.id} value={kid.id}>{kid.name}</option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {(child.profileBadges || []).length > 0 ? (
+                  (child.profileBadges || []).map(src => (
+                    <span key={src} className="flex h-12 w-12 items-center justify-center rounded-full bg-white p-1 shadow-sm">
+                      <img src={src} alt="Ausgewähltes Motiv" className="h-full w-full rounded-full object-contain" />
+                    </span>
+                  ))
+                ) : (
+                  <span className="rounded-full bg-sky-50 px-4 py-2 font-black text-sky-800">Noch kein Motiv gewählt ✨</span>
+                )}
+
+                <button
+                  onClick={() => setShowBadgeChooser(!showBadgeChooser)}
+                  className="rounded-full bg-gradient-to-br from-pink-300 via-purple-300 to-sky-300 px-5 py-3 font-black text-white shadow-[0_12px_28px_rgba(14,165,233,.24)] hover:scale-[1.02] active:scale-[.98] transition"
+                >
+                  🎨 Motiv auswählen
+                </button>
+              </div>
+
+              {showBadgeChooser && (
+                <div className="mt-4 rounded-[1.8rem] bg-sky-50/90 p-3 shadow-inner">
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="text-sm font-black text-sky-900">{child.name} kann genau ein Motiv auswählen.</p>
+                    <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-sky-700">{(child.profileBadges || []).length}/1</span>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10">
+                    {profileBadgeOptions.map(badge => {
+                      const active = (child.profileBadges || []).includes(badge.src);
+                      return (
+                        <button
+                          key={badge.id}
+                          onClick={() => toggleProfileBadge(badge.src)}
+                          className={`rounded-2xl border-2 p-2 shadow-sm transition hover:scale-105 active:scale-95 ${active ? "border-sky-500 bg-white" : "border-white bg-white/80"}`}
+                          title={badge.label}
+                        >
+                          <img
+                            src={badge.src}
+                            alt={badge.label}
+                            className="mx-auto h-10 w-10 object-contain"
+                            onError={(event) => { event.currentTarget.style.opacity = "0.2"; }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs font-bold text-sky-700">Die Dateien müssen in public/badges liegen und badge-01.png bis badge-30.png heißen. Es kann immer nur ein Motiv aktiv sein.</p>
+                </div>
+              )}
+            </div>
+
             <div className="mt-5">
               {childView === "home" && (
                 <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
@@ -2291,27 +2365,8 @@ alert(JSON.stringify(data, null, 2));
                           )}
                         </div>
                         <div className="flex-1">
-                          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                            <div>
-                              <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
-                              <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
-                            </div>
-
-                            {children.length > 1 && (
-                              <select
-                                value={selectedChildId}
-                                onChange={(e) => {
-                                  setSelectedChildId(Number(e.target.value));
-                                  setShowBadgeChooser(false);
-                                }}
-                                className="rounded-[1.2rem] border-2 border-white bg-white/85 px-4 py-2 font-black text-sky-900 shadow-sm"
-                              >
-                                {children.map((kid) => (
-                                  <option key={kid.id} value={kid.id}>{kid.name}</option>
-                                ))}
-                              </select>
-                            )}
-                          </div>
+                          <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
+                          <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
                           {!(child.profileBadges || [])[0] && (
                             <div className="mt-3 flex flex-wrap gap-2">
                               <span className="rounded-full bg-white/70 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
@@ -2355,6 +2410,32 @@ alert(JSON.stringify(data, null, 2));
                         </div>
                       </div>
                     </div>
+                    <
+                    <Panel title="🛒 Familien-Shop">
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <div className="rounded-[2rem] bg-white p-5 shadow-md">
+                          <h3 className="text-xl font-black text-sky-950">🎮 Nintendo Spiel – Mario Kart</h3>
+                          <p className="mt-2 font-bold text-slate-600">Von Eltern angelegte Belohnung</p>
+                          <div className="mt-4 inline-flex rounded-full bg-yellow-100 px-4 py-2 font-black text-yellow-800">
+                            🪙 1500 Coins
+                          </div>
+                          <button className="mt-5 w-full rounded-[1.2rem] bg-gradient-to-r from-sky-400 to-blue-500 px-5 py-3 font-black text-white shadow-lg">
+                            Jetzt einlösen
+                          </button>
+                        </div>
+
+                        <div className="rounded-[2rem] bg-sky-50 p-5 shadow-inner">
+                          <h3 className="text-xl font-black text-sky-950">👨‍👩‍👧 Eltern verwalten den Shop</h3>
+                          <ul className="mt-3 space-y-2 font-bold text-sky-800">
+                            <li>✅ Produkte hinzufügen</li>
+                            <li>✅ Coin-Preis festlegen</li>
+                            <li>✅ Belohnungen bearbeiten</li>
+                            <li>✅ Produkte löschen</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </Panel>
+
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
                         <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
