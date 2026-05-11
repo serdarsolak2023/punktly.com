@@ -1,3 +1,8 @@
 node_modules
 .next
 .env.local
+.gradle
+build
+*.apk
+*.aab
+android.keystore
