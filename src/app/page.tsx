@@ -1569,7 +1569,7 @@ alert(JSON.stringify(data, null, 2));
 
 
 
-<main className="relative min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-white px-4 py-6 md:px-6">
+<main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-34">
           {punktlyCoinPositions.map((coin, i) => (
             <img
@@ -1608,7 +1608,7 @@ alert(JSON.stringify(data, null, 2));
         </div>
 
 <div className="relative z-10 mx-auto flex w-full max-w-[760px] flex-col gap-5">
-    <section className="w-full rounded-[2.8rem] bg-white/68 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 md:px-10 md:py-10">
+    <section className="w-full rounded-[2.8rem] bg-white/58 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
@@ -1650,7 +1650,7 @@ alert(JSON.stringify(data, null, 2));
     </section>
 
     <div className="grid w-full gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[2.4rem] bg-white/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/60 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
@@ -1729,7 +1729,7 @@ alert(JSON.stringify(data, null, 2));
         )}
       </section>
 
-      <section className="w-full rounded-[2.4rem] bg-white/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/60 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -2058,15 +2058,17 @@ alert(JSON.stringify(data, null, 2));
   }
 
   .punktly-global-coin {
-    filter: drop-shadow(0 10px 18px rgba(255, 215, 0, .24));
-    will-change: transform;
-  
+
     mix-blend-mode: multiply;
     background: transparent !important;
     border-radius: 9999px;
-    opacity: .88;
-    transform-origin: center;
-    isolation: isolate;}
+    isolation: isolate;
+    opacity: .82;
+    filter: drop-shadow(0 10px 20px rgba(255,215,0,.14));
+    mask-image: radial-gradient(circle at center, black 72%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 72%, transparent 100%);
+
+  }
 
   .punktly-global-coin-float {
     animation: punktlyGlobalFloat 7s ease-in-out infinite;
@@ -2568,7 +2570,7 @@ alert(JSON.stringify(data, null, 2));
                           <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
                           {!(child.profileBadges || [])[0] && (
                             <div className="mt-3 flex flex-wrap gap-2">
-                              <span className="rounded-full bg-white/70 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
+                              <span className="rounded-full bg-white/60 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
                             </div>
                           )}
                           <button
