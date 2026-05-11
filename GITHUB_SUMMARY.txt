@@ -1,9 +1,7 @@
-Elternverwalteter Shop korrekt verknüpft:
-- Elternbereich enthält jetzt eigenen Shop-Tab
-- Eltern können Shop-Produkte wie Schatzkisten anlegen, bearbeiten und löschen
-- Kinderbereich-Shop ist mit dem Eltern-Shop verknüpft
-- Kinder sehen nur Produkte, die Eltern angelegt haben
-- Alter vorgefertigter Kinder-Shop wurde entfernt
-- Doppelter Shop-Tab im Kinderbereich verhindert
-- Shop-Produkte werden in Firebase unter users/{uid}/shop gespeichert
-- Beispiel „Nintendo Spiel – Mario Kart“ für 1500 Coins integriert
+Eltern-Shop bereinigt:
+- Beispielprodukt „Nintendo Spiel – Mario Kart“ entfernt
+- Shop startet jetzt komplett leer
+- Eltern legen alle Shop-Produkte selbst an
+- Kinderbereich zeigt nur von Eltern angelegte Produkte
+- Eingabefelder im Eltern-Shop sind nicht mehr vorbelegt
+- Shop bleibt vollständig mit Firebase und Kinderbereich verknüpft

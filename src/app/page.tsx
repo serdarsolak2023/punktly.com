@@ -202,18 +202,7 @@ const extraShopItems = [
   { id: 9003, title: "Fuchs-Krone", price: 800, owned: false },
 ];
 
-const initialShop: ShopItem[] = [
-  {
-    id: 1,
-    title: "Nintendo Spiel – Mario Kart",
-    price: 1500,
-    icon: "🎮",
-    ownedBy: [],
-    category: "Spezial",
-    rarity: "Legendär",
-    description: "Von Eltern angelegte Shop-Belohnung."
-  },
-];
+const initialShop: ShopItem[] = [];
 
 const initialChests: Chest[] = [];
 
@@ -421,10 +410,10 @@ export default function PunktlyRoleSplit() {
   const [newChestPrice, setNewChestPrice] = useState(100);
   const [newChestTier, setNewChestTier] = useState<"Bronze" | "Silber" | "Gold">("Bronze");
   const [newChestContent, setNewChestContent] = useState("");
-  const [newShopTitle, setNewShopTitle] = useState("Nintendo Spiel – Mario Kart");
-  const [newShopPrice, setNewShopPrice] = useState(1500);
-  const [newShopIcon, setNewShopIcon] = useState("🎮");
-  const [newShopDescription, setNewShopDescription] = useState("Von Eltern angelegte Shop-Belohnung.");
+  const [newShopTitle, setNewShopTitle] = useState("");
+  const [newShopPrice, setNewShopPrice] = useState(100);
+  const [newShopIcon, setNewShopIcon] = useState("🎁");
+  const [newShopDescription, setNewShopDescription] = useState("");
   const [editingShopId, setEditingShopId] = useState<number | null>(null);
   const [openedChestMessage, setOpenedChestMessage] = useState<string | null>(null);
   const [celebration, setCelebration] = useState<string | null>(null);
@@ -2759,7 +2748,7 @@ alert(JSON.stringify(data, null, 2));
                       <input
                         value={newShopTitle}
                         onChange={e => setNewShopTitle(e.target.value)}
-                        placeholder="Produkt, z. B. Spiel, Unternehmungen, Reise ..."
+                        placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 
@@ -2781,7 +2770,7 @@ alert(JSON.stringify(data, null, 2));
                       <textarea
                         value={newShopDescription}
                         onChange={e => setNewShopDescription(e.target.value)}
-                        placeholder="Beschreibung, z. B. Spiel, Unternehmungen, Reise ..."
+                        placeholder="Beschreibung, z. B. Nintendo Spiel Mario Kart"
                         className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
                       />
 
