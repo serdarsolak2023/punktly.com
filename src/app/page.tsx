@@ -190,30 +190,30 @@ const rareBadges = [
 ];
 
 const punktlyCoinPositions = [
-  { left: "3%", top: "6%", size: 56, badge: 1, delay: "0s" },
-  { left: "18%", top: "4%", size: 72, badge: 2, delay: ".4s" },
-  { left: "35%", top: "8%", size: 48, badge: 3, delay: ".8s" },
-  { left: "55%", top: "5%", size: 68, badge: 4, delay: "1.2s" },
-  { left: "78%", top: "7%", size: 58, badge: 5, delay: "1.6s" },
-  { left: "93%", top: "13%", size: 50, badge: 6, delay: "2s" },
+  { left: "2%", top: "8%", size: 64, badge: 1, delay: "0s" },
+  { left: "16%", top: "2%", size: 70, badge: 2, delay: ".4s" },
+  { left: "32%", top: "12%", size: 52, badge: 3, delay: ".8s" },
+  { left: "58%", top: "8%", size: 72, badge: 4, delay: "1.2s" },
+  { left: "76%", top: "14%", size: 66, badge: 5, delay: "1.6s" },
+  { left: "95%", top: "6%", size: 86, badge: 6, delay: "2s" },
 
-  { left: "8%", top: "26%", size: 64, badge: 7, delay: ".7s" },
-  { left: "28%", top: "30%", size: 52, badge: 8, delay: "1.1s" },
-  { left: "47%", top: "27%", size: 74, badge: 9, delay: "1.5s" },
-  { left: "70%", top: "31%", size: 54, badge: 10, delay: "1.9s" },
-  { left: "88%", top: "36%", size: 70, badge: 11, delay: "2.3s" },
+  { left: "8%", top: "30%", size: 72, badge: 7, delay: ".7s" },
+  { left: "22%", top: "43%", size: 54, badge: 8, delay: "1.1s" },
+  { left: "36%", top: "29%", size: 50, badge: 9, delay: "1.5s" },
+  { left: "67%", top: "33%", size: 70, badge: 10, delay: "1.9s" },
+  { left: "86%", top: "37%", size: 58, badge: 11, delay: "2.3s" },
 
-  { left: "4%", top: "53%", size: 76, badge: 12, delay: ".3s" },
-  { left: "20%", top: "60%", size: 46, badge: 13, delay: ".9s" },
-  { left: "39%", top: "56%", size: 66, badge: 14, delay: "1.4s" },
-  { left: "61%", top: "58%", size: 48, badge: 15, delay: "1.8s" },
-  { left: "82%", top: "55%", size: 72, badge: 16, delay: "2.2s" },
+  { left: "2%", top: "63%", size: 72, badge: 12, delay: ".3s" },
+  { left: "13%", top: "77%", size: 64, badge: 13, delay: ".9s" },
+  { left: "30%", top: "69%", size: 56, badge: 14, delay: "1.4s" },
+  { left: "50%", top: "76%", size: 66, badge: 15, delay: "1.8s" },
+  { left: "72%", top: "67%", size: 72, badge: 16, delay: "2.2s" },
+  { left: "88%", top: "72%", size: 76, badge: 17, delay: "2.6s" },
 
-  { left: "13%", top: "82%", size: 54, badge: 17, delay: ".6s" },
-  { left: "31%", top: "78%", size: 82, badge: 18, delay: "1s" },
-  { left: "50%", top: "84%", size: 46, badge: 19, delay: "1.6s" },
-  { left: "68%", top: "79%", size: 70, badge: 20, delay: "2.1s" },
-  { left: "90%", top: "83%", size: 56, badge: 21, delay: "2.7s" },
+  { left: "19%", top: "90%", size: 54, badge: 18, delay: "1s" },
+  { left: "43%", top: "91%", size: 74, badge: 19, delay: "1.5s" },
+  { left: "64%", top: "88%", size: 58, badge: 20, delay: "2.1s" },
+  { left: "93%", top: "91%", size: 60, badge: 21, delay: "2.7s" },
 ];
 
 const profileBadgeOptions = Array.from({ length: 30 }, (_, index) => {
@@ -1570,7 +1570,7 @@ alert(JSON.stringify(data, null, 2));
 
 
 <main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-34">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
               key={`global-coin-${i}`}
@@ -1589,12 +1589,12 @@ alert(JSON.stringify(data, null, 2));
           ))}
         </div>
 
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
           {Array.from({ length: 24 }).map((_, i) => (
             <span
               key={`star-${i}`}
               aria-hidden="true"
-              className="punktly-bg-star absolute text-yellow-400"
+              className="punktly-bg-star absolute text-yellow-300"
               style={{
                 left: `${(i * 13 + 7) % 100}%`,
                 top: `${(i * 19 + 5) % 100}%`,
@@ -1608,7 +1608,7 @@ alert(JSON.stringify(data, null, 2));
         </div>
 
 <div className="relative z-10 mx-auto flex w-full max-w-[760px] flex-col gap-5">
-    <section className="w-full rounded-[2.8rem] bg-white/58 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 md:px-10 md:py-10">
+    <section className="w-full rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
@@ -1650,7 +1650,7 @@ alert(JSON.stringify(data, null, 2));
     </section>
 
     <div className="grid w-full gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[2.4rem] bg-white/60 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
@@ -1729,7 +1729,7 @@ alert(JSON.stringify(data, null, 2));
         )}
       </section>
 
-      <section className="w-full rounded-[2.4rem] bg-white/60 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -1786,7 +1786,7 @@ alert(JSON.stringify(data, null, 2));
 
   return (
     <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-34">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
               key={`global-coin-${i}`}
@@ -2047,27 +2047,26 @@ alert(JSON.stringify(data, null, 2));
 
   @keyframes punktlyGlobalFloat {
     0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-    50% { transform: translateY(-14px) translateX(10px) rotate(8deg); }
+    50% { transform: translateY(-10px) translateX(8px) rotate(7deg); }
     100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
   }
 
   @keyframes punktlyGlobalDrift {
-    0% { transform: translateX(0px) rotate(0deg); }
-    50% { transform: translateX(18px) translateY(9px) rotate(-10deg); }
-    100% { transform: translateX(0px) rotate(0deg); }
+    0% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+    50% { transform: translateX(14px) translateY(7px) rotate(-8deg); }
+    100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
   }
 
   .punktly-global-coin {
-
     mix-blend-mode: multiply;
     background: transparent !important;
     border-radius: 9999px;
-    isolation: isolate;
-    opacity: .82;
-    filter: drop-shadow(0 10px 20px rgba(255,215,0,.14));
-    mask-image: radial-gradient(circle at center, black 72%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle at center, black 72%, transparent 100%);
-
+    opacity: .55;
+    filter: drop-shadow(0 12px 22px rgba(251, 191, 36, .16)) saturate(1.04);
+    will-change: transform;
+    transform-origin: center;
+    mask-image: radial-gradient(circle at center, black 0 68%, rgba(0,0,0,.62) 80%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 0 68%, rgba(0,0,0,.62) 80%, transparent 100%);
   }
 
   .punktly-global-coin-float {

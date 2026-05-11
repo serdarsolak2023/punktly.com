@@ -1,9 +1,10 @@
-Finale Premium-Optik integriert:
-- Coins jetzt mit echter transparenter Freistellung
-- Weiße PNG-Kanten nahezu vollständig entfernt
-- Coins überlagern sich natürlich wie im Design-Mockup
-- Soft-Masking und Blend-Modus für saubere Coin-Ränder integriert
-- Sehr hellblauer Premium-Hintergrund eingebaut
-- Hauptkarten transparenter und moderner gestaltet
-- Header und restliche Bereiche bleiben unverändert
-- Vollständig GitHub- und Vercel-kompatibel
+Code wirklich auf Premium-Mockup umgeschrieben:
+- Hauptseite optisch an das Referenzbild angepasst
+- Sehr heller, weicher Premium-Blau-Hintergrund eingebaut
+- Hauptkarte und Login/Zahlungskarten deutlich transparenter als Glassmorphism umgesetzt
+- Globale Coins mit festen, sauberen Positionen verteilt
+- Weiße PNG-Kanten durch Masking, Blend-Modus und transparente Rundung stark reduziert
+- Coins überlagern sich natürlicher und wirken wie freigestellt
+- Sterne weich und dezent im Hintergrund integriert
+- Header, Kinderbereich, Elternbereich und Funktionen bleiben unverändert
+- GitHub-/Vercel-kompatible ZIP erstellt
