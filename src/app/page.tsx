@@ -2410,7 +2410,6 @@ alert(JSON.stringify(data, null, 2));
                         </div>
                       </div>
                     </div>
-                    <
                     <Panel title="🛒 Familien-Shop">
                       <div className="grid gap-4 md:grid-cols-2">
                         <div className="rounded-[2rem] bg-white p-5 shadow-md">

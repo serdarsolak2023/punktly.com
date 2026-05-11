@@ -1,7 +1,5 @@
-Elternverwalteter Shop integriert:
-- Neuer Familien-Shop im Kinderbereich hinzugefügt
-- Eltern können Shop-Produkte und Belohnungen verwalten
-- Coin-Preise für Produkte definierbar
-- Beispielprodukt „Nintendo Spiel – Mario Kart“ für 1500 Coins integriert
-- Kinder können Produkte mit gesammelten Coins einlösen
-- Shop-System verbindet Kinderbereich und Elternbereich stärker miteinander
+Build-Fehler behoben:
+- Syntax-Fehler in src/app/page.tsx korrigiert
+- Fehlerhafter zusätzlicher JSX-Operator vor dem Shop-Panel entfernt
+- Vercel-Fehler „Unexpected token main“ behoben
+- Shop-Bereich bleibt erhalten
