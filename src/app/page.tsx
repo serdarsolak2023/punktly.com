@@ -1562,7 +1562,7 @@ alert(JSON.stringify(data, null, 2));
           ))}
         </div>
 
-  <div className="mx-auto flex w-full max-w-[760px] flex-col gap-5">
+<div className="relative z-10 mx-auto flex w-full max-w-[760px] flex-col gap-5">
     <section className="w-full rounded-[2.8rem] bg-white/95 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] ring-1 ring-white/80 md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
@@ -1741,6 +1741,25 @@ alert(JSON.stringify(data, null, 2));
 
   return (
     <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-30">
+          {Array.from({ length: 32 }).map((_, i) => (
+            <img
+              key={i}
+              src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+              alt=""
+              aria-hidden="true"
+              className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
+              style={{
+                width: `${50 + (i % 5) * 14}px`,
+                height: `${50 + (i % 5) * 14}px`,
+                left: `${(i * 11) % 100}%`,
+                top: `${(i * 17) % 100}%`,
+                animationDelay: `${i * 0.35}s`,
+              }}
+            />
+          ))}
+        </div>
+
       {celebration && (
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
@@ -1752,7 +1771,7 @@ alert(JSON.stringify(data, null, 2));
       {showLoginWelcomePopup && isPurchased && (
         <div className="fixed inset-0 z-[80] grid place-items-center bg-slate-950/60 p-4 backdrop-blur-md">
           <div className="w-full max-w-2xl rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_30px_90px_rgba(15,23,42,.35)]">
-            <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
+            <div className="relative z-10 mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
               <FoxCoinImage className="h-24 w-24" />
             </div>
 
@@ -1816,7 +1835,7 @@ alert(JSON.stringify(data, null, 2));
       {showPinReset && (
         <div className="fixed inset-0 z-[90] grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
           <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-white bg-white p-6 text-center shadow-[0_24px_80px_rgba(15,23,42,.25)]">
-            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-amber-100 text-4xl shadow-md">
+            <div className="relative z-10 mx-auto grid h-20 w-20 place-items-center rounded-full bg-amber-100 text-4xl shadow-md">
               🔁
             </div>
 
@@ -1891,7 +1910,7 @@ alert(JSON.stringify(data, null, 2));
       {resetConfirmKind && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
           <div className="w-full max-w-md animate-pop rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_24px_80px_rgba(37,99,235,.25)]">
-            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-yellow-100 text-4xl">
+            <div className="relative z-10 mx-auto grid h-20 w-20 place-items-center rounded-full bg-yellow-100 text-4xl">
               ⚠️
             </div>
 
@@ -2053,7 +2072,7 @@ alert(JSON.stringify(data, null, 2));
   .punktly-coin-drift { animation: punktlyCoinDrift 5s ease-in-out infinite; }
 `}</style>
 
-<div className="mx-auto max-w-6xl">
+<div className="relative z-10 mx-auto max-w-6xl">
         {(area === "child" || area === "parent") && (
           <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
             area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
@@ -3205,7 +3224,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
 }
 
 function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
-  return <button onClick={onClick} className={`rounded-[1.8rem] p-3 text-center font-black transition active:scale-95 ${active ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]" : "text-sky-700 hover:bg-cyan-50"}`}><div className="mx-auto mb-1 h-5 w-5">{icon}</div><div className="truncate text-[10px] md:text-xs">{label}</div></button>;
+  return <button onClick={onClick} className={`rounded-[1.8rem] p-3 text-center font-black transition active:scale-95 ${active ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]" : "text-sky-700 hover:bg-cyan-50"}`}><div className="relative z-10 mx-auto mb-1 h-5 w-5">{icon}</div><div className="truncate text-[10px] md:text-xs">{label}</div></button>;
 }
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {

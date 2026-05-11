@@ -1,7 +1,7 @@
-Globaler Coin-Hintergrund Build-Fix:
-- Syntaxfehler durch falsch eingefügten Coin-Hintergrund behoben
-- Coin-Hintergrund korrekt innerhalb des JSX-Main-Bereichs platziert
-- 32 animierte Coins bleiben im globalen Hintergrund aktiv
-- Inhalte bleiben über dem Hintergrund sichtbar
-- Layout und Funktionen bleiben unverändert
-- Projekt wieder GitHub- und Vercel-kompatibel
+Globaler Coin-Hintergrund auf alle Bereiche erweitert:
+- Animierte Coins erscheinen jetzt auf Haupt-/Premiumseite, Startbereich, Kinderbereich und Elternbereich
+- Coin-Layer in alle Main-Layouts integriert
+- Coins bleiben im Hintergrund und verändern keine Funktionen
+- Alle Inhalte bleiben über dem Coin-Hintergrund sichtbar
+- Bestehendes Layout bleibt 1:1 erhalten
+- Coins stammen weiterhin aus /public/badges
