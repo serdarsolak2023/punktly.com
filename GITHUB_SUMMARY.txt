@@ -1,8 +1,8 @@
-Globaler Coin-Hintergrund optisch bereinigt:
-- Weiße PNG-Kanten im globalen Coin-Hintergrund reduziert
-- Coins wirken jetzt wie im Header sauberer und ohne sichtbaren weißen Bildkasten
-- Coins bleiben weiterhin animiert und im Hintergrund
-- Sterne bleiben als dekorative Hintergrundelemente erhalten
-- Header-Layout, Kinderbereich und Elternbereich bleiben unverändert
-- Optional 3 zusätzliche animierte Header-Coins ergänzt
-- Keine Funktionsänderungen vorgenommen
+Hauptseite optisch verbessert:
+- Hauptseiten-Hintergrund auf sehr helles Blau angepasst
+- Hauptkarten auf der Freischalten-Seite transparenter gemacht
+- Coins im Hintergrund sind dadurch sichtbarer, ohne Layout zu verändern
+- Weiße PNG-Kanten der globalen Coin-Bilder weiter reduziert
+- Coin-Überlagerungen wirken natürlicher und harmonischer
+- Header, Kinderbereich, Elternbereich und Funktionen bleiben unverändert
+- GitHub-/Vercel-kompatible ZIP erstellt

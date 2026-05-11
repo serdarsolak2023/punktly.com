@@ -1542,8 +1542,8 @@ alert(JSON.stringify(data, null, 2));
 
 
 
-<main className="relative min-h-screen bg-gradient-to-br from-sky-50 via-white to-amber-50 px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
+<main className="relative min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-white px-4 py-6 md:px-6">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-38">
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
@@ -1581,7 +1581,7 @@ alert(JSON.stringify(data, null, 2));
         </div>
 
 <div className="relative z-10 mx-auto flex w-full max-w-[760px] flex-col gap-5">
-    <section className="w-full rounded-[2.8rem] bg-white/95 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] ring-1 ring-white/80 md:px-10 md:py-10">
+    <section className="w-full rounded-[2.8rem] bg-white/68 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
@@ -1601,29 +1601,29 @@ alert(JSON.stringify(data, null, 2));
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-emerald-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-emerald-900 md:text-lg">✅ Aufgaben & Motivation</p>
         </div>
-        <div className="rounded-[1.7rem] bg-amber-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-amber-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
         </div>
-        <div className="rounded-[1.7rem] bg-sky-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
         </div>
-        <div className="rounded-[1.7rem] bg-purple-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
         </div>
-        <div className="rounded-[1.7rem] bg-pink-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
         </div>
-        <div className="rounded-[1.7rem] bg-cyan-50 px-5 py-4 text-left shadow-md">
+        <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
         </div>
       </div>
     </section>
 
     <div className="grid w-full gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[2.4rem] bg-white/95 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
@@ -1702,7 +1702,7 @@ alert(JSON.stringify(data, null, 2));
         )}
       </section>
 
-      <section className="w-full rounded-[2.4rem] bg-white/95 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] ring-1 ring-white/80 md:p-6">
+      <section className="w-full rounded-[2.4rem] bg-white/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -1759,7 +1759,7 @@ alert(JSON.stringify(data, null, 2));
 
   return (
     <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-38">
           {Array.from({ length: 32 }).map((_, i) => (
             <img
               key={i}
