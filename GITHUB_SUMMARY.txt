@@ -1,5 +1,9 @@
-Header-Rechtsnavigation optimiert:
-- Impressum-, Datenschutzerklärung-, Widerrufsbelehrung- und AGB-Buttons kleiner gemacht
-- Alle vier rechtlichen Buttons stehen im Kinderbereich und Elternbereich nebeneinander
-- Restliches Header-Design bleibt unverändert
-- Login, Sounds An/Aus, Bereich wechseln und Coin-Animationen bleiben erhalten
+Header 1:1 nach Mockup umgesetzt:
+- Kinderbereich und Elternbereich mit modernen blauen/lila Header-Hintergründen aufgebaut
+- Animierte Coin-Hintergründe nutzen jetzt Dateien aus /public/badges
+- Logo wird nicht mehr als Hintergrund-Coin verwendet
+- Grüner Login-Button und moderner Bereich-wechseln-Button integriert
+- Sounds An/Aus bleibt im Header sichtbar
+- Elternbereich erhält zusätzlich die Zusammenfassung mit fünf Info-Karten
+- Rechtliche Navigation kompakt im Header angeordnet
+- Fallback-Badges werden angelegt, falls badge-01 bis badge-06 fehlen
