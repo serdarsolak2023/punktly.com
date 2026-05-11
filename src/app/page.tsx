@@ -2455,7 +2455,7 @@ alert(JSON.stringify(data, null, 2));
                       </div>
                     </Panel>
 
-                    <Panel title="🌍 Deine Abenteuerwelt">
+                    <Panel title="🌍 ">
                       <div className="grid gap-4 md:grid-cols-2">
                         <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 to-yellow-100 p-5 text-center shadow-[0_12px_35px_rgba(37,99,235,.10)]">
                           <div className="text-7xl">{child.activePet || "🦊"}</div>
@@ -2488,7 +2488,7 @@ alert(JSON.stringify(data, null, 2));
                     <Panel title="🏆 Deine Abzeichen">
                       <div className="flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
                     </Panel>
-                    <Panel title="Dein Zimmer">
+                    <Panel title="">
                       <LiveFox child={child} waitingCount={childTasks.filter((t) => t.status === "wartet").length} />
                     </Panel>
                   </div>
