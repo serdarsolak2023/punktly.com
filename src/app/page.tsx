@@ -511,6 +511,7 @@ const completedPercent = useMemo(
   [childTasks]
 );
   const themeClass = { hell: "from-orange-300 to-amber-200", nacht: "from-indigo-400 to-slate-300", wald: "from-emerald-300 to-lime-200", bonbon: "from-pink-300 to-purple-200" }[child.theme];
+  const selectedChildMotiv = (child.profileBadges || [])[0] || "/PunktlyLogo.png";
 
   
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
@@ -2637,20 +2638,20 @@ alert(JSON.stringify(data, null, 2));
                     </div>
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
-                        <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
-                        <StatCard icon="🎮" label="Level" value={child.level.toString()} />
-                        <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
-                        <StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
-                        <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
+                        <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} showCoinly motivSrc={selectedChildMotiv} />
+                        <StatCard icon="🎮" label="Level" value={child.level.toString()} showCoinly motivSrc={selectedChildMotiv} />
+                        <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} showCoinly motivSrc={selectedChildMotiv} />
+                        <StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} showCoinly motivSrc={selectedChildMotiv} />
+                        <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} showCoinly motivSrc={selectedChildMotiv} />
                       </div>
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
                       </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
+                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
                         <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
 <span>Ziel: {childRewardGoalLabel}</span>
-<span>{child.coins}/{childRewardGoalTotal}</span>
+<span className="flex items-center gap-1">{child.coins}/{childRewardGoalTotal} <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" /></span>
 </div>
 
 <Progress
@@ -3348,8 +3349,43 @@ function Progress({ value, max }: { value: number; max: number }) {
   return <div><div className="h-4 w-full overflow-hidden rounded-full border border-sky-100 bg-white/90"><div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 transition-all" style={{ width: `${pct}%` }} /></div><div className="mt-1 text-xs font-black text-sky-700">{pct}% geschafft</div></div>;
 }
 
-function StatCard({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
-  return <div className="rounded-[1.8rem] border-[3px] border-white bg-gradient-to-br from-white to-blue-50/70 p-4 shadow-[0_12px_30px_rgba(37,99,235,.10)]"><div className="mb-1 text-2xl">{icon}</div><p className="text-2xl font-black text-sky-950">{value}</p><p className="text-sm font-bold text-blue-600">{label}</p></div>;
+function CoinlyLabel({ motivSrc, text = "Coinly" }: { motivSrc: string; text?: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 align-middle text-sm font-black text-slate-500">
+      <img
+        src={motivSrc}
+        alt={text}
+        className="h-5 w-5 rounded-full object-cover shadow-sm"
+        onError={(event) => { event.currentTarget.src = "/PunktlyLogo.png"; }}
+      />
+      <span>{text}</span>
+    </span>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  icon,
+  showCoinly = false,
+  motivSrc = "/PunktlyLogo.png",
+}: {
+  label: string;
+  value: string;
+  icon: React.ReactNode;
+  showCoinly?: boolean;
+  motivSrc?: string;
+}) {
+  return (
+    <div className="rounded-[1.8rem] border-[3px] border-white bg-gradient-to-br from-white to-blue-50/70 p-4 shadow-[0_12px_30px_rgba(37,99,235,.10)]">
+      <div className="mb-1 text-2xl">{icon}</div>
+      <div className="flex flex-wrap items-end gap-2">
+        <p className="text-2xl font-black text-sky-950">{value}</p>
+        {showCoinly && <CoinlyLabel motivSrc={motivSrc} />}
+      </div>
+      <p className="text-sm font-bold text-blue-600">{label}</p>
+    </div>
+  );
 }
 
 function StatusBadge({ status }: { status: Status }) {
