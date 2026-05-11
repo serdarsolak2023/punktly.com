@@ -1,6 +1,7 @@
-Globaler Hintergrund verbessert:
-- Plus-Symbole im Hintergrund vollständig durch Sterne ersetzt
-- Coins bleiben weiterhin animiert im Hintergrund aktiv
-- Header-Bereiche von Kinder- und Elternbereich bleiben unverändert
-- Keine Änderungen an Layout, Funktionen oder bestehenden Bereichen
-- Sterne sorgen für deutlich harmonischeren und hochwertigeren Look
+Build-Fehler durch Stern-Ersetzung behoben:
+- Fehlerhafte Stern-Ersetzungen im Code rückgängig gemacht
+- Mathematische Operatoren und JavaScript-Code wieder korrekt hergestellt
+- Sterne jetzt nur als optische Hintergrund-Deko integriert
+- Animierte Coins bleiben weiterhin im globalen Hintergrund aktiv
+- Plus-Symbole wurden nicht mehr global im Code ersetzt
+- Projekt wieder GitHub- und Vercel-kompatibel
