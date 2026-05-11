@@ -452,7 +452,7 @@ export default function PunktlyRoleSplit() {
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(false);
-  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
+
 
   useEffect(() => {
     if (typeof window === "undefined") return;
