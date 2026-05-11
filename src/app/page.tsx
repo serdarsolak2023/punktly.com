@@ -2455,41 +2455,10 @@ alert(JSON.stringify(data, null, 2));
                       </div>
                     </Panel>
 
-                    <Panel title="🌍 ">
-                      <div className="grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 to-yellow-100 p-5 text-center shadow-[0_12px_35px_rgba(37,99,235,.10)]">
-                          <div className="text-7xl">{child.activePet || "🦊"}</div>
-                          <h3 className="mt-2 text-2xl font-black text-sky-950">Aktives Haustier</h3>
-                          <p className="font-bold text-sky-700">{child.activePet ? "Dein Begleiter ist aktiv." : "Kaufe ein Haustier im Shop."}</p>
-                        </div>
-
-                        <div className="rounded-[2rem] bg-gradient-to-br from-purple-100 to-pink-100 p-5 text-center shadow-[0_12px_35px_rgba(37,99,235,.10)]">
-                          <div className="text-7xl">{child.activeAvatar || "😀"}</div>
-                          <h3 className="mt-2 text-2xl font-black text-sky-950">Aktiver Avatar</h3>
-                          <p className="font-bold text-sky-700">{child.activeAvatar ? "Dein Avatar ist ausgerüstet." : "Kaufe einen Avatar im Shop."}</p>
-                        </div>
-
-                        <div className="rounded-[2rem] bg-gradient-to-br from-emerald-100 to-lime-100 p-5 text-center shadow-[0_12px_35px_rgba(37,99,235,.10)]">
-                          <div className="text-5xl">🎨</div>
-                          <h3 className="mt-2 text-2xl font-black text-sky-950">Hintergrund</h3>
-                          <p className="font-bold text-sky-700">{child.activeBackground || "Standard-Abenteuerwelt"}</p>
-                        </div>
-
-                        <div className="rounded-[2rem] bg-gradient-to-br from-yellow-100 to-orange-100 p-5 text-center shadow-[0_12px_35px_rgba(37,99,235,.10)]">
-                          <div className="text-5xl">⚡</div>
-                          <h3 className="mt-2 text-2xl font-black text-sky-950">Booster</h3>
-                          <p className="font-bold text-sky-700">{child.activeBooster || "Kein Booster aktiv"}</p>
-                        </div>
-                      </div>
-                    </Panel>
-
                   </div>
                   <div className="space-y-5">
                     <Panel title="🏆 Deine Abzeichen">
                       <div className="flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
-                    </Panel>
-                    <Panel title="">
-                      <LiveFox child={child} waitingCount={childTasks.filter((t) => t.status === "wartet").length} />
                     </Panel>
                   </div>
                 </section>
