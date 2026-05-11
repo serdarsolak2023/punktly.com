@@ -189,6 +189,33 @@ const rareBadges = [
   "🌙 Nachteule"
 ];
 
+const punktlyCoinPositions = [
+  { left: "3%", top: "6%", size: 56, badge: 1, delay: "0s" },
+  { left: "18%", top: "4%", size: 72, badge: 2, delay: ".4s" },
+  { left: "35%", top: "8%", size: 48, badge: 3, delay: ".8s" },
+  { left: "55%", top: "5%", size: 68, badge: 4, delay: "1.2s" },
+  { left: "78%", top: "7%", size: 58, badge: 5, delay: "1.6s" },
+  { left: "93%", top: "13%", size: 50, badge: 6, delay: "2s" },
+
+  { left: "8%", top: "26%", size: 64, badge: 7, delay: ".7s" },
+  { left: "28%", top: "30%", size: 52, badge: 8, delay: "1.1s" },
+  { left: "47%", top: "27%", size: 74, badge: 9, delay: "1.5s" },
+  { left: "70%", top: "31%", size: 54, badge: 10, delay: "1.9s" },
+  { left: "88%", top: "36%", size: 70, badge: 11, delay: "2.3s" },
+
+  { left: "4%", top: "53%", size: 76, badge: 12, delay: ".3s" },
+  { left: "20%", top: "60%", size: 46, badge: 13, delay: ".9s" },
+  { left: "39%", top: "56%", size: 66, badge: 14, delay: "1.4s" },
+  { left: "61%", top: "58%", size: 48, badge: 15, delay: "1.8s" },
+  { left: "82%", top: "55%", size: 72, badge: 16, delay: "2.2s" },
+
+  { left: "13%", top: "82%", size: 54, badge: 17, delay: ".6s" },
+  { left: "31%", top: "78%", size: 82, badge: 18, delay: "1s" },
+  { left: "50%", top: "84%", size: 46, badge: 19, delay: "1.6s" },
+  { left: "68%", top: "79%", size: 70, badge: 20, delay: "2.1s" },
+  { left: "90%", top: "83%", size: 56, badge: 21, delay: "2.7s" },
+];
+
 const profileBadgeOptions = Array.from({ length: 30 }, (_, index) => {
   const number = String(index + 1).padStart(2, "0");
   return {
@@ -1543,26 +1570,26 @@ alert(JSON.stringify(data, null, 2));
 
 
 <main className="relative min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-white px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-38">
-          {Array.from({ length: 32 }).map((_, i) => (
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-34">
+          {punktlyCoinPositions.map((coin, i) => (
             <img
-              key={i}
-              src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+              key={`global-coin-${i}`}
+              src={`/badges/badge-${String(coin.badge).padStart(2, "0")}.png`}
               alt=""
               aria-hidden="true"
               className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
               style={{
-                width: `${50 + (i % 5) * 14}px`,
-                height: `${50 + (i % 5) * 14}px`,
-                left: `${(i * 11) % 100}%`,
-                top: `${(i * 17) % 100}%`,
-                animationDelay: `${i * 0.35}s`,
+                width: `${coin.size}px`,
+                height: `${coin.size}px`,
+                left: coin.left,
+                top: coin.top,
+                animationDelay: coin.delay,
               }}
             />
           ))}
         </div>
 
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-60">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-45">
           {Array.from({ length: 24 }).map((_, i) => (
             <span
               key={`star-${i}`}
@@ -1759,20 +1786,20 @@ alert(JSON.stringify(data, null, 2));
 
   return (
     <main className="relative z-10 min-h-screen bg-gradient-to-br from-sky-100 via-white to-amber-100 p-4 pb-28 md:p-8 md:pb-32">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-38">
-          {Array.from({ length: 32 }).map((_, i) => (
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-34">
+          {punktlyCoinPositions.map((coin, i) => (
             <img
-              key={i}
-              src={`/badges/badge-${String((i % 12) + 1).padStart(2, "0")}.png`}
+              key={`global-coin-${i}`}
+              src={`/badges/badge-${String(coin.badge).padStart(2, "0")}.png`}
               alt=""
               aria-hidden="true"
               className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
               style={{
-                width: `${50 + (i % 5) * 14}px`,
-                height: `${50 + (i % 5) * 14}px`,
-                left: `${(i * 11) % 100}%`,
-                top: `${(i * 17) % 100}%`,
-                animationDelay: `${i * 0.35}s`,
+                width: `${coin.size}px`,
+                height: `${coin.size}px`,
+                left: coin.left,
+                top: coin.top,
+                animationDelay: coin.delay,
               }}
             />
           ))}
@@ -2036,7 +2063,10 @@ alert(JSON.stringify(data, null, 2));
   
     mix-blend-mode: multiply;
     background: transparent !important;
-    border-radius: 9999px;}
+    border-radius: 9999px;
+    opacity: .88;
+    transform-origin: center;
+    isolation: isolate;}
 
   .punktly-global-coin-float {
     animation: punktlyGlobalFloat 7s ease-in-out infinite;

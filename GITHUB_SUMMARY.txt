@@ -1,8 +1,8 @@
-Hauptseite optisch verbessert:
-- Hauptseiten-Hintergrund auf sehr helles Blau angepasst
-- Hauptkarten auf der Freischalten-Seite transparenter gemacht
-- Coins im Hintergrund sind dadurch sichtbarer, ohne Layout zu verändern
-- Weiße PNG-Kanten der globalen Coin-Bilder weiter reduziert
-- Coin-Überlagerungen wirken natürlicher und harmonischer
+Globaler Coin-Hintergrund sauberer aufgebaut:
+- Feste Coin-Positionen mit mehr Abstand integriert
+- Harte Coin-Überlappungen deutlich reduziert
+- Weiße PNG-Bildränder bei überlappenden Coins weiter minimiert
+- Coins wirken natürlicher wie im Header-Bereich
+- Globaler Coin-Hintergrund bleibt animiert
+- Sterne bleiben dezent im Hintergrund aktiv
 - Header, Kinderbereich, Elternbereich und Funktionen bleiben unverändert
-- GitHub-/Vercel-kompatible ZIP erstellt
