@@ -2036,20 +2036,50 @@ alert(JSON.stringify(data, null, 2));
 
               <img src="/badges/badge-01.png" alt="" aria-hidden="true"
                 className="punktly-coin-float pointer-events-none absolute -bottom-8 left-3 h-24 w-24 rotate-[-18deg] rounded-full object-contain opacity-90" />
+
               <img src="/badges/badge-02.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute bottom-5 left-[22%] h-20 w-20 rotate-[14deg] rounded-full object-contain opacity-80" />
+                className="punktly-coin-drift pointer-events-none absolute top-8 left-[38%] h-24 w-24 rotate-[14deg] rounded-full object-contain opacity-90"
+                style={{ animationDelay: ".4s" }} />
+
               <img src="/badges/badge-03.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -bottom-2 left-[38%] h-16 w-16 rotate-[8deg] rounded-full object-contain opacity-75"
+                className="punktly-coin-float pointer-events-none absolute -bottom-2 left-[25%] h-16 w-16 rotate-[8deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: "1s" }} />
+
               <img src="/badges/badge-04.png" alt="" aria-hidden="true"
                 className="punktly-coin-drift pointer-events-none absolute bottom-3 right-[30%] h-20 w-20 rotate-[-10deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: ".7s" }} />
+
               <img src="/badges/badge-05.png" alt="" aria-hidden="true"
                 className="punktly-coin-float pointer-events-none absolute -right-5 bottom-4 h-24 w-24 rotate-[18deg] rounded-full object-contain opacity-80"
                 style={{ animationDelay: "1.4s" }} />
+
               <img src="/badges/badge-06.png" alt="" aria-hidden="true"
                 className="punktly-coin-drift pointer-events-none absolute right-[8%] -top-5 h-16 w-16 rotate-[12deg] rounded-full object-contain opacity-65"
                 style={{ animationDelay: "2s" }} />
+
+              <img src="/badges/badge-07.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute top-4 left-[12%] h-14 w-14 rotate-[9deg] rounded-full object-contain opacity-75"
+                style={{ animationDelay: "2.3s" }} />
+
+              <img src="/badges/badge-08.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-10 left-[55%] h-16 w-16 rotate-[-15deg] rounded-full object-contain opacity-80"
+                style={{ animationDelay: "1.7s" }} />
+
+              <img src="/badges/badge-09.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute top-2 right-[18%] h-16 w-16 rotate-[15deg] rounded-full object-contain opacity-75"
+                style={{ animationDelay: ".9s" }} />
+
+              <img src="/badges/badge-10.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-4 right-[10%] h-20 w-20 rotate-[11deg] rounded-full object-contain opacity-80"
+                style={{ animationDelay: "2.7s" }} />
+
+              <img src="/badges/badge-11.png" alt="" aria-hidden="true"
+                className="punktly-coin-float pointer-events-none absolute top-[30%] right-[42%] h-14 w-14 rotate-[-8deg] rounded-full object-contain opacity-70"
+                style={{ animationDelay: "3s" }} />
+
+              <img src="/badges/badge-12.png" alt="" aria-hidden="true"
+                className="punktly-coin-drift pointer-events-none absolute bottom-8 left-[70%] h-16 w-16 rotate-[18deg] rounded-full object-contain opacity-75"
+                style={{ animationDelay: "1.2s" }} />
             </>
           )}
 

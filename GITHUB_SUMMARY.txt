@@ -1,7 +1,7 @@
-Eltern-Shop bereinigt:
-- Beispielprodukt „Nintendo Spiel – Mario Kart“ entfernt
-- Shop startet jetzt komplett leer
-- Eltern legen alle Shop-Produkte selbst an
-- Kinderbereich zeigt nur von Eltern angelegte Produkte
-- Eingabefelder im Eltern-Shop sind nicht mehr vorbelegt
-- Shop bleibt vollständig mit Firebase und Kinderbereich verknüpft
+Header-Animationen erweitert:
+- Header jetzt mit 12 animierten Coins ausgestattet
+- Coins bewegen sich dynamisch im Hintergrund
+- Löwen-Coin weiter nach rechts oben verschoben
+- Coins bleiben ausschließlich im Header-Bereich
+- Kinder- und Elternbereich nutzen identisches modernes Header-Design
+- Mehr Tiefe, Bewegung und professioneller Look integriert
