@@ -296,11 +296,11 @@ function isValidAchievement(title: string) {
   return true;
 }
 
-function cleanDeine Abzeichen(list: string[]) {
-  return cleanLevelDeine Abzeichen((list || []).filter(isValidAchievement));
+function cleanAchievements(list: string[]) {
+  return cleanLevelAchievements((list || []).filter(isValidAchievement));
 }
 
-function cleanLevelDeine Abzeichen(list: string[]) {
+function cleanLevelAchievements(list: string[]) {
   const levelBadges = list
     .filter((item) => /^Level \d+ erreicht$/.test(item))
     .map((item) => Number(item.match(/\d+/)?.[0] || 0))
@@ -2892,7 +2892,7 @@ alert(JSON.stringify(data, null, 2));
 
               {parentView === "stats" && (
                 <Panel title="📊 Eltern-Statistik">
-                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromDeine Abzeichen(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelDeine Abzeichen(c.achievements).length}`} /></div></div>)}</div>
+                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromDeine Abzeichen(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
                 </Panel>
               )}
 
