@@ -19,31 +19,6 @@ import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
-  
-
-
-
-
-  useEffect(() => {
-    if (!bgMusicRef.current) {
-      bgMusicRef.current = new Audio("/sounds/background-music.mp3");
-      bgMusicRef.current.loop = true;
-      bgMusicRef.current.volume = 0.35;
-    }
-
-    const music = bgMusicRef.current;
-
-    if (musicEnabled) {
-      music.play().catch(() => {});
-    } else {
-      music.pause();
-    }
-
-    return () => {
-      music.pause();
-    };
-  }, [musicEnabled]);
-
 return (
     <img
       src="/PunktlyLogo.png"
@@ -473,8 +448,27 @@ export default function PunktlyRoleSplit() {
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [musicEnabled, setMusicEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(false);
   const bgMusicRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (!bgMusicRef.current) {
+      bgMusicRef.current = new Audio("/sounds/background-music.mp3");
+      bgMusicRef.current.loop = true;
+      bgMusicRef.current.volume = 0.35;
+    }
+
+    const music = bgMusicRef.current;
+
+    if (musicEnabled) {
+      music.play().catch(() => {});
+    } else {
+      music.pause();
+    }
+  }, [musicEnabled]);
+
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
