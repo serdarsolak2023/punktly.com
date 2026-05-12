@@ -1462,69 +1462,156 @@ function celebrate(message: string) {
 
   if (!isPurchased) {
     return (
-      <main className="min-h-screen bg-[#eaf7ff] px-3 py-4 md:px-6 md:py-6">
-        <div className="relative mx-auto w-full max-w-[1547px] overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_90px_rgba(15,23,42,.18)] ring-4 ring-white">
-          <img
-            src="/punktlycoinly/startscreen-exact.png"
-            alt="PunktlyCoinly Startseite"
-            className="block h-auto w-full select-none"
-            draggable={false}
-          />
 
-          <button
-            onClick={loginWithGoogle}
-            aria-label="Mit Google einloggen"
-            className="absolute left-[10.6%] top-[75.2%] h-[8.7%] w-[33.6%] rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-sky-300/80"
-          >
-            <span className="sr-only">Mit Google einloggen</span>
-          </button>
 
+
+<main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
+          {punktlyCoinPositions.map((coin, i) => (
+            <img
+              key={`global-coin-${i}`}
+              src={`/badges/badge-${String(coin.badge).padStart(2, "0")}.png`}
+              alt=""
+              aria-hidden="true"
+              className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
+              style={{
+                width: `${coin.size}px`,
+                height: `${coin.size}px`,
+                left: coin.left,
+                top: coin.top,
+                animationDelay: coin.delay,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <span
+              key={`star-${i}`}
+              aria-hidden="true"
+              className="punktly-bg-star absolute text-yellow-300"
+              style={{
+                left: `${(i * 13 + 7) % 100}%`,
+                top: `${(i * 19 + 5) % 100}%`,
+                fontSize: `${16 + (i % 3) * 6}px`,
+                animationDelay: `${i * 0.28}s`,
+              }}
+            >
+              ⭐
+            </span>
+          ))}
+        </div>
+
+<div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
+    <section className="w-full rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
+      <img
+        src="/PunktlyLogo.png"
+        alt="Punktly Logo"
+        className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+      />
+
+      <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
+        Punktly
+      </h1>
+
+      <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
+        Punktly freischalten
+      </p>
+
+      <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+      </p>
+
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-emerald-900 md:text-lg">✅ Aufgaben & Motivation</p>
+        </div>
+        <div className="rounded-[1.7rem] bg-amber-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
+        </div>
+        <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
+        </div>
+        <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
+        </div>
+        <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
+        </div>
+        <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
+        </div>
+      </div>
+    </section>
+
+    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          🔐 Login
+        </p>
+
+        {firebaseUser ? (
+          <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
+            <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
+            <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
+            {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
+            {hasPaid && <p className="mt-3 font-black text-emerald-700">✅ Bereits freigeschaltet</p>}
+            <button
+              onClick={logoutGoogle}
+              className="mt-4 rounded-[1.4rem] bg-white px-5 py-3 font-black text-sky-700 shadow-md"
+            >
+              Abmelden
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <button
+              onClick={loginWithGoogle}
+              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
+            >
+              🔐 Mit Google einloggen
+            </button>
+          </div>
+        )}
+      </section>
+
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          💳 Zahlungsmethoden
+        </p>
+
+        {!firebaseUser && (
+          <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
+            🔒 Bitte zuerst einloggen, dann bezahlen.
+          </p>
+        )}
+
+        {paymentStatus && (
+          <p className="mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
+            {paymentStatus}
+          </p>
+        )}
+
+        <div className="grid gap-4">
           <button
             onClick={startGooglePlayBillingCheckout}
             disabled={isPaying || !firebaseUser}
-            aria-label="Über Google Play kaufen"
-            className="absolute left-[58.3%] top-[75.2%] h-[8.7%] w-[33.6%] rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-amber-300/80 disabled:cursor-not-allowed"
+            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
           >
-            <span className="sr-only">Über Google Play kaufen</span>
+            💳 Über Google Play kaufen
           </button>
-
-          {firebaseUser && (
-            <div className="absolute left-[10.6%] top-[86.4%] max-w-[34%] rounded-2xl bg-emerald-500/95 px-4 py-2 text-sm font-black text-white shadow-xl ring-2 ring-white/80">
-              ✅ Eingeloggt: <span className="break-all">{firebaseUser.email}</span>
-              <button
-                onClick={logoutGoogle}
-                className="ml-2 rounded-xl bg-white/95 px-2 py-1 text-xs font-black text-emerald-700"
-              >
-                Abmelden
-              </button>
-            </div>
-          )}
-
-          {!firebaseUser && paymentStatus && (
-            <div className="absolute left-1/2 top-[86.5%] w-[70%] -translate-x-1/2 rounded-2xl bg-amber-100/95 px-4 py-3 text-center text-sm font-black text-amber-900 shadow-xl ring-2 ring-white/80">
-              {paymentStatus}
-            </div>
-          )}
-
-          {firebaseUser && paymentStatus && (
-            <div className="absolute left-[58.3%] top-[86.4%] max-w-[33.6%] rounded-2xl bg-yellow-100/95 px-4 py-2 text-center text-sm font-black text-amber-900 shadow-xl ring-2 ring-white/80">
-              {paymentStatus}
-            </div>
-          )}
-
-          {isCheckingPaid && (
-            <div className="absolute right-5 top-5 rounded-2xl bg-white/90 px-4 py-2 text-sm font-black text-amber-700 shadow-xl">
-              Zahlungsstatus wird geprüft...
-            </div>
-          )}
-
-          {hasPaid && (
-            <div className="absolute right-5 top-5 rounded-2xl bg-emerald-500/95 px-4 py-2 text-sm font-black text-white shadow-xl">
-              ✅ Bereits freigeschaltet
-            </div>
-          )}
         </div>
-      </main>
+
+        <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
+          Nach dem Klick öffnet sich Google Play zur sicheren Zahlung.
+          <br />
+          Dein Login-Konto wird danach automatisch freigeschaltet.
+        </p>
+      </section>
+    </div>
+  </div>
+</main>
     );
   }
 
