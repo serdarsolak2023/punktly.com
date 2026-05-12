@@ -1511,21 +1511,23 @@ function celebrate(message: string) {
         className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 
-      <h1 className="mt-4 text-5xl font-black tracking-tight md:text-6xl" aria-label="PunktlyCoinly">
-        <span className="inline-block text-sky-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">P</span>
-        <span className="inline-block text-emerald-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">u</span>
-        <span className="inline-block text-yellow-400 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">n</span>
-        <span className="inline-block text-pink-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">k</span>
-        <span className="inline-block text-violet-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">t</span>
-        <span className="inline-block text-orange-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">l</span>
-        <span className="inline-block text-cyan-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">y</span>
-        <span className="inline-block text-fuchsia-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">C</span>
-        <span className="inline-block text-sky-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">o</span>
-        <span className="inline-block text-yellow-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">i</span>
-        <span className="inline-block text-emerald-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">n</span>
-        <span className="inline-block text-red-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">l</span>
-        <span className="inline-block text-orange-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">y</span>
-      </h1>
+      <div className="mx-auto inline-block rounded-full bg-gradient-to-r from-lime-400 via-yellow-300 via-orange-400 via-pink-500 via-violet-500 to-blue-500 p-[5px] shadow-[0_18px_45px_rgba(15,23,42,.18)]">
+        <h1 className="rounded-full bg-white/95 px-8 py-3 text-4xl font-black tracking-tight sm:px-12 sm:py-4 sm:text-6xl md:text-7xl">
+          <span className="inline-block text-yellow-400 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">P</span>
+          <span className="inline-block text-green-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">u</span>
+          <span className="inline-block text-blue-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">n</span>
+          <span className="inline-block text-red-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">k</span>
+          <span className="inline-block text-orange-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">t</span>
+          <span className="inline-block text-violet-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">l</span>
+          <span className="inline-block text-yellow-400 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">y</span>
+          <span className="inline-block text-blue-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">C</span>
+          <span className="inline-block text-red-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">o</span>
+          <span className="inline-block text-orange-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">i</span>
+          <span className="inline-block text-green-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">n</span>
+          <span className="inline-block text-blue-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">l</span>
+          <span className="inline-block text-violet-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)]">y</span>
+        </h1>
+      </div>
 
       <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
         Punktly freischalten
