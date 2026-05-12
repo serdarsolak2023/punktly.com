@@ -2178,15 +2178,9 @@ function celebrate(message: string) {
                   className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
                 />
                 <div>
-<div className="mt-6 flex justify-center">
-  <div className="rounded-full bg-white/75 px-6 py-3 shadow-[0_10px_30px_rgba(15,23,42,.10)] backdrop-blur-md">
-    <img
-      src="/punktlycoinly/logo-rainbow.png"
-      alt="PunktlyCoinly"
-      className="w-[420px] max-w-full object-contain"
-    />
-  </div>
-</div>
+                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
+                    Punktly
+                  </h1>
                   <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
                 </div>
               </div>
