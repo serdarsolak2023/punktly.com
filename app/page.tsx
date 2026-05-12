@@ -13,7 +13,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
@@ -396,6 +396,7 @@ export default function PunktlyRoleSplit() {
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"paypal" | "apple" | "google">("paypal");
   const [hasPaid, setHasPaid] = useState(false);
   const [isCheckingPaid, setIsCheckingPaid] = useState(false);
   const [area, setArea] = useState<Area>("start");
@@ -407,6 +408,9 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
@@ -1142,6 +1146,51 @@ function celebrate(message: string) {
     celebrate(message);
   }
 
+  async function loginWithApple() {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      const provider = new OAuthProvider("apple.com");
+      provider.addScope("email");
+      provider.addScope("name");
+      const result = await signInWithPopup(auth, provider);
+      await finishAuthLogin(result.user, "Apple Login erfolgreich!");
+    } catch (error) {
+      console.error(error);
+      celebrate("Apple Login fehlgeschlagen. Prüfe Apple in Firebase.");
+    }
+  }
+
+  async function loginOrRegisterWithEmail() {
+    const email = authEmail.trim();
+    const password = authPassword.trim();
+
+    if (!email || !password) {
+      celebrate("Bitte E-Mail und Passwort eingeben.");
+      return;
+    }
+
+    if (password.length < 6) {
+      celebrate("Passwort braucht mindestens 6 Zeichen.");
+      return;
+    }
+
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+
+      const result = authMode === "register"
+        ? await createUserWithEmailAndPassword(auth, email, password)
+        : await signInWithEmailAndPassword(auth, email, password);
+
+      await finishAuthLogin(
+        result.user,
+        authMode === "register" ? "Konto erstellt!" : "E-Mail Login erfolgreich!"
+      );
+    } catch (error) {
+      console.error(error);
+      celebrate(authMode === "register" ? "Konto konnte nicht erstellt werden." : "E-Mail Login fehlgeschlagen.");
+    }
+  }
+
   function loginWithPhoneSoon() {
     celebrate("Telefon Login ist vorbereitet und braucht noch Firebase SMS/reCAPTCHA.");
   }
@@ -1409,10 +1458,22 @@ function celebrate(message: string) {
   }
 
 
-  async function startGooglePlayBillingCheckout() {
+  async function startApplePayCheckout() {
+    setSelectedPaymentMethod("apple");
+    celebrate("🍎 Apple Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
+  async function startGooglePayCheckout() {
+    setSelectedPaymentMethod("google");
+    celebrate("🌐 Google Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
+  async function startPaypalCheckout() {
     try {
       setIsPaying(true);
-      setPaymentStatus("Google Play Billing wird vorbereitet...");
+      setPaymentStatus("PayPal wird vorbereitet...");
 
       let currentUser = firebaseUser || auth.currentUser;
 
@@ -1428,17 +1489,82 @@ function celebrate(message: string) {
         throw new Error("Login konnte nicht gestartet werden.");
       }
 
-      celebrate("Google Play Billing wird später in der Android-App gestartet.");
+      const response = await fetch("/api/paypal/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          amount: "9.99"
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.approvalUrl) {
+        console.error("PayPal create-order Fehler:", data);
+       console.error("VOLLER PAYPAL FEHLER:", data);
+
+alert(JSON.stringify(data, null, 2));
+        throw new Error(data.error || "PayPal Checkout konnte nicht gestartet werden.");
+      }
+
+      window.location.href = data.approvalUrl;
     } catch (error) {
       console.error(error);
-      celebrate("Google Play Zahlung konnte nicht gestartet werden.");
-    } finally {
       setPaymentStatus("");
+      celebrate("PayPal Zahlung konnte nicht gestartet werden.");
+    } finally {
       setIsPaying(false);
     }
   }
 
+  useEffect(() => {
+    async function capturePaypalPayment() {
+      if (typeof window === "undefined") return;
 
+      const params = new URLSearchParams(window.location.search);
+      const paypalStatus = params.get("paypal");
+      const orderId = params.get("token");
+
+      if (paypalStatus !== "success" || !orderId) return;
+
+      try {
+        setPaymentStatus("Zahlung wird bestätigt...");
+
+        const response = await fetch("/api/paypal/capture-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.paid) {
+          throw new Error(data.error || "Zahlung konnte nicht bestätigt werden.");
+        }
+
+        const currentUser = firebaseUser || auth.currentUser;
+
+        if (!currentUser) {
+          throw new Error("Kein Firebase Nutzer eingeloggt.");
+        }
+
+        await markUserAsPaid(currentUser, orderId);
+        playSound("coin");
+        celebrate("Zahlung erfolgreich! Punktly wurde dauerhaft freigeschaltet.");
+
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } catch (error) {
+        console.error(error);
+        celebrate("PayPal Zahlung wurde nicht bestätigt.");
+      } finally {
+        setPaymentStatus("");
+      }
+    }
+
+    capturePaypalPayment();
+  }, []);
 
 
   useEffect(() => {
@@ -1461,22 +1587,39 @@ function celebrate(message: string) {
   }, []);
 
   if (!isPurchased) {
+    const punktlyLetters = [
+      ["P", "text-rose-500", "-rotate-6"],
+      ["u", "text-orange-400", "rotate-3"],
+      ["n", "text-yellow-400", "-rotate-2"],
+      ["k", "text-green-500", "rotate-2"],
+      ["t", "text-blue-500", "-rotate-3"],
+      ["l", "text-violet-500", "rotate-2"],
+      ["y", "text-pink-500", "-rotate-2"],
+      ["C", "text-yellow-400", "rotate-3"],
+      ["o", "text-sky-500", "-rotate-2"],
+      ["i", "text-orange-400", "rotate-2"],
+      ["n", "text-purple-600", "-rotate-1"],
+      ["l", "text-red-500", "rotate-3"],
+      ["y", "text-orange-500", "-rotate-2"],
+    ];
+
     return (
+      <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#eaf8ff] via-[#f8fcff] to-[#fffaf0] px-3 py-5 md:px-6">
+        <div className="pointer-events-none fixed inset-x-0 bottom-0 z-0 h-48 bg-[radial-gradient(ellipse_at_20%_110%,rgba(132,204,22,.55),transparent_45%),radial-gradient(ellipse_at_70%_115%,rgba(34,197,94,.45),transparent_42%),linear-gradient(to_top,rgba(190,242,100,.72),transparent_72%)]" />
+        <div className="pointer-events-none fixed -bottom-10 left-0 z-0 h-32 w-72 rounded-t-full bg-white/80 blur-[1px] md:h-40 md:w-[32rem]" />
+        <div className="pointer-events-none fixed -bottom-12 right-10 z-0 h-32 w-80 rounded-t-full bg-white/75 blur-[1px] md:h-44 md:w-[34rem]" />
 
-
-
-<main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
-          {punktlyCoinPositions.map((coin, i) => (
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-75">
+          {punktlyCoinPositions.slice(0, 18).map((coin, i) => (
             <img
-              key={`global-coin-${i}`}
+              key={`start-coin-${i}`}
               src={`/badges/badge-${String(coin.badge).padStart(2, "0")}.png`}
               alt=""
               aria-hidden="true"
-              className={`punktly-global-coin absolute object-contain ${i % 2 === 0 ? "punktly-global-coin-float" : "punktly-global-coin-drift"}`}
+              className={`punktly-start-coin absolute object-contain ${i % 2 === 0 ? "punktly-start-float" : "punktly-start-drift"}`}
               style={{
-                width: `${coin.size}px`,
-                height: `${coin.size}px`,
+                width: `${Math.min(coin.size + 10, 92)}px`,
+                height: `${Math.min(coin.size + 10, 92)}px`,
                 left: coin.left,
                 top: coin.top,
                 animationDelay: coin.delay,
@@ -1485,17 +1628,17 @@ function celebrate(message: string) {
           ))}
         </div>
 
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           {Array.from({ length: 24 }).map((_, i) => (
             <span
-              key={`star-${i}`}
+              key={`start-star-${i}`}
               aria-hidden="true"
-              className="punktly-bg-star absolute text-yellow-300"
+              className="punktly-start-star absolute text-yellow-300 drop-shadow-[0_6px_8px_rgba(250,204,21,.25)]"
               style={{
-                left: `${(i * 13 + 7) % 100}%`,
-                top: `${(i * 19 + 5) % 100}%`,
-                fontSize: `${16 + (i % 3) * 6}px`,
-                animationDelay: `${i * 0.28}s`,
+                left: `${(i * 13 + 6) % 100}%`,
+                top: `${(i * 17 + 4) % 96}%`,
+                fontSize: `${15 + (i % 3) * 8}px`,
+                animationDelay: `${i * 0.22}s`,
               }}
             >
               ⭐
@@ -1503,151 +1646,151 @@ function celebrate(message: string) {
           ))}
         </div>
 
-<div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
-    <section className="relative w-full overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] sm:rounded-[3.2rem] bg-white/70 px-6 py-8 text-center shadow-[0_28px_90px_rgba(14,165,233,.16)] backdrop-blur-2xl ring-1 ring-white/90 md:px-10 md:py-10">
-      <div className="pointer-events-none absolute left-8 top-10 text-4xl drop-shadow-md">⭐</div>
-      <div className="pointer-events-none absolute right-10 top-10 text-4xl drop-shadow-md">⭐</div>
-      <div className="pointer-events-none absolute left-[12%] top-[34%] h-3 w-3 rounded-full bg-lime-400 shadow-md" />
-      <div className="pointer-events-none absolute right-[15%] top-[32%] h-3 w-3 rounded-full bg-sky-400 shadow-md" />
-      <div className="pointer-events-none absolute right-[8%] top-[43%] h-4 w-4 rounded-full bg-green-400 shadow-md" />
+        <div className="relative z-10 mx-auto flex w-full max-w-[86rem] flex-col gap-5">
+          <section className="relative overflow-hidden rounded-[2.2rem] border border-white/90 bg-white/58 px-5 py-8 text-center shadow-[0_30px_90px_rgba(30,64,175,.15)] backdrop-blur-2xl md:rounded-[3rem] md:px-10 md:py-10">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_17%_12%,rgba(254,240,138,.55),transparent_22%),radial-gradient(circle_at_80%_20%,rgba(186,230,253,.50),transparent_28%),radial-gradient(circle_at_72%_82%,rgba(253,224,71,.28),transparent_30%)]" />
+            <div className="pointer-events-none absolute left-8 top-9 text-4xl drop-shadow-md">⭐</div>
+            <div className="pointer-events-none absolute right-9 top-8 text-4xl drop-shadow-md">⭐</div>
+            <div className="pointer-events-none absolute left-[7%] top-[33%] h-3 w-3 rounded-full bg-pink-400" />
+            <div className="pointer-events-none absolute right-[14%] top-[20%] h-3 w-3 rounded-full bg-sky-400" />
+            <div className="pointer-events-none absolute right-[5%] top-[52%] h-4 w-4 rounded-full bg-green-400" />
 
-      <img
-        src="/PunktlyLogo.png"
-        alt="Punktly Logo"
-        className="relative z-10 mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
-      />
+            <img
+              src="/PunktlyLogo.png"
+              alt="Punktly Logo"
+              className="relative z-10 mx-auto h-24 w-24 rounded-full object-contain drop-shadow-[0_12px_20px_rgba(245,158,11,.35)] md:h-28 md:w-28"
+            />
 
-      <h1 className="relative z-10 mt-4 text-5xl font-black tracking-tight md:text-7xl">
-        <span className="inline-block rotate-[-2deg] text-rose-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">P</span>
-        <span className="inline-block rotate-[1deg] text-orange-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">u</span>
-        <span className="inline-block rotate-[-1deg] text-yellow-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">n</span>
-        <span className="inline-block rotate-[2deg] text-green-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">k</span>
-        <span className="inline-block rotate-[-1deg] text-blue-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">t</span>
-        <span className="inline-block rotate-[1deg] text-purple-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">l</span>
-        <span className="inline-block rotate-[-2deg] text-pink-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">y</span>
-        <span className="inline-block rotate-[2deg] text-yellow-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">C</span>
-        <span className="inline-block rotate-[-1deg] text-sky-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">o</span>
-        <span className="inline-block rotate-[1deg] text-orange-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">i</span>
-        <span className="inline-block rotate-[-1deg] text-violet-600 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">n</span>
-        <span className="inline-block rotate-[2deg] text-red-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">l</span>
-        <span className="inline-block rotate-[-2deg] text-orange-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">y</span>
-      </h1>
+            <h1 className="relative z-10 mx-auto mt-4 flex max-w-5xl flex-wrap items-center justify-center gap-0 text-[3.2rem] font-black leading-none tracking-[-0.08em] sm:text-[5.2rem] md:text-[6.8rem] lg:text-[7.4rem]">
+              {punktlyLetters.map(([letter, color, rotate], i) => (
+                <span
+                  key={`${letter}-${i}`}
+                  className={`punktly-candy-letter inline-block ${color} ${rotate}`}
+                >
+                  {letter}
+                </span>
+              ))}
+            </h1>
 
-      <p className="relative z-10 mt-4 text-xl font-black text-blue-900 sm:text-2xl md:text-3xl">
-        Premium freischalten und über <span className="text-green-600">Google Play</span> zahlen.
-      </p>
-
-      <p className="relative z-10 mx-auto mt-4 max-w-3xl text-base font-bold leading-relaxed text-blue-950 md:text-lg">
-        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
-      </p>
-
-      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-emerald-700 md:text-lg">✅ Aufgaben & Motivation</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-orange-600 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-sky-700 md:text-lg">🏡 Eigenes Zimmer</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-pink-600 md:text-lg">💗 Eigene Motive</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-purple-700 md:text-lg">🏆 Level & Erfolge</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
-          <p className="text-base font-black text-cyan-700 md:text-lg">👨‍👩‍👧 Elternbereich</p>
-        </div>
-      </div>
-    </section>
-
-    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-      <section className="relative overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-sky-50/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-2xl ring-1 ring-sky-200/80 md:p-6">
-        <div className="pointer-events-none absolute -bottom-10 left-0 right-0 h-28 rounded-t-[50%] bg-white/55" />
-        <p className="relative z-10 mb-5 text-center text-2xl font-black text-sky-950">
-          🔐 Login
-        </p>
-
-        {firebaseUser ? (
-          <div className="relative z-10 rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
-            <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
-            <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
-            {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
-            {hasPaid && <p className="mt-3 font-black text-emerald-700">✅ Bereits freigeschaltet</p>}
-            <button
-              onClick={logoutGoogle}
-              className="mt-4 rounded-[1.4rem] bg-white px-5 py-3 font-black text-sky-700 shadow-md"
-            >
-              Abmelden
-            </button>
-          </div>
-        ) : (
-          <div className="relative z-10 space-y-4">
-            <button
-              onClick={loginWithGoogle}
-              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
-            >
-              <span className="text-3xl">G</span> Mit Google einloggen
-            </button>
-          </div>
-        )}
-      </section>
-
-      <section className="relative overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-amber-50/78 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-2xl ring-1 ring-yellow-200/90 md:p-6">
-        <p className="mb-3 text-center text-lg font-black text-purple-700 md:text-xl">
-          Premium freischalten und über Google Play zahlen.
-        </p>
-        <p className="mb-5 text-center text-2xl font-black text-sky-950">
-          ▶️ Zahlungsmethoden
-        </p>
-
-        <div className="mb-5 flex flex-col items-center justify-center gap-3 rounded-[1.7rem] border-2 border-dashed border-yellow-300 bg-white/70 p-4 shadow-inner md:flex-row">
-          <div className="text-center md:text-left">
-            <p className="text-xl font-black text-orange-500">
-              Statt <span className="line-through decoration-red-500 decoration-4">89,99 €</span>
+            <p className="relative z-10 mt-5 text-xl font-black text-blue-900 sm:text-2xl md:text-3xl">
+              Premium freischalten und über <span className="text-green-600">Google Play</span> zahlen.
             </p>
-            <p className="text-3xl font-black text-orange-500">nur</p>
+
+            <p className="relative z-10 mx-auto mt-4 max-w-4xl text-base font-bold leading-relaxed text-blue-950 md:text-xl">
+              Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+            </p>
+
+            <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-emerald-700 md:text-xl">✅ Aufgaben & Motivation</p>
+              </div>
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-orange-600 md:text-xl">🎁 Schatzkisten & Belohnungen</p>
+              </div>
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-sky-700 md:text-xl">🏡 Eigenes Zimmer</p>
+              </div>
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-pink-600 md:text-xl">💗 Eigene Motive</p>
+              </div>
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-purple-700 md:text-xl">🏆 Level & Erfolge</p>
+              </div>
+              <div className="rounded-[1.7rem] bg-white/95 px-6 py-4 text-left shadow-[0_12px_26px_rgba(15,23,42,.10)] ring-1 ring-white transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(15,23,42,.13)]">
+                <p className="text-base font-black text-cyan-700 md:text-xl">👨‍👩‍👧 Elternbereich</p>
+              </div>
+            </div>
+          </section>
+
+          <div className="grid w-full gap-5 md:grid-cols-[.95fr_1.05fr]">
+            <section className="relative min-h-[18rem] overflow-hidden rounded-[2rem] border border-sky-200/80 bg-sky-50/62 p-5 shadow-[0_25px_80px_rgba(14,165,233,.14)] backdrop-blur-2xl md:rounded-[2.7rem] md:p-7">
+              <div className="pointer-events-none absolute -bottom-12 left-0 right-0 h-32 rounded-t-[50%] bg-white/70" />
+              <div className="pointer-events-none absolute -bottom-16 -left-12 h-48 w-72 rounded-t-full bg-white/60" />
+              <p className="relative z-10 mb-7 flex items-center justify-center gap-4 text-3xl font-black text-sky-950">
+                <span className="text-4xl">🔐</span> Login
+              </p>
+
+              {firebaseUser ? (
+                <div className="relative z-10 rounded-[2rem] bg-emerald-50/95 p-6 text-center shadow-inner ring-1 ring-emerald-100">
+                  <p className="text-2xl font-black text-emerald-800">✅ Eingeloggt</p>
+                  <p className="mt-3 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
+                  {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
+                  {hasPaid && <p className="mt-3 font-black text-emerald-700">✅ Bereits freigeschaltet</p>}
+                  <button
+                    onClick={logoutGoogle}
+                    className="mt-5 rounded-[1.4rem] bg-white px-6 py-3 font-black text-sky-700 shadow-[0_10px_24px_rgba(14,165,233,.16)] transition hover:scale-[1.02]"
+                  >
+                    Abmelden
+                  </button>
+                </div>
+              ) : (
+                <div className="relative z-10 space-y-4">
+                  <button
+                    onClick={loginWithGoogle}
+                    className="flex w-full items-center justify-center gap-4 rounded-[1.8rem] bg-white px-6 py-5 text-xl font-black text-sky-700 shadow-[0_16px_35px_rgba(15,23,42,.12)] ring-1 ring-white transition hover:-translate-y-0.5 hover:scale-[1.01]"
+                  >
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-3xl shadow-md">G</span>
+                    Mit Google einloggen
+                  </button>
+                </div>
+              )}
+            </section>
+
+            <section className="relative overflow-hidden rounded-[2rem] border border-yellow-200/90 bg-amber-50/82 p-5 shadow-[0_25px_80px_rgba(245,158,11,.16)] backdrop-blur-2xl md:rounded-[2.7rem] md:p-7">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(254,240,138,.60),transparent_28%),radial-gradient(circle_at_80%_78%,rgba(251,191,36,.26),transparent_30%)]" />
+              <p className="relative z-10 mb-3 text-center text-lg font-black text-purple-700 md:text-2xl">
+                Premium freischalten und über Google Play zahlen.
+              </p>
+              <p className="relative z-10 mb-6 flex items-center justify-center gap-3 text-3xl font-black text-sky-950">
+                <span>▶️</span> Zahlungsmethoden
+              </p>
+
+              <div className="relative z-10 mb-6 flex flex-col items-center justify-center gap-4 rounded-[2rem] border-2 border-dashed border-yellow-300 bg-white/78 p-4 shadow-inner md:flex-row md:p-5">
+                <div className="text-center md:text-left">
+                  <p className="text-xl font-black text-orange-500 md:text-2xl">
+                    Statt <span className="line-through decoration-red-500 decoration-4">89,99 €</span>
+                  </p>
+                  <p className="text-4xl font-black text-orange-500">nur</p>
+                </div>
+                <div className="relative rounded-[1.7rem] bg-gradient-to-br from-yellow-200 via-yellow-300 to-amber-300 px-7 py-4 shadow-[0_16px_34px_rgba(234,179,8,.35)] ring-4 ring-yellow-100">
+                  <span className="text-6xl font-black text-pink-500 drop-shadow-[0_4px_0_rgba(255,255,255,.95)] md:text-7xl">39,99 €</span>
+                  <span className="absolute -right-6 -bottom-5 rotate-6 rounded-2xl bg-purple-600 px-4 py-2 text-xl font-black text-white shadow-lg">1 Jahr</span>
+                  <span className="absolute -right-9 top-1 text-3xl">✨</span>
+                  <span className="absolute -left-7 bottom-1 text-3xl">💫</span>
+                </div>
+              </div>
+
+              {!firebaseUser && (
+                <p className="relative z-10 mb-4 rounded-[1.5rem] bg-amber-100/95 p-4 text-center font-black text-amber-800">
+                  🔒 Bitte zuerst einloggen, dann bezahlen.
+                </p>
+              )}
+
+              {paymentStatus && (
+                <p className="relative z-10 mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
+                  {paymentStatus}
+                </p>
+              )}
+
+              <div className="relative z-10 grid gap-4">
+                <button
+                  onClick={startGooglePayCheckout}
+                  disabled={isPaying || !firebaseUser}
+                  className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-sky-700 shadow-[0_18px_38px_rgba(15,23,42,.16)] transition hover:-translate-y-0.5 hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
+                >
+                  ▶️ Über Google Play kaufen
+                </button>
+              </div>
+
+              <p className="relative z-10 mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
+                Nach dem Klick öffnet sich Google Play zur sicheren Zahlung.
+                <br />
+                Dein Login-Konto wird danach automatisch freigeschaltet.
+              </p>
+            </section>
           </div>
-          <div className="relative rounded-[1.4rem] bg-yellow-300 px-6 py-3 shadow-[0_12px_30px_rgba(234,179,8,.28)] ring-4 ring-yellow-200">
-            <span className="text-5xl font-black text-pink-500 drop-shadow-[0_3px_0_rgba(255,255,255,.95)] md:text-6xl">39,99 €</span>
-            <span className="absolute -right-5 -bottom-4 rotate-6 rounded-xl bg-purple-600 px-3 py-2 text-lg font-black text-white shadow-lg">1 Jahr</span>
-          </div>
-          <div className="hidden text-3xl md:block">✨</div>
         </div>
-
-        {!firebaseUser && (
-          <p className="mb-4 rounded-[1.4rem] bg-amber-100/90 p-4 text-center font-black text-amber-800">
-            🔒 Bitte zuerst einloggen, dann bezahlen.
-          </p>
-        )}
-
-        {paymentStatus && (
-          <p className="mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
-            {paymentStatus}
-          </p>
-        )}
-
-        <div className="grid gap-4">
-          <button
-            onClick={startGooglePlayBillingCheckout}
-            disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-sky-700 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
-          >
-            ▶️ Über Google Play kaufen
-          </button>
-        </div>
-
-        <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
-          Nach dem Klick öffnet sich Google Play zur sicheren Zahlung.
-          <br />
-          Dein Login-Konto wird danach automatisch freigeschaltet.
-        </p>
-      </section>
-    </div>
-  </div>
-</main>
+      </main>
     );
   }
 

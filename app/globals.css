@@ -15,3 +15,40 @@ body {
 }
 button, input, select { font: inherit; }
 input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, .22); border-color: #3b82f6; }
+
+/* PunktlyCoinly Startseite Premium UI */
+.punktly-candy-letter {
+  -webkit-text-stroke: 8px rgba(255,255,255,.96);
+  paint-order: stroke fill;
+  text-shadow:
+    0 7px 0 rgba(255,255,255,.95),
+    0 14px 28px rgba(15,23,42,.18);
+  filter: drop-shadow(0 10px 12px rgba(15,23,42,.12));
+}
+
+.punktly-start-coin {
+  mix-blend-mode: multiply;
+  opacity: .9;
+  filter: drop-shadow(0 12px 22px rgba(245,158,11,.25)) saturate(1.08);
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.punktly-start-float { animation: punktlyStartFloat 7s ease-in-out infinite; }
+.punktly-start-drift { animation: punktlyStartDrift 10s ease-in-out infinite; }
+.punktly-start-star { animation: punktlyStartStar 4.5s ease-in-out infinite; }
+
+@keyframes punktlyStartFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg) scale(1); }
+  50% { transform: translateY(-18px) rotate(10deg) scale(1.07); }
+}
+
+@keyframes punktlyStartDrift {
+  0%, 100% { transform: translateX(-8px) translateY(0) rotate(0deg); }
+  50% { transform: translateX(14px) translateY(-10px) rotate(16deg); }
+}
+
+@keyframes punktlyStartStar {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: .55; }
+  50% { transform: scale(1.28) rotate(10deg); opacity: 1; }
+}
