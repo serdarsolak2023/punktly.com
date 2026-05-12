@@ -1,3 +1,4 @@
+"use client";
 
 // V20-V26 Features aktiviert:
 // - Wochenplan
@@ -7,8 +8,6 @@
 // - Eltern Dashboard PRO
 // - Schlafmodus & Sounds
 
-
-"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
