@@ -2368,17 +2368,15 @@ alert(JSON.stringify(data, null, 2));
             <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <img
-                    src="/start-kinder-comic.png"
-                    alt="Comic Kinder"
-                    className="mx-auto mb-4 h-64 w-full max-w-md object-contain drop-shadow-2xl"
-                  />
+                  src="/PunktlyLogo.png"
+                  alt="Punktly Logo"
+                  className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
+                />
                 <div>
-                  <h1 className="text-4xl font-black leading-none md:text-6xl drop-shadow-[0_5px_0_rgba(255,255,255,.75)]">
-                    <span className="text-yellow-400">P</span><span className="text-green-500">u</span><span className="text-blue-500">n</span><span className="text-red-500">k</span><span className="text-purple-500">t</span><span className="text-orange-400">l</span><span className="text-blue-500">y</span><span className="text-yellow-400">C</span><span className="text-green-500">o</span><span className="text-blue-500">i</span><span className="text-red-500">n</span><span className="text-purple-500">l</span><span className="text-orange-400">y</span>
+                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
+                    Punktly
                   </h1>
-                  <p className="mt-2 inline-flex rounded-[1rem] bg-emerald-800 px-5 py-2 text-base font-black text-white shadow-[0_8px_20px_rgba(22,101,52,.25)] ring-2 ring-white/90 md:text-xl">
-                    Bitte den Bereich wählen
-                  </p>
+                  <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
                 </div>
               </div>
 
@@ -2478,12 +2476,7 @@ alert(JSON.stringify(data, null, 2));
           <section className="grid gap-5 md:grid-cols-2">
             <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-gradient-to-br from-yellow-100 via-orange-50 to-white p-6 text-center shadow-[0_24px_70px_rgba(245,158,11,.18)]">
               <div className="flex justify-center"><FoxCoinImage className="h-36 w-36 animate-floaty" /></div>
-              <img
-                    src="/start-eltern-comic.png"
-                    alt="Comic Familie"
-                    className="mx-auto mb-4 h-64 w-full max-w-md object-contain drop-shadow-2xl"
-                  />
-                  <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
+              <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
 
               {children.length === 0 && (
