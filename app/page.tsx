@@ -1522,7 +1522,7 @@ function celebrate(message: string) {
   <span className="text-lime-500">o</span>
   <span className="text-amber-500">i</span>
   <span className="text-emerald-500">n</span>
-  <span className="text-sky-500">l</span>
+  <span className="text-rose-500">l</span>
   <span className="text-fuchsia-500">y</span>
 </h1>
      <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
