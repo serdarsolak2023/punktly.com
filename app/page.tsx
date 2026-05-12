@@ -1669,21 +1669,7 @@ alert(JSON.stringify(data, null, 2));
         <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
         </div>
-<div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
-  <div className="flex items-center gap-3">
-    <img
-      src="/start-eltern-comic.png"
-      alt="Elternbereich"
-      className="h-10 w-10 object-contain"
-    />
-
-    <p className="text-base font-black text-cyan-900 md:text-lg">
-      Elternbereich
-    </p>
-  </div>
-</div>
-    </section>
-
+<div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md"> <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p> </div>
     <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
       <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
