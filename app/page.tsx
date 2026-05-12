@@ -19,9 +19,6 @@ import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } 
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
-
-
-
 return (
     <img
       src="/PunktlyLogo.png"
@@ -135,14 +132,13 @@ const taskPresets: TaskPreset[] = [
   { title: "Kein Streit heute", coins: 12, repeat: "täglich", day: "Mo", category: "Sozial" },
 ];
 
-
 type TaskPack = { id: string; title: string; description: string; presets: string[] };
 
 const taskPacks: TaskPack[] = [
   {
     id: "morgenroutine",
     title: "🌞 Morgenroutine",
-    description: "Schnell startklar vor Kita oder Schule.",
+    description: "Schnell startklar vor der Kita oder der Schule.",
     presets: ["Zähne putzen morgens", "Bett machen", "Schultasche packen", "Wasserflasche auffüllen"],
   },
   {
