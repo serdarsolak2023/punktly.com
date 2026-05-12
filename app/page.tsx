@@ -1637,13 +1637,9 @@ alert(JSON.stringify(data, null, 2));
         className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 
-      <div className="mt-4 flex justify-center">
-        <img
-          src="/punktlycoinly/logo-rainbow.png"
-          alt="PunktlyCoinly"
-          className="w-[760px] max-w-full object-contain drop-shadow-[0_12px_35px_rgba(15,23,42,.18)]"
-        />
-      </div>
+      <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
+        Punktly <span className="text-black text-4xl md:text-5xl">Coinly</span>
+      </h1>
 
       <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
         Punktly freischalten
@@ -1756,6 +1752,22 @@ alert(JSON.stringify(data, null, 2));
       </section>
 
       <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <div className="mb-4 text-left">
+          <p className="text-2xl font-black text-red-500 line-through">
+            statt 89,99 €
+          </p>
+          <p className="text-4xl font-black text-red-600">
+            für 29,99 €
+          </p>
+          <p className="text-2xl font-black text-red-500">
+            für 1 Jahr sichern
+          </p>
+        </div>
+
+        <p className="mb-3 text-center text-3xl font-black text-red-500">
+          Premium freischalten und über Google Play bezahlen.
+        </p>
+
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -2373,9 +2385,15 @@ alert(JSON.stringify(data, null, 2));
                   className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
                 />
                 <div>
-                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
-                    Punktly
-                  </h1>
+                  
+<div className="mt-4 flex justify-center">
+  <img
+    src="/punktlycoinly/logo-rainbow.png"
+    alt="PunktlyCoinly"
+    className="w-[760px] max-w-full object-contain drop-shadow-[0_12px_35px_rgba(15,23,42,.18)]"
+  />
+</div>
+
                   <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
                 </div>
               </div>
