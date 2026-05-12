@@ -1504,55 +1504,74 @@ function celebrate(message: string) {
         </div>
 
 <div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
-    <section className="w-full rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
+    <section className="relative w-full overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] sm:rounded-[3.2rem] bg-white/70 px-6 py-8 text-center shadow-[0_28px_90px_rgba(14,165,233,.16)] backdrop-blur-2xl ring-1 ring-white/90 md:px-10 md:py-10">
+      <div className="pointer-events-none absolute left-8 top-10 text-4xl drop-shadow-md">⭐</div>
+      <div className="pointer-events-none absolute right-10 top-10 text-4xl drop-shadow-md">⭐</div>
+      <div className="pointer-events-none absolute left-[12%] top-[34%] h-3 w-3 rounded-full bg-lime-400 shadow-md" />
+      <div className="pointer-events-none absolute right-[15%] top-[32%] h-3 w-3 rounded-full bg-sky-400 shadow-md" />
+      <div className="pointer-events-none absolute right-[8%] top-[43%] h-4 w-4 rounded-full bg-green-400 shadow-md" />
+
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
-        className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+        className="relative z-10 mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 
-      <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
-        Punktly
+      <h1 className="relative z-10 mt-4 text-5xl font-black tracking-tight md:text-7xl">
+        <span className="inline-block rotate-[-2deg] text-rose-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">P</span>
+        <span className="inline-block rotate-[1deg] text-orange-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">u</span>
+        <span className="inline-block rotate-[-1deg] text-yellow-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">n</span>
+        <span className="inline-block rotate-[2deg] text-green-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">k</span>
+        <span className="inline-block rotate-[-1deg] text-blue-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">t</span>
+        <span className="inline-block rotate-[1deg] text-purple-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">l</span>
+        <span className="inline-block rotate-[-2deg] text-pink-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">y</span>
+        <span className="inline-block rotate-[2deg] text-yellow-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">C</span>
+        <span className="inline-block rotate-[-1deg] text-sky-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">o</span>
+        <span className="inline-block rotate-[1deg] text-orange-400 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">i</span>
+        <span className="inline-block rotate-[-1deg] text-violet-600 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">n</span>
+        <span className="inline-block rotate-[2deg] text-red-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">l</span>
+        <span className="inline-block rotate-[-2deg] text-orange-500 drop-shadow-[0_8px_0_rgba(255,255,255,.95)]">y</span>
       </h1>
 
-      <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
-        Punktly freischalten
+      <p className="relative z-10 mt-4 text-xl font-black text-blue-900 sm:text-2xl md:text-3xl">
+        Premium freischalten und über <span className="text-green-600">Google Play</span> zahlen.
       </p>
 
-      <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+      <p className="relative z-10 mx-auto mt-4 max-w-3xl text-base font-bold leading-relaxed text-blue-950 md:text-lg">
         Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
       </p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-emerald-900 md:text-lg">✅ Aufgaben & Motivation</p>
+      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-emerald-700 md:text-lg">✅ Aufgaben & Motivation</p>
         </div>
-        <div className="rounded-[1.7rem] bg-amber-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-orange-600 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
         </div>
-        <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-sky-700 md:text-lg">🏡 Eigenes Zimmer</p>
         </div>
-        <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-pink-600 md:text-lg">💗 Eigene Motive</p>
         </div>
-        <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-purple-700 md:text-lg">🏆 Level & Erfolge</p>
         </div>
-        <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
+        <div className="rounded-[1.7rem] bg-white/92 px-5 py-4 text-left shadow-[0_10px_24px_rgba(15,23,42,.10)] ring-1 ring-sky-100">
+          <p className="text-base font-black text-cyan-700 md:text-lg">👨‍👩‍👧 Elternbereich</p>
         </div>
       </div>
     </section>
 
     <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
-        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+      <section className="relative overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-sky-50/70 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-2xl ring-1 ring-sky-200/80 md:p-6">
+        <div className="pointer-events-none absolute -bottom-10 left-0 right-0 h-28 rounded-t-[50%] bg-white/55" />
+        <p className="relative z-10 mb-5 text-center text-2xl font-black text-sky-950">
           🔐 Login
         </p>
 
         {firebaseUser ? (
-          <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
+          <div className="relative z-10 rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
             <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
             <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
             {isCheckingPaid && <p className="mt-3 font-black text-amber-700">Zahlungsstatus wird geprüft...</p>}
@@ -1565,24 +1584,41 @@ function celebrate(message: string) {
             </button>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="relative z-10 space-y-4">
             <button
               onClick={loginWithGoogle}
               className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
             >
-              🔐 Mit Google einloggen
+              <span className="text-3xl">G</span> Mit Google einloggen
             </button>
           </div>
         )}
       </section>
 
-      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+      <section className="relative overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-amber-50/78 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-2xl ring-1 ring-yellow-200/90 md:p-6">
+        <p className="mb-3 text-center text-lg font-black text-purple-700 md:text-xl">
+          Premium freischalten und über Google Play zahlen.
+        </p>
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
-          💳 Zahlungsmethoden
+          ▶️ Zahlungsmethoden
         </p>
 
+        <div className="mb-5 flex flex-col items-center justify-center gap-3 rounded-[1.7rem] border-2 border-dashed border-yellow-300 bg-white/70 p-4 shadow-inner md:flex-row">
+          <div className="text-center md:text-left">
+            <p className="text-xl font-black text-orange-500">
+              Statt <span className="line-through decoration-red-500 decoration-4">89,99 €</span>
+            </p>
+            <p className="text-3xl font-black text-orange-500">nur</p>
+          </div>
+          <div className="relative rounded-[1.4rem] bg-yellow-300 px-6 py-3 shadow-[0_12px_30px_rgba(234,179,8,.28)] ring-4 ring-yellow-200">
+            <span className="text-5xl font-black text-pink-500 drop-shadow-[0_3px_0_rgba(255,255,255,.95)] md:text-6xl">39,99 €</span>
+            <span className="absolute -right-5 -bottom-4 rotate-6 rounded-xl bg-purple-600 px-3 py-2 text-lg font-black text-white shadow-lg">1 Jahr</span>
+          </div>
+          <div className="hidden text-3xl md:block">✨</div>
+        </div>
+
         {!firebaseUser && (
-          <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
+          <p className="mb-4 rounded-[1.4rem] bg-amber-100/90 p-4 text-center font-black text-amber-800">
             🔒 Bitte zuerst einloggen, dann bezahlen.
           </p>
         )}
@@ -1597,9 +1633,9 @@ function celebrate(message: string) {
           <button
             onClick={startGooglePlayBillingCheckout}
             disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
+            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-sky-700 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
           >
-            💳 Über Google Play kaufen
+            ▶️ Über Google Play kaufen
           </button>
         </div>
 
