@@ -1652,31 +1652,59 @@ alert(JSON.stringify(data, null, 2));
       <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
         Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
       </p>
+<div className="mt-8 grid gap-4 sm:grid-cols-2">
+  <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
+    <p className="text-base font-black text-emerald-900 md:text-lg">
+      ✅ Aufgaben & Motivation
+    </p>
+  </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-emerald-900 md:text-lg">✅ Aufgaben & Motivation</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-amber-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
-        </div>
-<div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md"> <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p> </div>
-    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
-        <p className="mb-5 text-center text-2xl font-black text-sky-950">
-          🔐 Login
-        </p>
+  <div className="rounded-[1.7rem] bg-amber-50/78 px-5 py-4 text-left shadow-md">
+    <p className="text-base font-black text-amber-900 md:text-lg">
+      🎁 Schatzkisten & Belohnungen
+    </p>
+  </div>
 
-        {firebaseUser ? (
+  <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
+    <p className="text-base font-black text-sky-900 md:text-lg">
+      🏡 Eigenes Zimmer
+    </p>
+  </div>
+
+  <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
+    <p className="text-base font-black text-purple-900 md:text-lg">
+      🎨 Eigene Motive
+    </p>
+  </div>
+
+  <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
+    <p className="text-base font-black text-pink-900 md:text-lg">
+      🏆 Level & Erfolge
+    </p>
+  </div>
+
+  <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
+    <div className="flex items-center gap-3">
+      <img
+        src="/start-eltern-comic.png"
+        alt="Elternbereich"
+        className="h-10 w-10 object-contain"
+      />
+
+      <p className="text-base font-black text-cyan-900 md:text-lg">
+        Elternbereich
+      </p>
+    </div>
+  </div>
+</div>
+
+<div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+  <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+    <p className="mb-5 text-center text-2xl font-black text-sky-950">
+      🔐 Login
+    </p>
+  </section>
+</div>        {firebaseUser ? (
           <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
             <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
             <p className="mt-2 break-all font-bold text-emerald-700">{firebaseUser.email}</p>
