@@ -13,7 +13,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 
@@ -396,6 +396,7 @@ export default function PunktlyRoleSplit() {
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"paypal" | "apple" | "google">("paypal");
   const [hasPaid, setHasPaid] = useState(false);
   const [isCheckingPaid, setIsCheckingPaid] = useState(false);
   const [area, setArea] = useState<Area>("start");
@@ -407,6 +408,9 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
@@ -1142,6 +1146,51 @@ function celebrate(message: string) {
     celebrate(message);
   }
 
+  async function loginWithApple() {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      const provider = new OAuthProvider("apple.com");
+      provider.addScope("email");
+      provider.addScope("name");
+      const result = await signInWithPopup(auth, provider);
+      await finishAuthLogin(result.user, "Apple Login erfolgreich!");
+    } catch (error) {
+      console.error(error);
+      celebrate("Apple Login fehlgeschlagen. Prüfe Apple in Firebase.");
+    }
+  }
+
+  async function loginOrRegisterWithEmail() {
+    const email = authEmail.trim();
+    const password = authPassword.trim();
+
+    if (!email || !password) {
+      celebrate("Bitte E-Mail und Passwort eingeben.");
+      return;
+    }
+
+    if (password.length < 6) {
+      celebrate("Passwort braucht mindestens 6 Zeichen.");
+      return;
+    }
+
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+
+      const result = authMode === "register"
+        ? await createUserWithEmailAndPassword(auth, email, password)
+        : await signInWithEmailAndPassword(auth, email, password);
+
+      await finishAuthLogin(
+        result.user,
+        authMode === "register" ? "Konto erstellt!" : "E-Mail Login erfolgreich!"
+      );
+    } catch (error) {
+      console.error(error);
+      celebrate(authMode === "register" ? "Konto konnte nicht erstellt werden." : "E-Mail Login fehlgeschlagen.");
+    }
+  }
+
   function loginWithPhoneSoon() {
     celebrate("Telefon Login ist vorbereitet und braucht noch Firebase SMS/reCAPTCHA.");
   }
@@ -1409,10 +1458,22 @@ function celebrate(message: string) {
   }
 
 
-  async function startGooglePlayBillingCheckout() {
+  async function startApplePayCheckout() {
+    setSelectedPaymentMethod("apple");
+    celebrate("🍎 Apple Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
+  async function startGooglePayCheckout() {
+    setSelectedPaymentMethod("google");
+    celebrate("🌐 Google Pay wird vorbereitet...");
+    await startPaypalCheckout();
+  }
+
+  async function startPaypalCheckout() {
     try {
       setIsPaying(true);
-      setPaymentStatus("Google Play Billing wird vorbereitet...");
+      setPaymentStatus("PayPal wird vorbereitet...");
 
       let currentUser = firebaseUser || auth.currentUser;
 
@@ -1428,17 +1489,82 @@ function celebrate(message: string) {
         throw new Error("Login konnte nicht gestartet werden.");
       }
 
-      celebrate("Google Play Billing wird später in der Android-App gestartet.");
+      const response = await fetch("/api/paypal/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          amount: "9.99"
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.approvalUrl) {
+        console.error("PayPal create-order Fehler:", data);
+       console.error("VOLLER PAYPAL FEHLER:", data);
+
+alert(JSON.stringify(data, null, 2));
+        throw new Error(data.error || "PayPal Checkout konnte nicht gestartet werden.");
+      }
+
+      window.location.href = data.approvalUrl;
     } catch (error) {
       console.error(error);
-      celebrate("Google Play Zahlung konnte nicht gestartet werden.");
-    } finally {
       setPaymentStatus("");
+      celebrate("PayPal Zahlung konnte nicht gestartet werden.");
+    } finally {
       setIsPaying(false);
     }
   }
 
+  useEffect(() => {
+    async function capturePaypalPayment() {
+      if (typeof window === "undefined") return;
 
+      const params = new URLSearchParams(window.location.search);
+      const paypalStatus = params.get("paypal");
+      const orderId = params.get("token");
+
+      if (paypalStatus !== "success" || !orderId) return;
+
+      try {
+        setPaymentStatus("Zahlung wird bestätigt...");
+
+        const response = await fetch("/api/paypal/capture-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.paid) {
+          throw new Error(data.error || "Zahlung konnte nicht bestätigt werden.");
+        }
+
+        const currentUser = firebaseUser || auth.currentUser;
+
+        if (!currentUser) {
+          throw new Error("Kein Firebase Nutzer eingeloggt.");
+        }
+
+        await markUserAsPaid(currentUser, orderId);
+        playSound("coin");
+        celebrate("Zahlung erfolgreich! Punktly wurde dauerhaft freigeschaltet.");
+
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } catch (error) {
+        console.error(error);
+        celebrate("PayPal Zahlung wurde nicht bestätigt.");
+      } finally {
+        setPaymentStatus("");
+      }
+    }
+
+    capturePaypalPayment();
+  }, []);
 
 
   useEffect(() => {
@@ -1512,7 +1638,7 @@ function celebrate(message: string) {
       />
 
       <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
-        Punktly
+        Punktly <span className="text-black text-4xl md:text-5xl">Coinly</span>
       </h1>
 
       <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
@@ -1572,11 +1698,76 @@ function celebrate(message: string) {
             >
               🔐 Mit Google einloggen
             </button>
+
+            <button
+              onClick={loginWithApple}
+              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-slate-950 px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] md:text-lg"
+            >
+               Mit Apple ID einloggen
+            </button>
+
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-white p-4 shadow-xl">
+              <div className="mb-3 grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setAuthMode("login")}
+                  className={`rounded-[1.2rem] px-4 py-3 font-black ${authMode === "login" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                >
+                  Einloggen
+                </button>
+                <button
+                  onClick={() => setAuthMode("register")}
+                  className={`rounded-[1.2rem] px-4 py-3 font-black ${authMode === "register" ? "bg-sky-500 text-white" : "bg-sky-50 text-sky-700"}`}
+                >
+                  Registrieren
+                </button>
+              </div>
+
+              <input
+                value={authEmail}
+                onChange={(e) => setAuthEmail(e.target.value)}
+                placeholder="E-Mail-Adresse"
+                type="email"
+                autoComplete="email"
+                className="mb-3 w-full rounded-[1.3rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+              />
+
+              <input
+                value={authPassword}
+                onChange={(e) => setAuthPassword(e.target.value)}
+                placeholder="Passwort"
+                type="password"
+                autoComplete={authMode === "register" ? "new-password" : "current-password"}
+                className="mb-4 w-full rounded-[1.3rem] border-2 border-sky-100 bg-sky-50 px-4 py-3 font-bold text-slate-800 outline-none"
+              />
+
+              <button
+                onClick={loginOrRegisterWithEmail}
+                className="w-full rounded-[1.4rem] bg-gradient-to-r from-emerald-400 to-teal-500 px-5 py-4 font-black text-white shadow-lg"
+              >
+                ✉️ Mit E-Mail fortfahren
+              </button>
+            </div>
           </div>
         )}
       </section>
 
       <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <div className="mb-4 text-left">
+          <p className="text-2xl font-black text-red-500 line-through">
+            statt 89,99 €
+          </p>
+          <p className="text-4xl font-black text-red-600">
+            für 29,99 €
+          </p>
+          <p className="text-2xl font-black text-red-500">
+            für 1 Jahr sichern
+          </p>
+        </div>
+
+        <p className="mb-3 text-center text-3xl font-black text-red-500">
+          Premium freischalten und über Google Play bezahlen.
+        </p>
+
         <p className="mb-5 text-center text-2xl font-black text-sky-950">
           💳 Zahlungsmethoden
         </p>
@@ -1595,16 +1786,32 @@ function celebrate(message: string) {
 
         <div className="grid gap-4">
           <button
-            onClick={startGooglePlayBillingCheckout}
+            onClick={startApplePayCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-slate-950 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:bg-slate-400 disabled:opacity-70"
+          >
+            🍎 Apple Pay
+          </button>
+
+          <button
+            onClick={startGooglePayCheckout}
             disabled={isPaying || !firebaseUser}
             className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
           >
-            💳 Über Google Play kaufen
+            🌐 Google Pay
+          </button>
+
+          <button
+            onClick={startPaypalCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-gradient-to-r from-sky-500 to-cyan-400 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.01] disabled:opacity-70"
+          >
+            🅿️ PayPal
           </button>
         </div>
 
         <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
-          Nach dem Klick öffnet sich Google Play zur sicheren Zahlung.
+          Nach dem Klick öffnet sich die gewählte Zahlungsmethode zur sicheren Zahlung.
           <br />
           Dein Login-Konto wird danach automatisch freigeschaltet.
         </p>
