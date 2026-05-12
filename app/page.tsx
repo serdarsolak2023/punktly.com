@@ -1511,8 +1511,20 @@ function celebrate(message: string) {
         className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 
-      <h1 className="mt-4 text-5xl font-black tracking-tight text-sky-950 md:text-6xl">
-        Punktly
+      <h1 className="mt-4 text-5xl font-black tracking-tight md:text-6xl" aria-label="PunktlyCoinly">
+        <span className="inline-block text-sky-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">P</span>
+        <span className="inline-block text-emerald-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">u</span>
+        <span className="inline-block text-yellow-400 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">n</span>
+        <span className="inline-block text-pink-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">k</span>
+        <span className="inline-block text-violet-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">t</span>
+        <span className="inline-block text-orange-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">l</span>
+        <span className="inline-block text-cyan-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">y</span>
+        <span className="inline-block text-fuchsia-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">C</span>
+        <span className="inline-block text-sky-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">o</span>
+        <span className="inline-block text-yellow-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">i</span>
+        <span className="inline-block text-emerald-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">n</span>
+        <span className="inline-block text-red-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">l</span>
+        <span className="inline-block text-orange-500 drop-shadow-[0_6px_0_rgba(255,255,255,.95)]">y</span>
       </h1>
 
       <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
