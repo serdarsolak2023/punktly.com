@@ -511,7 +511,6 @@ const completedPercent = useMemo(
   [childTasks]
 );
   const themeClass = { hell: "from-orange-300 to-amber-200", nacht: "from-indigo-400 to-slate-300", wald: "from-emerald-300 to-lime-200", bonbon: "from-pink-300 to-purple-200" }[child.theme];
-  const selectedChildMotiv = (child.profileBadges || [])[0] || "/PunktlyLogo.png";
 
   
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
@@ -2181,49 +2180,49 @@ alert(JSON.stringify(data, null, 2));
         >
           {area !== "child" && area !== "parent" && (
             <>
-              <div className="pointer-events-none absolute inset-0 opacity-90">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(255,255,255,.85),transparent_34%),radial-gradient(circle_at_82%_72%,rgba(125,211,252,.35),transparent_38%)]" />
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-100/55 via-orange-50/40 to-sky-100/55" />
+              <div className="pointer-events-none absolute inset-0 opacity-95">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(255,255,255,.88),transparent_34%),radial-gradient(circle_at_82%_72%,rgba(125,211,252,.32),transparent_38%)]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-100/70 via-orange-50/50 to-sky-100/65" />
               </div>
 
               <img src="/badges/badge-01.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-4 left-[22%] h-14 w-14 rotate-[12deg] rounded-full object-contain opacity-80"
+                className="punktly-coin-float pointer-events-none absolute top-1 left-[24%] h-8 w-8 rotate-[12deg] rounded-full object-contain opacity-80"
                 style={{ animationDelay: ".2s" }} />
 
               <img src="/badges/badge-02.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-4 left-[34%] h-11 w-11 rotate-[-10deg] rounded-full object-contain opacity-70"
+                className="punktly-coin-drift pointer-events-none absolute top-7 left-[33%] h-7 w-7 rotate-[-10deg] rounded-full object-contain opacity-70"
                 style={{ animationDelay: ".8s" }} />
 
               <img src="/badges/badge-03.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-3 left-[48%] h-12 w-12 rotate-[16deg] rounded-full object-contain opacity-75"
+                className="punktly-coin-float pointer-events-none absolute top-2 left-[45%] h-8 w-8 rotate-[16deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: "1.2s" }} />
 
               <img src="/badges/badge-04.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-7 left-[61%] h-10 w-10 rotate-[-14deg] rounded-full object-contain opacity-65"
+                className="punktly-coin-drift pointer-events-none absolute bottom-4 left-[56%] h-7 w-7 rotate-[-14deg] rounded-full object-contain opacity-65"
                 style={{ animationDelay: "1.7s" }} />
 
               <img src="/badges/badge-05.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -top-5 right-[19%] h-16 w-16 rotate-[9deg] rounded-full object-contain opacity-75"
+                className="punktly-coin-float pointer-events-none absolute top-1 right-[30%] h-8 w-8 rotate-[9deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: "2.1s" }} />
 
               <img src="/badges/badge-06.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-6 right-[10%] h-12 w-12 rotate-[-7deg] rounded-full object-contain opacity-70"
+                className="punktly-coin-drift pointer-events-none absolute top-8 right-[22%] h-7 w-7 rotate-[-7deg] rounded-full object-contain opacity-70"
                 style={{ animationDelay: "2.5s" }} />
 
               <img src="/badges/badge-07.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute bottom-2 left-[28%] h-10 w-10 rotate-[18deg] rounded-full object-contain opacity-65"
+                className="punktly-coin-float pointer-events-none absolute bottom-3 left-[28%] h-7 w-7 rotate-[18deg] rounded-full object-contain opacity-65"
                 style={{ animationDelay: "1s" }} />
 
               <img src="/badges/badge-08.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute bottom-3 left-[43%] h-12 w-12 rotate-[-18deg] rounded-full object-contain opacity-70"
+                className="punktly-coin-drift pointer-events-none absolute bottom-5 left-[41%] h-8 w-8 rotate-[-18deg] rounded-full object-contain opacity-70"
                 style={{ animationDelay: "1.9s" }} />
 
               <img src="/badges/badge-09.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute bottom-1 right-[30%] h-11 w-11 rotate-[10deg] rounded-full object-contain opacity-65"
+                className="punktly-coin-float pointer-events-none absolute bottom-2 right-[15%] h-7 w-7 rotate-[10deg] rounded-full object-contain opacity-65"
                 style={{ animationDelay: "2.8s" }} />
 
               <img src="/badges/badge-10.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute -bottom-4 right-[5%] h-16 w-16 rotate-[20deg] rounded-full object-contain opacity-75"
+                className="punktly-coin-drift pointer-events-none absolute top-4 right-[7%] h-8 w-8 rotate-[20deg] rounded-full object-contain opacity-75"
                 style={{ animationDelay: "3.2s" }} />
             </>
           )}
@@ -2368,15 +2367,17 @@ alert(JSON.stringify(data, null, 2));
             <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <img
-                  src="/PunktlyLogo.png"
-                  alt="Punktly Logo"
-                  className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
+                  src="/start-kinder-comic.png"
+                  alt="Comic Kinder"
+                  className="mx-auto mb-4 h-72 w-full max-w-md object-contain drop-shadow-2xl"
                 />
                 <div>
-                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
-                    Punktly
+                  <h1 className="text-3xl font-black md:text-5xl leading-tight drop-shadow-sm">
+                    <span className="text-yellow-400">P</span><span className="text-green-500">u</span><span className="text-blue-500">n</span><span className="text-red-500">k</span><span className="text-purple-500">t</span><span className="text-orange-400">l</span><span className="text-blue-500">y</span><span className="text-yellow-400">C</span><span className="text-green-500">o</span><span className="text-blue-500">i</span><span className="text-red-500">n</span><span className="text-purple-500">l</span><span className="text-orange-400">y</span>
                   </h1>
-                  <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
+                  <p className="mt-1 inline-flex rounded-full bg-emerald-800 px-4 py-1.5 text-sm font-black text-white shadow-lg ring-2 ring-white/80 md:text-base">
+                    Bitte den Bereich wählen
+                  </p>
                 </div>
               </div>
 
@@ -2688,19 +2689,19 @@ alert(JSON.stringify(data, null, 2));
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
                         <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
-<StatCard icon="🎮" label="Level" value={child.level.toString()} />
-<StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
-<StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
-<StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
+                        <StatCard icon="🎮" label="Level" value={child.level.toString()} />
+                        <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
+                        <StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
+                        <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
                       </div>
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
                       </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
+                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span>{child.xp}/{xpToNext(child.level)}</span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
                         <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
 <span>Ziel: {childRewardGoalLabel}</span>
-<span className="flex items-center gap-1">{child.coins}/{childRewardGoalTotal} <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" /></span>
+<span>{child.coins}/{childRewardGoalTotal}</span>
 </div>
 
 <Progress
@@ -3398,43 +3399,8 @@ function Progress({ value, max }: { value: number; max: number }) {
   return <div><div className="h-4 w-full overflow-hidden rounded-full border border-sky-100 bg-white/90"><div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 transition-all" style={{ width: `${pct}%` }} /></div><div className="mt-1 text-xs font-black text-sky-700">{pct}% geschafft</div></div>;
 }
 
-function CoinlyLabel({ motivSrc, text = "Coinly" }: { motivSrc: string; text?: string }) {
-  return (
-    <span className="inline-flex items-center gap-1 align-middle text-sm font-black text-slate-500">
-      <img
-        src={motivSrc}
-        alt={text}
-        className="h-5 w-5 rounded-full object-cover shadow-sm"
-        onError={(event) => { event.currentTarget.src = "/PunktlyLogo.png"; }}
-      />
-      <span>{text}</span>
-    </span>
-  );
-}
-
-function StatCard({
-  label,
-  value,
-  icon,
-  showCoinly = false,
-  motivSrc = "/PunktlyLogo.png",
-}: {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-  showCoinly?: boolean;
-  motivSrc?: string;
-}) {
-  return (
-    <div className="rounded-[1.8rem] border-[3px] border-white bg-gradient-to-br from-white to-blue-50/70 p-4 shadow-[0_12px_30px_rgba(37,99,235,.10)]">
-      <div className="mb-1 text-2xl">{icon}</div>
-      <div className="flex flex-wrap items-end gap-2">
-        <p className="text-2xl font-black text-sky-950">{value}</p>
-        {showCoinly && <CoinlyLabel motivSrc={motivSrc} />}
-      </div>
-      <p className="text-sm font-bold text-blue-600">{label}</p>
-    </div>
-  );
+function StatCard({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
+  return <div className="rounded-[1.8rem] border-[3px] border-white bg-gradient-to-br from-white to-blue-50/70 p-4 shadow-[0_12px_30px_rgba(37,99,235,.10)]"><div className="mb-1 text-2xl">{icon}</div><p className="text-2xl font-black text-sky-950">{value}</p><p className="text-sm font-bold text-blue-600">{label}</p></div>;
 }
 
 function StatusBadge({ status }: { status: Status }) {
