@@ -1680,23 +1680,23 @@ function celebrate(message: string) {
             </div>
 
             <h1 className="text-4xl font-black tracking-tight text-sky-950">
-              Herzlich willkommen bei Punktly
+              Herzlich Willkommen bei PunktlyCoinly
             </h1>
 
             <p className="mt-3 text-lg font-bold leading-relaxed text-sky-700">
-              Punktly hilft Kindern, Aufgaben spielerisch zu erledigen, Sterne zu sammeln
-              und ihre eigene Abenteuerwelt aufzubauen.
+              PunktlyCoinly hilft Kindern, Aufgaben spielerisch zu erledigen, Punkte und Coins zu sammeln
+              und Belohnungen einzulösen - alles unter der liebevollen Aufsicht der Eltern.
             </p>
 
             <div className="mt-6 grid gap-3 text-left">
               <div className="rounded-[1.8rem] bg-sky-50 p-4 font-bold text-sky-900">
-                ✅ Kinder erledigen Aufgaben und warten auf Eltern-Bestätigung.
+                ✅ Kinder erledigen Aufgaben und warten auf die Bestätigung der Eltern.
               </div>
               <div className="rounded-[1.8rem] bg-yellow-50 p-4 font-bold text-amber-900">
                 ⭐ Abzeichen werden zu Sternen und zeigen den Fortschritt.
               </div>
               <div className="rounded-[1.8rem] bg-emerald-50 p-4 font-bold text-emerald-900">
-                🛍️ Coins können im Shop für Haustiere, Avatare und Hintergründe genutzt werden.
+                🛍️ Coins können bei Belohnungen eingelöst werden.
               </div>
               <div className="rounded-[1.8rem] bg-purple-50 p-4 font-bold text-purple-900">
                 👨‍👩‍👧 Eltern verwalten Aufgaben, Belohnungen, Kinderprofile und Freigaben.
@@ -1704,7 +1704,7 @@ function celebrate(message: string) {
             </div>
 
             <p className="mt-5 text-sm font-bold text-slate-500">
-              Wenn du ablehnst, wirst du automatisch ausgeloggt.
+              Wenn Sie ablehnen, werden Sie automatisch wieder ausgeloggt.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -1721,7 +1721,7 @@ function celebrate(message: string) {
               <button
                 onClick={() => {
                   setShowLoginWelcomePopup(false);
-                  celebrate("Willkommen bei Punktly!");
+                  celebrate("Willkommen bei PunktlyCoinly!");
                 }}
                 className="rounded-[1.8rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-5 py-4 text-lg font-black text-white shadow-md"
               >
@@ -2147,7 +2147,7 @@ function celebrate(message: string) {
                     <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
                   </h1>
                   <p className="punktly-rainbow-text mt-2 text-xl font-black leading-tight sm:text-2xl">
-                    Punktly wünscht Ihnen Viel Spaß
+                    ✨PunktlyCoinly wünscht Ihnen Viel Spaß!✨
                   </p>
                 </div>
               </div>
@@ -2206,10 +2206,24 @@ function celebrate(message: string) {
                   className="h-16 w-16 object-contain drop-shadow-xl md:h-20 md:w-20"
                 />
                 <div>
-                  <h1 className="text-3xl font-black text-sky-950 md:text-4xl">
-                    Punktly
-                  </h1>
-                  <p className="font-bold text-sky-700">Bitte Bereich wählen</p>
+<h1 className="text-3xl font-black md:text-4xl">
+  <span className="text-yellow-400">P</span>
+  <span className="text-green-500">u</span>
+  <span className="text-blue-500">n</span>
+  <span className="text-red-500">k</span>
+  <span className="text-purple-500">t</span>
+  <span className="text-orange-400">l</span>
+  <span className="text-pink-500">y</span>
+  <span className="text-cyan-500">C</span>
+  <span className="text-lime-500">o</span>
+  <span className="text-indigo-500">i</span>
+  <span className="text-rose-500">n</span>
+  <span className="text-amber-500">l</span>
+  <span className="text-sky-500">y</span>
+</h1>
+<p className="animate-[rainbowMove_3s_linear_infinite] bg-gradient-to-r from-yellow-400 via-green-400 via-blue-500 via-purple-500 via-pink-500 to-orange-400 bg-[length:200%_100%] bg-clip-text font-bold text-transparent">
+  Bitte wählen Sie einen Bereich
+</p>
                 </div>
               </div>
 
@@ -2998,7 +3012,7 @@ function celebrate(message: string) {
                           </h3>
                           <p className="font-bold text-sky-700">{firebaseUser?.email || "Nicht eingeloggt"}</p>
                           <p className="mt-1 font-black text-emerald-700">
-                            {hasPaid ? "✅ Punktly freigeschaltet" : "🔒 Noch nicht freigeschaltet"}
+                            {hasPaid ? "✅ PunktlyCoinly freigeschaltet" : "🔒 Noch nicht freigeschaltet"}
                           </p>
                         </div>
                       </div>

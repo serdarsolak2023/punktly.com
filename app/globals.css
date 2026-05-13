@@ -15,3 +15,12 @@ body {
 }
 button, input, select { font: inherit; }
 input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, .22); border-color: #3b82f6; }
+
+@keyframes rainbowMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
