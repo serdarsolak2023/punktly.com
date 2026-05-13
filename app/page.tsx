@@ -1542,8 +1542,8 @@ function celebrate(message: string) {
 </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-yellow-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black !text-yellow-550 md:text-lg">✅ Aufgaben und Motivation</p>
+        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
+          <p className="text-base font-black !text-yellow-400 md:text-lg">✅ Aufgaben und Motivation</p>
         </div>
         <div className="rounded-[1.7rem] bg-green-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-green-550 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
