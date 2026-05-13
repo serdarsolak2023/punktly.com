@@ -1659,7 +1659,30 @@ function celebrate(message: string) {
       {legalPages[page].title}
     </button>
   ))}
-</nav>
+</nav>{activeLegalPage && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+    <div className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-2xl">
+      
+      <button
+        onClick={() => setActiveLegalPage(null)}
+        className="absolute right-4 top-4 rounded-full bg-red-100 px-3 py-1 text-sm font-black text-red-600"
+      >
+        ✕
+      </button>
+
+      <h2 className="mb-4 text-center text-2xl font-black text-sky-950">
+        {legalPages[activeLegalPage].title}
+      </h2>
+
+      <div className="space-y-3 text-sm font-bold leading-relaxed text-sky-900">
+        {legalPages[activeLegalPage].content.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </div>
+
+    </div>
+  </div>
+)}
     <section className="w-full rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
