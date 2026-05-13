@@ -1529,12 +1529,12 @@ function celebrate(message: string) {
         Premium freischalten und alle Funktionen für die ganze Familie genießen!
       </p>
 
-<p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+<p className="mx-auto mt-4 max-w-xl text-sm font-bold leading-relaxed text-sky-950 md:text-base">
   Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
   Gemeinsam Ziele erreichen und Spaß haben!
 </p>
 
-<p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+<p className="mx-auto mt-4 max-w-xl text-sm font-bold leading-relaxed text-sky-950 md:text-base">
   Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
   Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
   Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
@@ -1549,13 +1549,13 @@ function celebrate(message: string) {
           <p className="text-base font-black text-amber-900 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
         </div>
         <div className="rounded-[1.7rem] bg-sky-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-sky-900 md:text-lg">🏡 Eigenes Zimmer</p>
+          <p className="text-base font-black text-sky-900 md:text-lg">🏆 Level & Erfolge</p>
         </div>
         <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-purple-900 md:text-lg">🎨 Eigene Motive</p>
+          <p className="text-base font-black text-purple-900 md:text-lg">🪙 Punkte und Coins sammeln & einlösen</p>
         </div>
         <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-pink-900 md:text-lg">🏆 Level & Erfolge</p>
+          <p className="text-base font-black text-pink-900 md:text-lg">👦 Kinderbereich</p>
         </div>
         <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
