@@ -591,9 +591,11 @@ export default function PunktlyRoleSplit() {
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAppInfo, setShowAppInfo] = useState(false);
-  const [featurePopup, setFeaturePopup] = useState<{
+const [featurePopup, setFeaturePopup] = useState<{
   title: string;
   text: string;
+  color: string;
+  bg: string;
 } | null>(null);
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
@@ -1756,6 +1758,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Aufgaben und Motivation",
         text: "Hier kommt dein Text für Aufgaben und Motivation.",
+        color: "text-yellow-400",
+        bg: "bg-yellow-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1770,6 +1774,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Schatzkisten & Belohnungen",
         text: "Hier kommt dein Text für Schatzkisten & Belohnungen.",
+        color: "text-green-400",
+        bg: "bg-green-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1784,6 +1790,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Level & Erfolge",
         text: "Hier kommt dein Text für Level & Erfolge.",
+        color: "text-blue-400",
+        bg: "bg-blue-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1798,6 +1806,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Punkte und Coins sammeln",
         text: "Hier kommt dein Text für Punkte und Coins sammeln.",
+        color: "text-red-400",
+        bg: "bg-red-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1812,6 +1822,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Kinderbereich",
         text: "Hier kommt dein Text für den Kinderbereich.",
+        color: "text-orange-400",
+        bg: "bg-orange-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1826,6 +1838,8 @@ function celebrate(message: string) {
       setFeaturePopup({
         title: "Elternbereich",
         text: "Hier kommt dein Text für den Elternbereich.",
+        color: "text-purple-400",
+        bg: "bg-purple-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
@@ -1834,25 +1848,31 @@ function celebrate(message: string) {
       👨‍👩‍👧 Elternbereich
     </p>
   </button>
+
 </div>
+
 {featurePopup && (
   <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-    <div className="relative w-full max-w-xl rounded-[2rem] bg-white p-6 shadow-2xl">
+    
+    <div className={`relative w-full max-w-xl rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
+      
       <button
         onClick={() => setFeaturePopup(null)}
-        className="absolute right-4 top-4 rounded-full bg-red-100 px-3 py-1 text-sm font-black text-red-600"
+        className="absolute right-4 top-4 rounded-full bg-white/80 px-3 py-1 text-sm font-black text-red-600"
       >
         ✕
       </button>
 
-      <h2 className="mb-4 text-center text-2xl font-black text-sky-950">
+      <h2 className={`mb-4 text-center text-2xl font-black ${featurePopup.color}`}>
         {featurePopup.title}
       </h2>
 
-      <p className="text-center text-base font-bold leading-relaxed text-sky-900">
+      <p className={`text-center text-base font-bold leading-relaxed ${featurePopup.color}`}>
         {featurePopup.text}
       </p>
+
     </div>
+
   </div>
 )}
     </section>
