@@ -590,6 +590,7 @@ export default function PunktlyRoleSplit() {
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [showAppInfo, setShowAppInfo] = useState(false);
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
@@ -1680,21 +1681,34 @@ function celebrate(message: string) {
   <span className="text-rose-500">l</span>
   <span className="text-fuchsia-500">y</span>
 </h1>
-     <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
-        Premium freischalten und alle Funktionen für die ganze Familie genießen!
-      </p>
-
-<p className="mx-auto mt-4 max-w-xl text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-  Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
-  Gemeinsam Ziele erreichen und Spaß haben!
+<p className="mt-2 text-lg font-extrabold text-indigo-500 sm:text-xl">
+  Premium freischalten und alle Funktionen für die ganze Familie genießen!
 </p>
 
-<p className="mx-auto mt-4 max-w-xl text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-  Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
-  Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
-  Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
-  ein motivierender und moderner Ersatz für Taschengeld.
-</p>
+<button
+  onClick={() => setShowAppInfo(!showAppInfo)}
+  className="mt-4 rounded-full bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-lg transition hover:scale-105"
+>
+  ℹ️ Weitere Informationen zur App
+</button>
+
+{showAppInfo && (
+  <div className="mx-auto mt-5 max-w-2xl rounded-[1.8rem] bg-white/80 p-5 text-center shadow-xl backdrop-blur-xl">
+    
+    <p className="text-sm font-bold leading-relaxed text-sky-950 md:text-base">
+      Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+      Gemeinsam Ziele erreichen und Spaß haben!
+    </p>
+
+    <p className="mt-4 text-sm font-bold leading-relaxed text-sky-950 md:text-base">
+      Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
+      Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
+      Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
+      ein motivierender und moderner Ersatz für Taschengeld.
+    </p>
+
+  </div>
+)}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
