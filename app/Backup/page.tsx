@@ -1561,29 +1561,11 @@ function celebrate(message: string) {
       </div>
     </section>
 
- 
-<div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-  <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
-    
-    <p className="mb-5 text-center text-2xl font-black text-sky-950">
-      🔐 Login
-    </p>
-
-    <button
-      className="
-        flex w-full items-center justify-center gap-3
-        rounded-2xl border border-gray-200
-        bg-white py-3
-        text-lg font-semibold text-blue-600
-        shadow-md transition hover:shadow-lg
-      "
-    >
-      <FcGoogle size={26} />
-      Mit Google einloggen
-    </button>
-
-  </section>
-</div>
+    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          🔐 Login
+        </p>
 
         {firebaseUser ? (
           <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">

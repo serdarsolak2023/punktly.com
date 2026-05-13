@@ -16,18 +16,7 @@ import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
-
-
-function GoogleIcon({ className = "h-7 w-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
-      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z" />
-      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.6 8.3 6.3 14.7z" />
-      <path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.5 16.2 44 24 44z" />
-      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5z" />
-    </svg>
-  );
-}
+import { FcGoogle } from "react-icons/fc";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
@@ -1572,14 +1561,11 @@ function celebrate(message: string) {
       </div>
     </section>
 
- 
-<div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-  <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
-    
-    <p className="mb-5 text-center text-2xl font-black text-sky-950">
-      🔐 Login
-    </p>
-
+    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          🔐 Login
+        </p>
 
         {firebaseUser ? (
           <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
@@ -1600,8 +1586,7 @@ function celebrate(message: string) {
               onClick={loginWithGoogle}
               className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
             >
-              <GoogleIcon className="h-7 w-7" />
-              Mit Google einloggen
+              🔐 Mit Google einloggen
             </button>
           </div>
         )}
