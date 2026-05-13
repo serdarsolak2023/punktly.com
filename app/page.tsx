@@ -1834,8 +1834,27 @@ function celebrate(message: string) {
       👨‍👩‍👧 Elternbereich
     </p>
   </button>
-
 </div>
+{featurePopup && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+    <div className="relative w-full max-w-xl rounded-[2rem] bg-white p-6 shadow-2xl">
+      <button
+        onClick={() => setFeaturePopup(null)}
+        className="absolute right-4 top-4 rounded-full bg-red-100 px-3 py-1 text-sm font-black text-red-600"
+      >
+        ✕
+      </button>
+
+      <h2 className="mb-4 text-center text-2xl font-black text-sky-950">
+        {featurePopup.title}
+      </h2>
+
+      <p className="text-center text-base font-bold leading-relaxed text-sky-900">
+        {featurePopup.text}
+      </p>
+    </div>
+  </div>
+)}
     </section>
 
     <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
