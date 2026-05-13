@@ -1693,7 +1693,7 @@ function celebrate(message: string) {
 </button>
 
 {showAppInfo && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
+  <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
     <div className="relative w-full max-w-2xl rounded-[2rem] bg-white p-6 shadow-[0_20px_80px_rgba(0,0,0,.25)]">
       <button
         type="button"
