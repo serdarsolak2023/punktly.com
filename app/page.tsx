@@ -1555,7 +1555,7 @@ function celebrate(message: string) {
           <p className="text-base font-black text-purple-900 md:text-lg">🪙 Punkte und Coins sammeln & einlösen</p>
         </div>
         <div className="rounded-[1.7rem] bg-pink-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-pink-900 md:text-lg">👦 Kinderbereich</p>
+          <p className="text-base font-black text-blue-900 md:text-lg">👦 Kinderbereich</p>
         </div>
         <div className="rounded-[1.7rem] bg-cyan-50/78 px-5 py-4 text-left shadow-md">
           <p className="text-base font-black text-cyan-900 md:text-lg">👨‍👩‍👧 Elternbereich</p>
