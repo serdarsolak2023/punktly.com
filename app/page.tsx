@@ -1529,14 +1529,17 @@ function celebrate(message: string) {
         Premium freischalten und alle Funktionen für die ganze Familie genießen!
       </p>
 
-      <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
-        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle. 
-        <br />Gemeinsam Ziele erreichen und Spaß haben! 
-        <br />
-        <br />Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung. 
-        <br />Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch Level und können ihre Coins gegen von den Eltern 
-        <br />festgelegte Belohnungen eintauschen - ein motivierender und moderner Ersatz für Taschengeld. 
-      </p>
+<p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+  Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+  Gemeinsam Ziele erreichen und Spaß haben!
+</p>
+
+<p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
+  Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
+  Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
+  Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
+  ein motivierender und moderner Ersatz für Taschengeld.
+</p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-[1.7rem] bg-emerald-50/78 px-5 py-4 text-left shadow-md">
