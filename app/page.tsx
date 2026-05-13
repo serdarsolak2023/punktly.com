@@ -2368,8 +2368,18 @@ function celebrate(message: string) {
   <span className="text-sky-500">y</span>
 </h1>
 <p className="animate-[rainbowMove_3s_linear_infinite] bg-gradient-to-r from-yellow-400 via-green-400 via-blue-500 via-purple-500 via-pink-500 to-orange-400 bg-[length:200%_100%] bg-clip-text font-bold text-transparent">
-  Bitte wählen Sie einen Bereich
-</p>
+  Bitte wählen Sie einen Bereich aus um forzufahren.
+</p><nav className="mt-4 flex flex-wrap items-center justify-center gap-2">
+  {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
+    <button
+      key={page}
+      onClick={() => setActiveLegalPage(page)}
+      className="rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-black text-sky-700 shadow-sm ring-1 ring-sky-100 transition hover:bg-white"
+    >
+      {legalPages[page].title}
+    </button>
+  ))}
+</nav>
                 </div>
               </div>
 
