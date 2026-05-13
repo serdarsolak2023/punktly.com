@@ -1543,22 +1543,22 @@ function celebrate(message: string) {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-[1.7rem] bg-yellow-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black !text-yellow-400 md:text-lg">✅ Aufgaben & Motivation TEST</p>
+          <p className="text-base font-black !text-yellow-550 md:text-lg">✅ Aufgaben und Motivation</p>
         </div>
         <div className="rounded-[1.7rem] bg-green-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-green-400 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
+          <p className="text-base font-black text-green-550 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
         </div>
         <div className="rounded-[1.7rem] bg-blue-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-blue-400 md:text-lg">🏆 Level & Erfolge</p>
+          <p className="text-base font-black text-blue-550 md:text-lg">🏆 Level & Erfolge</p>
         </div>
         <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-red-400 md:text-lg">🪙 Punkte und Coins sammeln & einlösen</p>
+          <p className="text-base font-black text-red-550 md:text-lg">🪙 Punkte und Coins sammeln & einlösen</p>
         </div>
         <div className="rounded-[1.7rem] bg-orange-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-orange-400 md:text-lg">👦 Kinderbereich</p>
+          <p className="text-base font-black text-orange-550 md:text-lg">👦 Kinderbereich</p>
         </div>
         <div className="rounded-[1.7rem] bg-purple-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-purple-400 md:text-lg">👨‍👩‍👧 Elternbereich</p>
+          <p className="text-base font-black text-purple-550 md:text-lg">👨‍👩‍👧 Elternbereich</p>
         </div>
       </div>
     </section>
