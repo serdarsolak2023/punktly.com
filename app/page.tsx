@@ -1526,11 +1526,16 @@ function celebrate(message: string) {
   <span className="text-fuchsia-500">y</span>
 </h1>
      <p className="mt-2 text-xl font-black text-sky-600 sm:text-2xl">
-        Punktly freischalten
+        Premium freischalten und alle Funktionen für die ganze Familie genießen!
       </p>
 
       <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-relaxed text-sky-950 md:text-lg">
-        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle. 
+        <br />Gemeinsam Ziele erreichen und Spaß haben! 
+        <br />
+        <br />Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung. 
+        <br />Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch Level und können ihre Coins gegen von den Eltern 
+        <br />festgelegte Belohnungen eintauschen - ein motivierender und moderner Ersatz für Taschengeld. 
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
