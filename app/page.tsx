@@ -1646,7 +1646,9 @@ function celebrate(message: string) {
             </span>
           ))}
         </div>
-<nav className="mt-4 flex flex-wrap items-center justify-center gap-2">
+
+<div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
+  <nav className="mt-4 flex flex-wrap items-center justify-center gap-2">
   {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
     <button
       key={page}
@@ -1657,7 +1659,6 @@ function celebrate(message: string) {
     </button>
   ))}
 </nav>
-<div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
     <section className="w-full rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] bg-white/42 px-6 py-8 text-center shadow-[0_28px_80px_rgba(14,165,233,.14)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:px-10 md:py-10">
       <img
         src="/PunktlyLogo.png"
