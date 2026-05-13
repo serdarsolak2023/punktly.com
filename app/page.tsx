@@ -16,6 +16,7 @@ import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
+import { FcGoogle } from "react-icons/fc";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
@@ -1563,8 +1564,7 @@ function celebrate(message: string) {
       </div>
     </section>
 
-import { FcGoogle } from "react-icons/fc";
-
+ 
 <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
   <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 md:p-6">
     
