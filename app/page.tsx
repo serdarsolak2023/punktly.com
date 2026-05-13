@@ -75,36 +75,182 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
     title: "Impressum",
     intro: "Angaben gemäß § 5 TMG",
     content: [
-      "Hier kannst du später deine offiziellen Anbieterangaben eintragen.",
-      "Name / Firma, Anschrift, Kontakt-E-Mail, Telefon und verantwortliche Person ergänzen.",
-      "Wichtig: Bitte prüfe das Impressum rechtlich, bevor die App öffentlich genutzt wird."
+      "PunktlyCoinly, Inhaber: Serdar Solak",
+      "Wichtig: Weitere informationen folgen"
     ],
   },
   datenschutz: {
     title: "Datenschutzerklärung",
     intro: "Informationen zum Datenschutz",
     content: [
-      "Hier kannst du später deine vollständige Datenschutzerklärung einfügen.",
-      "Beschreibe, welche Daten gespeichert werden, wie Firebase/Google genutzt wird und wie Nutzer ihre Rechte ausüben können.",
-      "Wichtig: Bitte rechtlich prüfen lassen, besonders wegen Kinderkonten und Firebase-Speicherung."
+"1. Verantwortlicher",
+
+"Verantwortlich für die Datenverarbeitung innerhalb der App PunktlyCoinly ist PunktlyCoinly.",
+"E-Mail: kontakt@punktlycoinly.de",
+
+
+"2. Erhebung und Verarbeitung personenbezogener Daten",
+
+"Bei der Nutzung der App können personenbezogene Daten verarbeitet werden.",
+"Dazu gehören insbesondere:",
+"• E-Mail-Adresse bei Anmeldung mit Google",
+"• Benutzername oder Anzeigename",
+"• Freiwillig eingegebene Inhalte innerhalb der App",
+"• Technische Informationen zur Nutzung der App",
+
+"Die Verarbeitung erfolgt ausschließlich zum Betrieb und zur Bereitstellung der Funktionen der App.",
+
+
+"3. Zweck der Datenverarbeitung",
+
+"Die Verarbeitung personenbezogener Daten erfolgt insbesondere zur:",
+"• Anmeldung und Authentifizierung",
+"• Speicherung von Aufgaben, Coins, Fortschritten und Belohnungen",
+"• Synchronisierung der Familiendaten",
+"• Verbesserung der Stabilität und Sicherheit der App",
+
+
+"4. Rechtsgrundlage der Verarbeitung",
+
+"Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. b DSGVO zur Bereitstellung der App-Funktionen sowie gemäß Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an einem sicheren und stabilen Betrieb der Anwendung.",
+
+
+"5. Nutzung von Firebase und Google-Diensten",
+
+"Für Anmeldung, Datenbank und technische Infrastruktur nutzt PunktlyCoinly Dienste von Google Firebase.",
+
+"Anbieter:",
+"Google Ireland Limited",
+"Gordon House, Barrow Street",
+"Dublin 4, Irland",
+
+"Weitere Informationen:",
+"https://firebase.google.com/support/privacy",
+
+
+"6. Speicherung und Löschung von Daten",
+
+"Personenbezogene Daten werden nur so lange gespeichert, wie dies für die Nutzung der App erforderlich ist.",
+
+"Nutzer können jederzeit die Löschung ihrer Daten verlangen.",
+
+
+"7. Rechte der betroffenen Personen",
+
+"Nutzer haben im Rahmen der DSGVO insbesondere folgende Rechte:",
+"• Recht auf Auskunft",
+"• Recht auf Berichtigung",
+"• Recht auf Löschung",
+"• Recht auf Einschränkung der Verarbeitung",
+"• Recht auf Datenübertragbarkeit",
+"• Recht auf Widerspruch gegen die Verarbeitung",
+
+"Anfragen können per E-Mail gestellt werden.",
+
+
+"8. Datensicherheit",
+
+"Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um personenbezogene Daten bestmöglich vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.",
+
+
+"9. Änderungen dieser Datenschutzerklärung",
+
+"Diese Datenschutzerklärung kann aktualisiert werden, um rechtliche oder technische Änderungen zu berücksichtigen.",
+
+"Stand: Mai 2026"
     ],
   },
   widerruf: {
     title: "Widerrufsbelehrung",
     intro: "Informationen zum Widerrufsrecht",
     content: [
-      "Hier kannst du später deine Widerrufsbelehrung einfügen.",
-      "Ergänze Fristen, Kontaktweg und Hinweise zu digitalen Produkten oder Dienstleistungen.",
-      "Wichtig: Bitte rechtlich prüfen lassen, bevor Zahlungen oder Käufe öffentlich angeboten werden."
+"Widerrufsbelehrung",
+
+"Käufe und Zahlungen innerhalb von PunktlyCoinly werden über Google Play verarbeitet.",
+
+"Für Rückerstattungen, Widerrufe und Zahlungsabwicklungen gelten zusätzlich die Richtlinien von Google Play.",
+
+"Anfragen zu Rückerstattungen können direkt über das Google-Play-Konto gestellt werden.",
+
+"Weitere Informationen:",
+"https://support.google.com/googleplay/answer/2479637",
+
+"Digitale Inhalte können unmittelbar nach dem Kauf freigeschaltet werden.",
+
+"Mit dem Kauf stimmt der Nutzer ausdrücklich zu, dass die Ausführung des Vertrags sofort beginnt.",
+
+"Das Widerrufsrecht kann dadurch vorzeitig erlöschen.",
+
+"Stand: Mai 2026"
     ],
   },
   agb: {
     title: "AGB",
     intro: "Allgemeine Geschäftsbedingungen",
     content: [
-      "Hier kannst du später deine AGB einfügen.",
-      "Regle Nutzung, Zahlungsbedingungen, Rechte, Pflichten, Kündigung und Haftung.",
-      "Wichtig: Bitte rechtlich prüfen lassen, bevor die App öffentlich genutzt wird."
+"Allgemeine Geschäftsbedingungen (AGB)",
+
+"1. Geltungsbereich",
+
+"Diese Allgemeinen Geschäftsbedingungen gelten für die Nutzung der App PunktlyCoinly.",
+
+"Mit der Nutzung der App akzeptieren Nutzer diese Bedingungen.",
+
+
+"2. Leistungen der App",
+
+"PunktlyCoinly ist eine Familien- und Motivations-App zur Verwaltung von Aufgaben, Coins, Fortschritten und Belohnungen.",
+
+"Bestimmte Funktionen können zukünftig kostenpflichtig sein.",
+
+
+"3. Nutzerkonten",
+
+"Für bestimmte Funktionen kann eine Anmeldung mit Google erforderlich sein.",
+
+"Nutzer sind verpflichtet, ihre Zugangsdaten sicher aufzubewahren.",
+
+
+"4. Käufe und Zahlungen",
+
+"Digitale Käufe und Zahlungen innerhalb der App werden über Google Play verarbeitet.",
+
+"Es gelten zusätzlich die Nutzungsbedingungen und Zahlungsrichtlinien von Google Play.",
+
+
+"5. Pflichten der Nutzer",
+
+"Die App darf nicht missbräuchlich oder rechtswidrig verwendet werden.",
+
+"Manipulationen, Betrugsversuche oder technische Angriffe sind untersagt.",
+
+
+"6. Verfügbarkeit",
+
+"Wir bemühen uns um eine möglichst unterbrechungsfreie Verfügbarkeit der App.",
+
+"Es besteht jedoch kein Anspruch auf permanente Erreichbarkeit.",
+
+
+"7. Haftung",
+
+"Für Schäden haften wir nur bei Vorsatz oder grober Fahrlässigkeit.",
+
+"Für Datenverlust, technische Probleme oder Ausfälle übernehmen wir keine Haftung, soweit gesetzlich zulässig.",
+
+
+"8. Änderungen der Bedingungen",
+
+"Wir behalten uns vor, diese AGB jederzeit anzupassen oder zu aktualisieren.",
+
+
+"9. Schlussbestimmungen",
+
+"Es gilt das Recht der Bundesrepublik Deutschland.",
+
+"Sollten einzelne Bestimmungen dieser AGB unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
+
+"Stand: Mai 2026"
     ],
   },
 };
@@ -3012,7 +3158,7 @@ function celebrate(message: string) {
                           </h3>
                           <p className="font-bold text-sky-700">{firebaseUser?.email || "Nicht eingeloggt"}</p>
                           <p className="mt-1 font-black text-emerald-700">
-                            {hasPaid ? "✅ PunktlyCoinly freigeschaltet" : "🔒 Noch nicht freigeschaltet"}
+                            {hasPaid ? "✅ PunktlyCoinly Premium freigeschaltet" : "🔒 Noch nicht freigeschaltet"}
                           </p>
                         </div>
                       </div>
