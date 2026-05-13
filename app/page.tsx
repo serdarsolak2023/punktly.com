@@ -591,6 +591,10 @@ export default function PunktlyRoleSplit() {
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAppInfo, setShowAppInfo] = useState(false);
+  const [featurePopup, setFeaturePopup] = useState<{
+  title: string;
+  text: string;
+} | null>(null);
   const [showBadgeChooser, setShowBadgeChooser] = useState(false);
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPage | null>(null);
   const [showPinReset, setShowPinReset] = useState(false);
@@ -1745,26 +1749,93 @@ function celebrate(message: string) {
   </div>
 )}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black !text-yellow-400 md:text-lg">✅ Aufgaben und Motivation</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-green-400 md:text-lg">🎁 Schatzkisten & Belohnungen</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-blue-400 md:text-lg">🏆 Level & Erfolge</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-red-400 md:text-lg">🪙 Punkte und Coins sammeln & einlösen</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-orange-400 md:text-lg">👦 Kinderbereich</p>
-        </div>
-        <div className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md">
-          <p className="text-base font-black text-purple-400 md:text-lg">👨‍👩‍👧 Elternbereich</p>
-        </div>
-      </div>
+<div className="mt-8 grid gap-4 sm:grid-cols-2">
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Aufgaben und Motivation",
+        text: "Hier kommt dein Text für Aufgaben und Motivation.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-yellow-400 md:text-lg">
+      ✅ Aufgaben und Motivation
+    </p>
+  </button>
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Schatzkisten & Belohnungen",
+        text: "Hier kommt dein Text für Schatzkisten & Belohnungen.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-green-400 md:text-lg">
+      🎁 Schatzkisten & Belohnungen
+    </p>
+  </button>
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Level & Erfolge",
+        text: "Hier kommt dein Text für Level & Erfolge.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-blue-400 md:text-lg">
+      🏆 Level & Erfolge
+    </p>
+  </button>
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Punkte und Coins sammeln",
+        text: "Hier kommt dein Text für Punkte und Coins sammeln.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-red-400 md:text-lg">
+      🪙 Punkte und Coins sammeln
+    </p>
+  </button>
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Kinderbereich",
+        text: "Hier kommt dein Text für den Kinderbereich.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-orange-400 md:text-lg">
+      👦 Kinderbereich
+    </p>
+  </button>
+
+  <button
+    onClick={() =>
+      setFeaturePopup({
+        title: "Elternbereich",
+        text: "Hier kommt dein Text für den Elternbereich.",
+      })
+    }
+    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+  >
+    <p className="text-base font-black text-purple-400 md:text-lg">
+      👨‍👩‍👧 Elternbereich
+    </p>
+  </button>
+
+</div>
     </section>
 
     <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
