@@ -1718,7 +1718,7 @@ function celebrate(message: string) {
   onClick={() => setShowAppInfo(!showAppInfo)}
   className="mt-4 rounded-full bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-lg transition hover:scale-105"
 >
-  ℹ️ Weitere Informationen zur App
+  ℹ️ Details zur PunktlyCoinly App ℹ️
 </button>
 
 {showAppInfo && (
