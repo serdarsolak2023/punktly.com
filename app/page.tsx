@@ -2638,7 +2638,13 @@ function celebrate(message: string) {
         {area === "start" && (
           <section className="grid gap-5 md:grid-cols-2">
             <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-gradient-to-br from-yellow-100 via-orange-50 to-white p-6 text-center shadow-[0_24px_70px_rgba(245,158,11,.18)]">
-              <div className="flex justify-center"><FoxCoinImage className="h-36 w-36 animate-floaty" /></div>
+              <div className="flex justify-center">
+  <img
+    src="/Kinderbild.png"
+    alt="Bild"
+    className="h-36 w-36 animate-floaty"
+  />
+</div>
               <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
 
