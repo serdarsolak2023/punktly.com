@@ -1561,33 +1561,13 @@ function celebrate(message: string) {
       </div>
     </section>
 
-<div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
-  <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
-    
-    <p className="mb-5 text-center text-2xl font-black text-sky-950">
-      🔐 Login
-    </p>
+    <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
+      <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
+        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+          🔐 Login
+          
+        </p>
 
-    <button
-      onClick={loginWithGoogle}
-      className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] border border-gray-200 bg-white py-3 text-lg font-semibold text-sky-700 shadow-md transition hover:scale-[1.02] hover:shadow-lg"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 48 48"
-        className="h-7 w-7"
-      >
-        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12S17.4 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
-        <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-        <path fill="#4CAF50" d="M24 44c5.2 0 10-2 13.5-5.3l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.5 39.5 16.2 44 24 44z"/>
-        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.5 5.5-6.7 7.2l6.2 5.2C39.9 36.7 44 31 44 24c0-1.3-.1-2.7-.4-3.5z"/>
-      </svg>
-
-      Mit Google einloggen
-    </button>
-
-  </section>
-</div>
         {firebaseUser ? (
           <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-emerald-50 p-5 text-center">
             <p className="text-xl font-black text-emerald-800">✅ Eingeloggt</p>
@@ -1603,12 +1583,23 @@ function celebrate(message: string) {
           </div>
         ) : (
           <div className="space-y-4">
-            <button
-              onClick={loginWithGoogle}
-              className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
-            >
-              🔐 Mit Google einloggen
-            </button>
+<button
+  onClick={loginWithGoogle}
+  className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 48 48"
+    className="h-7 w-7"
+  >
+    <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12S17.4 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
+    <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+    <path fill="#4CAF50" d="M24 44c5.2 0 10-2 13.5-5.3l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.5 39.5 16.2 44 24 44z"/>
+    <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.5 5.5-6.7 7.2l6.2 5.2C39.9 36.7 44 31 44 24c0-1.3-.1-2.7-.4-3.5z"/>
+  </svg>
+
+  Mit Google einloggen
+</button>
           </div>
         )}
       </section>
