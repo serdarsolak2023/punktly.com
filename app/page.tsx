@@ -1693,20 +1693,32 @@ function celebrate(message: string) {
 </button>
 
 {showAppInfo && (
-  <div className="mx-auto mt-5 max-w-2xl rounded-[1.8rem] bg-white/80 p-5 text-center shadow-xl backdrop-blur-xl">
-    
-    <p className="text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-      Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
-      Gemeinsam Ziele erreichen und Spaß haben!
-    </p>
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
+    <div className="relative w-full max-w-2xl rounded-[2rem] bg-white p-6 shadow-[0_20px_80px_rgba(0,0,0,.25)]">
+      <button
+        type="button"
+        onClick={() => setShowAppInfo(false)}
+        className="absolute right-4 top-4 rounded-full bg-red-100 px-3 py-1 text-sm font-black text-red-600 transition hover:scale-105"
+      >
+        ✕
+      </button>
 
-    <p className="mt-4 text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-      Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
-      Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
-      Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
-      ein motivierender und moderner Ersatz für Taschengeld.
-    </p>
+      <h2 className="mb-4 text-center text-2xl font-black text-sky-950">
+        ℹ️ Informationen zur App
+      </h2>
 
+      <p className="text-sm font-bold leading-relaxed text-sky-950 md:text-base">
+        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
+        Gemeinsam Ziele erreichen und Spaß haben!
+      </p>
+
+      <p className="mt-4 text-sm font-bold leading-relaxed text-sky-950 md:text-base">
+        Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
+        Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
+        Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
+        ein motivierender und moderner Ersatz für Taschengeld.
+      </p>
+    </div>
   </div>
 )}
 
