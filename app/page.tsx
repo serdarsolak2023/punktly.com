@@ -2009,10 +2009,10 @@ function celebrate(message: string) {
                 ✅ Kinder erledigen Aufgaben und warten auf die Bestätigung der Eltern.
               </div>
               <div className="rounded-[1.8rem] bg-yellow-50 p-4 font-bold text-amber-900">
-                ⭐ Abzeichen werden zu Sternen und zeigen den Fortschritt.
+                ⭐ Abzeichen werden zu Sternen und Level zeigen den Fortschritt.
               </div>
               <div className="rounded-[1.8rem] bg-emerald-50 p-4 font-bold text-emerald-900">
-                🛍️ Coins können bei Belohnungen eingelöst werden.
+                🛍️ Coins können bei Belohnungen eingelöst werden, die von den Eltern angelgt werden.
               </div>
               <div className="rounded-[1.8rem] bg-purple-50 p-4 font-bold text-purple-900">
                 👨‍👩‍👧 Eltern verwalten Aufgaben, Belohnungen, Kinderprofile und Freigaben.
