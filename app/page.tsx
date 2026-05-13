@@ -1463,10 +1463,7 @@ function celebrate(message: string) {
 
   if (!isPurchased) {
     return (
-
-
-
-<main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
+    <main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
