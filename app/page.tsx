@@ -1713,7 +1713,25 @@ function celebrate(message: string) {
 <p className="mt-2 text-lg font-extrabold text-indigo-500 sm:text-xl">
   Premium freischalten und alle Funktionen für die ganze Familie genießen!
 </p>
+<div className="absolute left-8 top-24 rounded-[2rem] bg-red-50/90 px-6 py-5 shadow-xl ring-1 ring-red-200 backdrop-blur-xl">
+  
+  <p className="text-sm font-black uppercase tracking-wide text-red-500">
+    🔥 Sonderaktion
+  </p>
 
+  <p className="mt-2 text-lg font-bold text-gray-500 line-through">
+    statt 89,99 €
+  </p>
+
+  <p className="text-4xl font-black text-red-500">
+    29,99 €
+  </p>
+
+  <p className="mt-1 text-sm font-bold text-red-400">
+    Einmaliger Premium-Zugang
+  </p>
+
+</div>
 <button
   onClick={() => setShowAppInfo(!showAppInfo)}
   className="mt-4 rounded-full bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-lg transition hover:scale-105"
