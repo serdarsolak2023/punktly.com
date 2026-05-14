@@ -2730,7 +2730,9 @@ bg: "bg-purple-50",
               <div className="flex justify-center">
   <img
     src="/Kinderbild.png"
-    alt="Bild"
+    alt="Kinderbild"
+    width={220}
+  height={220}
     className="h-36 w-auto object-contain"
   />
 </div>
@@ -2768,7 +2770,9 @@ bg: "bg-purple-50",
               <div className="flex justify-center">
                  <img
     src="/Elternbild.png"
-    alt="Elternbereich"
+    alt="Elternbild"
+    width={220}
+  height={220}
     className="h-36 w-auto object-contain"
     />
               </div>
