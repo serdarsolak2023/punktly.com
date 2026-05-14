@@ -2093,13 +2093,13 @@ bg: "bg-purple-50",
               <FoxCoinImage className="h-24 w-24" />
             </div>
 
-<h1 className="text-4xl font-black tracking-tight text-center leading-tight sm:text-2xl animate-pulse">
+<h1 className="text-4xl font-black tracking-tight text-center leading-tight sm:text-3xl animate-pulse">
   <span className="text-yellow-400">⭐ Herzlich</span>{" "}
   <span className="text-green-500">Willkommen</span>{" "}
   <span className="text-blue-500">bei</span>{" "}
   <br />
 
-  <span className="text-yellow-400">P</span>
+  <span className="text-yellow-400">✨P</span>
   <span className="text-green-500">u</span>
   <span className="text-blue-500">n</span>
   <span className="text-red-500">k</span>
@@ -2107,14 +2107,14 @@ bg: "bg-purple-50",
   <span className="text-purple-500">l</span>
   <span className="text-pink-500">y</span>
 
-  <span className="mx-1 text-yellow-300">✨</span>
+  <span className="mx-1 text-yellow-300"></span>
 
   <span className="text-cyan-500">C</span>
   <span className="text-lime-500">o</span>
   <span className="text-amber-500">i</span>
   <span className="text-emerald-500">n</span>
   <span className="text-rose-500">l</span>
-  <span className="text-fuchsia-500">y</span>
+  <span className="text-fuchsia-500">y✨</span>
 
   <span className="ml-2 text-yellow-300">⭐</span>
 </h1>
