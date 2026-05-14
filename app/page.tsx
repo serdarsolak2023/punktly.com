@@ -11,7 +11,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut } from "lucide-react";
+import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
@@ -31,8 +31,8 @@ return (
 
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
-type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile";
-type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "calendar" | "family" | "stats" | "profile" | "settings";
+type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features";
+type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
 type Status = "offen" | "wartet" | "erledigt";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
@@ -591,7 +591,7 @@ export default function PunktlyRoleSplit() {
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAppInfo, setShowAppInfo] = useState(false);
-const [featurePopup, setFeaturePopup] = useState<{
+  const [featurePopup, setFeaturePopup] = useState<{
   title: string;
   text: string;
   color: string;
@@ -604,6 +604,9 @@ const [featurePopup, setFeaturePopup] = useState<{
   const [parentSecurityAnswer, setParentSecurityAnswer] = useState("");
   const [resetSecurityAnswer, setResetSecurityAnswer] = useState("");
   const [resetNewParentPin, setResetNewParentPin] = useState("");
+  const [bonusCoinsEnabled, setBonusCoinsEnabled] = useState(false);
+  const [wheelSpinning, setWheelSpinning] = useState(false);
+  const [wheelResult, setWheelResult] = useState<number | null>(null);
 
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -1554,10 +1557,46 @@ function celebrate(message: string) {
     }
   }
 
-  async function saveChildNow(updatedChild: Child) {
-    await saveFamilyItem("children", updatedChild);
+async function saveChildNow(updatedChild: Child) {
+  await saveFamilyItem("children", updatedChild);
+}
+
+function spinBonusWheel() {
+  const lastSpinKey = `punktlyWheelLastSpin_${child.id}`;
+  const lastSpin = Number(localStorage.getItem(lastSpinKey) || 0);
+  const now = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+
+  if (now - lastSpin < twentyFourHours) {
+    celebrate("Das Glücksrad kann nur alle 24 Stunden gedreht werden.");
+    return;
   }
 
+  const prizes = [5, 5, 5, 5, 5, 10, 10, 10, 15, 15, 25];
+  const prize = prizes[Math.floor(Math.random() * prizes.length)];
+
+  setWheelSpinning(true);
+
+  setTimeout(() => {
+    const updatedChild = {
+      ...child,
+      coins: child.coins + prize,
+    };
+
+    setChildren(prev =>
+      prev.map(c => (c.id === child.id ? updatedChild : c))
+    );
+
+    saveChildNow(updatedChild);
+
+    localStorage.setItem(lastSpinKey, String(now));
+    setWheelResult(prize);
+    setWheelSpinning(false);
+
+    celebrate(`Glückwunsch! Du hast ${prize} Coins gewonnen.`);
+  }, 1800);
+}
+  
   async function saveTaskNow(updatedTask: Task) {
     await saveFamilyItem("tasks", updatedTask);
   }
@@ -2920,7 +2959,43 @@ bg: "bg-purple-50",
                 </div>
               )}
             </div>
+{childView === "features" && (
+  <section className="rounded-[2rem] bg-white/90 p-6 text-center shadow-xl">
+    <h2 className="text-3xl font-black text-sky-950">
+      🎡 Glücksrad
+    </h2>
 
+    <p className="mt-2 font-bold text-sky-700">
+      Drehe einmal alle 24 Stunden und gewinne Bonus-Coins!
+    </p>
+
+    <div
+      className={`mx-auto mt-6 grid h-56 w-56 place-items-center rounded-full border-[10px] border-yellow-300 bg-gradient-to-br from-yellow-200 via-pink-200 to-sky-200 text-5xl shadow-2xl ${
+        wheelSpinning ? "animate-spin" : ""
+      }`}
+    >
+      🎡
+    </div>
+
+    <button
+      onClick={spinBonusWheel}
+      disabled={wheelSpinning}
+      className="mt-6 rounded-[1.5rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-60"
+    >
+      {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
+    </button>
+
+    {wheelResult !== null && (
+      <p className="mt-5 text-xl font-black text-green-600">
+        🎉 Du hast {wheelResult} Coins gewonnen!
+      </p>
+    )}
+
+    <div className="mt-6 rounded-[1.5rem] bg-yellow-50 p-4 text-sm font-bold text-yellow-700">
+      Gewinne: 5 Coins, 10 Coins, 15 Coins oder 25 Coins
+    </div>
+  </section>
+)}
             <div className="mt-5">
               {childView === "home" && (
                 <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
@@ -3649,13 +3724,14 @@ bg: "bg-purple-50",
 function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView) => void }) {
   return (
     <nav className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
-      <div className="grid grid-cols-5 gap-1">
+      <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
       </div>
     </nav>
   );
@@ -3670,6 +3746,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
         <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
         <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" />
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
