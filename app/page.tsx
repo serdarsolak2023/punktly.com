@@ -1695,20 +1695,20 @@ function celebrate(message: string) {
         alt="Punktly Logo"
         className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
-<h1 className="mt-4 text-5xl font-black tracking-tight font-serif md:text-6xl">
+<h1 className="text-3xl font-black md:text-4xl">
   <span className="text-yellow-400">P</span>
   <span className="text-green-500">u</span>
   <span className="text-blue-500">n</span>
   <span className="text-red-500">k</span>
-  <span className="text-orange-500">t</span>
-  <span className="text-purple-500">l</span>
+  <span className="text-purple-500">t</span>
+  <span className="text-orange-400">l</span>
   <span className="text-pink-500">y</span>
   <span className="text-cyan-500">C</span>
   <span className="text-lime-500">o</span>
-  <span className="text-amber-500">i</span>
-  <span className="text-emerald-500">n</span>
-  <span className="text-rose-500">l</span>
-  <span className="text-fuchsia-500">y</span>
+  <span className="text-indigo-500">i</span>
+  <span className="text-rose-500">n</span>
+  <span className="text-amber-500">l</span>
+  <span className="text-sky-500">y</span>
 </h1>
 <p className="mt-2 text-lg font-extrabold text-indigo-500 sm:text-xl">
   Premium freischalten und alle Funktionen für die ganze Familie genießen!
