@@ -1952,7 +1952,7 @@ bg: "bg-purple-50",
 {featurePopup && (
   <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
     
-    <div className={`relative flex max-h-[80vh] w-full max-w-xl flex-col rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
+    <div className={`relative flex max-h-[80vh] w-full max-w-2xl flex-col rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
       
       <button
         onClick={() => setFeaturePopup(null)}
