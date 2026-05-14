@@ -2763,13 +2763,15 @@ bg: "bg-purple-50",
                 👶 Kinderbereich öffnen
               </button>
             </div>
-
+<section className="grid gap-5 md:grid-cols-2"></section>
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-white/90 p-6 shadow-[0_24px_70px_rgba(37,99,235,.16)] backdrop-blur-xl">
               <div className="flex justify-center">
   <img
     src="/Elternbild.png"
-    alt="Bild"
+    alt="Elternbereich"
     className="h-36 w-36 animate-floaty"
   />
+</div>
               <h2 className="mt-4 text-center text-4xl font-black text-sky-950">Elternbereich</h2>
               <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
               <div className="mt-6 grid gap-3">
