@@ -1948,7 +1948,7 @@ bg: "bg-purple-50",
 
     <div className="grid w-full gap-4 sm:gap-5 md:grid-cols-2">
       <section className="w-full rounded-[1.8rem] sm:rounded-[2.4rem] bg-white/48 p-5 shadow-[0_24px_70px_rgba(15,23,42,.11)] backdrop-blur-xl ring-1 ring-white/80 backdrop-blur-2xl md:p-6">
-        <p className="mb-5 text-center text-2xl font-black text-sky-950">
+        <p className="mb-5 text-center text-3xl font-black text-sky-700">
           🔐 Login
           
         </p>
