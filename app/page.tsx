@@ -2093,24 +2093,46 @@ bg: "bg-purple-50",
               <FoxCoinImage className="h-24 w-24" />
             </div>
 
-            <h1 className="text-4xl font-black tracking-tight text-sky-950">
-              Herzlich Willkommen bei PunktlyCoinly
-            </h1>
+<h1 className="text-4xl font-black tracking-tight text-center leading-tight sm:text-5xl animate-pulse">
+  <span className="text-yellow-400">⭐ Herzlich</span>{" "}
+  <span className="text-green-500">Willkommen</span>{" "}
+  <span className="text-blue-500">bei</span>{" "}
+  <br />
 
-            <p className="mt-3 text-lg font-bold leading-relaxed text-sky-700">
-              PunktlyCoinly hilft Kindern, Aufgaben spielerisch zu erledigen, Punkte und Coins zu sammeln
-              und Belohnungen einzulösen - alles unter der liebevollen Aufsicht der Eltern.
-            </p>
+  <span className="text-yellow-400">P</span>
+  <span className="text-green-500">u</span>
+  <span className="text-blue-500">n</span>
+  <span className="text-red-500">k</span>
+  <span className="text-orange-400">t</span>
+  <span className="text-purple-500">l</span>
+  <span className="text-pink-500">y</span>
+
+  <span className="mx-1 text-yellow-300">✨</span>
+
+  <span className="text-cyan-500">C</span>
+  <span className="text-lime-500">o</span>
+  <span className="text-amber-500">i</span>
+  <span className="text-emerald-500">n</span>
+  <span className="text-rose-500">l</span>
+  <span className="text-fuchsia-500">y</span>
+
+  <span className="ml-2 text-yellow-300">⭐</span>
+</h1>
+
+<p className="mt-3 text-base font-bold leading-relaxed text-sky-700">
+  PunktlyCoinly hilft Kindern, Aufgaben spielerisch zu erledigen, Punkte und Coins zu sammeln
+  und im Shop, Belohnungen oder Schatzkisten einzulösen - alles unter der liebevollen Aufsicht der Eltern.
+</p>
 
             <div className="mt-6 grid gap-3 text-left">
               <div className="rounded-[1.8rem] bg-sky-50 p-4 font-bold text-sky-900">
                 ✅ Kinder erledigen Aufgaben und warten auf die Bestätigung der Eltern.
               </div>
               <div className="rounded-[1.8rem] bg-yellow-50 p-4 font-bold text-amber-900">
-                ⭐ Abzeichen werden zu Sternen und Level zeigen den Fortschritt.
+                ⭐ Leveln und atraktive Erfolge motivieren Kinder, regelmäßig aktiv zu bleiben.
               </div>
               <div className="rounded-[1.8rem] bg-emerald-50 p-4 font-bold text-emerald-900">
-                🛍️ Coins können bei Belohnungen eingelöst werden, die von den Eltern angelgt werden.
+                🛍️ Coins können im Shop, Belohnungen oder Schatzkisten eingelöst werden.
               </div>
               <div className="rounded-[1.8rem] bg-purple-50 p-4 font-bold text-purple-900">
                 👨‍👩‍👧 Eltern verwalten Aufgaben, Belohnungen, Kinderprofile und Freigaben.
