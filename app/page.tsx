@@ -1716,7 +1716,7 @@ function celebrate(message: string) {
 <div className="absolute left-8 top-24 rounded-[2rem] bg-red-50/90 px-6 py-5 shadow-xl ring-1 ring-red-200 backdrop-blur-xl">
   
   <p className="text-sm font-black uppercase tracking-wide text-red-500">
-    🔥 Sonderaktion
+    🔥🔥🔥 Sonderaktion 🔥🔥🔥
   </p>
 
   <p className="mt-2 text-lg font-bold text-gray-500 line-through">
@@ -1728,7 +1728,7 @@ function celebrate(message: string) {
   </p>
 
   <p className="mt-1 text-sm font-bold text-red-400">
-    Einmaliger Premium-Zugang
+    Premium-Zugang
   </p>
 
 </div>
