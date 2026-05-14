@@ -1756,10 +1756,22 @@ function celebrate(message: string) {
   <button
     onClick={() =>
       setFeaturePopup({
-        title: "Aufgaben und Motivation",
-        text: "Hier kommt dein Text für Aufgaben und Motivation.",
-        color: "text-yellow-400",
-        bg: "bg-yellow-50",
+    title: "✅Aufgaben und Motivation✅",
+text: `Mit PunktlyCoinly werden tägliche und wöchentliche Aufgaben zu einem motivierenden Abenteuer.
+
+Kinder lernen spielerisch Verantwortung zu übernehmen und wichtige Alltagsaufgaben selbstständig zu erledigen.
+
+Durch tägliche Aufgaben entwickeln Kinder Routinen und lernen Verantwortung im Alltag zu übernehmen.
+
+Wöchentliche Aufgaben sorgen zusätzlich für langfristige Ziele, Motivation und regelmäßige Fortschritte.
+
+Für jede erledigte Aufgabe erhalten Kinder Punkte und Coins als Belohnung.
+
+Dadurch sammeln sie Erfolge, steigen im Level auf und bleiben dauerhaft motiviert.
+
+Eltern können Aufgaben individuell anpassen und die Entwicklung ihrer Kinder jederzeit begleiten.`,
+color: "text-yellow-400",
+bg: "bg-yellow-50",
       })
     }
     className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
