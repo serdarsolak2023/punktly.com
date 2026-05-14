@@ -1695,7 +1695,7 @@ function celebrate(message: string) {
         alt="Punktly Logo"
         className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
-<h1 className="mt-4 text-5xl font-black tracking-tight md:text-6xl">
+<h1 className="mt-4 text-5xl font-black tracking-tight font-serif md:text-6xl">
   <span className="text-yellow-400">P</span>
   <span className="text-green-500">u</span>
   <span className="text-blue-500">n</span>
