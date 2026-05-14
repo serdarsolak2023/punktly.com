@@ -1967,6 +1967,12 @@ bg: "bg-purple-50",
 
   Mit Google einloggen
 </button>
+<button
+  onClick={() => window.open("https://paypal.me/DEINPAYPALNAME", "_blank")}
+  className="mt-4 flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-yellow-400 px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] md:text-lg"
+>
+  💛 Spenden mit PayPal
+</button>
           </div>
         )}
       </section>
