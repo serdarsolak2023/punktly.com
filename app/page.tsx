@@ -1967,7 +1967,7 @@ bg: "bg-purple-50",
 
   Mit Google einloggen
 </button>
-<p className="mt-4 text-center text-sm font-black text-sky-700">
+<p className="mb-5 text-center text-2xl font-black text-sky-700">
   💛 Freiwillige Spenden
 </p>
 <button
