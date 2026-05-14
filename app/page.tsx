@@ -2764,7 +2764,7 @@ bg: "bg-purple-50",
               </button>
             </div>
 
-            <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-white/90 p-6 shadow-[0_24px_70px_rgba(37,99,235,.16)] backdrop-blur-xl">
+            <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-2 border-white bg-gradient-to-br from-white via-sky-50 to-white p-6 shadow-[0_24px_70px_rgba(37,99,235,.16)]">
               <div className="flex justify-center">
                  <img
     src="/Elternbild.png"
