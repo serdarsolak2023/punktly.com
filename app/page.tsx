@@ -2773,7 +2773,7 @@ bg: "bg-purple-50",
   />
 </div>
               <h2 className="mt-4 text-center text-4xl font-black text-sky-950">Elternbereich</h2>
-              <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
+              <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Belohnungen, Kinder, Statistik und Bestätigungen werde durch die Elern verwaltet.</p>
               <div className="mt-6 grid gap-3">
                 <input
                   value={pinInput}
