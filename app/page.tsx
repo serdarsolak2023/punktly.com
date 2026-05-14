@@ -2736,7 +2736,7 @@ bg: "bg-purple-50",
     className="h-36 w-auto object-contain"
   />
 </div>
-              <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
+              <h2 className="mt-4 text-4xl font-black text-blue-950">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
 
               {children.length === 0 && (
@@ -2776,8 +2776,8 @@ bg: "bg-purple-50",
     className="h-36 w-auto object-contain"
     />
               </div>
-              <h2 className="mt-4 text-center text-4xl font-black text-sky-950">Elternbereich</h2>
-              <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
+              <h2 className="mt-4 text-center text-4xl font-black text-green-950">Elternbereich</h2>
+              <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Shop, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
               <div className="mt-6 grid gap-3">
                 <input
                   value={pinInput}
@@ -2790,7 +2790,7 @@ bg: "bg-purple-50",
                   onClick={() => setShowPinReset(true)}
                   className="w-full rounded-[1.35rem] bg-amber-100 px-6 py-3 font-black text-amber-800"
                 >
-                  🔁 PIN vergessen?
+                  🔁 PIN vergessen ?
                 </button>
                 {!savedParentPin ? (
                   <button
