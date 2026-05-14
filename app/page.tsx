@@ -2731,7 +2731,7 @@ bg: "bg-purple-50",
   <img
     src="/Kinderbild.png"
     alt="Bild"
-    className="h-36 w-36 animate-floaty"
+    className="h-36 w-auto object-contain"
   />
 </div>
               <h2 className="mt-4 text-4xl font-black text-sky-950">Kinderbereich</h2>
@@ -2769,7 +2769,7 @@ bg: "bg-purple-50",
                  <img
     src="/Elternbild.png"
     alt="Elternbereich"
-    className="h-36 w-36 animate-floaty"
+    className="h-36 w-auto object-contain"
     />
               </div>
               <h2 className="mt-4 text-center text-4xl font-black text-sky-950">Elternbereich</h2>
