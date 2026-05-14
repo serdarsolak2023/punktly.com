@@ -1986,7 +1986,8 @@ bg: "bg-purple-50",
   Mit Google einloggen
 </button>
 <p className="mb-5 text-center text-2xl font-black text-sky-700">
-  💛 Freiwillige Spenden
+  💛 Spenden 💛
+  ! Danke für Eure Unterstüzung !
 </p>
 <button
   onClick={() => window.open("https://paypal.me/DEINPAYPALNAME", "_blank")}
