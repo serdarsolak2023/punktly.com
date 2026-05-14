@@ -1758,17 +1758,11 @@ function celebrate(message: string) {
       setFeaturePopup({
     title: "✅ Aufgaben und Motivation ✅",
 text: `Mit PunktlyCoinly werden tägliche und wöchentliche Aufgaben zu einem motivierenden Abenteuer.
-
 Kinder lernen spielerisch Verantwortung zu übernehmen und wichtige Alltagsaufgaben selbstständig zu erledigen.
-
 Durch tägliche Aufgaben entwickeln Kinder Routinen und lernen Verantwortung im Alltag zu übernehmen.
-
 Wöchentliche Aufgaben sorgen zusätzlich für langfristige Ziele, Motivation und regelmäßige Fortschritte.
-
 Für jede erledigte Aufgabe erhalten Kinder Punkte und Coins als Belohnung.
-
 Dadurch sammeln sie Erfolge, steigen im Level auf und bleiben dauerhaft motiviert.
-
 Eltern können Aufgaben individuell anpassen und die Entwicklung ihrer Kinder jederzeit begleiten.`,
 color: "text-yellow-400",
 bg: "bg-yellow-50",
@@ -1786,21 +1780,13 @@ bg: "bg-yellow-50",
       setFeaturePopup({
  title: "🎁 Shop, Schatzkisten und Belohnungen 🎁",
 text: `Mit PunktlyCoinly werden Belohnungen zu einem spannenden Erlebnis.
-
 Kinder können durch erledigte Aufgaben Coins sammeln und diese später für Schatzkisten und individuelle Belohnungen einlösen.
-
 Die Schatzkiste kann individuell von den Eltern als kleine Überraschung gestaltet werden.
-
 Dadurch entsteht zusätzliche Spannung und Motivation im Alltag.
-
 Belohnungen können gemeinsam mit den Kindern erstellt werden, sodass sie eigene Ziele und Wünsche festlegen können.
-
 Kinder arbeiten sich Schritt für Schritt auf ihre Wunschbelohnungen hinaus und bleiben langfristig motiviert.
-
 Im Dashboard sehen Kinder eine optische Darstellung ihres Fortschritts.
-
 So können sie jederzeit verfolgen, wie viele Coins noch bis zur gewünschten Belohnung fehlen.
-
 Die Kombination aus Motivation, Fortschritt und Belohnungen sorgt für mehr Spaß und Verantwortung im Familienalltag.`,
 color: "text-green-400",
 bg: "bg-green-50",
@@ -1818,17 +1804,11 @@ bg: "bg-green-50",
       setFeaturePopup({
 title: "🏆 Level & Erfolge 🏆",
 text: `Mit PunktlyCoinly werden Fortschritte und Erfolge sichtbar und motivierend dargestellt.
-
 Kinder sammeln durch erledigte Aufgaben Punkte und steigen dadurch in verschiedene Level auf.
-
 Mit jedem neuen Level erhalten Kinder ein Gefühl von Erfolg und Motivation, weiter aktiv zu bleiben.
-
 Erfolge und Meilensteine werden optisch dargestellt, sodass Kinder ihren Fortschritt jederzeit verfolgen können.
-
 Durch regelmäßige Aufgaben, gesammelte Coins und erreichte Ziele entwickeln Kinder langfristige Motivation und Verantwortungsbewusstsein.
-
 Das Levelsystem sorgt zusätzlich für Spaß, Spannung und ein spielerisches Lernerlebnis im Alltag.
-
 Kinder sehen direkt, wie weit sie bereits gekommen sind und welche Ziele sie als Nächstes erreichen können.`,
 color: "text-blue-400",
 bg: "bg-blue-50",
@@ -1846,25 +1826,15 @@ bg: "bg-blue-50",
       setFeaturePopup({
 title: "🪙 Punkte und Coins sammeln 🪙",
 text: `Mit PunktlyCoinly werden Punkte und Coins durch erledigte Aufgaben gesammelt.
-
 Kinder erhalten für tägliche und wöchentliche Aufgaben Belohnungen in Form von Punkten und Coins.
-
 Punkte helfen dabei, im Level aufzusteigen und neue Erfolge einzusehen.
-
 Coins können im Shop für individuelle Wunschprodukte eingelöst werden, die gemeinsam mit den Eltern angelegt werden.
-
 Dadurch arbeiten Kinder langfristig auf ihre persönlichen Ziele und Wünsche hinaus.
-
 Schatzkisten dienen als kleine Überraschungskisten und können ebenfalls mit Coins eingelöst werden.
-
 Diese sorgen zusätzlich für Spannung, Motivation und kleine Überraschungen im Alltag.
-
 Auch Belohnungen werden individuell von den Eltern erstellt und motivieren Kinder dabei, Aufgaben regelmäßig zu erledigen.
-
 Im Dashboard sehen Kinder jederzeit ihren aktuellen Fortschritt sowie die Anzahl ihrer gesammelten Punkte und Coins.
-
 Zusätzlich können Kinder verfolgen, wie viele Coins ihnen noch bis zu ihrem gewünschten Produkt oder ihrer Belohnung fehlen.
-
 Dadurch entsteht ein modernes und motivierendes System, das Lernen, Verantwortung, Ziele und Spaß miteinander verbindet.`,
 color: "text-red-400",
 bg: "bg-red-50",
@@ -1882,21 +1852,13 @@ bg: "bg-red-50",
       setFeaturePopup({
 title: "👦 Kinderbereich 👦",
 text: `Der Kinderbereich wurde speziell für Kinder entwickelt und sorgt für eine einfache, sichere und motivierende Nutzung der App.
-
 Kinder können ihre täglichen und wöchentlichen Aufgaben übersichtlich ansehen und selbstständig erledigen.
-
 Durch das Sammeln von Punkten und Coins bleiben Kinder langfristig motiviert und sehen ihre Fortschritte direkt im Dashboard.
-
 Level, Erfolge, Belohnungen und Schatzkisten werden kindgerecht und spielerisch dargestellt.
-
 Dadurch entsteht ein modernes und motivierendes Erlebnis für den Alltag.
-
 Der Kinderbereich bietet eine übersichtliche Oberfläche, damit Kinder ihre Ziele einfacher verfolgen können.
-
 Zusätzlich können Kinder jederzeit sehen, wie viele Coins sie bereits gesammelt haben.
-
 Auch der Fortschritt zu zukünftigen Belohnungen und Schatzkisten wird optisch dargestellt.
-
 So lernen Kinder spielerisch Verantwortung, Motivation und den Umgang mit kleinen Belohnungssystemen.`,
 color: "text-orange-400",
 bg: "bg-orange-50",
@@ -1914,27 +1876,16 @@ bg: "bg-orange-50",
       setFeaturePopup({
 title: "👨‍👩‍👧 Elternbereich 👨‍👩‍👧",
 text: `Der Elternbereich bietet Eltern die volle Kontrolle und Übersicht über alle wichtigen Funktionen der App.
-
 Der Zugriff auf den Elternbereich ist zusätzlich mit einer eigenen PIN geschützt, sodass nur Eltern wichtige Bereiche und Einstellungen verwalten können.
-
 Eltern können tägliche und wöchentliche Aufgaben individuell erstellen, bearbeiten und an die Bedürfnisse ihrer Kinder anpassen.
-
 Zusätzlich können Belohnungen, Schatzkisten, Shop-Produkte und Coin-Werte flexibel festgelegt werden.
-
 Kinder können erledigte Aufgaben markieren, diese müssen jedoch zuerst von den Eltern bestätigt und genehmigt werden.
-
 Dadurch behalten Eltern jederzeit die Kontrolle über Aufgaben, Coins und Fortschritte.
-
 Im Kalender können Eltern alle geplanten Aufgaben, Ziele und Aktivitäten übersichtlich einsehen.
-
 Zusätzlich bietet der Elternbereich verschiedene Statistiken und Übersichten über erledigte Aufgaben, Fortschritte, Level und gesammelte Coins.
-
 Auch individuelle Shop-Produkte können erstellt werden, damit Kinder ihre gesammelten Coins gegen persönliche Wünsche und Belohnungen eintauschen können.
-
 Belohnungen und Ziele können gemeinsam mit den Kindern geplant werden, um langfristige Motivation und klare Ziele zu schaffen.
-
 Durch die optische Darstellung der Fortschritte behalten Eltern jederzeit den Überblick über die Entwicklung ihrer Kinder.
-
 Die Kombination aus Motivation, Struktur, Kontrolle und Belohnungen sorgt für mehr Zusammenarbeit im Familienalltag und unterstützt Kinder dabei, Verantwortung zu übernehmen und langfristig eigene Ziele zu verfolgen.`,
 color: "text-purple-400",
 bg: "bg-purple-50",
