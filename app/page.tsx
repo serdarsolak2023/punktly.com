@@ -1987,10 +1987,11 @@ bg: "bg-purple-50",
 </button>
 <p className="mb-5 text-center text-2xl font-black text-sky-700">
   💛 Spenden 💛
-  ! Danke für Eure Unterstüzung !
+  <br />
+  ❤️ Danke für Eure Unterstüzung ❤️
 </p>
 <button
-  onClick={() => window.open("https://paypal.me/DEINPAYPALNAME", "_blank")}
+  onClick={() => window.open("https://paypal.me/serdarsolak0203@gmail.com", "_blank")}
   className="mt-4 flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-[#0070BA] px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] hover:bg-[#005ea6] md:text-lg"
 >
   <svg
