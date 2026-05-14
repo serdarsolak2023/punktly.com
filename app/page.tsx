@@ -2096,7 +2096,7 @@ bg: "bg-purple-50",
 <h1 className="text-4xl font-black tracking-tight text-center leading-tight sm:text-3xl animate-pulse">
   <span className="text-yellow-400">⭐ Herzlich</span>{" "}
   <span className="text-green-500">Willkommen</span>{" "}
-  <span className="text-blue-500">bei</span>{" "}
+  <span className="text-blue-500">bei ⭐</span>{" "}
   <br />
 
   <span className="text-yellow-400">✨P</span>
@@ -2116,7 +2116,7 @@ bg: "bg-purple-50",
   <span className="text-rose-500">l</span>
   <span className="text-fuchsia-500">y✨</span>
 
-  <span className="ml-2 text-yellow-300">⭐</span>
+  <span className="ml-2 text-yellow-300"></span>
 </h1>
 
 <p className="mt-3 text-base font-bold leading-relaxed text-sky-700">
