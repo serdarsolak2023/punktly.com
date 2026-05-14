@@ -1915,9 +1915,9 @@ bg: "bg-orange-50",
 title: "👨‍👩‍👧 Elternbereich 👨‍👩‍👧",
 text: `Der Elternbereich bietet Eltern die volle Kontrolle und Übersicht über alle wichtigen Funktionen der App.
 
-Der Zugriff auf den Elternbereich ist zusätzlich mit einer eigenen PIN geschützt, sodass nur Eltern Einstellungen und wichtige Bereiche verwalten können.
+Der Zugriff auf den Elternbereich ist zusätzlich mit einer eigenen PIN geschützt, sodass nur Eltern wichtige Bereiche und Einstellungen verwalten können.
 
-Eltern können tägliche und wöchentliche Aufgaben individuell erstellen und an die Bedürfnisse ihrer Kinder anpassen.
+Eltern können tägliche und wöchentliche Aufgaben individuell erstellen, bearbeiten und an die Bedürfnisse ihrer Kinder anpassen.
 
 Zusätzlich können Belohnungen, Schatzkisten, Shop-Produkte und Coin-Werte flexibel festgelegt werden.
 
@@ -1929,19 +1929,13 @@ Im Kalender können Eltern alle geplanten Aufgaben, Ziele und Aktivitäten über
 
 Zusätzlich bietet der Elternbereich verschiedene Statistiken und Übersichten über erledigte Aufgaben, Fortschritte, Level und gesammelte Coins.
 
-Belohnungen können gemeinsam mit den Kindern geplant werden, um langfristige Motivation und klare Ziele zu schaffen.
+Auch individuelle Shop-Produkte können erstellt werden, damit Kinder ihre gesammelten Coins gegen persönliche Wünsche und Belohnungen eintauschen können.
+
+Belohnungen und Ziele können gemeinsam mit den Kindern geplant werden, um langfristige Motivation und klare Ziele zu schaffen.
 
 Durch die optische Darstellung der Fortschritte behalten Eltern jederzeit den Überblick über die Entwicklung ihrer Kinder.
 
-Eltern können Aufgaben flexibel bearbeiten, anpassen oder neue Ziele hinzufügen.
-
-Auch individuelle Shop-Produkte können erstellt werden, damit Kinder ihre gesammelten Coins gegen persönliche Wünsche und Belohnungen eintauschen können.
-
-Die Kombination aus Motivation, Struktur, Kontrolle und Belohnungen sorgt für mehr Zusammenarbeit im Familienalltag.
-
-Kinder lernen dadurch Verantwortung zu übernehmen und langfristig eigene Ziele zu verfolgen.
-
-Gleichzeitig behalten Eltern jederzeit die Kontrolle über Fortschritte, Coins, Aufgaben und Belohnungen.`,
+Die Kombination aus Motivation, Struktur, Kontrolle und Belohnungen sorgt für mehr Zusammenarbeit im Familienalltag und unterstützt Kinder dabei, Verantwortung zu übernehmen und langfristig eigene Ziele zu verfolgen.`,
 color: "text-purple-400",
 bg: "bg-purple-50",
       })
@@ -2418,7 +2412,7 @@ bg: "bg-purple-50",
           <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
             area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
           }`}>
-            {area === "child" ? "KINDERBEREICH HEADER" : "ELTERNBEREICH HEADER"}
+            {area === "child" ? "KINDERBEREICH" : "ELTERNBEREICH "}
             <span>{area === "child" ? "👦" : "👥"}</span>
           </div>
         )}
