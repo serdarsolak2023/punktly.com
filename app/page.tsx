@@ -1952,7 +1952,7 @@ bg: "bg-purple-50",
 {featurePopup && (
   <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
     
-    <div className={`relative max-h-[80vh] w-full max-w-xl overflow-y-auto rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
+    <div className={`relative flex max-h-[80vh] w-full max-w-xl flex-col rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
       
       <button
         onClick={() => setFeaturePopup(null)}
@@ -1965,9 +1965,11 @@ bg: "bg-purple-50",
         {featurePopup.title}
       </h2>
 
-      <p className={`text-center text-sm md:text-base font-bold leading-8 ${featurePopup.color}`}>
-        {featurePopup.text}
-      </p>
+<div className="overflow-y-auto pr-2">
+  <p className={`whitespace-pre-line text-center text-sm font-bold leading-7 md:text-base ${featurePopup.color}`}>
+    {featurePopup.text}
+  </p>
+</div>
 
     </div>
 
