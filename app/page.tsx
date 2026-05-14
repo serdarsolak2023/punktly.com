@@ -1710,8 +1710,17 @@ function celebrate(message: string) {
   <span className="text-amber-500">l</span>
   <span className="text-sky-500">y</span>
 </h1>
-<p className="mt-2 text-lg font-extrabold text-indigo-500 sm:text-xl">
-  Premium freischalten und alle Funktionen für die ganze Familie genießen!
+<p className="mt-2 text-lg font-extrabold sm:text-xl">
+  <span className="text-yellow-400">Premium</span>{" "}
+  <span className="text-green-500">freischalten</span>{" "}
+  <span className="text-blue-500">und</span>{" "}
+  <span className="text-red-500">alle</span>{" "}
+  <span className="text-orange-400">Funktionen</span>{" "}
+  <span className="text-purple-500">für</span>{" "}
+  <span className="text-pink-500">die</span>{" "}
+  <span className="text-cyan-500">ganze</span>{" "}
+  <span className="text-lime-500">Familie</span>{" "}
+  <span className="text-amber-500">genießen!</span>
 </p>
 <div className="absolute left-8 top-24 rounded-[2rem] bg-red-50/90 px-6 py-5 shadow-xl ring-1 ring-red-200 backdrop-blur-xl">
   
