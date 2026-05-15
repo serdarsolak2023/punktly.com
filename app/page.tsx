@@ -867,14 +867,13 @@ function celebrate(message: string) {
       setTasks(prev => prev.map(t => t.id === taskId ? waitingTask : t));
       saveTaskNow(waitingTask);
     }
-    celebrate("Wartet auf Eltern-Bestätigung!");
-  }
-  const randomMessage =
+    const randomMessage =
   motivationMessages[
     Math.floor(Math.random() * motivationMessages.length)
   ];
 
-celebrate(randomMessage);
+celebrate(`${randomMessage} Warte jetzt auf die Bestätigung deiner Eltern.`);
+  }
 
   function approveTask(task: Task) {
     const approvedTask: Task = { ...task, status: "erledigt" };
