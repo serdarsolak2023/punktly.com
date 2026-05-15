@@ -11,7 +11,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon } from "lucide-react";
+import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon, BookOpen } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
@@ -31,8 +31,8 @@ return (
 
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
-type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features";
-type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings";
+type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features" | "learning";
+type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings" | "learning";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
 type Status = "offen" | "wartet" | "erledigt";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
@@ -579,7 +579,10 @@ export default function PunktlyRoleSplit() {
   const [selectedPreset, setSelectedPreset] = useState("");
   const [selectedTaskPack, setSelectedTaskPack] = useState(taskPacks[0]?.id || "");
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
-
+  const [learningTasks, setLearningTasks] = useState<any[]>([]);
+  const [newLearningTitle, setNewLearningTitle] = useState("");
+  const [newLearningCoins, setNewLearningCoins] = useState(10);
+  const [newLearningCategory, setNewLearningCategory] = useState("📚 Lesen");
   const [newRewardTitle, setNewRewardTitle] = useState("");
   const [newRewardCoins, setNewRewardCoins] = useState(100);
   const [editingRewardId, setEditingRewardId] = useState<number | null>(null);
@@ -1691,6 +1694,23 @@ function deleteChild(id: number) {
 
 async function saveChildNow(updatedChild: Child) {
   await saveFamilyItem("children", updatedChild);
+}
+function addLearningTask() {
+  if (!newLearningTitle.trim()) return;
+
+  const task = {
+    id: Date.now(),
+    title: newLearningTitle,
+    coins: newLearningCoins,
+    category: newLearningCategory,
+  };
+
+  setLearningTasks(prev => [...prev, task]);
+
+  setNewLearningTitle("");
+  setNewLearningCoins(10);
+
+  celebrate("📚 Lernaufgabe hinzugefügt!");
 }
 function claimDailyLoginBonus() {
   if (!child) return;
@@ -3430,7 +3450,57 @@ bg: "bg-purple-50",
                   <Panel title="👶 Kinder"><BigNumber value={children.length} label="Profile" /></Panel>
                 </section>
               )}
+{parentView === "learning" && (
+  <Panel title="🧠 Lernmodus">
 
+    <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-6 shadow-xl">
+      
+      <h2 className="text-3xl font-black text-sky-950">
+        📚 Lernaufgaben
+      </h2>
+
+      <p className="mt-2 font-bold text-sky-700">
+        Erstelle spezielle Lernaufgaben für deine Kinder.
+      </p>
+
+      <div className="mt-6 grid gap-4">
+
+<input
+  value={newLearningTitle}
+  onChange={(e) => setNewLearningTitle(e.target.value)}
+  placeholder="📖 Lernaufgabe"
+          className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+        />
+
+<input
+  value={newLearningCoins}
+  onChange={(e) => setNewLearningCoins(Number(e.target.value))}
+  placeholder="🪙 Coins"
+  type="number"
+  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+/>
+
+        <select className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold">
+          <option>📚 Lesen</option>
+          <option>➕ Mathe</option>
+          <option>🇬🇧 Englisch</option>
+          <option>✍️ Schreiben</option>
+          <option>🧠 Konzentration</option>
+        </select>
+
+<button
+  onClick={addLearningTask}
+  className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
+>
+  ➕ Lernaufgabe hinzufügen
+</button>
+
+      </div>
+
+    </div>
+
+  </Panel>
+)}
               {parentView === "tasks" && (
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingTaskId ? "✏️ Aufgabe bearbeiten" : "➕ Aufgabe anlegen"}>
@@ -3977,6 +4047,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
       <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
+        <Tab active={view === "tasks"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
@@ -3993,6 +4064,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
       <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
+        <Tab active={view === "settings"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
