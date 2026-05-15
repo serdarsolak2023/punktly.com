@@ -872,7 +872,7 @@ function celebrate(message: string) {
     Math.floor(Math.random() * motivationMessages.length)
   ];
 
-celebrate(`${randomMessage} Warte jetzt auf die Bestätigung deiner Eltern.`);
+celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`);
   } 
 
   function approveTask(task: Task) {
