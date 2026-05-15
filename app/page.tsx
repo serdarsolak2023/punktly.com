@@ -1869,16 +1869,7 @@ function spinBonusWheel() {
 
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence).catch(console.error);
-useEffect(() => {
-  if (!activeLearningTask) return;
-  if (learningTimeLeft <= 0) return;
 
-  const timer = setTimeout(() => {
-    setLearningTimeLeft(prev => prev - 1);
-  }, 1000);
-
-  return () => clearTimeout(timer);
-}, [activeLearningTask, learningTimeLeft]);
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setFirebaseUser(user);
@@ -1894,6 +1885,16 @@ useEffect(() => {
 
     return () => unsubscribe();
   }, []);
+  useEffect(() => {
+  if (!activeLearningTask) return;
+  if (learningTimeLeft <= 0) return;
+
+  const timer = setTimeout(() => {
+    setLearningTimeLeft(prev => prev - 1);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, [activeLearningTask, learningTimeLeft]);
 
   if (!isPurchased) {
     return (
