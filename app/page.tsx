@@ -1629,8 +1629,9 @@ function claimDailyLoginBonus() {
   const twentyFourHours = 24 * 60 * 60 * 1000;
 
   if (now - lastClaim < twentyFourHours) {
-    return;
-  }
+  celebrate("🎁 Der tägliche Bonus wurde heute bereits abgeholt.");
+  return;
+}
 
   const updatedChild = {
     ...child,
@@ -3068,6 +3069,12 @@ bg: "bg-purple-50",
     >
       {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
     </button>
+    <button
+  onClick={claimDailyLoginBonus}
+  className="mt-4 rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03]"
+>
+  🎁 Täglichen Bonus abholen
+</button>
 
     {wheelResult !== null && (
       <p className="mt-5 text-xl font-black text-green-600">
