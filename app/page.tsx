@@ -3754,7 +3754,7 @@ bg: "bg-purple-50",
                           Diese Sicherheitsabfrage kann nur hier im geöffneten Elternbereich geändert werden.
                         </p>
                       </div>
-{editingChildId ? "Änderung speichern" : "+ Kind hinzufügen"}
+{editingChildId ? "✏️ Kind ändern" : "+ Kind hinzufügen"}
                       <div className="rounded-[1.35rem] bg-sky-50 p-4 font-bold text-sky-800">
                         Aktueller PIN-Status: {savedParentPin ? "✅ PIN gespeichert" : "❌ Noch keine PIN gespeichert"}
                         <br />
