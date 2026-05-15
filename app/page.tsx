@@ -3059,9 +3059,7 @@ bg: "bg-purple-50",
   <div className="rounded-full bg-emerald-100 px-4 py-2 font-black text-emerald-800">
     🐾 {child.favoriteAnimal || "-"}
   </div>
-
-</div>
-                  
+</div>   
                 </div>
 
                 {children.length > 1 && (
@@ -3071,7 +3069,7 @@ bg: "bg-purple-50",
                       setSelectedChildId(Number(e.target.value));
                       setShowBadgeChooser(false);
                     }}
-                    className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-black text-sky-900 shadow-inner"
+                    className="rounded-[1.2rem] border-2 border-green-400 bg-yellow-200 px-4 py-3 font-black text-red-600 shadow-inner"
                   >
                     {children.map((kid) => (
                       <option key={kid.id} value={kid.id}>{kid.name}</option>
