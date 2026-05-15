@@ -3045,10 +3045,7 @@ bg: "bg-purple-50",
 
             <div className="mt-4 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[.18em] text-sky-500">Profil von </p>
-                  <h2 className="text-2xl font-black text-sky-950">{child.name}</h2>
-                  <p className="text-sm font-bold text-sky-700">TEST</p>
+                <div> 
                   <div className="mt-4 flex flex-wrap gap-2">
 
   <div className="rounded-full bg-pink-100 px-4 py-2 font-black text-pink-800">
