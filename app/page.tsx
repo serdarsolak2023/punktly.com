@@ -604,10 +604,12 @@ export default function PunktlyRoleSplit() {
   const [parentSecurityAnswer, setParentSecurityAnswer] = useState("");
   const [resetSecurityAnswer, setResetSecurityAnswer] = useState("");
   const [resetNewParentPin, setResetNewParentPin] = useState("");
-  const [bonusCoinsEnabled, setBonusCoinsEnabled] = useState(false);
+  
+  const [bonusWheelEnabled, setBonusWheelEnabled] = useState(true);
   const [wheelSpinning, setWheelSpinning] = useState(false);
   const [wheelResult, setWheelResult] = useState<number | null>(null);
-
+  const [bonusCoinsEnabled, setBonusCoinsEnabled] = useState(false);
+  
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
     name: "Kein Kind",
@@ -632,9 +634,9 @@ export default function PunktlyRoleSplit() {
   };
   const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
-const waitingRewards = rewards.filter((r) => r.status === "wartet");
+  const waitingRewards = rewards.filter((r) => r.status === "wartet");
 
-const childRewardGoalTotal = useMemo(
+  const childRewardGoalTotal = useMemo(
   () =>
     rewards
       .filter((reward) => reward.status === "frei")
@@ -2959,7 +2961,7 @@ bg: "bg-purple-50",
                 </div>
               )}
             </div>
-{childView === "features" && (
+{childView === "features" && bonusWheelEnabled && (
   <section className="rounded-[2rem] bg-white/90 p-6 text-center shadow-xl">
     <h2 className="text-3xl font-black text-sky-950">
       🎡 Glücksrad
@@ -3525,8 +3527,39 @@ bg: "bg-purple-50",
                   <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
                 </Panel>
               )}
+             {parentView === "features" && (
+              <section className="rounded-[2rem] bg-white/90 p-6 shadow-xl">
+        <h2 className="text-3xl font-black text-sky-950">
+      ⭐ Bonus Features
+    </h2>
 
-              
+    <div className="mt-6 flex items-center justify-between rounded-[1.5rem] bg-sky-50 p-4">
+      
+      <div>
+        <p className="text-lg font-black text-sky-900">
+          🎡 Glücksrad
+        </p>
+
+        <p className="text-sm font-bold text-sky-700">
+          Kinder können alle 24 Stunden Bonus-Coins gewinnen.
+        </p>
+      </div>
+
+      <button
+        onClick={() => setBonusWheelEnabled(!bonusWheelEnabled)}
+        className={`rounded-full px-5 py-2 font-black transition ${
+          bonusWheelEnabled
+            ? "bg-green-500 text-white"
+            : "bg-gray-300 text-gray-700"
+        }`}
+      >
+        {bonusWheelEnabled ? "JA" : "NEIN"}
+      </button>
+
+    </div>
+
+  </section>
+)}              
               {parentView === "profile" && (
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title="👤 Eltern-Profil">
@@ -3731,7 +3764,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Features" />
       </div>
     </nav>
   );
@@ -3746,7 +3779,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Features" />
         <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
         <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" />
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
