@@ -3301,7 +3301,54 @@ bg: "bg-purple-50",
                   </div>
                 </section>
               )}
+{childView === "learning" && (
+  <section className="grid gap-5">
 
+    <Panel title="🧠 Meine Lernaufgaben">
+
+      <div className="grid gap-4">
+
+        {learningTasks
+          .filter(task => task.childId === child.id)
+          .map(task => (
+            <div
+              key={task.id}
+              className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-5 shadow-xl"
+            >
+
+              <div className="flex items-center justify-between gap-4">
+
+                <div>
+                  <p className="text-sm font-black text-sky-600">
+                    {task.category}
+                  </p>
+
+                  <h3 className="text-2xl font-black text-sky-950">
+                    {task.title}
+                  </h3>
+
+                  <p className="mt-1 font-black text-amber-600">
+                    🪙 {task.coins} Coins
+                  </p>
+                </div>
+
+                <button
+                  className="rounded-[1.5rem] bg-gradient-to-r from-emerald-400 to-green-500 px-5 py-3 font-black text-white shadow-lg"
+                >
+                  ✅ Erledigt
+                </button>
+
+              </div>
+
+            </div>
+          ))}
+
+      </div>
+
+    </Panel>
+
+  </section>
+)}
               {childView === "tasks" && (
                 <Panel title="✅ Deine Aufgaben">
                   <div className="grid gap-3">
