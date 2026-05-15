@@ -564,6 +564,7 @@ export default function PunktlyRoleSplit() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
   const [newChildName, setNewChildName] = useState("");
+  const [editingChildId, setEditingChildId] = useState<number | null>(null);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskCoins, setNewTaskCoins] = useState(10);
   const [newTaskRepeat, setNewTaskRepeat] = useState<Repeat>("täglich");
@@ -1296,16 +1297,52 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
     celebrate("Shop-Produkt gelöscht.");
   }
 
-  function addChild() {
-    if (!newChildName.trim()) return;
-    const id = Date.now();
-    const newChild = { id, name: newChildName, coins: 0, xp: 0, level: 1, prestige: 0, prestigeStars: 0, streak: 0, completedCount: 0, weeklyPoints: 0, theme: "hell" as Theme, goal: "Neue Belohnung", goalCoins: 500, equipped: [], activePet: "", activeBackground: "", activeAvatar: "", activeBooster: "", achievements: [], profileBadges: [] };
-    setChildren(prev => [...prev, newChild]);
-    saveFamilyItem("children", newChild);
-    setSelectedChildId(id);
+function saveChild() {
+  if (!newChildName.trim()) return;
+
+  if (editingChildId) {
+    const editedChild = children.find(c => c.id === editingChildId);
+    if (!editedChild) return;
+
+    const updatedChild = {
+      ...editedChild,
+      name: newChildName.trim(),
+    };
+
+    setChildren(prev => prev.map(c => c.id === editingChildId ? updatedChild : c));
+    saveFamilyItem("children", updatedChild);
+    setEditingChildId(null);
     setNewChildName("");
-    celebrate("Kind hinzugefügt!");
+    celebrate("Kind bearbeitet!");
+    return;
   }
+
+  const id = Date.now();
+  const newChild = { id, name: newChildName, coins: 0, xp: 0, level: 1, prestige: 0, prestigeStars: 0, streak: 0, completedCount: 0, weeklyPoints: 0, theme: "hell" as Theme, goal: "Neue Belohnung", goalCoins: 500, equipped: [], activePet: "", activeBackground: "", activeAvatar: "", activeBooster: "", achievements: [], profileBadges: [] };
+
+  setChildren(prev => [...prev, newChild]);
+  saveFamilyItem("children", newChild);
+  setSelectedChildId(id);
+  setNewChildName("");
+  celebrate("Kind hinzugefügt!");
+}
+
+function editChild(child: Child) {
+  setEditingChildId(child.id);
+  setNewChildName(child.name);
+}
+
+function deleteChild(id: number) {
+  setChildren(prev => prev.filter(c => c.id !== id));
+  deleteFamilyItem("children", id);
+
+  if (selectedChildId === id) {
+    const nextChild = children.find(c => c.id !== id);
+    setSelectedChildId(nextChild ? nextChild.id : 0);
+  }
+
+  celebrate("Kind gelöscht.");
+}
 
   function setChildTheme(theme: Theme) {
     const updatedChild = { ...child, theme };
@@ -3717,7 +3754,7 @@ bg: "bg-purple-50",
                           Diese Sicherheitsabfrage kann nur hier im geöffneten Elternbereich geändert werden.
                         </p>
                       </div>
-
+{editingChildId ? "Änderung speichern" : "+ Kind hinzufügen"}
                       <div className="rounded-[1.35rem] bg-sky-50 p-4 font-bold text-sky-800">
                         Aktueller PIN-Status: {savedParentPin ? "✅ PIN gespeichert" : "❌ Noch keine PIN gespeichert"}
                         <br />
@@ -3737,7 +3774,7 @@ bg: "bg-purple-50",
 
 {parentView === "settings" && (
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
-                  <Panel title="👶 Kind anlegen">
+                  <Panel title={editingChildId ? "✏️ Kind bearbeiten" : "👶 Kind anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">
                       Lege hier die Kinder deiner Familie an. Jedes Kind bekommt eigene Coins, XP, Level und Streaks.
                     </p>
@@ -3746,12 +3783,12 @@ bg: "bg-purple-50",
                       <input
                         value={newChildName}
                         onChange={e => setNewChildName(e.target.value)}
-                        placeholder="Name des Kindes, z. B. Emma"
+                        placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
                       />
 
                       <button
-                        onClick={addChild}
+                        onClick={saveChild}
                         className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
                       >
                         + Kind hinzufügen
@@ -3806,6 +3843,19 @@ bg: "bg-purple-50",
                               >
                                 {selectedChildId === c.id ? "Ausgewählt" : "Auswählen"}
                               </button>
+                              <button
+  onClick={() => editChild(c)}
+  className="rounded-[1.35rem] bg-yellow-300 px-4 py-3 font-black text-yellow-900"
+>
+  ✏️ Bearbeiten
+</button>
+
+<button
+  onClick={() => deleteChild(c.id)}
+  className="rounded-[1.35rem] bg-red-400 px-4 py-3 font-black text-white"
+>
+  🗑️ Löschen
+</button>
                             </div>
 
                             <div className="mt-4">
