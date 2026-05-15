@@ -1649,7 +1649,7 @@ function deleteChild(id: number) {
     }
   }
 
-  async function deleteFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop", id: number) {
+  async function deleteFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop" | "learningTasks", id: number) {
     const user = auth.currentUser || firebaseUser;
 
     if (!user) {
@@ -1666,7 +1666,7 @@ function deleteChild(id: number) {
     }
   }
 
-  async function saveFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop", item: { id: number }) {
+  async function saveFamilyItem(collectionName: "children" | "tasks" | "rewards" | "chests" | "shop" | "learningTasks", item: { id: number }) {
     const user = auth.currentUser || firebaseUser;
 
     if (!user) {
@@ -1698,14 +1698,16 @@ async function saveChildNow(updatedChild: Child) {
 function addLearningTask() {
   if (!newLearningTitle.trim()) return;
 
-  const task = {
-    id: Date.now(),
-    title: newLearningTitle,
-    coins: newLearningCoins,
-    category: newLearningCategory,
-  };
-
+const task = {
+  id: Date.now(),
+  childId: selectedChildId,
+  title: newLearningTitle,
+  coins: newLearningCoins,
+  category: newLearningCategory,
+  status: "offen",
+};
   setLearningTasks(prev => [...prev, task]);
+  saveFamilyItem("learningTasks", task);
 
   setNewLearningTitle("");
   setNewLearningCoins(10);
@@ -3487,7 +3489,17 @@ bg: "bg-purple-50",
           <option>✍️ Schreiben</option>
           <option>🧠 Konzentration</option>
         </select>
-
+<select
+  value={selectedChildId}
+  onChange={(e) => setSelectedChildId(Number(e.target.value))}
+  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+>
+  {children.map((kid) => (
+    <option key={kid.id} value={kid.id}>
+      👶 Für {kid.name}
+    </option>
+  ))}
+</select>
 <button
   onClick={addLearningTask}
   className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
