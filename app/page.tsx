@@ -2790,6 +2790,8 @@ bg: "bg-purple-50",
   <span className="text-amber-500">l</span>
   <span className="text-sky-500">y</span>
 </h1>
+<br />
+<br />
 <p className="animate-[rainbowMove_3s_linear_infinite] bg-gradient-to-r from-yellow-400 via-green-400 via-blue-500 via-purple-500 via-pink-500 to-orange-400 bg-[length:200%_100%] bg-clip-text font-bold text-transparent">
   PunktlyCoinly wünscht viel Spaß beim Punkte sammeln, Leveln und Belohnungen einlösen!
 </p>
