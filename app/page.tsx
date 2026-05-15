@@ -2774,13 +2774,25 @@ bg: "bg-purple-50",
                   className="h-20 w-20 flex-none sm:h-24 sm:w-24 rounded-full object-contain drop-shadow-xl md:h-28 md:w-28"
                 />
 
-                <div className="min-w-0">
-                  <h1 className="punktly-welcome-wipe text-2xl font-black leading-tight text-sky-950 sm:text-3xl">
-                    <span className="punktly-sparkle">✨</span> Willkommen auf Punktly <span className="punktly-sparkle">✨</span>
-                  </h1>
-                  <p className="punktly-rainbow-text mt-2 text-xl font-black leading-tight sm:text-2xl">
-                    ✨PunktlyCoinly wünscht Ihnen Viel Spaß!✨
-                  </p>
+                <div>
+<h1 className="text-3xl font-black md:text-4xl">
+  <span className="text-yellow-400">P</span>
+  <span className="text-green-500">u</span>
+  <span className="text-blue-500">n</span>
+  <span className="text-red-500">k</span>
+  <span className="text-purple-500">t</span>
+  <span className="text-orange-400">l</span>
+  <span className="text-pink-500">y</span>
+  <span className="text-cyan-500">C</span>
+  <span className="text-lime-500">o</span>
+  <span className="text-indigo-500">i</span>
+  <span className="text-rose-500">n</span>
+  <span className="text-amber-500">l</span>
+  <span className="text-sky-500">y</span>
+</h1>
+<p className="animate-[rainbowMove_3s_linear_infinite] bg-gradient-to-r from-yellow-400 via-green-400 via-blue-500 via-purple-500 via-pink-500 to-orange-400 bg-[length:200%_100%] bg-clip-text font-bold text-transparent">
+  PunktlyCoinly wünscht viel Spaß beim Punkte sammeln, Leveln und Belohnungen einlösen!
+</p>
                 </div>
               </div>
 
