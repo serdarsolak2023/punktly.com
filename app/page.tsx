@@ -4205,7 +4205,58 @@ bg: "bg-purple-50",
                                     {t}
                                   </button>
                                 ))}
-                              </div>
+                              </div>{activeLearningTask && (
+  <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-8 text-center">
+
+    <div className="rounded-[3rem] bg-white/90 p-10 shadow-[0_30px_100px_rgba(14,165,233,.25)]">
+
+      <h1 className="text-5xl font-black text-sky-950">
+        📚 Lernzeit
+      </h1>
+
+      <p className="mt-4 text-2xl font-black text-sky-700">
+        {activeLearningTask.title}
+      </p>
+
+      <div className="mt-8 text-7xl font-black text-indigo-600">
+        {Math.floor(learningTimeLeft / 60)}:
+        {(learningTimeLeft % 60).toString().padStart(2, "0")}
+      </div>
+
+      <p className="mt-6 text-lg font-bold text-sky-700">
+        Bitte konzentriert lernen 😄
+      </p>
+
+      <div className="mt-8 grid gap-4">
+
+        <input
+          value={learningPinInput}
+          onChange={(e) => setLearningPinInput(e.target.value)}
+          placeholder="🔐 Eltern-PIN zum Beenden"
+          type="password"
+          className="w-full rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-xl font-black"
+        />
+
+        <button
+          onClick={() => {
+            if (learningPinInput === savedParentPin) {
+              setActiveLearningTask(null);
+              setLearningPinInput("");
+            } else {
+              celebrate("❌ Falscher PIN");
+            }
+          }}
+          className="rounded-[1.5rem] bg-gradient-to-r from-pink-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl"
+        >
+          🔓 Lernzeit beenden
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
                             </div>
                           </div>
                         ))}
