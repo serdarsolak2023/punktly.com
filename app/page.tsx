@@ -609,7 +609,8 @@ export default function PunktlyRoleSplit() {
   const [wheelSpinning, setWheelSpinning] = useState(false);
   const [wheelResult, setWheelResult] = useState<number | null>(null);
   const [bonusCoinsEnabled, setBonusCoinsEnabled] = useState(false);
-  
+  const [dailyBonusEnabled, setDailyBonusEnabled] = useState(true);
+    
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
     name: "Kein Kind",
@@ -1120,7 +1121,7 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
     const waitingReward: Reward = { ...reward, status: "wartet" };
     setRewards(prev => prev.map(r => r.id === reward.id ? waitingReward : r));
     saveFamilyItem("rewards", waitingReward);
-    celebrate("Belohnung wartet auf Eltern!");
+    celebrate("Warten auf die Bestätigung deiner Eltern!");
   }
 
   function approveReward(reward: Reward) {
@@ -1617,6 +1618,34 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
 
 async function saveChildNow(updatedChild: Child) {
   await saveFamilyItem("children", updatedChild);
+}
+function claimDailyLoginBonus() {
+  if (!child) return;
+
+  const bonusKey = `dailyBonus_${child.id}`;
+  const lastClaim = Number(localStorage.getItem(bonusKey) || 0);
+
+  const now = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+
+  if (now - lastClaim < twentyFourHours) {
+    return;
+  }
+
+  const updatedChild = {
+    ...child,
+    coins: child.coins + 10,
+  };
+
+  setChildren(prev =>
+    prev.map(c => (c.id === child.id ? updatedChild : c))
+  );
+
+  saveChildNow(updatedChild);
+
+  localStorage.setItem(bonusKey, String(now));
+
+  celebrate("🎁 Täglicher Login-Bonus!\n\nDu hast 10 Coins erhalten.");
 }
 
 function spinBonusWheel() {
@@ -2264,11 +2293,7 @@ bg: "bg-purple-50",
           </div>
         </div>
       )}
-
-
-
-      
-
+   
       {showPinReset && (
         <div className="fixed inset-0 z-[90] grid place-items-center bg-blue-950/45 p-4 backdrop-blur-md">
           <div className="w-full max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-4 border-white bg-white p-6 text-center shadow-[0_24px_80px_rgba(15,23,42,.25)]">
@@ -2887,6 +2912,7 @@ bg: "bg-purple-50",
                   }
                   setArea("child");
                   setChildView("home");
+                  claimDailyLoginBonus();
                 }}
                 className="mt-6 w-full rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.35)] hover:scale-[1.02] active:scale-[.98] transition"
               >
