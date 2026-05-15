@@ -1310,10 +1310,13 @@ function saveChild() {
     const editedChild = children.find(c => c.id === editingChildId);
     if (!editedChild) return;
 
-    const updatedChild = {
-      ...editedChild,
-      name: newChildName.trim(),
-    };
+const updatedChild = {
+  ...editedChild,
+  name: newChildName.trim(),
+  age: newChildAge,
+  favoriteColor: newChildColor,
+  favoriteAnimal: newChildAnimal,
+};
 
     setChildren(prev => prev.map(c => c.id === editingChildId ? updatedChild : c));
     saveFamilyItem("children", updatedChild);
@@ -1324,7 +1327,31 @@ function saveChild() {
   }
 
   const id = Date.now();
-  const newChild = { id, name: newChildName, coins: 0, xp: 0, level: 1, prestige: 0, prestigeStars: 0, streak: 0, completedCount: 0, weeklyPoints: 0, theme: "hell" as Theme, goal: "Neue Belohnung", goalCoins: 500, equipped: [], activePet: "", activeBackground: "", activeAvatar: "", activeBooster: "", achievements: [], profileBadges: [] };
+  const newChild = {
+  id,
+  name: newChildName.trim(),
+  age: newChildAge,
+  favoriteColor: newChildColor,
+  favoriteAnimal: newChildAnimal,
+  coins: 0,
+  xp: 0,
+  level: 1,
+  prestige: 0,
+  prestigeStars: 0,
+  streak: 0,
+  completedCount: 0,
+  weeklyPoints: 0,
+  theme: "hell" as Theme,
+  goal: "Neue Belohnung",
+  goalCoins: 500,
+  equipped: [],
+  activePet: "",
+  activeBackground: "",
+  activeAvatar: "",
+  activeBooster: "",
+  achievements: [],
+  profileBadges: [],
+};
 
   setChildren(prev => [...prev, newChild]);
   saveFamilyItem("children", newChild);
@@ -1336,6 +1363,9 @@ function saveChild() {
 function editChild(child: Child) {
   setEditingChildId(child.id);
   setNewChildName(child.name);
+  setNewChildAge(child.age || "");
+  setNewChildColor(child.favoriteColor || "");
+  setNewChildAnimal(child.favoriteAnimal || "");
 }
 
 function deleteChild(id: number) {
@@ -3810,7 +3840,7 @@ bg: "bg-purple-50",
                       />
 <input
   value={newChildAge}
-  onChange={e => setNewChildAge(e.target.value)}
+  onChange={e => setNewChildAge(e.target.value )}
   placeholder="🎂 Alter"
   type="number"
   className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
