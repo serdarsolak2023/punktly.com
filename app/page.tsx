@@ -60,6 +60,9 @@ type Child = {
   activeBooster?: string;
   achievements: string[];
   profileBadges?: string[];
+  age?: string;
+favoriteColor?: string;
+favoriteAnimal?: string;
 };
 
 type Task = { id: number; childId: number | "all"; title: string; coins: number; xp: number; repeat: Repeat; status: Status; day: string; };
@@ -3016,6 +3019,22 @@ bg: "bg-purple-50",
                   <p className="text-xs font-black uppercase tracking-[.18em] text-sky-500">Profil von {child.name}</p>
                   <h2 className="text-2xl font-black text-sky-950">Mein Motiv</h2>
                   <p className="text-sm font-bold text-sky-700">Jedes Kind speichert sein eigenes Motiv.</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+
+  <div className="rounded-full bg-pink-100 px-4 py-2 font-black text-pink-800">
+    🎂 {child.age || "-"} Jahre
+  </div>
+
+  <div className="rounded-full bg-yellow-100 px-4 py-2 font-black text-yellow-800">
+    🎨 {child.favoriteColor || "-"}
+  </div>
+
+  <div className="rounded-full bg-emerald-100 px-4 py-2 font-black text-emerald-800">
+    🐾 {child.favoriteAnimal || "-"}
+  </div>
+
+</div>
+                  
                 </div>
 
                 {children.length > 1 && (
