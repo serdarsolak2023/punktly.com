@@ -1612,6 +1612,7 @@ function deleteChild(id: number) {
       };
 
       const loadedChildren = (await loadCollection<Child>("children")).map((loadedChild) => syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
+      const loadedLearningTasks = await loadCollection<any>("learningTasks");
       const loadedTasks = await loadCollection<Task>("tasks");
       const loadedRewards = await loadCollection<Reward>("rewards");
       const loadedChests = await loadCollection<Chest>("chests");
@@ -1627,6 +1628,7 @@ function deleteChild(id: number) {
 
       const syncedChildren = loadedChildren.map(syncPrestigeStars);
       setChildren(syncedChildren);
+      setLearningTasks(loadedLearningTasks);
       syncedChildren.forEach((loadedChild) => {
         saveFamilyItem("children", syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
       });
