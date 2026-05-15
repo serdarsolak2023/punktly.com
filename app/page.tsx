@@ -2913,7 +2913,6 @@ bg: "bg-purple-50",
                   }
                   setArea("child");
                   setChildView("home");
-                  claimDailyLoginBonus();
                 }}
                 className="mt-6 w-full rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.35)] hover:scale-[1.02] active:scale-[.98] transition"
               >
