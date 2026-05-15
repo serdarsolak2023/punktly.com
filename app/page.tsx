@@ -557,6 +557,7 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
 
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
@@ -1697,17 +1698,44 @@ function deleteChild(id: number) {
 async function saveChildNow(updatedChild: Child) {
   await saveFamilyItem("children", updatedChild);
 }
-function addLearningTask() {
+function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
 
-const task = {
-  id: Date.now(),
-  childId: selectedChildId,
-  title: newLearningTitle,
-  coins: newLearningCoins,
-  category: newLearningCategory,
-  status: "offen",
-};
+  if (editingLearningTaskId) {
+    const editedTask = learningTasks.find(task => task.id === editingLearningTaskId);
+    if (!editedTask) return;
+
+    const updatedTask = {
+      ...editedTask,
+      childId: selectedChildId,
+      title: newLearningTitle,
+      coins: newLearningCoins,
+      category: newLearningCategory,
+    };
+
+    setLearningTasks(prev =>
+      prev.map(task => task.id === editingLearningTaskId ? updatedTask : task)
+    );
+
+    saveFamilyItem("learningTasks", updatedTask);
+
+    setEditingLearningTaskId(null);
+    setNewLearningTitle("");
+    setNewLearningCoins(10);
+
+    celebrate("📚 Lernaufgabe bearbeitet!");
+    return;
+  }
+
+  const task = {
+    id: Date.now(),
+    childId: selectedChildId,
+    title: newLearningTitle,
+    coins: newLearningCoins,
+    category: newLearningCategory,
+    status: "offen",
+  };
+
   setLearningTasks(prev => [...prev, task]);
   saveFamilyItem("learningTasks", task);
 
@@ -1715,6 +1743,20 @@ const task = {
   setNewLearningCoins(10);
 
   celebrate("📚 Lernaufgabe hinzugefügt!");
+}
+
+function editLearningTask(task: any) {
+  setEditingLearningTaskId(task.id);
+  setSelectedChildId(task.childId);
+  setNewLearningTitle(task.title);
+  setNewLearningCoins(task.coins);
+  setNewLearningCategory(task.category);
+}
+
+function deleteLearningTask(id: number) {
+  setLearningTasks(prev => prev.filter(task => task.id !== id));
+  deleteFamilyItem("learningTasks", id);
+  celebrate("Lernaufgabe gelöscht.");
 }
 function claimDailyLoginBonus() {
   if (!child) return;
@@ -3560,12 +3602,67 @@ bg: "bg-purple-50",
   ))}
 </select>
 <button
-  onClick={addLearningTask}
+  onClick={saveLearningTask}
   className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
 >
-  ➕ Lernaufgabe hinzufügen
+  {editingLearningTaskId ? "✏️ Lernaufgabe ändern" : "➕ Lernaufgabe hinzufügen"}
 </button>
+<div className="mt-6 grid gap-4">
 
+  {learningTasks.map((task) => {
+    const kid = children.find(c => c.id === task.childId);
+
+    return (
+      <div
+        key={task.id}
+        className="rounded-[2rem] bg-white/90 p-5 shadow-xl"
+      >
+
+        <div className="flex items-center justify-between gap-4">
+
+          <div>
+            <p className="text-sm font-black text-sky-500">
+              {task.category}
+            </p>
+
+            <h3 className="text-2xl font-black text-sky-950">
+              {task.title}
+            </h3>
+
+            <p className="mt-1 font-black text-amber-600">
+              🪙 {task.coins} Coins
+            </p>
+
+            <p className="mt-1 font-bold text-sky-700">
+              👶 {kid?.name || "Kind"}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2">
+
+            <button
+              onClick={() => editLearningTask(task)}
+              className="rounded-[1.3rem] bg-yellow-200 px-4 py-2 font-black text-yellow-900"
+            >
+              ✏️ Bearbeiten
+            </button>
+
+            <button
+              onClick={() => deleteLearningTask(task.id)}
+              className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
+            >
+              🗑️ Löschen
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    );
+  })}
+
+</div>
       </div>
 
     </div>
