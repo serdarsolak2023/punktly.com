@@ -3787,12 +3787,12 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
                       />
 
-                      <button
-                        onClick={saveChild}
-                        className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
-                      >
-                        + Kind hinzufügen
-                      </button>
+<button
+  onClick={saveChild}
+  className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white"
+>
+  {editingChildId ? "Änderung speichern" : "+ Kind hinzufügen"}
+</button>
                     </div>
 
                     {children.length === 0 && (
