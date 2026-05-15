@@ -3333,7 +3333,17 @@ bg: "bg-purple-50",
                 </div>
 
                 <button
-                  className="rounded-[1.5rem] bg-gradient-to-r from-emerald-400 to-green-500 px-5 py-3 font-black text-white shadow-lg"
+                  className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
+                >
+                  ✅ Erledigt
+                </button>
+                                <button
+                  className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
+                >
+                  ✅ Erledigt
+                </button>
+                                <button
+                  className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
                 >
                   ✅ Erledigt
                 </button>
