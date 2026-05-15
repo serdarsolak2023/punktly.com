@@ -3043,8 +3043,8 @@ bg: "bg-purple-50",
           <>
             <ChildTabs view={childView} setView={setChildView} />
 
-            <div className="mt-4 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-white bg-white/85 p-4 shadow-[0_18px_50px_rgba(37,99,235,.14)]">
-              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div> 
                   <div className="mt-4 flex flex-wrap gap-2">
 
