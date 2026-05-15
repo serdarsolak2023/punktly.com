@@ -3043,8 +3043,8 @@ bg: "bg-purple-50",
           <>
             <ChildTabs view={childView} setView={setChildView} />
 
-                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+<div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-pink-100 via-yellow-100 via-sky-100 to-purple-100 p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white">
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div> 
                   <div className="mt-4 flex flex-wrap gap-2">
 
@@ -3061,7 +3061,6 @@ bg: "bg-purple-50",
   </div>
 </div>   
                 </div>
-
                 {children.length > 1 && (
                   <select
                     value={selectedChildId}
@@ -3069,7 +3068,7 @@ bg: "bg-purple-50",
                       setSelectedChildId(Number(e.target.value));
                       setShowBadgeChooser(false);
                     }}
-                    className="rounded-[1.2rem] border-2 border-green-400 bg-yellow-200 px-4 py-3 font-black text-red-600 shadow-inner"
+                    className="ml-auto rounded-[1.5rem] border-2 border-white bg-gradient-to-r from-pink-200 via-yellow-200 to-sky-200 px-5 py-3 font-black text-purple-700 shadow-[0_10px_30px_rgba(168,85,247,.18)]"
                   >
                     {children.map((kid) => (
                       <option key={kid.id} value={kid.id}>{kid.name}</option>
