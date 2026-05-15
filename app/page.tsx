@@ -759,7 +759,7 @@ const completedPercent = useMemo(
 function celebrate(message: string) {
     playSound("success");
     setCelebration(message);
-    setTimeout(() => setCelebration(null), 1800);
+    setTimeout(() => setCelebration(null), 5000);
   }
 
   function goStart() {
@@ -873,7 +873,7 @@ function celebrate(message: string) {
   ];
 
 celebrate(`${randomMessage} Warte jetzt auf die Bestätigung deiner Eltern.`);
-  }
+  } 
 
   function approveTask(task: Task) {
     const approvedTask: Task = { ...task, status: "erledigt" };
