@@ -635,7 +635,58 @@ export default function PunktlyRoleSplit() {
   const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
   const waitingRewards = rewards.filter((r) => r.status === "wartet");
-
+  const motivationMessages = [
+  "Super gemacht! Du kannst stolz auf dich sein.",
+  "Toll erledigt! Weiter so.",
+  "Du bist richtig fleißig.",
+  "Klasse Arbeit! Das war stark.",
+  "Du kommst deinem Ziel immer näher.",
+  "Jede Aufgabe bringt dich weiter.",
+  "Du hast heute richtig gut mitgemacht.",
+  "Stark! Deine Mühe zahlt sich aus.",
+  "Du sammelst nicht nur Coins, sondern auch Erfahrung.",
+  "Weiter so, du bist auf dem richtigen Weg.",
+  "Das hast du richtig gut gemacht.",
+  "Du wirst jeden Tag besser.",
+  "Eine Aufgabe geschafft – ein Schritt näher zur Belohnung.",
+  "Du zeigst echte Verantwortung.",
+  "Richtig stark, mach weiter so.",
+  "Du kannst stolz auf deinen Fortschritt sein.",
+  "Heute hast du wieder etwas geschafft.",
+  "Deine Coins wachsen, weil du fleißig bist.",
+  "Großartig! Du bleibst dran.",
+  "Du hast dir deine Belohnung verdient.",
+  "Mit jeder Aufgabe wirst du stärker.",
+  "Dein Einsatz lohnt sich.",
+  "Du machst das richtig klasse.",
+  "So sieht Verantwortung aus.",
+  "Du bist ein echter Aufgaben-Profi.",
+  "Ein weiterer Erfolg für dich.",
+  "Du hast gezeigt, dass du es kannst.",
+  "Bleib dran, du erreichst dein Ziel.",
+  "Du bist heute sehr motiviert.",
+  "Tolle Leistung von dir.",
+  "Deine Familie kann stolz auf dich sein.",
+  "Du sammelst Schritt für Schritt Erfolg.",
+  "Das war eine starke Aufgabe.",
+  "Du hast wieder Coins verdient.",
+  "Sehr gut gemacht.",
+  "Du bist ein echter Coin-Sammler.",
+  "Dein Fortschritt ist sichtbar.",
+  "Du lernst Verantwortung mit Spaß.",
+  "Klasse, dass du drangeblieben bist.",
+  "Das war ein super Schritt nach vorne.",
+  "Du hast heute etwas Wichtiges geschafft.",
+  "Deine Mühe bringt dich weiter.",
+  "Du bist auf dem Weg zur nächsten Belohnung.",
+  "Jede erledigte Aufgabe zählt.",
+  "Du machst PunktlyCoinly richtig stark.",
+  "Du hast dir ein Lob verdient.",
+  "So macht Aufgaben erledigen Spaß.",
+  "Deine Motivation ist richtig stark.",
+  "Du bist ein echtes Vorbild.",
+  "Mega gemacht! Weiter geht’s."
+];
   const childRewardGoalTotal = useMemo(
   () =>
     rewards
@@ -818,6 +869,12 @@ function celebrate(message: string) {
     }
     celebrate("Wartet auf Eltern-Bestätigung!");
   }
+  const randomMessage =
+  motivationMessages[
+    Math.floor(Math.random() * motivationMessages.length)
+  ];
+
+celebrate(randomMessage);
 
   function approveTask(task: Task) {
     const approvedTask: Task = { ...task, status: "erledigt" };
