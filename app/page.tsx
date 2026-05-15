@@ -564,6 +564,9 @@ export default function PunktlyRoleSplit() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
   const [newChildName, setNewChildName] = useState("");
+  const [newChildAge, setNewChildAge] = useState("");
+  const [newChildColor, setNewChildColor] = useState("");
+  const [newChildAnimal, setNewChildAnimal] = useState("");
   const [editingChildId, setEditingChildId] = useState<number | null>(null);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskCoins, setNewTaskCoins] = useState(10);
@@ -3496,7 +3499,7 @@ bg: "bg-purple-50",
                       <textarea
                         value={newShopDescription}
                         onChange={e => setNewShopDescription(e.target.value)}
-                        placeholder="Beschreibung, z. B. Nintendo Spiel Mario Kart"
+                        placeholder="Beschreibung, z. B. Mario Kart"
                         className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
                       />
 
@@ -3786,7 +3789,27 @@ bg: "bg-purple-50",
                         placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
                       />
+<input
+  value={newChildAge}
+  onChange={e => setNewChildAge(e.target.value)}
+  placeholder="🎂 Alter"
+  type="number"
+  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+/>
 
+<input
+  value={newChildColor}
+  onChange={e => setNewChildColor(e.target.value)}
+  placeholder="🎨 Lieblingsfarbe"
+  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+/>
+
+<input
+  value={newChildAnimal}
+  onChange={e => setNewChildAnimal(e.target.value)}
+  placeholder="🐾 Lieblingstier"
+  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+/>
 <button
   onClick={saveChild}
   className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white"
