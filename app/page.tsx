@@ -1958,31 +1958,38 @@ function spinBonusWheel() {
     return () => unsubscribe();
   }, []);
   
-  useEffect(() => {
-if (learningTimeLeft <= 0) {
-  const updatedTask = {
-    ...activeLearningTask,
-    status: "wartet",
-  };
+useEffect(() => {
+  if (!activeLearningTask) return;
 
-  setLearningTasks(prev =>
-    prev.map(task =>
-      task.id === activeLearningTask.id ? updatedTask : task
-    )
-  );
+  if (learningTimeLeft <= 0) {
+    const finishedTask = activeLearningTask;
 
-  saveFamilyItem("learningTasks", updatedTask);
+    const updatedTask = {
+      ...finishedTask,
+      status: "wartet",
+    };
 
-  setActiveLearningTask(null);
-  setLearningPinInput("");
+    setLearningTasks(prev =>
+      prev.map(task =>
+        task.id === finishedTask.id ? updatedTask : task
+      )
+    );
 
-  celebrate("🎉 Lernaufgabe beendet! Wartet auf Elternbestätigung.");
+    saveFamilyItem("learningTasks", updatedTask);
 
-  return;
-}
+    setActiveLearningTask(null);
+    setActiveReadingText(null);
+    setLearningPinInput("");
+
+    setTimeout(() => {
+      celebrate("🎉 Lernaufgabe beendet!\n\nWartet auf Elternbestätigung.");
+    }, 100);
+
+    return;
+  }
 
   const timer = setTimeout(() => {
-    setLearningTimeLeft(prev => prev - 1);
+    setLearningTimeLeft(prev => Math.max(prev - 1, 0));
   }, 1000);
 
   return () => clearTimeout(timer);
