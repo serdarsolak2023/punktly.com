@@ -3937,6 +3937,19 @@ bg: "bg-purple-50",
   ))}
 </select>
 <button
+  type="button"
+  onClick={() => {
+    setNewLearningTitle("");
+    setNewLearningCoins("");
+    setNewLearningMinutes(0);
+    setNewLearningCategory("📚 Lesen");
+    setNewLearningLevel("leicht");
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>
+<button
   onClick={saveLearningTask}
   className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
 >
@@ -3988,20 +4001,14 @@ bg: "bg-purple-50",
             >
               🗑️ Löschen
             </button>
-
           </div>
-
         </div>
-
       </div>
     );
   })}
-
 </div>
-      </div>
-
+     </div>
     </div>
-
   </Panel>
 )}
               {parentView === "tasks" && (
@@ -4041,6 +4048,20 @@ bg: "bg-purple-50",
                       <select value={newTaskRepeat} onChange={e => setNewTaskRepeat(e.target.value as Repeat)} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="einmalig">Einmalig</option><option value="täglich">Täglich</option><option value="wöchentlich">Wöchentlich</option></select>
                       <select value={newTaskDay} onChange={e => setNewTaskDay(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">{days.map(d => <option key={d}>{d}</option>)}</select>
                       <select value={String(newTaskTarget)} onChange={e => setNewTaskTarget(e.target.value === "all" ? "all" : Number(e.target.value))} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="all">Für alle Kinder</option>{children.map(c => <option key={c.id} value={c.id}>Nur für {c.name}</option>)}</select>
+                      <button
+  type="button"
+  onClick={() => {
+    setNewTaskTitle("");
+    setNewTaskCoins(0);
+    setNewTaskRepeat("täglich");
+    setNewTaskTarget("all");
+    setNewTaskDay("Mo");
+    setSelectedPreset("");
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>
                       <button onClick={saveTask} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(16,185,129,.25)] hover:scale-[1.02] active:scale-[.98] transition">{editingTaskId ? "Änderung speichern" : "Aufgabe hinzufügen"}</button>
                     </div>
 
@@ -4173,7 +4194,18 @@ bg: "bg-purple-50",
                         placeholder="Beschreibung, z. B. Mario Kart"
                         className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
                       />
-
+<button
+  type="button"
+  onClick={() => {
+    setNewShopTitle("");
+    setNewShopPrice(0);
+    setNewShopIcon("🎁");
+    setNewShopDescription("");
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>
                       <button
                         onClick={saveShopItem}
                         className="rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-4 text-xl font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.22)]"
@@ -4282,6 +4314,18 @@ bg: "bg-purple-50",
                         placeholder="Was ist drin? z. B. Du darfst heute ein Eis aussuchen."
                         className="min-h-[120px] w-full rounded-[1.35rem] border p-3"
                       />
+                      <button
+  type="button"
+  onClick={() => {
+    setNewChestTitle("");
+    setNewChestPrice(0);
+    setNewChestContent("");
+    setNewChestTier("Bronze");
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>
                       <button onClick={addChest} className="rounded-[1.35rem] bg-gradient-to-br from-yellow-200 via-orange-300 to-pink-300 px-4 py-3 font-black text-amber-950 shadow-[0_10px_25px_rgba(245,158,11,.25)] hover:scale-[1.02] active:scale-[.98] transition">
                         Schatzkiste speichern
                       </button>
@@ -4507,6 +4551,7 @@ bg: "bg-purple-50",
   placeholder="🐾 Lieblingstier"
   className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
 />
+
 <button
   onClick={saveChild}
   className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white"
