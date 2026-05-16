@@ -1825,21 +1825,21 @@ function getReadingText(level: "leicht" | "mittel" | "schwer") {
 
   return texts[Math.floor(Math.random() * texts.length)];
 }
+
 function getMathTask(level: "leicht" | "mittel" | "schwer") {
-  if (!child) return null;
-
-  const age = Number(child.age || 0);
-
-  const tasks = mathTasks[level].filter(
-    task =>
+  const age = Number(child?.age || 0)
+  const filteredTasks = mathTasks.filter(
+    (task) =>
+      task.category === level &&
       age >= task.minAge &&
       age <= task.maxAge
   );
-
-  if (tasks.length === 0) return null;
-
-  return tasks[
-    Math.floor(Math.random() * tasks.length)
+  if (filteredTasks.length === 0) {
+    return null;
+  }
+  
+  return filteredTasks[
+    Math.floor(Math.random() * filteredTasks.length)
   ];
 }
 function saveLearningTask() {
@@ -1872,15 +1872,16 @@ function saveLearningTask() {
     return;
   }
 
-  const task = {
-    id: Date.now(),
-    childId: selectedChildId,
-    title: newLearningTitle,
-    coins: newLearningCoins,
-    category: newLearningCategory,
-    level: newLearningLevel,
-    status: "offen",
-  };
+const task = {
+  id: Date.now(),
+  childId: selectedChildId,
+  title: newLearningTitle,
+  coins: newLearningCoins,
+  category: newLearningCategory,
+  level: newLearningLevel,
+  minutes: newLearningMinutes,
+  status: "offen",
+};
 
   setLearningTasks(prev => [...prev, task]);
   saveFamilyItem("learningTasks", task);
