@@ -3883,10 +3883,14 @@ bg: "bg-purple-50",
           className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
         />
 
-<NumberKeypadField
-  label="🪙 Coins"
-  value={newRewardCoins}
-  setter={setNewRewardCoins}
+<input
+  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  readOnly
+  onClick={() =>
+    openNumberKeypad(newRewardCoins, setNewRewardCoins)
+  }
+  placeholder="🪙 Coins"
+  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 <input
   value={newLearningMinutes}
@@ -4060,10 +4064,14 @@ bg: "bg-purple-50",
                   <Panel title={editingRewardId ? "✏️ Belohnung bearbeiten" : "🎁 Belohnung anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">Belohnungen können nur Eltern anlegen, bearbeiten und löschen.</p>
                     <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" />
-<NumberKeypadField
-  label="🪙 Coins"
-  value={newRewardCoins}
-  setter={setNewRewardCoins}
+<input
+  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  readOnly
+  onClick={() =>
+    openNumberKeypad(newRewardCoins, setNewRewardCoins)
+  }
+  placeholder="🪙 Coins"
+  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
                     <button onClick={saveReward} className="rounded-[1.35rem] bg-purple-500 px-4 py-3 font-black text-white">{editingRewardId ? "Änderung speichern" : "Belohnung hinzufügen"}</button></div>
                   </Panel>
@@ -4103,10 +4111,14 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 
-<NumberKeypadField
-  label="🪙 Preis in Coins"
-  value={newShopPrice}
-  setter={setNewShopPrice}
+<input
+  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  readOnly
+  onClick={() =>
+    openNumberKeypad(newRewardCoins, setNewRewardCoins)
+  }
+  placeholder="🪙 Coins"
+  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 
                       <input
@@ -4200,10 +4212,14 @@ bg: "bg-purple-50",
                         placeholder="Name der Schatzkiste, z. B. Überraschung"
                         className="w-full rounded-[1.35rem] border p-3"
                       />
-<NumberKeypadField
-  label="🪙 Coins"
-  value={newRewardCoins}
-  setter={setNewRewardCoins}
+<input
+  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  readOnly
+  onClick={() =>
+    openNumberKeypad(newRewardCoins, setNewRewardCoins)
+  }
+  placeholder="🪙 Coins"
+  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
                       <select
                         value={newChestTier}
