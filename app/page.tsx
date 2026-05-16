@@ -830,11 +830,13 @@ function openNumberKeypad(
   currentValue: number,
   setter: (value: number) => void
 ) {
-  setNumberKeypadValue("");
+  setNumberKeypadValue(
+    currentValue > 0 ? String(currentValue) : ""
+  );
+
   setNumberKeypadSetter(() => setter);
   setNumberKeypadOpen(true);
 }
-
 function NumberKeypadField({ label, value, setter }: {
   label: string;
   value: number;
@@ -3884,13 +3886,11 @@ bg: "bg-purple-50",
         />
 
 <input
-  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  value={newLearningCoins === 0 ? "" : newLearningCoins}
   readOnly
-  onClick={() =>
-    openNumberKeypad(newRewardCoins, setNewRewardCoins)
-  }
+  onClick={() => openNumberKeypad(newLearningCoins, setNewLearningCoins)}
   placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
+  className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
 <input
   value={newLearningMinutes}
@@ -4065,11 +4065,9 @@ bg: "bg-purple-50",
                     <p className="mb-4 font-bold text-sky-700">Belohnungen können nur Eltern anlegen, bearbeiten und löschen.</p>
                     <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" />
 <input
-  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  value={newRewardCoins === 0 ? "" : newRewardCoins}
   readOnly
-  onClick={() =>
-    openNumberKeypad(newRewardCoins, setNewRewardCoins)
-  }
+  onClick={() => openNumberKeypad(newRewardCoins, setNewRewardCoins)}
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
@@ -4112,12 +4110,10 @@ bg: "bg-purple-50",
                       />
 
 <input
-  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  value={newShopPrice === 0 ? "" : newShopPrice}
   readOnly
-  onClick={() =>
-    openNumberKeypad(newRewardCoins, setNewRewardCoins)
-  }
-  placeholder="🪙 Coins"
+  onClick={() => openNumberKeypad(newShopPrice, setNewShopPrice)}
+  placeholder="🪙 Preis in Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 
@@ -4213,10 +4209,10 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 <input
-  value={newRewardCoins === 0 ? "" : newRewardCoins}
+  value={newChestPrice === 0 ? "" : newChestPrice}
   readOnly
-  onClick={() =>openNumberKeypad(newRewardCoins, setNewRewardCoins)}
-  placeholder="🪙 Coins"
+  onClick={() => openNumberKeypad(newChestPrice, setNewChestPrice)}
+  placeholder="🪙 Kistenpreis"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
                       <select
