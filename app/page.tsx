@@ -1704,7 +1704,8 @@ async function saveChildNow(updatedChild: Child) {
 }
 function startLearningSession(task: any) {
   setActiveLearningTask(task);
-  setLearningTimeLeft(task.minutes * 60);
+  setLearningTimeLeft(Number(task.minutes || 1) * 60);
+  setLearningPinInput("");
 }
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
