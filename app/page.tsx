@@ -582,7 +582,7 @@ export default function PunktlyRoleSplit() {
   const [newChildAnimal, setNewChildAnimal] = useState("");
   const [editingChildId, setEditingChildId] = useState<number | null>(null);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [newTaskCoins, setNewTaskCoins] = useState(10);
+  const [newTaskCoins, setNewTaskCoins] = useState(0);
   const [newTaskRepeat, setNewTaskRepeat] = useState<Repeat>("täglich");
   const [newTaskTarget, setNewTaskTarget] = useState<number | "all">("all");
   const [newTaskDay, setNewTaskDay] = useState("Mo");
@@ -4008,7 +4008,9 @@ bg: "bg-purple-50",
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingTaskId ? "✏️ Aufgabe bearbeiten" : "➕ Aufgabe anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">
-                      Wähle eine typische Alltagsaufgabe aus oder schreibe eine eigene. Coins, Wiederholung, Tag und Kind kannst du danach frei anpassen.
+                      Wähle eine typische Alltagsaufgabe aus oder schreibe eine eigene ➡️ Aufgabe anlegen. 
+                      <br />
+                      Coins, Wiederholung, Tag und Kind kannst du danach frei anpassen.
                     </p>
                     <div className="grid gap-3">
                       <select value={selectedPreset} onChange={e => applyTaskPreset(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">
@@ -4019,8 +4021,23 @@ bg: "bg-purple-50",
                           </option>
                         ))}
                       </select>
-                      <input value={newTaskTitle} onChange={e => setNewTaskTitle(e.target.value)} placeholder="Eigene Aufgabe oder Vorlage bearbeiten" className="w-full rounded-[1.35rem] border p-3" />
-                      <input value={newTaskCoins === 0 ? "" : newTaskCoins} onChange={e => setNewTaskCoins(e.target.value === "" ? 0 : Number(e.target.value))} type="number" placeholder="Coins anpassen" className="w-full rounded-[1.35rem] border p-3" />
+                      <input value={newTaskTitle} onChange={e => setNewTaskTitle(e.target.value)} placeholder="Eigene Aufgabe anlegen" className="w-full rounded-[1.35rem] border p-3" />
+<input
+  value={
+    Number(newTaskCoins) === 0
+      ? ""
+      : `🪙 ${newTaskCoins} Coins`
+  }
+  readOnly
+  onClick={() =>
+    openNumberKeypad(
+      Number(newTaskCoins),
+      setNewTaskCoins
+    )
+  }
+  placeholder="🪙 Coins"
+  className="w-full cursor-pointer rounded-[1.35rem] border bg-white p-3"
+/>
                       <select value={newTaskRepeat} onChange={e => setNewTaskRepeat(e.target.value as Repeat)} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="einmalig">Einmalig</option><option value="täglich">Täglich</option><option value="wöchentlich">Wöchentlich</option></select>
                       <select value={newTaskDay} onChange={e => setNewTaskDay(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">{days.map(d => <option key={d}>{d}</option>)}</select>
                       <select value={String(newTaskTarget)} onChange={e => setNewTaskTarget(e.target.value === "all" ? "all" : Number(e.target.value))} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="all">Für alle Kinder</option>{children.map(c => <option key={c.id} value={c.id}>Nur für {c.name}</option>)}</select>
