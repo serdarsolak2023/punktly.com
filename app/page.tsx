@@ -18,6 +18,7 @@ import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
+import { mathTasks } from "./mathTasks";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
@@ -575,6 +576,9 @@ export default function PunktlyRoleSplit() {
   const [shop, setShop] = useState<ShopItem[]>(initialShop);
   const [chests, setChests] = useState<Chest[]>(initialChests);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [activeMathTask, setActiveMathTask] = useState<any>(null);
+  const [mathQuestionTask, setMathQuestionTask] = useState<any | null>(null);
+  const [mathQuestionData, setMathQuestionData] = useState<any | null>(null);
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -1809,6 +1813,23 @@ function getReadingText(level: "leicht" | "mittel" | "schwer") {
 
   return texts[Math.floor(Math.random() * texts.length)];
 }
+function getMathTask(level: "leicht" | "mittel" | "schwer") {
+  if (!child) return null;
+
+  const age = Number(child.age || 0);
+
+  const tasks = mathTasks[level].filter(
+    task =>
+      age >= task.minAge &&
+      age <= task.maxAge
+  );
+
+  if (tasks.length === 0) return null;
+
+  return tasks[
+    Math.floor(Math.random() * tasks.length)
+  ];
+}
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
 
@@ -2548,7 +2569,7 @@ bg: "bg-purple-50",
         </div>
 
 {numberKeypadOpen && (
-  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
+  <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/30 px-4">
 
     <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
 
@@ -2620,7 +2641,7 @@ bg: "bg-purple-50",
   </div>
 )}
 {readingQuestionTask && readingQuestionText && (
-  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
+  <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/50 px-4">
     <div className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl">
       <h2 className="text-center text-3xl font-black text-sky-900">
         📖 Frage zum Text
@@ -4782,7 +4803,7 @@ bg: "bg-purple-50",
         )}
       </div>
       {activeLearningTask && (
-  <div className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-8 text-center">
+  <div className="fixed inset-0 z-[9000] flex flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-8 text-center">
 
     <div className="rounded-[3rem] bg-white/90 p-10 shadow-[0_30px_100px_rgba(14,165,233,.25)]">
 
