@@ -4127,6 +4127,17 @@ bg: "bg-purple-50",
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
+   <button
+  type="button"
+  onClick={() => {
+    setNewRewardTitle("");
+    setNewRewardCoins(0);
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>                 
+                    
                     <button onClick={saveReward} className="rounded-[1.35rem] bg-purple-500 px-4 py-3 font-black text-white">{editingRewardId ? "Änderung speichern" : "Belohnung hinzufügen"}</button></div>
                   </Panel>
 
