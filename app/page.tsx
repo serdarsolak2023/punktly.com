@@ -3200,13 +3200,46 @@ bg: "bg-purple-50",
               <h2 className="mt-4 text-center text-4xl font-black text-green-950">Elternbereich</h2>
               <p className="mt-2 text-center font-bold text-sky-800">Aufgaben, Shop, Belohnungen, Kinder, Statistik und Bestätigungen verwalten.</p>
               <div className="mt-6 grid gap-3">
-                <input
-                  value={pinInput}
-                  onChange={e => setPinInput(e.target.value)}
-                  placeholder={savedParentPin ? "Eltern-PIN eingeben" : "Neue Eltern-PIN erstellen"}
-                  type="password"
-                  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-center text-xl font-black"
-                />
+                <div className="mx-auto w-44 rounded-[1.5rem] bg-white p-4 text-center text-3xl font-black tracking-[0.4rem] shadow-inner">
+  {pinInput.length > 0 ? "●".repeat(pinInput.length) : "PIN"}
+</div>
+
+<div className="mx-auto mt-4 grid max-w-xs grid-cols-3 gap-3">
+  {["1","2","3","4","5","6","7","8","9"].map((num) => (
+    <button
+      key={num}
+      type="button"
+      onClick={() => setPinInput(prev => (prev + num).slice(0,6))}
+      className="rounded-[1rem] bg-white py-4 text-2xl font-black text-sky-900 shadow-md"
+    >
+      {num}
+    </button>
+  ))}
+
+  <button
+    type="button"
+    onClick={() => setPinInput("")}
+    className="rounded-[1rem] bg-red-100 py-4 text-xl font-black text-red-700 shadow-md"
+  >
+    C
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setPinInput(prev => (prev + "0").slice(0,6))}
+    className="rounded-[1rem] bg-white py-4 text-2xl font-black text-sky-900 shadow-md"
+  >
+    0
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setPinInput(prev => prev.slice(0,-1))}
+    className="rounded-[1rem] bg-yellow-100 py-4 text-xl font-black text-yellow-800 shadow-md"
+  >
+    ⌫
+  </button>
+</div>
                 <button
                   onClick={() => setShowPinReset(true)}
                   className="w-full rounded-[1.35rem] bg-amber-100 px-6 py-3 font-black text-amber-800"
