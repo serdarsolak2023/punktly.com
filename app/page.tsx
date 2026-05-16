@@ -830,9 +830,28 @@ function openNumberKeypad(
   currentValue: number,
   setter: (value: number) => void
 ) {
-  setNumberKeypadValue(String(currentValue || ""));
+  setNumberKeypadValue("");
   setNumberKeypadSetter(() => setter);
   setNumberKeypadOpen(true);
+}
+function NumberKeypadField({
+  label,
+  value,
+  setter,
+}: {
+  label: string;
+  value: number;
+  setter: (value: number) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => openNumberKeypad(value, setter)}
+      className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 text-center font-black shadow-inner"
+    >
+      {label}: {value}
+    </button>
+  );
 }
 
   async function resetParentPin() {
