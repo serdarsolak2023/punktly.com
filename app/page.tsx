@@ -594,14 +594,14 @@ export default function PunktlyRoleSplit() {
   const [newLearningCoins, setNewLearningCoins] = useState("0");
   const [newLearningCategory, setNewLearningCategory] = useState("📚 Lesen");
   const [newRewardTitle, setNewRewardTitle] = useState("");
-  const [newRewardCoins, setNewRewardCoins] = useState(100);
+  const [newRewardCoins, setNewRewardCoins] = useState(0);
   const [editingRewardId, setEditingRewardId] = useState<number | null>(null);
   const [newChestTitle, setNewChestTitle] = useState("");
-  const [newChestPrice, setNewChestPrice] = useState(100);
+  const [newChestPrice, setNewChestPrice] = useState(0);
   const [newChestTier, setNewChestTier] = useState<"Bronze" | "Silber" | "Gold">("Bronze");
   const [newChestContent, setNewChestContent] = useState("");
   const [newShopTitle, setNewShopTitle] = useState("");
-  const [newShopPrice, setNewShopPrice] = useState(100);
+  const [newShopPrice, setNewShopPrice] = useState(0);
   const [newShopIcon, setNewShopIcon] = useState("🎁");
   const [newShopDescription, setNewShopDescription] = useState("");
   const [editingShopId, setEditingShopId] = useState<number | null>(null);
@@ -4074,9 +4074,18 @@ bg: "bg-purple-50",
                     <p className="mb-4 font-bold text-sky-700">Belohnungen können nur Eltern anlegen, bearbeiten und löschen.</p>
                     <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" />
 <input
-  value={newRewardCoins === 0 ? "" : newRewardCoins}
+  value={
+    Number(newRewardCoins) === 0
+      ? ""
+      : `🪙 ${newRewardCoins} Coins`
+  }
   readOnly
-  onClick={() => openNumberKeypad(newRewardCoins, setNewRewardCoins)}
+  onClick={() =>
+    openNumberKeypad(
+      Number(newRewardCoins),
+      setNewRewardCoins
+    )
+  }
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
@@ -4117,11 +4126,19 @@ bg: "bg-purple-50",
                         placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
                         className="w-full rounded-[1.35rem] border p-3"
                       />
-
 <input
-  value={newShopPrice === 0 ? "" : newShopPrice}
+  value={
+    Number(newShopPrice) === 0
+      ? ""
+      : `🪙 ${newShopPrice} Coins`
+  }
   readOnly
-  onClick={() => openNumberKeypad(newShopPrice, setNewShopPrice)}
+  onClick={() =>
+    openNumberKeypad(
+      Number(newShopPrice),
+      setNewShopPrice
+    )
+  }
   placeholder="🪙 Preis in Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
@@ -4218,9 +4235,18 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 <input
-  value={newChestPrice === 0 ? "" : newChestPrice}
+  value={
+    Number(newChestPrice) === 0
+      ? ""
+      : `🪙 ${newChestPrice} Coins`
+  }
   readOnly
-  onClick={() => openNumberKeypad(newChestPrice, setNewChestPrice)}
+  onClick={() =>
+    openNumberKeypad(
+      Number(newChestPrice),
+      setNewChestPrice
+    )
+  }
   placeholder="🪙 Kistenpreis"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
