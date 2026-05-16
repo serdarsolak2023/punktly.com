@@ -4213,11 +4213,9 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 <input
-  value={newRewardCoins > 0 ? newRewardCoins : ""}
+  value={newRewardCoins === 0 ? "" : newRewardCoins}
   readOnly
-  onClick={() =>
-    openNumberKeypad(newRewardCoins, setNewRewardCoins)
-  }
+  onClick={() =>openNumberKeypad(newRewardCoins, setNewRewardCoins)}
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
