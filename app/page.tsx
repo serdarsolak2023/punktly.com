@@ -4412,9 +4412,9 @@ const readingText = activeReadingText;
       <div className="mt-8 grid gap-4">
 <input
   value={learningPinInput}
-  onChange={(e) => setLearningPinInput(e.target.value)}
+  onChange={(e) => setLearningPinInput(e.target.value.replace(/\D/g, ""))}
   placeholder="🔐 PIN"
-  type="password"
+  type="tel"
   inputMode="numeric"
   pattern="[0-9]*"
   maxLength={6}
