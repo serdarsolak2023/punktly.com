@@ -591,7 +591,7 @@ export default function PunktlyRoleSplit() {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [learningTasks, setLearningTasks] = useState<any[]>([]);
   const [newLearningTitle, setNewLearningTitle] = useState("");
-  const [newLearningCoins, setNewLearningCoins] = useState(10);
+  const [newLearningCoins, setNewLearningCoins] = useState("0");
   const [newLearningCategory, setNewLearningCategory] = useState("📚 Lesen");
   const [newRewardTitle, setNewRewardTitle] = useState("");
   const [newRewardCoins, setNewRewardCoins] = useState(100);
@@ -1790,7 +1790,7 @@ function saveLearningTask() {
 
     setEditingLearningTaskId(null);
     setNewLearningTitle("");
-    setNewLearningCoins(10);
+    setNewLearningCoins("0");
 
     celebrate("📚 Lernaufgabe bearbeitet!");
     return;
@@ -1810,7 +1810,7 @@ function saveLearningTask() {
   saveFamilyItem("learningTasks", task);
 
   setNewLearningTitle("");
-  setNewLearningCoins(10);
+  setNewLearningCoins("0");
 
   celebrate("📚 Lernaufgabe hinzugefügt!");
 }
@@ -3886,9 +3886,18 @@ bg: "bg-purple-50",
         />
 
 <input
-  value={newLearningCoins === 0 ? "" : newLearningCoins}
+  value={
+    Number(newLearningCoins) === 0
+      ? ""
+      : `🪙 ${newLearningCoins} Coins`
+  }
   readOnly
-  onClick={() => openNumberKeypad(newLearningCoins, setNewLearningCoins)}
+  onClick={() =>
+    openNumberKeypad(
+      Number(newLearningCoins),
+      (value) => setNewLearningCoins(String(value))
+    )
+  }
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
