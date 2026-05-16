@@ -834,6 +834,7 @@ function openNumberKeypad(
   setNumberKeypadSetter(() => setter);
   setNumberKeypadOpen(true);
 }
+
 function NumberKeypadField({
   label,
   value,
@@ -3883,17 +3884,11 @@ bg: "bg-purple-50",
           className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
         />
 
-<div
-  onClick={() =>
-    openNumberKeypad(
-      newLearningCoins,
-      setNewLearningCoins
-    )
-  }
-  className="cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 text-center font-black shadow-inner"
->
-  🪙 Coins: {newLearningCoins}
-</div>
+<NumberKeypadField
+  label="🪙 Coins"
+  value={newLearningCoins}
+  setter={setNewLearningCoins}
+/>
 <input
   value={newLearningMinutes}
   onChange={(e) => setNewLearningMinutes(Number(e.target.value))}
@@ -4065,7 +4060,13 @@ bg: "bg-purple-50",
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingRewardId ? "✏️ Belohnung bearbeiten" : "🎁 Belohnung anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">Belohnungen können nur Eltern anlegen, bearbeiten und löschen.</p>
-                    <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" /><input value={newRewardCoins === 0 ? "" : newRewardCoins} onChange={e => setNewRewardCoins(e.target.value === "" ? 0 : Number(e.target.value))} type="number" placeholder="Coins" className="w-full rounded-[1.35rem] border p-3" /><button onClick={saveReward} className="rounded-[1.35rem] bg-purple-500 px-4 py-3 font-black text-white">{editingRewardId ? "Änderung speichern" : "Belohnung hinzufügen"}</button></div>
+                    <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" />
+<NumberKeypadField
+  label="🪙 Coins"
+  value={newRewardCoins}
+  setter={setNewRewardCoins}
+/>
+                    <button onClick={saveReward} className="rounded-[1.35rem] bg-purple-500 px-4 py-3 font-black text-white">{editingRewardId ? "Änderung speichern" : "Belohnung hinzufügen"}</button></div>
                   </Panel>
 
                   <Panel title="🔐 Einlösungen & Belohnungsliste">
@@ -4103,13 +4104,11 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.35rem] border p-3"
                       />
 
-                      <input
-                        value={newShopPrice === 0 ? "" : newShopPrice}
-                        onChange={e => setNewShopPrice(e.target.value === "" ? 0 : Number(e.target.value))}
-                        type="number"
-                        placeholder="Preis in Coins"
-                        className="w-full rounded-[1.35rem] border p-3"
-                      />
+<NumberKeypadField
+  label="🪙 Preis in Coins"
+  value={newShopPrice}
+  setter={setNewShopPrice}
+/>
 
                       <input
                         value={newShopIcon}
@@ -4202,13 +4201,11 @@ bg: "bg-purple-50",
                         placeholder="Name der Schatzkiste, z. B. Überraschung"
                         className="w-full rounded-[1.35rem] border p-3"
                       />
-                      <input
-                        value={newChestPrice === 0 ? "" : newChestPrice}
-                        onChange={e => setNewChestPrice(e.target.value === "" ? 0 : Number(e.target.value))}
-                        type="number"
-                        placeholder="Preis in Coins"
-                        className="w-full rounded-[1.35rem] border p-3"
-                      />
+<NumberKeypadField
+  label="🪙 Coins"
+  value={newRewardCoins}
+  setter={setNewRewardCoins}
+/>
                       <select
                         value={newChestTier}
                         onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
@@ -4350,13 +4347,25 @@ bg: "bg-purple-50",
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner font-bold"
                       />
 
-                      <input
-                        value={newParentPin}
-                        onChange={e => setNewParentPin(e.target.value)}
-                        placeholder={savedParentPin ? "Neue Eltern-PIN setzen (optional)" : "Eltern-PIN erstellen"}
-                        type="password"
-                        className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner font-bold"
-                      />
+<div
+  onClick={() => {
+    setNumberKeypadValue(newParentPin || "");
+
+    setNumberKeypadSetter(() =>
+      (value: number) =>
+        setNewParentPin(String(value))
+    );
+
+    setNumberKeypadOpen(true);
+  }}
+  className="w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 text-center font-bold shadow-inner"
+>
+  {newParentPin
+    ? "●".repeat(newParentPin.length)
+    : (savedParentPin
+      ? "Neue Eltern-PIN setzen (optional)"
+      : "Eltern-PIN erstellen")}
+</div>
 
                       <div className="rounded-[1.8rem] bg-amber-50 p-4">
                         <p className="mb-3 font-black text-amber-900">🔐 Sicherheitsabfrage für PIN-Reset</p>
@@ -4411,12 +4420,10 @@ bg: "bg-purple-50",
                         placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
                       />
-<input
-  value={newChildAge}
-  onChange={e => setNewChildAge(e.target.value )}
-  placeholder="🎂 Alter"
-  type="number"
-  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+<NumberKeypadField
+  label="🎂 Alter"
+  value={Number(newChildAge || 0)}
+  setter={(value) => setNewChildAge(String(value))}
 />
 
 <input
@@ -4574,16 +4581,20 @@ const readingText = activeReadingText;
       </div>
 
       <div className="mt-8 grid gap-4">
-<input
-  value={learningPinInput}
-  onChange={(e) => setLearningPinInput(e.target.value.replace(/\D/g, ""))}
-  placeholder="🔐 PIN"
-  type="tel"
-  inputMode="numeric"
-  pattern="[0-9]*"
-  maxLength={6}
-  className="mx-auto w-40 rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-3xl font-black tracking-[0.5rem]"
-/>
+<div
+  onClick={() => {
+    setNumberKeypadValue(learningPinInput || "");
+    setNumberKeypadSetter(() =>
+      (value: number) => setLearningPinInput(String(value))
+    );
+    setNumberKeypadOpen(true);
+  }}
+  className="mx-auto w-40 cursor-pointer rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-3xl font-black tracking-[0.5rem] shadow-inner"
+>
+  {learningPinInput
+    ? "●".repeat(learningPinInput.length)
+    : "🔐 PIN"}
+</div>
         <button
           onClick={() => {
             if (learningPinInput === savedParentPin) {
