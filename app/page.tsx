@@ -4439,7 +4439,17 @@ bg: "bg-purple-50",
                           </p>
                         </div>
                       </div>
-<button
+
+                      <button
+                        onClick={logoutGoogle}
+                        className="mt-5 w-full rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+                      >
+                        Google Logout
+                      </button>
+<br />
+<br />
+<br />
+                      <button
   type="button"
   onClick={() => {
     const confirmed = window.confirm(
@@ -4462,12 +4472,6 @@ bg: "bg-purple-50",
 >
   🗑️ Kinder & Inhalte zurücksetzen
 </button>
-                      <button
-                        onClick={logoutGoogle}
-                        className="mt-5 w-full rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
-                      >
-                        Google Logout
-                      </button>
                     </div>
                   </Panel>
 
