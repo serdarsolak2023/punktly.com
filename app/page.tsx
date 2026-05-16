@@ -4439,7 +4439,29 @@ bg: "bg-purple-50",
                           </p>
                         </div>
                       </div>
+<button
+  type="button"
+  onClick={() => {
+    const confirmed = window.confirm(
+      "Kinderprofile, Aufgaben, Lernen, Belohnungen, Kisten und Shop wirklich zurücksetzen?"
+    );
 
+    if (!confirmed) return;
+
+    localStorage.removeItem("children");
+    localStorage.removeItem("tasks");
+    localStorage.removeItem("learningTasks");
+    localStorage.removeItem("rewards");
+    localStorage.removeItem("chests");
+    localStorage.removeItem("shopItems");
+    localStorage.removeItem("coins");
+
+    window.location.reload();
+  }}
+  className="w-full rounded-[1.5rem] bg-red-500 px-4 py-4 font-black text-white"
+>
+  🗑️ Kinder & Inhalte zurücksetzen
+</button>
                       <button
                         onClick={logoutGoogle}
                         className="mt-5 w-full rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
