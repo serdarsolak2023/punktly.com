@@ -4410,16 +4410,42 @@ const readingText = activeReadingText;
       </div>
 
       <div className="mt-8 grid gap-4">
-<input
-  value={learningPinInput}
-  onChange={(e) => setLearningPinInput(e.target.value.replace(/\D/g, ""))}
-  placeholder="🔐 PIN"
-  type="tel"
-  inputMode="numeric"
-  pattern="[0-9]*"
-  maxLength={6}
-  className="mx-auto w-40 rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-3xl font-black tracking-[0.5rem]"
-/>
+<div className="mx-auto w-40 rounded-[1.5rem] bg-white p-4 text-center text-3xl font-black tracking-[0.4rem]">
+  {learningPinInput ? "●".repeat(learningPinInput.length) : "PIN"}
+</div>
+
+<div className="mt-4 grid grid-cols-3 gap-3">
+  {[1,2,3,4,5,6,7,8,9].map(num => (
+    <button
+      key={num}
+      onClick={() => setLearningPinInput(prev => (prev + num).slice(0, 6))}
+      className="rounded-xl bg-white px-4 py-3 text-2xl font-black shadow"
+    >
+      {num}
+    </button>
+  ))}
+
+  <button
+    onClick={() => setLearningPinInput("")}
+    className="rounded-xl bg-red-100 px-4 py-3 text-xl font-black text-red-700 shadow"
+  >
+    C
+  </button>
+
+  <button
+    onClick={() => setLearningPinInput(prev => prev + "0")}
+    className="rounded-xl bg-white px-4 py-3 text-2xl font-black shadow"
+  >
+    0
+  </button>
+
+  <button
+    onClick={() => setLearningPinInput(prev => prev.slice(0, -1))}
+    className="rounded-xl bg-yellow-100 px-4 py-3 text-xl font-black text-yellow-800 shadow"
+  >
+    ⌫
+  </button>
+</div>
         <button
           onClick={() => {
             if (learningPinInput === savedParentPin) {
