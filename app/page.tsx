@@ -4205,7 +4205,20 @@ bg: "bg-purple-50",
                                     {t}
                                   </button>
                                 ))}
-                              </div>{activeLearningTask && (
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </Panel>
+                </section>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+      {activeLearningTask && (
   <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-8 text-center">
 
     <div className="rounded-[3rem] bg-white/90 p-10 shadow-[0_30px_100px_rgba(14,165,233,.25)]">
@@ -4257,20 +4270,9 @@ bg: "bg-purple-50",
 
   </div>
 )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </Panel>
-                </section>
-              )}
-            </div>
-          </>
-        )}
-      </div>
     </main>
-  );
+    
+      );
 }
 
 function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView) => void }) {
