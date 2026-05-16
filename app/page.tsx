@@ -1030,7 +1030,48 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
     }
     celebrate("Aufgabe abgelehnt.");
   }
+async function resetFamilyContent() {
+  const confirmed = window.confirm(
+    "Kinderprofile, Aufgaben, Lernen, Belohnungen, Kisten und Shop wirklich zurücksetzen?"
+  );
 
+  if (!confirmed) return;
+
+  setChildren([]);
+  setTasks([]);
+  setLearningTasks([]);
+  setRewards([]);
+  setChests([]);
+  setShop([]);
+
+try {
+  const user = auth.currentUser || firebaseUser;
+  if (!user) return;
+
+  const collectionsToReset = [
+    "children",
+    "tasks",
+    "learningTasks",
+    "rewards",
+    "chests",
+    "shop",
+  ];
+
+  for (const collectionName of collectionsToReset) {
+    const snap = await getDocs(
+      collection(doc(db, "users", user.uid), collectionName)
+    );
+
+    for (const documentItem of snap.docs) {
+      await deleteDoc(documentItem.ref);
+    }
+  }
+
+  celebrate("Kinder & Inhalte zurückgesetzt");
+} catch {
+  celebrate("Fehler beim Zurücksetzen");
+}
+}
   function saveTask() {
     if (!newTaskTitle.trim()) return;
     if (editingTaskId) {
@@ -4449,25 +4490,9 @@ bg: "bg-purple-50",
 <br />
 <br />
 <br />
-                      <button
+<button
   type="button"
-  onClick={() => {
-    const confirmed = window.confirm(
-      "Kinderprofile, Aufgaben, Lernen, Belohnungen, Kisten und Shop wirklich zurücksetzen?"
-    );
-
-    if (!confirmed) return;
-
-    localStorage.removeItem("children");
-    localStorage.removeItem("tasks");
-    localStorage.removeItem("learningTasks");
-    localStorage.removeItem("rewards");
-    localStorage.removeItem("chests");
-    localStorage.removeItem("shopItems");
-    localStorage.removeItem("coins");
-
-    window.location.reload();
-  }}
+  onClick={resetFamilyContent}
   className="w-full rounded-[1.5rem] bg-red-500 px-4 py-4 font-black text-white"
 >
   🗑️ Kinder & Inhalte zurücksetzen
@@ -4776,7 +4801,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
       <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
-        <Tab active={view === "tasks"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
+        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
