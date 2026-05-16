@@ -17,6 +17,7 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPe
 import { auth, db } from "@/lib/firebase";
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 import { FcGoogle } from "react-icons/fc";
+import { readingTexts } from "./readingTexts";
 
 function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
   
@@ -625,6 +626,8 @@ export default function PunktlyRoleSplit() {
   const [wheelResult, setWheelResult] = useState<number | null>(null);
   const [bonusCoinsEnabled, setBonusCoinsEnabled] = useState(false);
   const [dailyBonusEnabled, setDailyBonusEnabled] = useState(true);
+  const [newLearningLevel, setNewLearningLevel] = useState<"leicht" | "mittel" | "schwer">("leicht");
+  const [activeReadingText, setActiveReadingText] = useState<any>(null);
     
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -1704,8 +1707,32 @@ async function saveChildNow(updatedChild: Child) {
 }
 function startLearningSession(task: any) {
   setActiveLearningTask(task);
+
   setLearningTimeLeft(Number(task.minutes || 1) * 60);
+
   setLearningPinInput("");
+
+  if (task.category === "📚 Lesen") {
+    const text = getReadingText(task.level || "leicht");
+    setActiveReadingText(text);
+  } else {
+    setActiveReadingText(null);
+  }
+}
+function getReadingText(level: "leicht" | "mittel" | "schwer") {
+  if (!child) return null;
+
+  const age = Number(child.age || 0);
+
+  const texts = readingTexts[level].filter(
+    text =>
+      age >= text.minAge &&
+      age <= text.maxAge
+  );
+
+  if (texts.length === 0) return null;
+
+  return texts[Math.floor(Math.random() * texts.length)];
 }
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
@@ -1720,6 +1747,7 @@ function saveLearningTask() {
       title: newLearningTitle,
       coins: newLearningCoins,
       category: newLearningCategory,
+      level: newLearningLevel,
       minutes: newLearningMinutes,
     };
 
@@ -1743,6 +1771,7 @@ function saveLearningTask() {
     title: newLearningTitle,
     coins: newLearningCoins,
     category: newLearningCategory,
+    level: newLearningLevel,
     status: "offen",
   };
 
@@ -1767,6 +1796,48 @@ function deleteLearningTask(id: number) {
   setLearningTasks(prev => prev.filter(task => task.id !== id));
   deleteFamilyItem("learningTasks", id);
   celebrate("Lernaufgabe gelöscht.");
+}
+function approveLearningTask(task: any) {
+  const targetChild = children.find(c => c.id === task.childId);
+  if (!targetChild) return;
+
+  const updatedChild = {
+    ...targetChild,
+    coins: targetChild.coins + task.coins,
+  };
+
+  const updatedTask = {
+    ...task,
+    status: "erledigt",
+  };
+
+  setChildren(prev =>
+    prev.map(c => c.id === targetChild.id ? updatedChild : c)
+  );
+
+  setLearningTasks(prev =>
+    prev.map(t => t.id === task.id ? updatedTask : t)
+  );
+
+  saveFamilyItem("children", updatedChild);
+  saveFamilyItem("learningTasks", updatedTask);
+
+  celebrate(`✅ Lernaufgabe bestätigt! ${targetChild.name} erhält ${task.coins} Coins.`);
+}
+
+function rejectLearningTask(task: any) {
+  const updatedTask = {
+    ...task,
+    status: "offen",
+  };
+
+  setLearningTasks(prev =>
+    prev.map(t => t.id === task.id ? updatedTask : t)
+  );
+
+  saveFamilyItem("learningTasks", updatedTask);
+
+  celebrate("❌ Lernaufgabe wurde abgelehnt.");
 }
 function claimDailyLoginBonus() {
   if (!child) return;
@@ -1888,11 +1959,25 @@ function spinBonusWheel() {
   }, []);
   
   useEffect(() => {
-  if (!activeLearningTask) return;
-  if (learningTimeLeft <= 0) {
+if (learningTimeLeft <= 0) {
+  const updatedTask = {
+    ...activeLearningTask,
+    status: "wartet",
+  };
+
+  setLearningTasks(prev =>
+    prev.map(task =>
+      task.id === activeLearningTask.id ? updatedTask : task
+    )
+  );
+
+  saveFamilyItem("learningTasks", updatedTask);
+
   setActiveLearningTask(null);
   setLearningPinInput("");
-  celebrate("🎉 Lernaufgabe beendet!");
+
+  celebrate("🎉 Lernaufgabe beendet! Wartet auf Elternbestätigung.");
+
   return;
 }
 
@@ -3398,14 +3483,26 @@ bg: "bg-purple-50",
                     🪙 {task.coins} Coins
                   </p>
                 </div>
+{task.status === "wartet" && (
+  <p className="mt-3 rounded-full bg-yellow-100 px-4 py-2 text-center font-black text-yellow-800">
+    ⏳ Wartet auf Elternbestätigung
+  </p>
+)}
 
-<button
-  onClick={() => startLearningSession(task)}
-  className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
->
-  📚 Starten
-</button>
+{task.status === "erledigt" && (
+  <p className="mt-3 rounded-full bg-green-100 px-4 py-2 text-center font-black text-green-800">
+    ✅ Erledigt
+  </p>
+)}
 
+{task.status === "offen" && (
+  <button
+    onClick={() => startLearningSession(task)}
+    className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
+  >
+    📚 Starten
+  </button>
+)}
               </div>
 
             </div>
@@ -3426,14 +3523,44 @@ bg: "bg-purple-50",
                           <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3><p className="font-bold text-sky-700">{task.day} · {task.repeat} · +{task.coins} Coins · +{task.xp} XP</p></div>
                           <StatusBadge status={task.status} />
                         </div>
-                        {task.status === "offen" && <button onClick={() => submitTask(task.id)} className="mt-3 w-full rounded-[1.35rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(37,99,235,.25)] hover:scale-[1.02] active:scale-[.98] transition">Ich habe es gemacht</button>}
+                       {task.status === "wartet" ? (
+  <div className="flex flex-col gap-2">
+    <button
+      onClick={() => approveLearningTask(task)}
+      className="rounded-[1.3rem] bg-green-300 px-4 py-2 font-black text-green-900"
+    >
+      ✅ Bestätigen
+    </button>
+
+    <button
+      onClick={() => rejectLearningTask(task)}
+      className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
+    >
+      ❌ Ablehnen
+    </button>
+  </div>
+) : (
+  <div className="flex flex-col gap-2">
+    <button
+      onClick={() => editLearningTask(task)}
+      className="rounded-[1.3rem] bg-yellow-200 px-4 py-2 font-black text-yellow-900"
+    >
+      ✏️ Bearbeiten
+    </button>
+
+    <button
+      onClick={() => deleteLearningTask(task.id)}
+      className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
+    >
+      🗑️ Löschen
+    </button>
+  </div>
+)}
                       </div>
                     ))}
                   </div>
                 </Panel>
               )}
-
-              
               {childView === "chests" && (
                 <Panel title="🎁 Schatzkisten">
                   <p className="mb-4 font-bold text-sky-700">
@@ -3610,6 +3737,16 @@ bg: "bg-purple-50",
           <option>✍️ Schreiben</option>
           <option>🧠 Konzentration</option>
         </select>
+        <select
+  value={newLearningLevel}
+  onChange={(e) => setNewLearningLevel(e.target.value as "leicht" | "mittel" | "schwer")}
+  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+>
+  <option value="leicht">🌱 Leicht</option>
+  <option value="mittel">🌼 Mittel</option>
+  <option value="schwer">🔥 Schwer</option>
+</select>
+
 <select
   value={selectedChildId}
   onChange={(e) => setSelectedChildId(Number(e.target.value))}
@@ -4237,15 +4374,33 @@ bg: "bg-purple-50",
       <p className="mt-4 text-2xl font-black text-sky-700">
         {activeLearningTask.title}
       </p>
+{activeLearningTask.category === "📚 Lesen" ? (() => {
 
+const readingText = activeReadingText;
+
+  return (
+    <div className="mt-6 rounded-[2rem] bg-yellow-50 p-6 text-left shadow-inner">
+
+      <h2 className="mb-4 text-2xl font-black text-orange-600">
+        📖 {readingText?.title || "Lesetext"}
+      </h2>
+
+      <p className="text-lg font-bold leading-9 text-slate-700">
+        {readingText?.text || "Kein passender Text gefunden"}
+      </p>
+
+    </div>
+  );
+
+})() : (
+  <p className="mt-6 text-lg font-bold text-sky-700">
+    Bitte konzentriert lernen 😄
+  </p>
+)}
       <div className="mt-8 text-7xl font-black text-indigo-600">
         {Math.floor(learningTimeLeft / 60)}:
         {(learningTimeLeft % 60).toString().padStart(2, "0")}
       </div>
-
-      <p className="mt-6 text-lg font-bold text-sky-700">
-        Bitte konzentriert lernen 😄
-      </p>
 
       <div className="mt-8 grid gap-4">
 
