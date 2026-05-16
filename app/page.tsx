@@ -2094,7 +2094,7 @@ useEffect(() => {
       return;
     }
 if (
-  String(finishedTask?.category || "").includes("Mathe") &&
+  finishedTask?.category === " ➕ Mathe" &&
   activeMathTask?.question
 ) {
   setMathQuestionTask(finishedTask);
