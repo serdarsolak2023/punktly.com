@@ -1791,12 +1791,24 @@ function startLearningSession(task: any) {
 
   setLearningPinInput("");
 
-  if (task.category === "📚 Lesen") {
-    const text = getReadingText(task.level || "leicht");
-    setActiveReadingText(text);
-  } else {
-    setActiveReadingText(null);
-  }
+if (task.category === "📚 Lesen") {
+  const text = getReadingText(task.level || "leicht");
+
+  setActiveReadingText(text);
+  setActiveMathTask(null);
+
+} else if (task.category === "➕ Mathe") {
+
+  const math = getMathTask(task.level || "leicht");
+
+  setActiveMathTask(math);
+  setActiveReadingText(null);
+
+} else {
+
+  setActiveReadingText(null);
+  setActiveMathTask(null);
+}
 }
 function getReadingText(level: "leicht" | "mittel" | "schwer") {
   if (!child) return null;
@@ -2072,7 +2084,19 @@ useEffect(() => {
 
       return;
     }
+if (
+  finishedTask?.category === "➕ Mathe" &&
+  activeMathTask?.question
+) {
+  setMathQuestionTask(finishedTask);
+  setMathQuestionData(activeMathTask);
 
+  setActiveLearningTask(null);
+  setActiveMathTask(null);
+  setLearningPinInput("");
+
+  return;
+}
     const updatedTask = {
       ...finishedTask,
       status: "wartet",
@@ -2680,6 +2704,57 @@ bg: "bg-purple-50",
                 setReadingQuestionText(null);
 
                 celebrate("❌ Leider falsch.\n\nBitte nochmal lesen.");
+              }
+            }}
+            className="rounded-[1.5rem] bg-sky-100 px-5 py-4 text-lg font-black text-sky-900"
+          >
+            {answer}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+{mathQuestionTask && mathQuestionData && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
+    <div className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl">
+      <h2 className="text-center text-3xl font-black text-sky-900">
+        ➕ Mathefrage
+      </h2>
+
+      <p className="mt-4 text-center text-3xl font-black text-sky-700">
+        {mathQuestionData.question}
+      </p>
+
+      <div className="mt-6 grid gap-3">
+        {mathQuestionData.answers.map((answer: string) => (
+          <button
+            key={answer}
+            type="button"
+            onClick={() => {
+              if (answer === mathQuestionData.correctAnswer) {
+                const updatedTask = {
+                  ...mathQuestionTask,
+                  status: "wartet",
+                };
+
+                setLearningTasks(prev =>
+                  prev.map(task =>
+                    task.id === mathQuestionTask.id ? updatedTask : task
+                  )
+                );
+
+                saveFamilyItem("learningTasks", updatedTask);
+
+                setMathQuestionTask(null);
+                setMathQuestionData(null);
+
+                celebrate("✅ Richtig gerechnet!\n\nWartet auf Elternbestätigung.");
+              } else {
+                setMathQuestionTask(null);
+                setMathQuestionData(null);
+
+                celebrate("❌ Leider falsch.\n\nBitte nochmal üben.");
               }
             }}
             className="rounded-[1.5rem] bg-sky-100 px-5 py-4 text-lg font-black text-sky-900"
