@@ -576,6 +576,9 @@ export default function PunktlyRoleSplit() {
   const [chests, setChests] = useState<Chest[]>(initialChests);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
+  const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
+  const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
+
   const [newChildName, setNewChildName] = useState("");
   const [newChildAge, setNewChildAge] = useState("");
   const [newChildColor, setNewChildColor] = useState("");
@@ -1822,7 +1825,6 @@ function saveLearningTask() {
       level: newLearningLevel,
       minutes: newLearningMinutes,
     };
-
     setLearningTasks(prev =>
       prev.map(task => task.id === editingLearningTaskId ? updatedTask : task)
     );
@@ -2035,6 +2037,20 @@ useEffect(() => {
 
   if (learningTimeLeft <= 0) {
     const finishedTask = activeLearningTask;
+
+    if (
+      finishedTask?.category === "📚 Lesen" &&
+      activeReadingText?.question
+    ) {
+      setReadingQuestionTask(finishedTask);
+      setReadingQuestionText(activeReadingText);
+
+      setActiveLearningTask(null);
+      setActiveReadingText(null);
+      setLearningPinInput("");
+
+      return;
+    }
 
     const updatedTask = {
       ...finishedTask,
@@ -2603,7 +2619,57 @@ bg: "bg-purple-50",
 
   </div>
 )}
+{readingQuestionTask && readingQuestionText && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
+    <div className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl">
+      <h2 className="text-center text-3xl font-black text-sky-900">
+        📖 Frage zum Text
+      </h2>
 
+      <p className="mt-4 text-center text-xl font-bold text-sky-700">
+        {readingQuestionText.question}
+      </p>
+
+      <div className="mt-6 grid gap-3">
+        {readingQuestionText.answers.map((answer: string) => (
+          <button
+            key={answer}
+            type="button"
+            onClick={() => {
+              if (answer === readingQuestionText.correctAnswer) {
+                const updatedTask = {
+                  ...readingQuestionTask,
+                  status: "wartet",
+                };
+
+                setLearningTasks(prev =>
+                  prev.map(task =>
+                    task.id === readingQuestionTask.id ? updatedTask : task
+                  )
+                );
+
+                saveFamilyItem("learningTasks", updatedTask);
+
+                setReadingQuestionTask(null);
+                setReadingQuestionText(null);
+
+                celebrate("✅ Richtig beantwortet!\n\nWartet auf Elternbestätigung.");
+              } else {
+                setReadingQuestionTask(null);
+                setReadingQuestionText(null);
+
+                celebrate("❌ Leider falsch.\n\nBitte nochmal lesen.");
+              }
+            }}
+            className="rounded-[1.5rem] bg-sky-100 px-5 py-4 text-lg font-black text-sky-900"
+          >
+            {answer}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
       {celebration && (
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
@@ -4770,19 +4836,21 @@ const readingText = activeReadingText;
     ? "●".repeat(learningPinInput.length)
     : "🔐 PIN"}
 </div>
-        <button
-          onClick={() => {
-            if (learningPinInput === savedParentPin) {
-              setActiveLearningTask(null);
-              setLearningPinInput("");
-            } else {
-              celebrate("❌ Falscher PIN");
-            }
-          }}
-          className="rounded-[1.5rem] bg-gradient-to-r from-pink-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl"
-        >
-          🔓 Lernzeit beenden
-        </button>
+<button
+  onClick={() => {
+    if (learningPinInput === savedParentPin) {
+      setActiveLearningTask(null);
+      setActiveReadingText(null);
+      setLearningPinInput("");
+      celebrate("🔓 Lernzeit wurde von den Eltern beendet.");
+    } else {
+      celebrate("❌ Falscher PIN");
+    }
+  }}
+  className="rounded-[1.5rem] bg-gradient-to-r from-pink-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl"
+>
+  🔓 Lernzeit beenden
+</button>
 
       </div>
 
