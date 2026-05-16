@@ -2135,7 +2135,7 @@ if (
   }, 1000);
 
   return () => clearTimeout(timer);
-}, [activeLearningTask, learningTimeLeft]);
+}, [activeLearningTask, learningTimeLeft, activeReadingText, activeMathTask]);
 
   if (!isPurchased) {
     return (
