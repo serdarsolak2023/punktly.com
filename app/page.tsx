@@ -565,6 +565,9 @@ export default function PunktlyRoleSplit() {
   const [learningTimeLeft, setLearningTimeLeft] = useState(0);
   const [learningPinInput, setLearningPinInput] = useState("");
 
+  const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
+  const [numberKeypadValue, setNumberKeypadValue] = useState("");
+  const [numberKeypadSetter, setNumberKeypadSetter] = useState<((value: number) => void) | null>(null);
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
@@ -823,7 +826,14 @@ function celebrate(message: string) {
       celebrate("PIN falsch.");
     }
   }
-
+function openNumberKeypad(
+  currentValue: number,
+  setter: (value: number) => void
+) {
+  setNumberKeypadValue(String(currentValue || ""));
+  setNumberKeypadSetter(() => setter);
+  setNumberKeypadOpen(true);
+}
 
   async function resetParentPin() {
     try {
@@ -3209,6 +3219,79 @@ bg: "bg-purple-50",
     ? "●".repeat(pinInput.length)
     : "🔐 Eltern PIN"}
 </div>
+{numberKeypadOpen && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
+
+    <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
+
+      <div className="mb-4 rounded-[1rem] bg-slate-100 p-4 text-center text-3xl font-black text-sky-900">
+        {numberKeypadValue || "0"}
+      </div>
+
+      <div className="grid grid-cols-3 gap-3">
+
+        {["1","2","3","4","5","6","7","8","9"].map((num) => (
+          <button
+            key={num}
+            type="button"
+            onClick={() =>
+              setNumberKeypadValue(prev => (prev + num).slice(0,6))
+            }
+            className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
+          >
+            {num}
+          </button>
+        ))}
+
+        <button
+          type="button"
+          onClick={() => setNumberKeypadValue("")}
+          className="rounded-xl bg-red-100 py-4 text-xl font-black text-red-700 shadow"
+        >
+          C
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            setNumberKeypadValue(prev => (prev + "0").slice(0,6))
+          }
+          className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
+        >
+          0
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            setNumberKeypadValue(prev => prev.slice(0,-1))
+          }
+          className="rounded-xl bg-yellow-100 py-4 text-xl font-black text-yellow-800 shadow"
+        >
+          ⌫
+        </button>
+
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          if (numberKeypadSetter) {
+            numberKeypadSetter(Number(numberKeypadValue || 0));
+          }
+
+          setNumberKeypadOpen(false);
+        }}
+        className="mt-4 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
+      >
+        ✅ Übernehmen
+      </button>
+
+    </div>
+
+  </div>
+)}
+
 {showPinKeypad && (
   <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
     <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
@@ -3781,13 +3864,17 @@ bg: "bg-purple-50",
           className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
         />
 
-<input
-  value={newLearningCoins}
-  onChange={(e) => setNewLearningCoins(Number(e.target.value))}
-  placeholder="🪙 Coins"
-  type="number"
-  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
-/>
+<div
+  onClick={() =>
+    openNumberKeypad(
+      newLearningCoins,
+      setNewLearningCoins
+    )
+  }
+  className="cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 text-center font-black shadow-inner"
+>
+  🪙 Coins: {newLearningCoins}
+</div>
 <input
   value={newLearningMinutes}
   onChange={(e) => setNewLearningMinutes(Number(e.target.value))}
