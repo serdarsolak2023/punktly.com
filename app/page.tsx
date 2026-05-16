@@ -1885,9 +1885,15 @@ function spinBonusWheel() {
 
     return () => unsubscribe();
   }, []);
+  
   useEffect(() => {
   if (!activeLearningTask) return;
-  if (learningTimeLeft <= 0) return;
+  if (learningTimeLeft <= 0) {
+  setActiveLearningTask(null);
+  setLearningPinInput("");
+  celebrate("🎉 Lernaufgabe beendet!");
+  return;
+}
 
   const timer = setTimeout(() => {
     setLearningTimeLeft(prev => prev - 1);
