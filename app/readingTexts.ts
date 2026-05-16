@@ -1,5 +1,4 @@
 export const readingTexts = {
-export const readingTexts={
 leicht:[
 {
 category:"leicht",
