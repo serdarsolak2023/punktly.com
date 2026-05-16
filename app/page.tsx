@@ -4111,13 +4111,17 @@ bg: "bg-purple-50",
   type="number"
   className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
-        <select className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold">
-          <option>📚 Lesen</option>
-          <option>➕ Mathe</option>
-          <option>🇬🇧 Englisch</option>
-          <option>✍️ Schreiben</option>
-          <option>🧠 Konzentration</option>
-        </select>
+<select
+  value={newLearningCategory}
+  onChange={(e) => setNewLearningCategory(e.target.value)}
+  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+>
+  <option value="📚 Lesen">📚 Lesen</option>
+  <option value="➕ Mathe">➕ Mathe</option>
+  <option value="🇬🇧 Englisch">🇬🇧 Englisch</option>
+  <option value="✍️ Schreiben">✍️ Schreiben</option>
+  <option value="🧠 Konzentration">🧠 Konzentration</option>
+</select>
         <select
   value={newLearningLevel}
   onChange={(e) => setNewLearningLevel(e.target.value as "leicht" | "mittel" | "schwer")}
