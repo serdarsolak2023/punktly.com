@@ -4410,15 +4410,16 @@ const readingText = activeReadingText;
       </div>
 
       <div className="mt-8 grid gap-4">
-
-        <input
-          value={learningPinInput}
-          onChange={(e) => setLearningPinInput(e.target.value)}
-          placeholder="🔐 Eltern-PIN zum Beenden"
-          type="password"
-          className="w-full rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-xl font-black"
-        />
-
+<input
+  value={learningPinInput}
+  onChange={(e) => setLearningPinInput(e.target.value)}
+  placeholder="🔐 PIN"
+  type="password"
+  inputMode="numeric"
+  pattern="[0-9]*"
+  maxLength={6}
+  className="mx-auto w-40 rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-3xl font-black tracking-[0.5rem]"
+/>
         <button
           onClick={() => {
             if (learningPinInput === savedParentPin) {
