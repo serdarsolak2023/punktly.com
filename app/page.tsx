@@ -1785,37 +1785,38 @@ async function saveChildNow(updatedChild: Child) {
   await saveFamilyItem("children", updatedChild);
 }
 function startLearningSession(task: any) {
+  const category = String(task.category || "");
+
   setActiveLearningTask(task);
-
   setLearningTimeLeft(Number(task.minutes || 1) * 60);
-
   setLearningPinInput("");
 
-if (task.category === "📚 Lesen") {
-  const text = getReadingText(task.level || "leicht");
+  if (category.includes("Lesen")) {
+    const text = getReadingText(task.level || "leicht");
 
-  setActiveReadingText(text);
-  setActiveMathTask(null);
-
-} else if (task.category === "➕ Mathe") {
-  const math = getMathTask(task.level || "leicht");
-
-  if (!math) {
-    celebrate("❌ Keine passende Matheaufgabe gefunden.");
-    setActiveLearningTask(null);
+    setActiveReadingText(text);
     setActiveMathTask(null);
+    return;
+  }
+
+  if (category.includes("Mathe")) {
+    const math = getMathTask(task.level || "leicht");
+
+    if (!math) {
+      celebrate("❌ Keine passende Matheaufgabe gefunden.");
+      setActiveLearningTask(null);
+      setActiveMathTask(null);
+      setActiveReadingText(null);
+      return;
+    }
+
+    setActiveMathTask(math);
     setActiveReadingText(null);
     return;
   }
 
-  setActiveMathTask(math);
-  setActiveReadingText(null);
-
-} else {
-
   setActiveReadingText(null);
   setActiveMathTask(null);
-}
 }
 function getReadingText(level: "leicht" | "mittel" | "schwer") {
   if (!child) return null;
@@ -2093,7 +2094,7 @@ useEffect(() => {
       return;
     }
 if (
-  finishedTask?.category === "➕ Mathe" &&
+  String(finishedTask?.category || "").includes("Mathe") &&
   activeMathTask?.question
 ) {
   setMathQuestionTask(finishedTask);
