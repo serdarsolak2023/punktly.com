@@ -839,7 +839,9 @@ function NumberKeypadField({ label, value, setter }: {
   label: string;
   value: number;
   setter: (value: number) => void;
-}) {
+}) 
+
+{
   return (
     <button
       type="button"
@@ -4417,10 +4419,17 @@ bg: "bg-purple-50",
                         placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
                         className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
                       />
-<NumberKeypadField
-  label="🎂 Alter"
-  value={Number(newChildAge || 0)}
-  setter={(value) => setNewChildAge(String(value))}
+<input
+  value={newChildAge}
+  readOnly
+  onClick={() =>
+    openNumberKeypad(
+      Number(newChildAge || 0),
+      (value) => setNewChildAge(String(value))
+    )
+  }
+  placeholder="🎂 Alter"
+  className="w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
 />
 
 <input
@@ -4640,7 +4649,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
       <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
-        <Tab active={view === "settings"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
+        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
