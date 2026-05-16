@@ -2490,6 +2490,79 @@ bg: "bg-purple-50",
           ))}
         </div>
 
+{numberKeypadOpen && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
+
+    <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
+
+      <div className="mb-4 rounded-[1rem] bg-slate-100 p-4 text-center text-3xl font-black text-sky-900">
+        {numberKeypadValue || "0"}
+      </div>
+
+      <div className="grid grid-cols-3 gap-3">
+
+        {["1","2","3","4","5","6","7","8","9"].map((num) => (
+          <button
+            key={num}
+            type="button"
+            onClick={() =>
+              setNumberKeypadValue(prev => (prev + num).slice(0,6))
+            }
+            className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
+          >
+            {num}
+          </button>
+        ))}
+
+        <button
+          type="button"
+          onClick={() => setNumberKeypadValue("")}
+          className="rounded-xl bg-red-100 py-4 text-xl font-black text-red-700 shadow"
+        >
+          C
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            setNumberKeypadValue(prev => (prev + "0").slice(0,6))
+          }
+          className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
+        >
+          0
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            setNumberKeypadValue(prev => prev.slice(0,-1))
+          }
+          className="rounded-xl bg-yellow-100 py-4 text-xl font-black text-yellow-800 shadow"
+        >
+          ⌫
+        </button>
+
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          if (numberKeypadSetter) {
+            numberKeypadSetter(Number(numberKeypadValue || 0));
+          }
+
+          setNumberKeypadOpen(false);
+        }}
+        className="mt-4 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
+      >
+        ✅ Übernehmen
+      </button>
+
+    </div>
+
+  </div>
+)}
+
       {celebration && (
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
@@ -3239,78 +3312,6 @@ bg: "bg-purple-50",
     ? "●".repeat(pinInput.length)
     : "🔐 Eltern PIN"}
 </div>
-{numberKeypadOpen && (
-  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
-
-    <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
-
-      <div className="mb-4 rounded-[1rem] bg-slate-100 p-4 text-center text-3xl font-black text-sky-900">
-        {numberKeypadValue || "0"}
-      </div>
-
-      <div className="grid grid-cols-3 gap-3">
-
-        {["1","2","3","4","5","6","7","8","9"].map((num) => (
-          <button
-            key={num}
-            type="button"
-            onClick={() =>
-              setNumberKeypadValue(prev => (prev + num).slice(0,6))
-            }
-            className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
-          >
-            {num}
-          </button>
-        ))}
-
-        <button
-          type="button"
-          onClick={() => setNumberKeypadValue("")}
-          className="rounded-xl bg-red-100 py-4 text-xl font-black text-red-700 shadow"
-        >
-          C
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            setNumberKeypadValue(prev => (prev + "0").slice(0,6))
-          }
-          className="rounded-xl bg-sky-50 py-4 text-2xl font-black text-sky-900 shadow"
-        >
-          0
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            setNumberKeypadValue(prev => prev.slice(0,-1))
-          }
-          className="rounded-xl bg-yellow-100 py-4 text-xl font-black text-yellow-800 shadow"
-        >
-          ⌫
-        </button>
-
-      </div>
-
-      <button
-        type="button"
-        onClick={() => {
-          if (numberKeypadSetter) {
-            numberKeypadSetter(Number(numberKeypadValue || 0));
-          }
-
-          setNumberKeypadOpen(false);
-        }}
-        className="mt-4 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
-      >
-        ✅ Übernehmen
-      </button>
-
-    </div>
-
-  </div>
-)}
 
 {showPinKeypad && (
   <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 px-4">
