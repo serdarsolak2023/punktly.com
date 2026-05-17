@@ -2093,16 +2093,16 @@ useEffect(() => {
 
       return;
     }
-if (
-  finishedTask?.category === "➕ Mathe" &&
-  activeMathTask?.question
-) {
-  setMathQuestionTask(finishedTask);
-  setMathQuestionData(activeMathTask);
+    if (
+    finishedTask?.category === "➕ Mathe" &&
+    activeMathTask?.question
+    ) {
+     setMathQuestionTask(finishedTask);
+     setMathQuestionData(activeMathTask);
 
-  setActiveLearningTask(null);
-  setActiveMathTask(null);
-  setLearningPinInput("");
+     setActiveLearningTask(null);
+     setActiveMathTask(null);
+     setLearningPinInput("");
 
   return;
 }
