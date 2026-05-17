@@ -4181,42 +4181,35 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                     {childTasks.map(task => (
                       <div key={task.id} className="rounded-[1.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_25px_70px_rgba(14,165,233,.18)]">
                         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                          <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3><p className="font-bold text-sky-700">{task.day} · {task.repeat} · +{task.coins} Coins · +{task.xp} XP</p></div>
+                          <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3>
+    
+    <p className="font-bold text-sky-700">{task.day} · {task.repeat} · +{task.coins} Coins · +{task.xp} XP</p></div>
                           <StatusBadge status={task.status} />
                         </div>
-                       {task.status === "wartet" ? (
-  <div className="flex flex-col gap-2">
-    <button
-      onClick={() => approveLearningTask(task)}
-      className="rounded-[1.3rem] bg-green-300 px-4 py-2 font-black text-green-900"
-    >
-      ✅ Bestätigen
-    </button>
 
+<div className="flex flex-col gap-2">
+  {task.status === "offen" && (
     <button
-      onClick={() => rejectLearningTask(task)}
-      className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
+      type="button"
+      onClick={() => submitTask(task.id)}
+      className="rounded-[1.3rem] bg-green-200 px-4 py-2 font-black text-green-900"
     >
-      ❌ Ablehnen
+      🔔 Bitte erledigen
     </button>
-  </div>
-) : (
-  <div className="flex flex-col gap-2">
-    <button
-      onClick={() => editLearningTask(task)}
-      className="rounded-[1.3rem] bg-yellow-200 px-4 py-2 font-black text-yellow-900"
-    >
-      ✏️ Bearbeiten
-    </button>
+  )}
 
-    <button
-      onClick={() => deleteLearningTask(task.id)}
-      className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
-    >
-      🗑️ Löschen
-    </button>
-  </div>
-)}
+  {task.status === "wartet" && (
+    <p className="rounded-[1.3rem] bg-yellow-100 px-4 py-2 text-center font-black text-yellow-800">
+      ⏳ Wartet auf Elternbestätigung
+    </p>
+  )}
+
+  {task.status === "erledigt" && (
+    <p className="rounded-[1.3rem] bg-green-100 px-4 py-2 text-center font-black text-green-800">
+      ✅ Erledigt
+    </p>
+  )}
+</div>
                       </div>
                     ))}
                   </div>
