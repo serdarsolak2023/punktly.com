@@ -584,7 +584,9 @@ export default function PunktlyRoleSplit() {
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
-
+  const [textKeyboardOpen, setTextKeyboardOpen] = useState(false);
+  const [textKeyboardValue, setTextKeyboardValue] = useState("");
+  const [textKeyboardSetter, setTextKeyboardSetter] = useState<((value:string)=>void)|null>(null);
   const [newChildName, setNewChildName] = useState("");
   const [newChildAge, setNewChildAge] = useState("");
   const [newChildColor, setNewChildColor] = useState("");
@@ -1859,6 +1861,49 @@ function getMathTask(level: "leicht" | "mittel" | "schwer") {
   return filteredTasks[
     Math.floor(Math.random() * filteredTasks.length)
   ];
+}
+function AppInput({
+value,
+onChange,
+placeholder,
+className=""
+}:{
+value:string;
+onChange:(value:string)=>void;
+placeholder?:string;
+className?:string;
+}){
+
+return(
+
+<div
+onClick={()=>
+openTextKeyboard(
+value,
+onChange
+)
+}
+className={`w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
+>
+
+{value || placeholder}
+
+</div>
+
+);
+
+}
+function openTextKeyboard(
+value:string,
+setter:(value:string)=>void
+){
+
+setTextKeyboardValue(value || "");
+
+setTextKeyboardSetter(()=>setter);
+
+setTextKeyboardOpen(true);
+
 }
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
