@@ -567,6 +567,7 @@ export default function PunktlyRoleSplit() {
   const [learningPinInput, setLearningPinInput] = useState("");
   const [mathStep, setMathStep] = useState(0);
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
@@ -646,7 +647,14 @@ export default function PunktlyRoleSplit() {
   const [dailyBonusEnabled, setDailyBonusEnabled] = useState(true);
   const [newLearningLevel, setNewLearningLevel] = useState<"leicht" | "mittel" | "schwer">("leicht");
   const [activeReadingText, setActiveReadingText] = useState<any>(null);
-    
+  useEffect(() => {
+  const timer = setInterval(() => {
+    setCurrentDateTime(new Date());
+  }, 1000);
+
+  return () => clearInterval(timer);
+}, []);
+        
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
     name: "Kein Kind",
@@ -2160,7 +2168,13 @@ function spinBonusWheel() {
       setIsPaying(false);
     }
   }
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCurrentDateTime(new Date());
+  }, 1000);
 
+  return () => clearInterval(timer);
+}, []);
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
@@ -2685,9 +2699,30 @@ bg: "bg-purple-50",
     </div>
   </div>
 </main>
+
     );
   }
 
+<div className="fixed right-4 top-4 z-[20000] rounded-[1.5rem] border-2 border-white bg-white/90 px-4 py-3 text-right font-black text-sky-950 shadow-xl backdrop-blur">
+
+  <div className="text-sm text-sky-600">
+    {currentDateTime.toLocaleDateString("de-DE", {
+      weekday: "short",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })}
+  </div>
+
+  <div className="text-xl">
+    {currentDateTime.toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })}
+  </div>
+
+</div>
   return (
     <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
@@ -4192,7 +4227,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     <button
       type="button"
       onClick={() => submitTask(task.id)}
-      className="rounded-[1.3rem] bg-green-200 px-4 py-2 font-black text-green-900"
+      className="rounded-[1.3rem] bg-orange-200 px-4 py-2 font-black text-orange-900"
     >
       🔔 Bitte erledigen
     </button>
