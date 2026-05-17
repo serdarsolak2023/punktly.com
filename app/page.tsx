@@ -2093,16 +2093,16 @@ useEffect(() => {
 
       return;
     }
-    if (
-    finishedTask?.category === "➕ Mathe" &&
-    activeMathTask?.question
-    ) {
-     setMathQuestionTask(finishedTask);
-     setMathQuestionData(activeMathTask);
+if (
+  String(finishedTask?.category || "").includes("Mathe") &&
+  activeMathTask?.question
+) {
+  setMathQuestionTask(finishedTask);
+  setMathQuestionData(activeMathTask);
 
-     setActiveLearningTask(null);
-     setActiveMathTask(null);
-    setLearningPinInput("");
+  setActiveLearningTask(null);
+  setActiveMathTask(null);
+  setLearningPinInput("");
 
   return;
 }
@@ -4960,25 +4960,7 @@ const readingText = activeReadingText;
 >
   🔓 Lernzeit beenden
 </button>
-{activeLearningTask.category === "➕ Mathe" && (() => {
 
-const mathTask = activeMathTask;
-
-return (
-  <div className="mt-6 rounded-[2rem] bg-blue-50 p-6 text-left shadow-inner">
-
-    <h2 className="mb-4 text-2xl font-black text-blue-600">
-      ➕ {mathTask?.title || "Mathe"}
-    </h2>
-
-    <p className="text-lg font-bold leading-9 text-slate-700">
-      {mathTask?.text || "Keine passende Matheaufgabe gefunden"}
-    </p>
-
-  </div>
-);
-
-})()}
       </div>
 
     </div>
