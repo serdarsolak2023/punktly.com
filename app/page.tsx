@@ -1704,20 +1704,31 @@ return true;
         return snap.docs.map((d) => d.data() as T);
       };
 
-      const loadedChildren = (await loadCollection<Child>("children")).map((loadedChild) => syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
-      const loadedLearningTasks = await loadCollection<any>("learningTasks");
-      const loadedTasks = await loadCollection<Task>("tasks");
-      const loadedRewards = await loadCollection<Reward>("rewards");
-      const loadedChests = await loadCollection<Chest>("chests");
-      const loadedShop = await loadCollection<ShopItem>("shop");
+const [
+  loadedChildrenRaw,
+  loadedLearningTasks,
+  loadedTasks,
+  loadedRewards,
+  loadedChests,
+  loadedShop
+] = await Promise.all([
+  loadCollection<Child>("children"),
+  loadCollection<any>("learningTasks"),
+  loadCollection<Task>("tasks"),
+  loadCollection<Reward>("rewards"),
+  loadCollection<Chest>("chests"),
+  loadCollection<ShopItem>("shop")
+]);
 
-      console.log("Punktly Firebase Load:", {
-        children: loadedChildren,
-        tasks: loadedTasks,
-        rewards: loadedRewards,
-        chests: loadedChests,
-        shop: loadedShop
-      });
+const loadedChildren = loadedChildrenRaw.map(
+  (loadedChild) =>
+    syncPrestigeStars({
+      ...loadedChild,
+      achievements: cleanAchievements(
+        loadedChild.achievements || []
+      )
+    })
+);
 
 const syncedChildren = loadedChildren.map(
   syncPrestigeStars
@@ -3540,20 +3551,20 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
                 <p className="text-3xl">🎨</p>
-                <p className="mt-2 font-black text-sky-950">Einheitliches Design</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Kinder- und Elternbereich haben das gleiche moderne Design und Layout.</p>
+                <p className="mt-2 font-black text-sky-950">Kinderfreundliches Design</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Kinder- und Elternbereich haben moderne Design und Layout.</p>
               </div>
 
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
                 <p className="text-3xl">🛡️</p>
                 <p className="mt-2 font-black text-sky-950">Vertrauen & Sicherheit</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Klare rechtliche Links und sichere, grüne Login-Buttons für Vertrauen.</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Vertrauenswürdige und sichere Plattform für Kinder und Eltern. Sie müssen keine personenbezogenen Daten preisgeben.</p>
               </div>
 
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
                 <p className="text-3xl">🪙</p>
                 <p className="mt-2 font-black text-sky-950">Motivierende Coins</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Verschiedene Coins aus den Badges sorgen für Dynamik und Motivation.</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Mit Coins können die Kinder motiviert werden, ihre Aufgaben zu erledigen.</p>
               </div>
 
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
@@ -3565,7 +3576,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
                 <p className="text-3xl">🔁</p>
                 <p className="mt-2 font-black text-sky-950">Bereich wechseln</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Stylischer Button für den schnellen Wechsel zwischen Kinder- und Elternbereich.</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Button für den schnellen Wechsel zwischen Kinder- und Elternbereich.</p>
               </div>
             </div>
           </section>
