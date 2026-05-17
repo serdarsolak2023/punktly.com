@@ -565,6 +565,7 @@ export default function PunktlyRoleSplit() {
   const [activeLearningTask, setActiveLearningTask] = useState<any | null>(null);
   const [learningTimeLeft, setLearningTimeLeft] = useState(0);
   const [learningPinInput, setLearningPinInput] = useState("");
+  const [mathStep, setMathStep] = useState(0);
 
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
@@ -1807,13 +1808,13 @@ if (category.includes("Mathe")) {
     return;
   }
 
-  setActiveMathTask({
-    title: mathTaskData.title,
-    text: mathTaskData.text,
-    question: mathTaskData.question,
-    answers: mathTaskData.answers,
-    correctAnswer: mathTaskData.correctAnswer,
-  });
+setActiveMathTask({
+  title: mathTaskData.title,
+  text: mathTaskData.text,
+  questions: mathTaskData.questions,
+});
+
+setMathStep(0);
 
   setActiveReadingText(null);
 
@@ -4908,37 +4909,119 @@ bg: "bg-purple-50",
         {activeLearningTask.title}
       </p>
 {activeLearningTask.category === "📚 Lesen" ? (() => {
-  const readingText = activeReadingText;
 
-  return (
-    <div className="mt-6 rounded-[2rem] bg-yellow-50 p-6 text-left shadow-inner">
-      <h2 className="mb-4 text-2xl font-black text-orange-600">
-        📖 {readingText?.title || "Lesetext"}
-      </h2>
+const readingText = activeReadingText;
 
-      <p className="text-lg font-bold leading-9 text-slate-700">
-        {readingText?.text || "Kein passender Text gefunden"}
-      </p>
-    </div>
-  );
-})() : String(activeLearningTask.category || "").includes("Mathe") ? (() => {
-  const mathTask = activeMathTask;
+return (
+<div className="mt-6 rounded-[2rem] bg-yellow-50 p-6 text-left shadow-inner">
 
-  return (
-    <div className="mt-6 rounded-[2rem] bg-blue-50 p-6 text-left shadow-inner">
-      <h2 className="mb-4 text-2xl font-black text-blue-600">
-        ➕ {mathTask?.title || "Matheaufgabe"}
-      </h2>
+<h2 className="mb-4 text-2xl font-black text-orange-600">
+📖 {readingText?.title || "Lesetext"}
+</h2>
 
-      <p className="text-lg font-bold leading-9 text-slate-700">
-        {mathTask?.text || "Keine passende Matheaufgabe gefunden"}
-      </p>
-    </div>
-  );
-})() : (
-  <p className="mt-6 text-lg font-bold text-sky-700">
-    Bitte konzentriert lernen 😄
-  </p>
+<p className="text-lg font-bold leading-9 text-slate-700">
+{readingText?.text || "Kein passender Text gefunden"}
+</p>
+
+</div>
+);
+
+})()
+
+: String(activeLearningTask.category || "").includes("Mathe")
+&& activeMathTask
+? (() => {
+
+const currentQuestion =
+activeMathTask.questions?.[mathStep];
+
+return (
+
+<div className="mt-6 rounded-[2rem] bg-blue-50 p-6 text-left shadow-inner">
+
+<h2 className="mb-4 text-2xl font-black text-blue-600">
+➕ {activeMathTask.title}
+</h2>
+
+<p className="text-lg font-bold leading-9 text-slate-700">
+{activeMathTask.text}
+</p>
+
+<div className="mt-6 rounded-[1.5rem] bg-white p-5 text-center">
+
+<p className="text-sm font-black text-blue-400">
+Aufgabe {mathStep + 1} / 10
+</p>
+
+<p className="mt-3 text-4xl font-black text-blue-800">
+{currentQuestion?.question}
+</p>
+
+</div>
+
+<div className="mt-5 grid gap-3">
+
+{currentQuestion?.answers.map((answer:string)=>(
+
+<button
+key={answer}
+onClick={()=>{
+
+if(answer===currentQuestion.correctAnswer){
+
+if(mathStep>=9){
+
+celebrate("🎉 Alle Aufgaben geschafft!");
+
+setActiveLearningTask(null);
+setActiveMathTask(null);
+setMathStep(0);
+
+return;
+}
+
+setMathStep(prev=>prev+1);
+
+celebrate("✅ Richtig");
+
+}else{
+
+const newMath =
+getMathTask(activeLearningTask.level);
+
+if(newMath){
+
+setActiveMathTask(newMath);
+
+setMathStep(0);
+
+}
+
+celebrate("❌ Falsch → neue Aufgaben");
+}
+
+}}
+className="rounded-[1.5rem] bg-blue-100 p-4 text-xl font-black"
+>
+{answer}
+</button>
+
+))}
+
+</div>
+
+</div>
+
+);
+
+})()
+
+: (
+
+<p className="mt-6 text-lg font-bold text-sky-700">
+Bitte konzentriert lernen 😄
+</p>
+
 )}
       <div className="mt-8 text-7xl font-black text-indigo-600">
         {Math.floor(learningTimeLeft / 60)}:
