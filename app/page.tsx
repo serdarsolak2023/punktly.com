@@ -566,6 +566,7 @@ export default function PunktlyRoleSplit() {
   const [learningTimeLeft, setLearningTimeLeft] = useState(0);
   const [learningPinInput, setLearningPinInput] = useState("");
   const [mathStep, setMathStep] = useState(0);
+  const [summaryOpen, setSummaryOpen] = useState(false);
 
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
@@ -3598,56 +3599,110 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         </header>
 
         {area === "parent" && (
-          <section className="mb-5 rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-[3px] border-white bg-white/95 p-5 shadow-[0_20px_60px_rgba(37,99,235,.12)]">
-            <div className="mb-4 flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-md">⭐</div>
-              <h2 className="text-2xl font-black text-sky-950">Zusammenfassung</h2>
-            </div>
+<section className="mb-5 rounded-[2.5rem] border-[3px] border-white bg-white/95 p-5 shadow-[0_20px_60px_rgba(37,99,235,.12)]">
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">🎨</p>
-                <p className="mt-2 font-black text-sky-950">Kinderfreundliches Design</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Kinder- und Elternbereich haben moderne Design und Layout.</p>
-              </div>
+  <div
+    onClick={() => setSummaryOpen(prev => !prev)}
+    className="flex cursor-pointer items-center justify-between"
+  >
 
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">🛡️</p>
-                <p className="mt-2 font-black text-sky-950">Vertrauen & Sicherheit</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Vertrauenswürdige und sichere Plattform für Kinder und Eltern. Sie müssen keine personenbezogenen Daten preisgeben.</p>
-              </div>
+    <div className="flex items-center gap-3">
 
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">🪙</p>
-                <p className="mt-2 font-black text-sky-950">Motivierende Coins</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Mit Coins können die Kinder motiviert werden, ihre Aufgaben zu erledigen.</p>
-              </div>
+      <div className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-md">
+        ⭐
+      </div>
 
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">🔊</p>
-                <p className="mt-2 font-black text-sky-950">Sounds An/Aus</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Die Sound-Funktion bleibt sichtbar und kann jederzeit aktiviert werden.</p>
-              </div>
+      <h2 className="text-2xl font-black text-sky-950">
+        Zusammenfassung
+      </h2>
 
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">📚</p>
-                <p className="mt-2 font-black text-sky-950">Lernen</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Interaktive Lerninhalte für Kinder.</p>
-              </div>
+    </div>
 
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">Aufgaben</p>
-                <p className="mt-2 font-black text-sky-950">Aufgaben</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Kinder erledigen Aufgaben und bekmmen dafür Ihre Coins und könen diese bei den Eltern sicher einlösen.</p>
-              </div>
-              
-              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
-                <p className="text-3xl">🔁</p>
-                <p className="mt-2 font-black text-sky-950">Bereich wechseln</p>
-                <p className="mt-1 text-sm font-bold text-slate-500">Button für den schnellen Wechsel zwischen Kinder- und Elternbereich.</p>
-              </div>
-            </div>
-          </section>
+    <div className="text-3xl font-black text-sky-700">
+      {summaryOpen ? "▲" : "▼"}
+    </div>
+
+  </div>
+
+  {summaryOpen && (
+
+    <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">🎨</p>
+        <p className="mt-2 font-black text-sky-950">
+          Kinderfreundliches Design
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Kinder- und Elternbereich haben moderne Design und Layout.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">🛡️</p>
+        <p className="mt-2 font-black text-sky-950">
+          Vertrauen & Sicherheit
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Vertrauenswürdige und sichere Plattform für Kinder und Eltern.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">🪙</p>
+        <p className="mt-2 font-black text-sky-950">
+          Motivierende Coins
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Kinder können durch Coins motiviert werden.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">🔊</p>
+        <p className="mt-2 font-black text-sky-950">
+          Sounds An/Aus
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Sound-Funktion jederzeit aktivierbar.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">📚</p>
+        <p className="mt-2 font-black text-sky-950">
+          Lernen
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Interaktive Lerninhalte für Kinder.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">📝</p>
+        <p className="mt-2 font-black text-sky-950">
+          Aufgaben
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Aufgaben erledigen und Coins sicher einlösen.
+        </p>
+      </div>
+
+      <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+        <p className="text-3xl">🔁</p>
+        <p className="mt-2 font-black text-sky-950">
+          Bereich wechseln
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-500">
+          Schneller Wechsel zwischen Kinder- und Elternbereich.
+        </p>
+      </div>
+
+    </div>
+
+  )}
+
+</section>
         )}
 
         {activeLegalPage && (
