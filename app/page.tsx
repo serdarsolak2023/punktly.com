@@ -1721,16 +1721,15 @@ function deleteChild(id: number) {
         shop: loadedShop
       });
 
-      const syncedChildren = loadedChildren.map(syncPrestigeStars);
-      setChildren(syncedChildren);
-      setLearningTasks(loadedLearningTasks);
-      syncedChildren.forEach((loadedChild) => {
-        saveFamilyItem("children", syncPrestigeStars({ ...loadedChild, achievements: cleanAchievements(loadedChild.achievements || []) }));
-      });
-      loadedChildren.forEach((loadedChild) => {
-        saveFamilyItem("children", syncPrestigeStars(loadedChild));
-      });
-      setTasks(loadedTasks);
+const syncedChildren = loadedChildren.map(
+  syncPrestigeStars
+);
+
+setChildren(syncedChildren);
+setLearningTasks(loadedLearningTasks);
+setTasks(loadedTasks);
+
+
       setRewards(loadedRewards);
       setChests(loadedChests);
       setShop(loadedShop.length > 0 ? loadedShop : initialShop);
@@ -2788,7 +2787,7 @@ prev=>prev+" "
 }
 className="rounded-[1rem] bg-sky-100 p-4 text-xl font-black"
 >
-␣ Leer
+␣ Space
 </button>
 
 <button
