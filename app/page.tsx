@@ -845,10 +845,10 @@ function openNumberKeypad(
     currentValue > 0 ? String(currentValue) : ""
   );
 
- setNumberKeypadSetter(() =>
-  (value: string) =>
-    setLearningPinInput(value)
-);
+  setNumberKeypadSetter(() => (value: string) => {
+    setter(Number(value) || 0);
+  });
+
   setNumberKeypadOpen(true);
 }
 function NumberKeypadField({ label, value, setter }: {
