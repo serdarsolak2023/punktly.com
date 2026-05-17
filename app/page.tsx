@@ -1799,21 +1799,26 @@ function startLearningSession(task: any) {
     return;
   }
 
-  if (category.includes("Mathe")) {
-    const math = getMathTask(task.level || "leicht");
+if (category.includes("Mathe")) {
+  const mathTaskData = getMathTask(task.level || "leicht");
 
-    if (!math) {
-      celebrate("❌ Keine passende Matheaufgabe gefunden.");
-      setActiveLearningTask(null);
-      setActiveMathTask(null);
-      setActiveReadingText(null);
-      return;
-    }
-
-    setActiveMathTask(math);
-    setActiveReadingText(null);
+  if (!mathTaskData) {
+    celebrate("❌ Keine passende Matheaufgabe gefunden.");
     return;
   }
+
+  setActiveMathTask({
+    title: mathTaskData.title,
+    text: mathTaskData.text,
+    question: mathTaskData.question,
+    answers: mathTaskData.answers,
+    correctAnswer: mathTaskData.correctAnswer,
+  });
+
+  setActiveReadingText(null);
+
+  return;
+}
 
   setActiveReadingText(null);
   setActiveMathTask(null);
