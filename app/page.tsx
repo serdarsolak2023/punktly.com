@@ -1862,42 +1862,33 @@ function getMathTask(level: "leicht" | "mittel" | "schwer") {
     Math.floor(Math.random() * filteredTasks.length)
   ];
 }
-function AppInput({
-value,
-onChange,
-placeholder,
-className=""
-}:{
-value:string;
-onChange:(value:string)=>void;
-placeholder?:string;
-className?:string;
-}){
 
-return(
-
-<div
-onClick={()=>
-openTextKeyboard(
-value,
-onChange
-)
-}
-className={`w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
->
-
-{value || placeholder}
-
-</div>
-
-);
-
-}
 function openTextKeyboard(
 value:string,
 setter:(value:string)=>void
 ){
+function AppInput({
+  value,
+  onChange,
+  placeholder,
+  className = ""
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+}) {
 
+  return (
+    <div
+      onClick={() => openTextKeyboard(value, onChange)}
+      className={`w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
+    >
+      {value || placeholder}
+    </div>
+  );
+
+}
 setTextKeyboardValue(value || "");
 
 setTextKeyboardSetter(()=>setter);
@@ -2726,9 +2717,9 @@ bg: "bg-purple-50",
 
       <button
         type="button"
-onClick={() => {
-  if (numberKeypadSetter) {
-    numberKeypadSetter(numberKeypadValue);
+        onClick={() => {
+          if (numberKeypadSetter) {
+                 numberKeypadSetter(numberKeypadValue);
   }
 
   setNumberKeypadOpen(false);
@@ -2740,6 +2731,68 @@ onClick={() => {
 
     </div>
 
+  </div>
+)}
+
+{textKeyboardOpen && (
+  <div className="fixed inset-0 z-[10000] flex items-end justify-center bg-black/30 px-4 pb-4">
+    <div className="w-full max-w-md rounded-[2rem] bg-white p-4 shadow-2xl">
+
+      <div className="mb-3 rounded-[1rem] bg-slate-100 p-3 text-center text-xl font-black text-sky-900">
+        {textKeyboardValue || "Text eingeben"}
+      </div>
+
+      <div className="grid grid-cols-10 gap-2">
+        {"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ".split("").map((letter) => (
+          <button
+            key={letter}
+            type="button"
+            onClick={() => setTextKeyboardValue(prev => prev + letter)}
+            className="rounded-xl bg-sky-50 py-3 text-lg font-black text-sky-900 shadow"
+          >
+            {letter}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        <button
+          type="button"
+          onClick={() => setTextKeyboardValue(prev => prev + " ")}
+          className="rounded-xl bg-sky-100 py-3 font-black text-sky-900 shadow"
+        >
+          Leer
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setTextKeyboardValue(prev => prev.slice(0, -1))}
+          className="rounded-xl bg-yellow-100 py-3 font-black text-yellow-800 shadow"
+        >
+          ⌫
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setTextKeyboardValue("")}
+          className="rounded-xl bg-red-100 py-3 font-black text-red-700 shadow"
+        >
+          C
+        </button>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          textKeyboardSetter?.(textKeyboardValue);
+          setTextKeyboardOpen(false);
+        }}
+        className="mt-3 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
+      >
+        ✅ Übernehmen
+      </button>
+
+    </div>
   </div>
 )}
 {readingQuestionTask && readingQuestionText && (
