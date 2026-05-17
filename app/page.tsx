@@ -2085,7 +2085,21 @@ useEffect(() => {
 
   if (learningTimeLeft <= 0) {
     const finishedTask = activeLearningTask;
+if (
+  String(finishedTask?.category || "").includes("Mathe")
+) {
 
+  celebrate(
+    `⏰ Zeit vorbei!\n\n${mathStep}/10 Aufgaben geschafft.\nKeine Belohnung erhalten.`
+  );
+
+  setActiveLearningTask(null);
+  setActiveMathTask(null);
+  setMathStep(0);
+  setLearningPinInput("");
+
+  return;
+}
     if (
       finishedTask?.category === "📚 Lesen" &&
       activeReadingText?.question
@@ -4969,15 +4983,32 @@ onClick={()=>{
 
 if(answer===currentQuestion.correctAnswer){
 
-if(mathStep>=9){
+if (mathStep >= 9) {
 
-celebrate("🎉 Alle Aufgaben geschafft!");
+  const updatedTask = {
+    ...activeLearningTask,
+    status: "wartet"
+  };
 
-setActiveLearningTask(null);
-setActiveMathTask(null);
-setMathStep(0);
+  setLearningTasks(prev =>
+    prev.map(task =>
+      task.id === activeLearningTask.id
+        ? updatedTask
+        : task
+    )
+  );
 
-return;
+  saveFamilyItem("learningTasks", updatedTask);
+
+  setActiveLearningTask(null);
+  setActiveMathTask(null);
+  setMathStep(0);
+
+  celebrate(
+    "🎉 Alle 10 Aufgaben geschafft!\n\nWartet auf Elternbestätigung."
+  );
+
+  return;
 }
 
 setMathStep(prev=>prev+1);
