@@ -4203,7 +4203,15 @@ bg: "bg-purple-50",
       >
 
         <div className="flex items-center justify-between gap-4">
-
+{task.status === "wartet" && (
+  <button
+    type="button"
+    onClick={() => approveLearningTask(task)}
+    className="mt-4 w-full rounded-[1.3rem] bg-green-300 px-4 py-3 font-black text-green-900"
+  >
+    ✅ Eltern bestätigen
+  </button>
+)}
           <div>
             <p className="text-sm font-black text-sky-500">
               {task.category}
