@@ -581,6 +581,7 @@ export default function PunktlyRoleSplit() {
   const [activeMathTask, setActiveMathTask] = useState<any>(null);
   const [mathQuestionTask, setMathQuestionTask] = useState<any | null>(null);
   const [mathQuestionData, setMathQuestionData] = useState<any | null>(null);
+  const [familyDataLoadedForUid, setFamilyDataLoadedForUid] = useState("");
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -1636,10 +1637,14 @@ function deleteChild(id: number) {
       if (snap.exists() && snap.data().paid === true) {
         setHasPaid(true);
         setIsPurchased(true);
-    setShowLoginWelcomePopup(true);
-        setShowLoginWelcomePopup(true);
-        await loadFamilyData(user);
-        return true;
+setShowLoginWelcomePopup(true);
+
+if (familyDataLoadedForUid !== user.uid) {
+  await loadFamilyData(user);
+  setFamilyDataLoadedForUid(user.uid);
+}
+
+return true;
       }
 
       setHasPaid(false);
