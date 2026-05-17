@@ -4250,19 +4250,19 @@ bg: "bg-purple-50",
       : `🪙 ${newLearningCoins} Coins`
   }
   readOnly
-  onClick={() =>
-    openNumberKeypad(
-      Number(newLearningCoins),
-      (value) => setNewLearningCoins(String(value))
-    )
-  }
+onClick={() =>
+  openNumberKeypad(
+    Number(newLearningCoins) || 0,
+    (value) => setNewLearningCoins(String(value))
+  )
+}
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
 <NumberKeypadField
   label="⏱️ Dauer in Minuten"
   value={newLearningMinutes}
-  setter={setNewLearningMinutes}
+  setter={(value) => setNewLearningMinutes(Number(value) || 0)}
 />
 <select
   value={newLearningCategory}
