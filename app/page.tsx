@@ -1862,23 +1862,26 @@ function getMathTask(level: "leicht" | "mittel" | "schwer") {
     Math.floor(Math.random() * filteredTasks.length)
   ];
 }
-
 function openTextKeyboard(
-value:string,
-setter:(value:string)=>void
-){
+  value: string,
+  setter: (value: string) => void
+) {
+  setTextKeyboardValue(value || "");
+  setTextKeyboardSetter(() => setter);
+  setTextKeyboardOpen(true);
+}
+
 function AppInput({
   value,
   onChange,
   placeholder,
-  className = ""
+  className = "",
 }: {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
 }) {
-
   return (
     <div
       onClick={() => openTextKeyboard(value, onChange)}
@@ -1887,14 +1890,6 @@ function AppInput({
       {value || placeholder}
     </div>
   );
-
-}
-setTextKeyboardValue(value || "");
-
-setTextKeyboardSetter(()=>setter);
-
-setTextKeyboardOpen(true);
-
 }
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
@@ -4212,12 +4207,11 @@ bg: "bg-purple-50",
 
       <div className="mt-6 grid gap-4">
 
-<input
+<AppInput
   value={newLearningTitle}
-  onChange={(e) => setNewLearningTitle(e.target.value)}
+  onChange={setNewLearningTitle}
   placeholder="📖 Lernaufgabe"
-          className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
-        />
+/>
 
 <input
   value={
@@ -4235,12 +4229,10 @@ bg: "bg-purple-50",
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
-<input
+<NumberKeypadField
+  label="⏱️ Dauer in Minuten"
   value={newLearningMinutes}
-  onChange={(e) => setNewLearningMinutes(Number(e.target.value))}
-  placeholder="⏱️ Dauer in Minuten"
-  type="number"
-  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+  setter={setNewLearningMinutes}
 />
 <select
   value={newLearningCategory}
