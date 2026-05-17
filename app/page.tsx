@@ -586,6 +586,7 @@ export default function PunktlyRoleSplit() {
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
   const [textKeyboardOpen, setTextKeyboardOpen] = useState(false);
   const [textKeyboardValue, setTextKeyboardValue] = useState("");
+  const [keyboardUppercase, setKeyboardUppercase] = useState(true);
   const [textKeyboardSetter, setTextKeyboardSetter] = useState<((value:string)=>void)|null>(null);
   const [newChildName, setNewChildName] = useState("");
   const [newChildAge, setNewChildAge] = useState("");
@@ -2742,7 +2743,11 @@ bg: "bg-purple-50",
 
       <div className="grid grid-cols-10 gap-3">
 
-        {"QWERTZUIOPASDFGHJKLÖÄYXCVBNM".split("").map(
+        {(
+keyboardUppercase
+? "QWERTZUIOPASDFGHJKLÖÄYXCVBNM"
+: "qwertzuiopasdfghjklöäyxcvbnm"
+).split("").map(
           (letter) => (
 
           <button
@@ -2762,43 +2767,53 @@ bg: "bg-purple-50",
 
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3">
+<div className="mt-4 grid grid-cols-4 gap-3">
 
-        <button
-          type="button"
-          onClick={() =>
-            setTextKeyboardValue(
-              prev => prev + " "
-            )
-          }
-          className="rounded-[1rem] bg-sky-100 p-4 text-xl font-black"
-        >
-          ␣ Leerzeichen
-        </button>
+<button
+type="button"
+onClick={() =>
+setKeyboardUppercase(prev=>!prev)
+}
+className="rounded-[1rem] bg-purple-100 p-4 text-xl font-black"
+>
+⇧ Shift
+</button>
 
-        <button
-          type="button"
-          onClick={() =>
-            setTextKeyboardValue(
-              prev => prev.slice(0,-1)
-            )
-          }
-          className="rounded-[1rem] bg-yellow-100 p-4 text-xl font-black"
-        >
-          ⌫ Zurück
-        </button>
+<button
+type="button"
+onClick={() =>
+setTextKeyboardValue(
+prev=>prev+" "
+)
+}
+className="rounded-[1rem] bg-sky-100 p-4 text-xl font-black"
+>
+␣ Leer
+</button>
 
-        <button
-          type="button"
-          onClick={() =>
-            setTextKeyboardValue("")
-          }
-          className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
-        >
-          ✖ Löschen
-        </button>
+<button
+type="button"
+onClick={() =>
+setTextKeyboardValue(
+prev=>prev.slice(0,-1)
+)
+}
+className="rounded-[1rem] bg-yellow-100 p-4 text-xl font-black"
+>
+⌫ Zurück
+</button>
 
-      </div>
+<button
+type="button"
+onClick={() =>
+setTextKeyboardValue("")
+}
+className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
+>
+✖ Löschen
+</button>
+
+</div>
 
       <button
         type="button"
