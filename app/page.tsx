@@ -1024,13 +1024,6 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
       return nextChildren;
     });
 
-    setTimeout(() => {
-      if (childToSave) {
-        saveChildNow(childToSave);
-      }
-      saveTaskNow(approvedTask);
-    }, 250);
-
     setChallenges(prev => prev.map(ch => ({ ...ch, current: Math.min(ch.goal, ch.current + 1) })));
     playSound("coin");
     celebrate("🎉 Bestätigt! Coins + XP gespeichert!");
