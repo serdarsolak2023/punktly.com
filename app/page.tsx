@@ -4728,7 +4728,7 @@ onClick={() => {
 
 setNumberKeypadSetter(() =>
   (value: string) =>
-    setLearningPinInput(value)
+    setNewParentPin(value)
 );
 
     setNumberKeypadOpen(true);
