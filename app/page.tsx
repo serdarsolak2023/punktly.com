@@ -1192,25 +1192,44 @@ celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
     setResetConfirmKind(kind);
   }
 
-  function confirmResetRepeating() {
-    if (!resetConfirmKind) return;
+async function confirmResetRepeating() {
+  if (!resetConfirmKind) return;
 
-    const kind = resetConfirmKind;
-    const label = kind === "täglich" ? "Tagesaufgaben" : "Wochenaufgaben";
+  const kind = resetConfirmKind;
+  const label = kind === "täglich" ? "Tagesaufgaben" : "Wochenaufgaben";
 
-    const updatedTasks = tasks.map(t =>
-      t.repeat === kind ? { ...t, status: "offen" as Status, completedDate: "" } : t
-    );
+  const updatedTasks = tasks.map(t =>
+    t.repeat === kind
+      ? { ...t, status: "offen" as Status, completedDate: "" }
+      : t
+  );
 
-    setTasks(updatedTasks);
+  setTasks(updatedTasks);
+
+  const user = auth.currentUser || firebaseUser;
+
+  if (user) {
+    const batch = writeBatch(db);
 
     updatedTasks
       .filter(t => t.repeat === kind)
-      .forEach(t => saveTaskNow(t));
+      .forEach(t => {
+        batch.set(
+          doc(db, "users", user.uid, "tasks", String(t.id)),
+          {
+            ...t,
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true }
+        );
+      });
 
-    setResetConfirmKind(null);
-    celebrate(`${label} wurden zurückgesetzt!`);
+    await batch.commit();
   }
+
+  setResetConfirmKind(null);
+  celebrate(`${label} wurden zurückgesetzt!`);
+}
 
   function saveReward() {
     if (!newRewardTitle.trim()) return;
