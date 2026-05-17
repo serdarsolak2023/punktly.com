@@ -2730,64 +2730,94 @@ bg: "bg-purple-50",
 )}
 
 {textKeyboardOpen && (
-  <div className="fixed inset-0 z-[10000] flex items-end justify-center bg-black/30 px-4 pb-4">
-    <div className="w-full max-w-md rounded-[2rem] bg-white p-4 shadow-2xl">
+  <div className="fixed inset-0 z-[10000] flex items-end justify-center bg-black/30 p-4">
 
-      <div className="mb-3 rounded-[1rem] bg-slate-100 p-3 text-center text-xl font-black text-sky-900">
+    <div className="w-full max-w-3xl rounded-[2rem] bg-white p-6 shadow-2xl">
+
+      <div className="mb-5 rounded-[1.5rem] bg-slate-100 p-5 text-center text-2xl font-black text-sky-900">
+
         {textKeyboardValue || "Text eingeben"}
+
       </div>
 
-      <div className="grid grid-cols-10 gap-2">
-        {"ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ".split("").map((letter) => (
+      <div className="grid grid-cols-10 gap-3">
+
+        {"QWERTZUIOPASDFGHJKLÖÄYXCVBNM".split("").map(
+          (letter) => (
+
           <button
             key={letter}
             type="button"
-            onClick={() => setTextKeyboardValue(prev => prev + letter)}
-            className="rounded-xl bg-sky-50 py-3 text-lg font-black text-sky-900 shadow"
+            onClick={() =>
+              setTextKeyboardValue(
+                prev => prev + letter
+              )
+            }
+            className="rounded-[1rem] bg-sky-50 p-4 text-2xl font-black shadow"
           >
             {letter}
           </button>
+
         ))}
+
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className="mt-4 grid grid-cols-3 gap-3">
+
         <button
           type="button"
-          onClick={() => setTextKeyboardValue(prev => prev + " ")}
-          className="rounded-xl bg-sky-100 py-3 font-black text-sky-900 shadow"
+          onClick={() =>
+            setTextKeyboardValue(
+              prev => prev + " "
+            )
+          }
+          className="rounded-[1rem] bg-sky-100 p-4 text-xl font-black"
         >
-          Leer
+          ␣ Leerzeichen
         </button>
 
         <button
           type="button"
-          onClick={() => setTextKeyboardValue(prev => prev.slice(0, -1))}
-          className="rounded-xl bg-yellow-100 py-3 font-black text-yellow-800 shadow"
+          onClick={() =>
+            setTextKeyboardValue(
+              prev => prev.slice(0,-1)
+            )
+          }
+          className="rounded-[1rem] bg-yellow-100 p-4 text-xl font-black"
         >
-          ⌫
+          ⌫ Zurück
         </button>
 
         <button
           type="button"
-          onClick={() => setTextKeyboardValue("")}
-          className="rounded-xl bg-red-100 py-3 font-black text-red-700 shadow"
+          onClick={() =>
+            setTextKeyboardValue("")
+          }
+          className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         >
-          C
+          ✖ Löschen
         </button>
+
       </div>
 
       <button
         type="button"
         onClick={() => {
-          textKeyboardSetter?.(textKeyboardValue);
+
+          textKeyboardSetter?.(
+            textKeyboardValue
+          );
+
           setTextKeyboardOpen(false);
+
         }}
-        className="mt-3 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
+        className="mt-4 w-full rounded-[1rem] bg-green-200 p-5 text-2xl font-black"
       >
         ✅ Übernehmen
       </button>
 
     </div>
+
   </div>
 )}
 {readingQuestionTask && readingQuestionText && (
