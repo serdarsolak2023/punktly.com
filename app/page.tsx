@@ -2094,7 +2094,7 @@ useEffect(() => {
       return;
     }
 if (
-  finishedTask?.category === " ➕ Mathe" &&
+  finishedTask?.category === "➕ Mathe" &&
   activeMathTask?.question
 ) {
   setMathQuestionTask(finishedTask);
