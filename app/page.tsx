@@ -4230,21 +4230,22 @@ bg: "bg-purple-50",
             >
               ✏️ Bearbeiten
             </button>
-{task.status === "wartet" && (
-  <button
-    type="button"
-    onClick={() => approveLearningTask(task)}
-    className="mt-4 w-full rounded-[1.3rem] bg-green-300 px-4 py-3 font-black text-green-900"
-  >
-    ✅ Eltern bestätigen
-  </button>
-)}
+
             <button
               onClick={() => deleteLearningTask(task.id)}
               className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
             >
               🗑️ Löschen
             </button>
+            {task.status === "wartet" && (
+            <button
+             type="button"
+             onClick={() => approveLearningTask(task)}
+             className="mt-4 w-full rounded-[1.3rem] bg-green-300 px-4 py-3 font-black text-green-900"
+             >
+           ✅ Eltern bestätigen
+            </button>
+)}
           </div>
         </div>
       </div>
