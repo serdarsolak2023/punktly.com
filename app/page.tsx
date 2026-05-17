@@ -569,7 +569,8 @@ export default function PunktlyRoleSplit() {
 
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
-  const [numberKeypadSetter, setNumberKeypadSetter] = useState<((value: number) => void) | null>(null);
+  const [numberKeypadSetter, setNumberKeypadSetter] =
+         useState<((value: string) => void) | null>(null);
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
@@ -842,7 +843,10 @@ function openNumberKeypad(
     currentValue > 0 ? String(currentValue) : ""
   );
 
-  setNumberKeypadSetter(() => setter);
+ setNumberKeypadSetter(() =>
+  (value: string) =>
+    setLearningPinInput(value)
+);
   setNumberKeypadOpen(true);
 }
 function NumberKeypadField({ label, value, setter }: {
@@ -2677,13 +2681,13 @@ bg: "bg-purple-50",
 
       <button
         type="button"
-        onClick={() => {
-          if (numberKeypadSetter) {
-            numberKeypadSetter(Number(numberKeypadValue || 0));
-          }
+onClick={() => {
+  if (numberKeypadSetter) {
+    numberKeypadSetter(numberKeypadValue);
+  }
 
-          setNumberKeypadOpen(false);
-        }}
+  setNumberKeypadOpen(false);
+}}
         className="mt-4 w-full rounded-xl bg-green-100 py-3 font-black text-green-800 shadow"
       >
         ✅ Übernehmen
@@ -4722,10 +4726,10 @@ bg: "bg-purple-50",
   onClick={() => {
     setNumberKeypadValue(newParentPin || "");
 
-    setNumberKeypadSetter(() =>
-      (value: number) =>
-        setNewParentPin(String(value))
-    );
+setNumberKeypadSetter(() =>
+  (value: string) =>
+    setLearningPinInput(value)
+);
 
     setNumberKeypadOpen(true);
   }}
@@ -5072,9 +5076,10 @@ Bitte konzentriert lernen 😄
 <div
   onClick={() => {
     setNumberKeypadValue(learningPinInput || "");
-    setNumberKeypadSetter(() =>
-      (value: number) => setLearningPinInput(String(value))
-    );
+setNumberKeypadSetter(() =>
+  (value: string) =>
+    setLearningPinInput(value)
+);
     setNumberKeypadOpen(true);
   }}
   className="mx-auto w-40 cursor-pointer rounded-[1.5rem] border-2 border-sky-100 bg-white p-4 text-center text-3xl font-black tracking-[0.5rem] shadow-inner"
