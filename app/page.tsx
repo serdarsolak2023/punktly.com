@@ -1053,33 +1053,37 @@ async function resetFamilyContent() {
   setChests([]);
   setShop([]);
 
-try {
-  const user = auth.currentUser || firebaseUser;
-  if (!user) return;
+  try {
+    const user = auth.currentUser || firebaseUser;
+    if (!user) return;
 
-  const collectionsToReset = [
-    "children",
-    "tasks",
-    "learningTasks",
-    "rewards",
-    "chests",
-    "shop",
-  ];
+    const collectionsToReset = [
+      "children",
+      "tasks",
+      "learningTasks",
+      "rewards",
+      "chests",
+      "shop",
+    ];
 
-  for (const collectionName of collectionsToReset) {
-    const snap = await getDocs(
-      collection(doc(db, "users", user.uid), collectionName)
-    );
+    const batch = writeBatch(db);
 
-    for (const documentItem of snap.docs) {
-      await deleteDoc(documentItem.ref);
+    for (const collectionName of collectionsToReset) {
+      const snap = await getDocs(
+        collection(doc(db, "users", user.uid), collectionName)
+      );
+
+      snap.docs.forEach((documentItem) => {
+        batch.delete(documentItem.ref);
+      });
     }
-  }
 
-  celebrate("Kinder & Inhalte zurückgesetzt");
-} catch {
-  celebrate("Fehler beim Zurücksetzen");
-}
+    await batch.commit();
+
+    celebrate("Kinder & Inhalte zurückgesetzt");
+  } catch {
+    celebrate("Fehler beim Zurücksetzen");
+  }
 }
   function saveTask() {
     if (!newTaskTitle.trim()) return;
