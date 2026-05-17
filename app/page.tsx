@@ -15,7 +15,7 @@ import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, R
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
@@ -1134,10 +1134,37 @@ try {
       return;
     }
 
-    setTasks(prev => [...prev, ...tasksToAdd]);
-    tasksToAdd.forEach(task => saveFamilyItem("tasks", task));
-    playSound("click");
-    celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
+setTasks(prev => [...prev, ...tasksToAdd]);
+
+const user = auth.currentUser || firebaseUser;
+
+if (user) {
+  const batch = writeBatch(db);
+
+  tasksToAdd.forEach(task => {
+    const taskRef = doc(
+      db,
+      "users",
+      user.uid,
+      "tasks",
+      String(task.id)
+    );
+
+    batch.set(
+      taskRef,
+      {
+        ...task,
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+  });
+
+  batch.commit();
+}
+
+playSound("click");
+celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
   }
 
   function editTask(task: Task) {
@@ -3573,6 +3600,18 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 <p className="mt-1 text-sm font-bold text-slate-500">Die Sound-Funktion bleibt sichtbar und kann jederzeit aktiviert werden.</p>
               </div>
 
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">📚</p>
+                <p className="mt-2 font-black text-sky-950">Lernen</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Interaktive Lerninhalte für Kinder.</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
+                <p className="text-3xl">Aufgaben</p>
+                <p className="mt-2 font-black text-sky-950">Aufgaben</p>
+                <p className="mt-1 text-sm font-bold text-slate-500">Kinder erledigen Aufgaben und bekmmen dafür Ihre Coins und könen diese bei den Eltern sicher einlösen.</p>
+              </div>
+              
               <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
                 <p className="text-3xl">🔁</p>
                 <p className="mt-2 font-black text-sky-950">Bereich wechseln</p>
