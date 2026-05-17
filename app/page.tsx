@@ -2141,19 +2141,7 @@ if (
 
       return;
     }
-if (
-  String(finishedTask?.category || "").includes("Mathe") &&
-  activeMathTask?.question
-) {
-  setMathQuestionTask(finishedTask);
-  setMathQuestionData(activeMathTask);
 
-  setActiveLearningTask(null);
-  setActiveMathTask(null);
-  setLearningPinInput("");
-
-  return;
-}
     const updatedTask = {
       ...finishedTask,
       status: "wartet",
@@ -4247,7 +4235,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 <AppInput
   value={newLearningTitle}
   onChange={setNewLearningTitle}
-  placeholder="📖 Lernaufgabe"
+  placeholder="📖 Lernaufgabe eintragen"
 />
 
 <input
