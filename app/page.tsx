@@ -1795,7 +1795,6 @@ setTasks(loadedTasks);
 
     try {
       await deleteDoc(doc(db, "users", user.uid, collectionName, String(id)));
-      console.log("Punktly Firebase Delete OK:", collectionName, id);
     } catch (error) {
       console.error("Punktly Firebase Delete Fehler:", error);
       celebrate("Firebase konnte den Eintrag nicht löschen.");
