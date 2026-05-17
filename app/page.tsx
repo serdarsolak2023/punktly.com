@@ -4903,12 +4903,10 @@ bg: "bg-purple-50",
         {activeLearningTask.title}
       </p>
 {activeLearningTask.category === "📚 Lesen" ? (() => {
-
-const readingText = activeReadingText;
+  const readingText = activeReadingText;
 
   return (
     <div className="mt-6 rounded-[2rem] bg-yellow-50 p-6 text-left shadow-inner">
-
       <h2 className="mb-4 text-2xl font-black text-orange-600">
         📖 {readingText?.title || "Lesetext"}
       </h2>
@@ -4916,10 +4914,22 @@ const readingText = activeReadingText;
       <p className="text-lg font-bold leading-9 text-slate-700">
         {readingText?.text || "Kein passender Text gefunden"}
       </p>
-
     </div>
   );
+})() : String(activeLearningTask.category || "").includes("Mathe") ? (() => {
+  const mathTask = activeMathTask;
 
+  return (
+    <div className="mt-6 rounded-[2rem] bg-blue-50 p-6 text-left shadow-inner">
+      <h2 className="mb-4 text-2xl font-black text-blue-600">
+        ➕ {mathTask?.title || "Matheaufgabe"}
+      </h2>
+
+      <p className="text-lg font-bold leading-9 text-slate-700">
+        {mathTask?.text || "Keine passende Matheaufgabe gefunden"}
+      </p>
+    </div>
+  );
 })() : (
   <p className="mt-6 text-lg font-bold text-sky-700">
     Bitte konzentriert lernen 😄
