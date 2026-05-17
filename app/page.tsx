@@ -1629,12 +1629,17 @@ function deleteChild(id: number) {
       return;
     }
 
-    const updates: any = {
-      uid: user.uid,
-      email: user.email,
-      parentDisplayName: parentDisplayName || user.displayName || "",
-      updatedAt: serverTimestamp(),
-    };
+const updates: any = {};
+
+if (parentDisplayName.trim()) {
+  updates.parentDisplayName = parentDisplayName.trim();
+}
+
+if (user.email) {
+  updates.email = user.email;
+}
+
+updates.uid = user.uid;
 
     if (newParentPin.trim()) {
       updates.parentPin = newParentPin.trim();
@@ -1654,7 +1659,7 @@ function deleteChild(id: number) {
       setParentSecurityQuestion(parentSecurityQuestion.trim());
       setParentSecurityAnswer(parentSecurityAnswer.trim().toLowerCase());
     }
-
+updates.updatedAt = serverTimestamp();
     await setDoc(doc(db, "users", user.uid), updates, { merge: true });
     celebrate("Eltern-Profil gespeichert!");
   }
@@ -1678,22 +1683,24 @@ if (familyDataLoadedForUid !== user.uid) {
 return true;
       }
 
-      setHasPaid(false);
-      setIsPurchased(false);
+setHasPaid(false);
+setIsPurchased(false);
 
-      await setDoc(
-        userRef,
-        {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName || "",
-          paid: false,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      );
+if (!snap.exists()) {
+  await setDoc(
+    userRef,
+    {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName || "",
+      paid: false,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+}
 
-      return false;
+return false;
     } catch (error) {
       console.error(error);
       celebrate("Zahlungsstatus konnte nicht geprüft werden.");
@@ -1723,8 +1730,8 @@ return true;
     setHasPaid(true);
     setIsPurchased(true);
     await loadFamilyData(user);
+setFamilyDataLoadedForUid(user.uid);
   }
-
 
   async function loadFamilyData(user: FirebaseUser) {
     try {
