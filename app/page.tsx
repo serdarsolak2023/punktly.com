@@ -1779,7 +1779,6 @@ setTasks(loadedTasks);
         { merge: true }
       );
 
-      console.log("Punktly Firebase Save OK:", collectionName, item.id);
     } catch (error) {
       console.error("Punktly Firebase Save Fehler:", error);
       celebrate("Firebase konnte Daten nicht speichern.");
