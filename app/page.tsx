@@ -1698,7 +1698,28 @@ updates.updatedAt = serverTimestamp();
       setIsCheckingPaid(true);
       const userRef = doc(db, "users", user.uid);
       const snap = await getDoc(userRef);
+const data = snap.data();
 
+if (data?.trialActive && data?.trialEndsAt > Date.now()) {
+  setHasPaid(true);
+  setIsPurchased(true);
+  setShowLoginWelcomePopup(true);
+
+  await loadFamilyData(user);
+
+  return true;
+}
+
+if (data?.trialActive && data?.trialEndsAt <= Date.now()) {
+  await setDoc(
+    userRef,
+    {
+      trialActive: false,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+}
       if (snap.exists() && snap.data().paid === true) {
         setHasPaid(true);
         setIsPurchased(true);
@@ -2160,7 +2181,47 @@ function spinBonusWheel() {
     await saveFamilyItem("tasks", updatedTask);
   }
 
+async function startTrial() {
+  const user = firebaseUser || auth.currentUser;
 
+  if (!user) {
+    celebrate("Bitte zuerst einloggen.");
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
+    const data = snap.data();
+
+    if (data?.trialUsed) {
+      celebrate("Testphase wurde bereits genutzt.");
+      return;
+    }
+
+    const trialEnds = Date.now() + 48 * 60 * 60 * 1000;
+
+    await setDoc(
+      userRef,
+      {
+        trialUsed: true,
+        trialActive: true,
+        trialStartedAt: serverTimestamp(),
+        trialEndsAt: trialEnds,
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    setHasPaid(true);
+    setIsPurchased(true);
+    await loadFamilyData(user);
+
+    celebrate("🎉 48 Stunden Testphase gestartet!");
+  } catch {
+    celebrate("Testphase konnte nicht gestartet werden.");
+  }
+}
   async function startGooglePlayBillingCheckout(
   plan: "monthly" | "yearly" | "lifetime"
 ) {
@@ -2742,78 +2803,95 @@ bg: "bg-purple-50",
         <br/>
 <div id="payment-section" className="mb-6 grid gap-4">
 
-  <div className="grid grid-cols-2 gap-3">
+<div className="grid grid-cols-2 gap-3">
 
-   <div
-  onClick={() => setSelectedPremiumPlan("monthly")}
-  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
-    selectedPremiumPlan === "monthly"
-      ? "border-pink-500 bg-pink-100 ring-4 ring-pink-200"
-      : "border-pink-100 bg-pink-50"
-  }`}
->
-      <p className="text-xs font-black text-pink-600">
-        🔥 Premium Monat
-      </p>
+  <button
+    onClick={startTrial}
+    disabled={!firebaseUser}
+    className="rounded-[1.5rem] border-2 border-emerald-200 bg-emerald-50 p-4 text-left shadow-sm transition hover:scale-[1.02] disabled:opacity-50"
+  >
+    <p className="text-xs font-black text-emerald-700">
+      🧪 TESTPHASE
+    </p>
 
-      <p className="mt-1 text-sm font-black text-gray-400 line-through">
-        statt 9,99 €
-      </p>
+    <p className="mt-2 text-2xl font-black text-emerald-600">
+      48h
+    </p>
 
-      <p className="text-2xl font-black text-pink-600">
-        6,99 €
-      </p>
+    <p className="text-xs font-black text-emerald-700">
+      kostenlos testen
+    </p>
 
-      <p className="text-xs font-black text-pink-500">
-        pro Monat
-      </p>
-            <p className="mt-1 text-[11px] font-black text-green-600">
-        🎉 Spare 3 €
-      </p>
-    </div>
+    <p className="mt-1 text-[11px] font-black text-green-600">
+      🎉 Voller Premium Zugriff
+    </p>
+  </button>
 
-    <div
-  onClick={() => setSelectedPremiumPlan("yearly")}
-  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
-    selectedPremiumPlan === "yearly"
-      ? "border-yellow-500 bg-yellow-100 ring-4 ring-yellow-200"
-      : "border-yellow-300 bg-yellow-50"
-  }`}
->
-
-      <p className="text-xs font-black text-yellow-700">
-        ⭐ BELIEBT
-      </p>
-
-      <p className="mt-1 text-sm font-black text-gray-400 line-through">
-        statt 89,99 €
-      </p>
-
-      <p className="text-2xl font-black text-yellow-600">
-        59,99 €
-      </p>
-
-      <p className="text-xs font-black text-yellow-700">
-        pro Jahr
-      </p>
-
-      <p className="mt-1 text-[11px] font-black text-green-600">
-        🎉 Spare 30 €
-      </p>
-
-    </div>
-
-  </div>
 
   <div
-  onClick={() => setSelectedPremiumPlan("lifetime")}
-  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
-    selectedPremiumPlan === "lifetime"
-      ? "border-purple-500 bg-purple-100 ring-4 ring-purple-200"
-      : "border-purple-100 bg-purple-50"
-  }`}
->
+    onClick={() => setSelectedPremiumPlan("monthly")}
+    className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+      selectedPremiumPlan === "monthly"
+        ? "border-pink-500 bg-pink-100 ring-4 ring-pink-200"
+        : "border-pink-100 bg-pink-50"
+    }`}
+  >
+    <p className="text-xs font-black text-pink-700">
+      🔥 Premium Monat
+    </p>
 
+    <p className="mt-1 text-sm font-black text-gray-400 line-through">
+      statt 9,99 €
+    </p>
+
+    <p className="text-2xl font-black text-pink-600">
+      6,99 €
+    </p>
+
+    <p className="text-xs font-black text-pink-700">
+      pro Monat
+    </p>
+  </div>
+
+
+  <div
+    onClick={() => setSelectedPremiumPlan("yearly")}
+    className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+      selectedPremiumPlan === "yearly"
+        ? "border-yellow-500 bg-yellow-100 ring-4 ring-yellow-200"
+        : "border-yellow-300 bg-yellow-50"
+    }`}
+  >
+    <p className="text-xs font-black text-yellow-700">
+      ⭐ BELIEBT
+    </p>
+
+    <p className="mt-1 text-sm font-black text-gray-400 line-through">
+      statt 89,99 €
+    </p>
+
+    <p className="text-2xl font-black text-yellow-600">
+      59,99 €
+    </p>
+
+    <p className="text-xs font-black text-yellow-700">
+      pro Jahr
+    </p>
+
+    <p className="mt-1 text-[11px] font-black text-green-600">
+      🎉 Spare 30 €
+    </p>
+  </div>
+
+
+  <div
+    onClick={() => setSelectedPremiumPlan("lifetime")}
+    className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+      selectedPremiumPlan === "lifetime"
+        ? "border-purple-500 bg-purple-100 ring-4 ring-purple-200"
+        : "border-purple-100 bg-purple-50"
+    }`}
+  >
     <p className="text-xs font-black text-purple-700">
       👑 Lifetime Familie
     </p>
@@ -2829,10 +2907,13 @@ bg: "bg-purple-50",
     <p className="text-xs font-black text-purple-700">
       einmalig
     </p>
-      <p className="mt-1 text-[11px] font-black text-green-600">
-        🎉 Spare 50 €
-      </p>
+
+    <p className="mt-1 text-[11px] font-black text-green-600">
+      🎉 Spare 50 €
+    </p>
   </div>
+
+</div>
 
 </div>
         <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
