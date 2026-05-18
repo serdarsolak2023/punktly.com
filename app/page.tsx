@@ -1537,24 +1537,23 @@ function deleteChild(id: number) {
     saveFamilyItem("children", updatedChild);
   }
 
-  function toggleProfileBadge(badgeSrc: string) {
-    let childToSave: Child | null = null;
+function toggleProfileBadge(badgeSrc: string) {
+  const updatedChild = syncPrestigeStars({
+    ...child,
+    profileBadges:
+      (child.profileBadges || []).includes(badgeSrc)
+        ? []
+        : [badgeSrc],
+  });
 
-    setChildren(prev => prev.map(c => {
-      if (c.id !== child.id) return c;
+  setChildren(prev =>
+    prev.map(c =>
+      c.id === child.id ? updatedChild : c
+    )
+  );
 
-      const currentBadges = c.profileBadges || [];
-      const nextBadges = currentBadges.includes(badgeSrc) ? [] : [badgeSrc];
-
-      const updatedChild = { ...c, profileBadges: nextBadges };
-      childToSave = updatedChild;
-      return updatedChild;
-    }));
-
-    if (childToSave) {
-      saveFamilyItem("children", childToSave);
-    }
-  }
+  saveFamilyItem("children", updatedChild);
+}
 
 
 
