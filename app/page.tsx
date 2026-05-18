@@ -4667,7 +4667,7 @@ onClick={() =>
                       <AppInput
   value={newRewardTitle}
   onChange={setNewRewardTitle}
-  placeholder="Belohnung, z. B. Eis"
+  placeholder="Belohnung, z. B. Eis essen gehen, ins Kino gehen, etc."
   className="w-full"
 />
 <input
@@ -4747,16 +4747,13 @@ onClick={() =>
       setNewShopPrice
     )
   }
-  placeholder="🪙 Preis in Coins"
+  placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 
-<AppInput
-  value={newShopIcon}
-  onChange={setNewShopIcon}
-  placeholder="Icon, z. B. 🎮"
-  className="w-full"
-/>
+<div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 text-center text-2xl font-black shadow-inner">
+  🎁
+</div>
 
 <AppTextarea
   value={newShopDescription}
@@ -4866,17 +4863,25 @@ onClick={() =>
       setNewChestPrice
     )
   }
-  placeholder="🪙 Kistenpreis"
+  placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 <select
   value={newChestTier}
   onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
-  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-black outline-none"
+  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-base font-black outline-none"
 >
-  <option value="Bronze">Bronze</option>
-  <option value="Silber">Silber</option>
-  <option value="Gold">Gold</option>
+  <option className="text-sm" value="Bronze">
+    Bronze
+  </option>
+
+  <option className="text-sm" value="Silber">
+    Silber
+  </option>
+
+  <option className="text-sm" value="Gold">
+    Gold
+  </option>
 </select>
 <AppTextarea
   value={newChestContent}
@@ -4939,7 +4944,8 @@ onClick={() =>
               {parentView === "family" && (
                 <Panel title="👨‍👩‍👧 Familien-Challenges">
                   <div className="grid gap-4 md:grid-cols-2">
-                    {challenges.map(ch => <div key={ch.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
+                    {challenges.map(ch => <div key={ch.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
+                    <h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
                   </div>
                 </Panel>
               )}
