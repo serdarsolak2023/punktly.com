@@ -2391,7 +2391,9 @@ if (
   <p className="text-[10px] font-black uppercase tracking-wide text-pink-600">
     ✨ PREMIUM
   </p>
-
+      <p className="mt-1 text-sm font-black text-gray-400 line-through">
+        statt 9,99 €
+      </p>
   <div className="mt-1 flex items-center gap-2">
     <span className="text-xl font-black text-pink-600">
       6,99 €
@@ -2740,6 +2742,9 @@ bg: "bg-purple-50",
       <p className="text-xs font-black text-pink-500">
         pro Monat
       </p>
+            <p className="mt-1 text-[11px] font-black text-green-600">
+        🎉 Spare 3 €
+      </p>
     </div>
 
     <div className="rounded-[1.5rem] border-2 border-yellow-300 bg-yellow-50 p-4">
@@ -2785,7 +2790,9 @@ bg: "bg-purple-50",
     <p className="text-xs font-black text-purple-700">
       einmalig
     </p>
-
+      <p className="mt-1 text-[11px] font-black text-green-600">
+        🎉 Spare 50 €
+      </p>
   </div>
 
 </div>
