@@ -5107,7 +5107,7 @@ setNumberKeypadSetter(() =>
 <AppInput
   value={newChildName}
   onChange={setNewChildName}
-  placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
+  placeholder="👶 Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
   className="w-full text-lg"
 />
 <input
@@ -5120,7 +5120,7 @@ setNumberKeypadSetter(() =>
     )
   }
   placeholder="🎂 Alter"
-  className="w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+  className="w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-black text-sky-950 opacity-100"
 />
 
 <AppInput
