@@ -2697,7 +2697,75 @@ bg: "bg-purple-50",
         <p className="mb-5 text-center text-3xl font-black text-sky-700">
           💳 Zahlungsmethoden
         </p>
+<div id="payment-section" className="mb-6 grid gap-4">
 
+  <div className="grid grid-cols-2 gap-3">
+
+    <div className="rounded-[1.5rem] border-2 border-pink-100 bg-pink-50 p-4">
+      <p className="text-xs font-black text-pink-600">
+        🔥 Premium Monat
+      </p>
+
+      <p className="mt-1 text-sm font-black text-gray-400 line-through">
+        statt 9,99 €
+      </p>
+
+      <p className="text-2xl font-black text-pink-600">
+        6,99 €
+      </p>
+
+      <p className="text-xs font-black text-pink-500">
+        pro Monat
+      </p>
+    </div>
+
+    <div className="rounded-[1.5rem] border-2 border-yellow-300 bg-yellow-50 p-4">
+
+      <p className="text-xs font-black text-yellow-700">
+        ⭐ BELIEBT
+      </p>
+
+      <p className="mt-1 text-sm font-black text-gray-400 line-through">
+        statt 89,99 €
+      </p>
+
+      <p className="text-2xl font-black text-yellow-600">
+        59,99 €
+      </p>
+
+      <p className="text-xs font-black text-yellow-700">
+        pro Jahr
+      </p>
+
+      <p className="mt-1 text-[11px] font-black text-green-600">
+        🎉 Spare 30 €
+      </p>
+
+    </div>
+
+  </div>
+
+  <div className="rounded-[1.5rem] border-2 border-purple-100 bg-purple-50 p-4">
+
+    <p className="text-xs font-black text-purple-700">
+      👑 Lifetime Familie
+    </p>
+
+    <p className="mt-1 text-sm font-black text-gray-400 line-through">
+      statt 199,99 €
+    </p>
+
+    <p className="text-2xl font-black text-purple-600">
+      149,99 €
+    </p>
+
+    <p className="text-xs font-black text-purple-700">
+      einmalig
+    </p>
+
+  </div>
+
+</div>
         {!firebaseUser && (
           <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
             🔒 Bitte zuerst einloggen, dann bezahlen.
