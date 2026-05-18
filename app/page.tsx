@@ -2719,6 +2719,7 @@ bg: "bg-purple-50",
             💳 Über Google Play kaufen
           </button>
         </div>
+        <br/>
 <div id="payment-section" className="mb-6 grid gap-4">
 
   <div className="grid grid-cols-2 gap-3">
