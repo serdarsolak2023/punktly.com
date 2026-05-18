@@ -2386,23 +2386,60 @@ if (
   <span className="text-lime-500">Familie</span>{" "}
   <span className="text-amber-500">genießen!</span>
 </p>
-<div className="absolute left-8 top-24 rounded-[2rem] bg-red-50/90 px-6 py-5 shadow-xl ring-1 ring-red-200 backdrop-blur-xl">
-  
-  <p className="text-sm font-black uppercase tracking-wide text-red-500">
-    🔥🔥🔥 Sonderaktion 🔥🔥🔥
+<div className="absolute left-8 top-24 rounded-[2rem] bg-red-50/90 px-5 py-4 shadow-xl ring-1 ring-red-200 backdrop-blur-xl">
+
+  <p className="text-[11px] font-black uppercase tracking-wide text-red-500">
+    🔥 Sonderaktion
   </p>
 
-  <p className="mt-2 text-lg font-bold text-gray-500 line-through">
-    statt 89,99 €
-  </p>
+  <div className="mt-3 rounded-2xl bg-white/80 p-3">
+    <p className="text-xs font-black text-slate-500">
+      🔥 Premium Monat
+    </p>
 
-  <p className="text-4xl font-black text-red-500">
-    29,99 €
-  </p>
+    <p className="mt-1 text-sm font-bold text-gray-400 line-through">
+      statt 9,99 €
+    </p>
 
-  <p className="mt-1 text-sm font-bold text-red-400">
-    Premium-Zugang
-  </p>
+    <p className="text-2xl font-black text-red-500">
+      6,99 €
+      <span className="ml-1 text-sm text-slate-600">/ Monat</span>
+    </p>
+  </div>
+
+  <div className="mt-3 rounded-2xl border-2 border-yellow-300 bg-yellow-50 p-3">
+    <p className="text-xs font-black text-yellow-700">
+      ⭐ BELIEBT
+    </p>
+
+    <p className="mt-1 text-sm font-bold text-gray-400 line-through">
+      statt 83,88 €
+    </p>
+
+    <p className="text-2xl font-black text-yellow-600">
+      59,99 €
+      <span className="ml-1 text-sm text-slate-600">/ Jahr</span>
+    </p>
+
+    <p className="mt-1 text-[11px] font-black text-green-600">
+      🎉 Spare 23,89 €
+    </p>
+  </div>
+
+  <div className="mt-3 rounded-2xl bg-purple-50 p-3">
+    <p className="text-xs font-black text-purple-700">
+      👑 Lifetime Familie
+    </p>
+
+    <p className="mt-1 text-sm font-bold text-gray-400 line-through">
+      statt 199,99 €
+    </p>
+
+    <p className="text-2xl font-black text-purple-600">
+      149,99 €
+      <span className="ml-1 text-sm text-slate-600">einmalig</span>
+    </p>
+  </div>
 
 </div>
 <button
