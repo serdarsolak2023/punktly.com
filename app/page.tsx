@@ -38,7 +38,7 @@ type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "featu
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
 type Status = "offen" | "wartet" | "erledigt";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
-type Theme = "hell" | "nacht" | "wald" | "bonbon";
+type Theme = "🦁 Löwe" | "🐬 Delfin" | "🐸 Frosch" | "🦄 Einhorn" | "🐯 Tiger" | "🐼 Panda" | "🦜 Papagei" | "🐧 Pinguin";
 type TaskPreset = { title: string; coins: number; repeat: Repeat; day: string; category: string };
 
 type Child = {
@@ -5163,13 +5163,15 @@ setNumberKeypadSetter(() =>
                           <div
                             key={c.id}
                             className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border bg-gradient-to-br ${
-                              c.theme === "hell"
-                                ? "from-orange-100 to-yellow-100"
-                                : c.theme === "nacht"
-                                ? "from-indigo-100 to-slate-100"
-                                : c.theme === "wald"
-                                ? "from-emerald-100 to-lime-100"
-                                : "from-pink-100 to-purple-100"
+c.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200"
+: c.theme === "🐬 Delfin" ? "from-sky-100 to-cyan-200"
+: c.theme === "🐸 Frosch" ? "from-lime-100 to-emerald-200"
+: c.theme === "🦄 Einhorn" ? "from-pink-100 to-purple-200"
+: c.theme === "🐯 Tiger" ? "from-orange-100 to-red-200"
+: c.theme === "🐼 Panda" ? "from-slate-100 to-gray-300"
+: c.theme === "🦜 Papagei" ? "from-green-100 to-yellow-200"
+: c.theme === "🐧 Pinguin" ? "from-blue-100 to-indigo-200"
+: "from-pink-100 to-purple-200"
                             } p-5 shadow-sm`}
                           >
                             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -5211,7 +5213,7 @@ setNumberKeypadSetter(() =>
                             <div className="mt-4">
                               <h4 className="mb-2 font-black text-sky-950">Kinder-Farbe</h4>
                               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-                                {(["hell","nacht","wald","bonbon"] as Theme[]).map(t => (
+                                {(["🦁 Löwe","🐬 Delfin","🐸 Frosch","🦄 Einhorn","🐯 Tiger","🐼 Panda","🦜 Papagei","🐧 Pinguin"] as Theme[]).map(t => (
                                   <button
                                     key={t}
                                     onClick={() => {
