@@ -1964,6 +1964,26 @@ function AppInput({
     </div>
   );
 }
+function AppTextarea({
+  value,
+  onChange,
+  placeholder,
+  className = "",
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      onClick={() => openTextKeyboard(value, onChange)}
+      className={`min-h-[110px] w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
+    >
+      {value || placeholder}
+    </div>
+  );
+}
 function saveLearningTask() {
   if (!newLearningTitle.trim()) return;
 
@@ -3117,20 +3137,18 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                   <p className="mt-2 text-lg font-black text-sky-950">{parentSecurityQuestion}</p>
                 </div>
 
-                <input
-                  value={resetSecurityAnswer}
-                  onChange={(e) => setResetSecurityAnswer(e.target.value)}
-                  placeholder="Antwort eingeben"
-                  className="mt-4 w-full rounded-[1.35rem] border-2 border-sky-100 bg-white px-4 py-3 text-center font-black outline-none"
-                />
+<AppInput
+  value={resetSecurityAnswer}
+  onChange={setResetSecurityAnswer}
+  placeholder="Antwort eingeben"
+  className="mt-4 text-center"
+/>
 
-                <input
-                  value={resetNewParentPin}
-                  onChange={(e) => setResetNewParentPin(e.target.value)}
-                  placeholder="Neue Eltern-PIN"
-                  type="password"
-                  className="mt-3 w-full rounded-[1.35rem] border-2 border-sky-100 bg-white px-4 py-3 text-center font-black outline-none"
-                />
+<NumberKeypadField
+  label="🔒 Neue Eltern-PIN"
+  value={Number(resetNewParentPin) || 0}
+  setter={(value) => setResetNewParentPin(String(value))}
+/>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <button
@@ -3372,7 +3390,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   })}
 
   <span className="ml-3 text-pink-600">
-    ⏰ {currentDateTime.toLocaleTimeString("de-DE", {
+    🕒 {currentDateTime.toLocaleTimeString("de-DE", {
       hour: "2-digit",
       minute: "2-digit",
     })}
@@ -4722,19 +4740,19 @@ onClick={() =>
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 
-                      <input
-                        value={newShopIcon}
-                        onChange={e => setNewShopIcon(e.target.value)}
-                        placeholder="Icon, z. B. 🎮"
-                        className="w-full rounded-[1.35rem] border p-3"
-                      />
+<AppInput
+  value={newShopIcon}
+  onChange={setNewShopIcon}
+  placeholder="Icon, z. B. 🎮"
+  className="w-full"
+/>
 
-                      <textarea
-                        value={newShopDescription}
-                        onChange={e => setNewShopDescription(e.target.value)}
-                        placeholder="Beschreibung, z. B. Mario Kart"
-                        className="min-h-[110px] w-full rounded-[1.35rem] border p-3"
-                      />
+<AppTextarea
+  value={newShopDescription}
+  onChange={setNewShopDescription}
+  placeholder="Beschreibung, z. B. Mario Kart"
+  className="w-full"
+/>
 <button
   type="button"
   onClick={() => {
@@ -4818,12 +4836,12 @@ onClick={() =>
                       Eltern bestimmen hier genau, was in der Schatzkiste enthalten ist.
                     </p>
                     <div className="grid gap-3">
-                      <input
-                        value={newChestTitle}
-                        onChange={e => setNewChestTitle(e.target.value)}
-                        placeholder="Name der Schatzkiste, z. B. Überraschung"
-                        className="w-full rounded-[1.35rem] border p-3"
-                      />
+<AppInput
+  value={newChestTitle}
+  onChange={setNewChestTitle}
+  placeholder="Name der Schatzkiste, z. B. Überraschung"
+  className="w-full"
+/>
 <input
   value={
     Number(newChestPrice) === 0
@@ -4849,12 +4867,12 @@ onClick={() =>
                         <option value="Silber">Silber</option>
                         <option value="Gold">Gold</option>
                       </select>
-                      <textarea
-                        value={newChestContent}
-                        onChange={e => setNewChestContent(e.target.value)}
-                        placeholder="Was ist drin? z. B. Du darfst heute ein Eis aussuchen."
-                        className="min-h-[120px] w-full rounded-[1.35rem] border p-3"
-                      />
+<AppTextarea
+  value={newChestContent}
+  onChange={setNewChestContent}
+  placeholder="Was ist drin? z. B. Du darfst heute ein Eis aussuchen."
+  className="w-full"
+/>
                       <button
   type="button"
   onClick={() => {
@@ -4996,12 +5014,12 @@ onClick={() =>
                     </p>
 
                     <div className="grid gap-3">
-                      <input
-                        value={parentDisplayName}
-                        onChange={e => setParentDisplayName(e.target.value)}
-                        placeholder="Name der Eltern, z. B. Mama & Papa"
-                        className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner font-bold"
-                      />
+<AppInput
+  value={parentDisplayName}
+  onChange={setParentDisplayName}
+  placeholder="Name der Eltern, z. B. Mama & Papa"
+  className="w-full"
+/>
 
 <div
   onClick={() => {
@@ -5026,25 +5044,24 @@ setNumberKeypadSetter(() =>
                       <div className="rounded-[1.8rem] bg-amber-50 p-4">
                         <p className="mb-3 font-black text-amber-900">🔐 Sicherheitsabfrage für PIN-Reset</p>
 
-                        <input
-                          value={parentSecurityQuestion}
-                          onChange={e => setParentSecurityQuestion(e.target.value)}
-                          placeholder="Sicherheitsfrage, z. B. Wie heißt dein erstes Kind?"
-                          className="mb-3 w-full rounded-[1.4rem] border-[3px] border-amber-100 bg-white/90 p-4 shadow-inner font-bold"
-                        />
+<AppInput
+  value={parentSecurityQuestion}
+  onChange={setParentSecurityQuestion}
+  placeholder="Sicherheitsfrage, z. B. Wie heißt dein erstes Kind?"
+  className="mb-3 w-full"
+/>
 
-                        <input
-                          value={parentSecurityAnswer}
-                          onChange={e => setParentSecurityAnswer(e.target.value)}
-                          placeholder="Antwort für PIN-Reset"
-                          className="w-full rounded-[1.4rem] border-[3px] border-amber-100 bg-white/90 p-4 shadow-inner font-bold"
-                        />
+<AppInput
+  value={parentSecurityAnswer}
+  onChange={setParentSecurityAnswer}
+  placeholder="Antwort für PIN-Reset"
+  className="w-full"
+/>
 
                         <p className="mt-3 text-sm font-bold text-amber-700">
                           Diese Sicherheitsabfrage kann nur hier im geöffneten Elternbereich geändert werden.
                         </p>
-                      </div>
-{editingChildId ? "✏️ Kind ändern" : "+ Kind hinzufügen"}
+                      </div>{editingChildId ? "✏️ Kind ändern" : "+ Kind hinzufügen"}
                       <div className="rounded-[1.35rem] bg-sky-50 p-4 font-bold text-sky-800">
                         Aktueller PIN-Status: {savedParentPin ? "✅ PIN gespeichert" : "❌ Noch keine PIN gespeichert"}
                         <br />
@@ -5070,12 +5087,12 @@ setNumberKeypadSetter(() =>
                     </p>
 
                     <div className="grid gap-3">
-                      <input
-                        value={newChildName}
-                        onChange={e => setNewChildName(e.target.value)}
-                        placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
-                        className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
-                      />
+<AppInput
+  value={newChildName}
+  onChange={setNewChildName}
+  placeholder="Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
+  className="w-full text-lg"
+/>
 <input
   value={newChildAge}
   readOnly
@@ -5089,18 +5106,18 @@ setNumberKeypadSetter(() =>
   className="w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
 />
 
-<input
+<AppInput
   value={newChildColor}
-  onChange={e => setNewChildColor(e.target.value)}
+  onChange={setNewChildColor}
   placeholder="🎨 Lieblingsfarbe"
-  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+  className="w-full text-lg"
 />
 
-<input
+<AppInput
   value={newChildAnimal}
-  onChange={e => setNewChildAnimal(e.target.value)}
+  onChange={setNewChildAnimal}
   placeholder="🐾 Lieblingstier"
-  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-bold"
+  className="w-full text-lg"
 />
 
 <button
@@ -5113,7 +5130,7 @@ setNumberKeypadSetter(() =>
 
                     {children.length === 0 && (
                       <div className="mt-5 rounded-[1.8rem] bg-yellow-50 p-4 font-black text-amber-800">
-                        Noch kein Kind angelegt. Erstelle zuerst ein Kind, damit der Kinderbereich genutzt werden kann.
+                        Noch kein Kind angelegt. Lege zuerst ein Kind an, damit der Kinderbereich genutzt werden kann.
                       </div>
                     )}
                   </Panel>
