@@ -2395,7 +2395,7 @@ if (
         statt 9,99 €
       </p>
       <div className="mt-1 flex items-center gap-2">
-    <span className="mit-1 text-xl font-black text-pink-600">
+    <span className="mt-1 text-xl font-black text-pink-600">
       6,99 €
     </span>
 
