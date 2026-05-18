@@ -641,6 +641,8 @@ export default function PunktlyRoleSplit() {
   const [parentSecurityAnswer, setParentSecurityAnswer] = useState("");
   const [resetSecurityAnswer, setResetSecurityAnswer] = useState("");
   const [resetNewParentPin, setResetNewParentPin] = useState("");
+  const [trialEndsAt, setTrialEndsAt] = useState<number | null>(null);
+  const [trialIsActive, setTrialIsActive] = useState(false);
   
   const [bonusWheelEnabled, setBonusWheelEnabled] = useState(true);
   const [wheelSpinning, setWheelSpinning] = useState(false);
@@ -762,7 +764,27 @@ const completedPercent = useMemo(
   const themeClass = child.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200" : child.theme === "🐬 Delfin" ? "from-sky-100 to-cyan-200" : child.theme === "🐸 Frosch" ? "from-lime-100 to-emerald-200" : child.theme === "🦄 Einhorn" ? "from-pink-100 to-purple-200" : child.theme === "🐯 Tiger" ? "from-orange-100 to-red-200" : child.theme === "🐼 Panda" ? "from-slate-100 to-gray-300" : child.theme === "🦜 Papagei" ? "from-green-100 to-yellow-200" : child.theme === "🐧 Pinguin" ? "from-blue-100 to-indigo-200" : "from-yellow-100 to-orange-200";
   const selectedChildMotiv = (child.profileBadges || [])[0] || "/PunktlyLogo.png";
 
-  
+  function getTrialTimeLeft() {
+  if (!trialEndsAt) return "";
+
+  const diff = trialEndsAt - Date.now();
+
+  if (diff <= 0) return "abgelaufen";
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor(
+    (diff / (1000 * 60)) % 60
+  );
+
+  if (hours >= 24) {
+    const days = Math.floor(hours / 24);
+    const restHours = hours % 24;
+
+    return `${days} Tag ${restHours} Std`;
+  }
+
+  return `${hours} Std ${minutes} Min`;
+}
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
 
@@ -1703,6 +1725,9 @@ const data = snap.data();
 if (data?.trialActive && data?.trialEndsAt > Date.now()) {
   setHasPaid(true);
   setIsPurchased(true);
+  setTrialEndsAt(data.trialEndsAt);
+setTrialIsActive(true);
+  
   setShowLoginWelcomePopup(true);
 
   await loadFamilyData(user);
@@ -1720,6 +1745,8 @@ if (data?.trialActive && data?.trialEndsAt <= Date.now()) {
     { merge: true }
   );
 }
+setTrialEndsAt(null);
+setTrialIsActive(false);
       if (snap.exists() && snap.data().paid === true) {
         setHasPaid(true);
         setIsPurchased(true);
@@ -2215,6 +2242,8 @@ async function startTrial() {
     );
 
     setHasPaid(true);
+    setTrialEndsAt(trialEnds);
+setTrialIsActive(true);
     setIsPurchased(true);
     await loadFamilyData(user);
 
@@ -3604,6 +3633,17 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     })}
   </span>
 </div>
+{trialIsActive && trialEndsAt && (
+  <div className="mt-2 rounded-full bg-emerald-50 px-4 py-2 text-center text-xs font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
+    🧪 Testphase aktiv: {getTrialTimeLeft()}
+
+    {trialEndsAt - Date.now() <= 6 * 60 * 60 * 1000 && (
+      <span className="ml-2 text-red-600">
+        ⚠️ Endet bald!
+      </span>
+    )}
+  </div>
+)}
           </div>
         )}
 
