@@ -2208,6 +2208,7 @@ async function startTrial() {
         trialActive: true,
         trialStartedAt: serverTimestamp(),
         trialEndsAt: trialEnds,
+        trialEndsText: new Date(trialEnds).toLocaleString("de-DE"),
         updatedAt: serverTimestamp(),
       },
       { merge: true }
@@ -2807,6 +2808,7 @@ bg: "bg-purple-50",
 
   <button
     onClick={startTrial}
+    
     disabled={!firebaseUser}
     className="rounded-[1.5rem] border-2 border-emerald-200 bg-emerald-50 p-4 text-left shadow-sm transition hover:scale-[1.02] disabled:opacity-50"
   >
