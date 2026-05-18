@@ -2386,18 +2386,18 @@ if (
   <span className="text-lime-500">Familie</span>{" "}
   <span className="text-amber-500">genießen!</span>
 </p>
-<div className="absolute left-8 top-6 rounded-[1.2rem] bg-white/90 px-3 py-2 shadow-md ring-1 ring-sky-100 backdrop-blur">
+<div className="absolute left-8 top-6 rounded-[1.4rem] bg-red-100/95 px-4 py-3 shadow-lg ring-2 ring-red-200 backdrop-blur">
 
-  <p className="text-[10px] font-black uppercase text-orange-500">
-    ✨ Premium
+  <p className="text-[10px] font-black uppercase tracking-wide text-pink-600">
+    ✨ PREMIUM
   </p>
 
   <div className="mt-1 flex items-center gap-2">
-    <span className="text-lg font-black text-pink-500">
-      6,99€
+    <span className="text-xl font-black text-pink-600">
+      6,99 €
     </span>
 
-    <span className="text-xs font-bold text-slate-500">
+    <span className="text-sm font-black text-pink-600">
       pro Monat
     </span>
   </div>
@@ -2410,7 +2410,7 @@ if (
           behavior: "smooth"
         });
     }}
-    className="mt-2 w-full rounded-xl bg-gradient-to-r from-pink-500 to-violet-500 px-3 py-1.5 text-xs font-black text-white"
+    className="mt-2 w-full rounded-[1rem] bg-gradient-to-r from-pink-500 to-fuchsia-500 px-3 py-2 text-[11px] font-black text-white shadow-md"
   >
     💎 Premium Pakete ansehen
   </button>
