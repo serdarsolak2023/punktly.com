@@ -4089,13 +4089,12 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                         <div className="flex-1">
                           <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
                           <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
+                          {!(child.profileBadges || [])[0] && (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              <span className="rounded-full bg-white/60 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
+                            </div>
+                          )}
 
-                          <button
-                            onClick={() => setShowBadgeChooser(!showBadgeChooser)}
-                            className="mt-3 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-sky-800 shadow-sm hover:scale-[1.02] active:scale-[.98] transition"
-                          >
-                            🎨 Mein Motiv auswählen
-                          </button>
                           {showBadgeChooser && (
                             <div className="mt-4 rounded-[1.8rem] bg-white/80 p-3 shadow-inner">
                               <div className="mb-2 flex items-center justify-between gap-3">
