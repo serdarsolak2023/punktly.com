@@ -2705,36 +2705,7 @@ bg: "bg-purple-50",
 
   return (
     <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
-
-<div className="sticky top-0 z-[20000] mb-3 flex w-full justify-center py-2">
-
-  <div className="flex items-center gap-4 rounded-[2rem] bg-sky-100/80 px-5 py-2 shadow-md backdrop-blur">
-
-<div className="text-sm font-black text-sky-700">
-  {currentDateTime.getHours() >= 6 &&
-  currentDateTime.getHours() < 18
-    ? "☀️"
-    : "🌙"}{" "}
-
-  {currentDateTime.toLocaleDateString("de-DE", {
-    weekday: "short",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  })}
-</div>
-
-    <div className="text-lg font-black text-pink-600">
-      ⏰ {currentDateTime.toLocaleTimeString("de-DE", {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}
-    </div>
-
-  </div>
-
-</div>
-        
+      
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
@@ -3388,6 +3359,25 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
           }`}>
             {area === "child" ? "KINDERBEREICH" : "ELTERNBEREICH "}
             <span>{area === "child" ? "👦" : "👥"}</span>
+            <div className="justify-self-center rounded-full bg-white/80 px-4 py-2 text-sm font-black text-sky-800 shadow-sm">
+  {currentDateTime.getHours() >= 6 && currentDateTime.getHours() < 18
+    ? "☀️"
+    : "🌙"}{" "}
+
+  {currentDateTime.toLocaleDateString("de-DE", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })}
+
+  <span className="ml-3 text-pink-600">
+    ⏰ {currentDateTime.toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}
+  </span>
+</div>
           </div>
         )}
 
