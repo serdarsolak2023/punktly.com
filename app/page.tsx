@@ -3634,14 +3634,20 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   </span>
 </div>
 {trialIsActive && trialEndsAt && (
-  <div className="mt-2 rounded-full bg-emerald-50 px-4 py-2 text-center text-xs font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
-    🧪 Testphase aktiv: {getTrialTimeLeft()}
+  <div className="mt-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
+
+    🧪 Testphase aktiv:
+
+    <span className="ml-2">
+      {getTrialTimeLeft()}
+    </span>
 
     {trialEndsAt - Date.now() <= 6 * 60 * 60 * 1000 && (
       <span className="ml-2 text-red-600">
         ⚠️ Endet bald!
       </span>
     )}
+
   </div>
 )}
           </div>
