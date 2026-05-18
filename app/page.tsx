@@ -602,6 +602,8 @@ export default function PunktlyRoleSplit() {
   const [newTaskTarget, setNewTaskTarget] = useState<number | "all">("all");
   const [newTaskDay, setNewTaskDay] = useState("Mo");
   const [selectedPreset, setSelectedPreset] = useState("");
+  const [selectedPremiumPlan, setSelectedPremiumPlan] =
+  useState<"monthly" | "yearly" | "lifetime">("yearly");
   const [selectedTaskPack, setSelectedTaskPack] = useState(taskPacks[0]?.id || "");
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [learningTasks, setLearningTasks] = useState<any[]>([]);
@@ -2159,11 +2161,27 @@ function spinBonusWheel() {
   }
 
 
-  async function startGooglePlayBillingCheckout() {
+  async function startGooglePlayBillingCheckout(
+  plan: "monthly" | "yearly" | "lifetime"
+) {
     try {
       setIsPaying(true);
       setPaymentStatus("Google Play Billing wird vorbereitet...");
+let productId = "";
 
+if (plan === "monthly") {
+  productId = "premium_monthly";
+}
+
+if (plan === "yearly") {
+  productId = "premium_yearly";
+}
+
+if (plan === "lifetime") {
+  productId = "premium_lifetime";
+}
+
+console.log("Ausgewähltes Paket:", productId);
       let currentUser = firebaseUser || auth.currentUser;
 
       if (!currentUser) {
@@ -2395,7 +2413,7 @@ if (
         statt 9,99 €
       </p>
       <div className="mt-1 flex items-center gap-2">
-    <span className="mt-1 text-xl font-black text-pink-600">
+    <span className="text-xl font-black text-pink-600">
       6,99 €
     </span>
 
@@ -2714,7 +2732,7 @@ bg: "bg-purple-50",
 
         <div className="grid gap-4">
           <button
-            onClick={startGooglePlayBillingCheckout}
+            onClick={() => startGooglePlayBillingCheckout(selectedPremiumPlan)}
             disabled={isPaying || !firebaseUser}
             className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
           >
@@ -2726,7 +2744,14 @@ bg: "bg-purple-50",
 
   <div className="grid grid-cols-2 gap-3">
 
-    <div className="rounded-[1.5rem] border-2 border-pink-100 bg-pink-50 p-4">
+   <div
+  onClick={() => setSelectedPremiumPlan("monthly")}
+  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+    selectedPremiumPlan === "monthly"
+      ? "border-pink-500 bg-pink-100 ring-4 ring-pink-200"
+      : "border-pink-100 bg-pink-50"
+  }`}
+>
       <p className="text-xs font-black text-pink-600">
         🔥 Premium Monat
       </p>
@@ -2747,7 +2772,14 @@ bg: "bg-purple-50",
       </p>
     </div>
 
-    <div className="rounded-[1.5rem] border-2 border-yellow-300 bg-yellow-50 p-4">
+    <div
+  onClick={() => setSelectedPremiumPlan("yearly")}
+  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+    selectedPremiumPlan === "yearly"
+      ? "border-yellow-500 bg-yellow-100 ring-4 ring-yellow-200"
+      : "border-yellow-300 bg-yellow-50"
+  }`}
+>
 
       <p className="text-xs font-black text-yellow-700">
         ⭐ BELIEBT
@@ -2773,7 +2805,14 @@ bg: "bg-purple-50",
 
   </div>
 
-  <div className="rounded-[1.5rem] border-2 border-purple-100 bg-purple-50 p-4">
+  <div
+  onClick={() => setSelectedPremiumPlan("lifetime")}
+  className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
+    selectedPremiumPlan === "lifetime"
+      ? "border-purple-500 bg-purple-100 ring-4 ring-purple-200"
+      : "border-purple-100 bg-purple-50"
+  }`}
+>
 
     <p className="text-xs font-black text-purple-700">
       👑 Lifetime Familie
