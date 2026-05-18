@@ -4450,7 +4450,7 @@ onClick={() =>
 >
   <option value="📚 Lesen">📚 Lesen</option>
   <option value="➕ Mathe">➕ Mathe</option>
-  <option value="🇬🇧 Englisch">🇬🇧 Englisch</option>
+  <option value="🇬🇧  Englisch">🇬🇧 Englisch</option>
   <option value="✍️ Schreiben">✍️ Schreiben</option>
   <option value="🧠 Konzentration">🧠 Konzentration</option>
 </select>
@@ -4751,8 +4751,8 @@ onClick={() =>
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
 
-<div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 text-center text-2xl font-black shadow-inner">
-  🎁
+<div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 pl-6 text-left text-2xl font-black shadow-inner">
+  🛒
 </div>
 
 <AppTextarea
@@ -4839,7 +4839,7 @@ onClick={() =>
 
               {parentView === "chests" && (
                 <section className="grid gap-5 lg:grid-cols-2">
-                  <Panel title="🎁 Schatzkiste anlegen">
+                  <Panel title="💎 Schatzkiste anlegen">
                     <p className="mb-4 font-bold text-sky-700">
                       Eltern bestimmen hier genau, was in der Schatzkiste enthalten ist.
                     </p>
@@ -4958,7 +4958,7 @@ onClick={() =>
              {parentView === "features" && (
               <section className="rounded-[2rem] bg-white/90 p-6 shadow-xl">
         <h2 className="text-3xl font-black text-sky-950">
-      ⭐ Bonus Features
+      ⭐ Bonus
     </h2>
 
     <div className="mt-6 flex items-center justify-between rounded-[1.5rem] bg-sky-50 p-4">
@@ -5441,7 +5441,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Features" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
       </div>
     </nav>
   );
@@ -5457,7 +5457,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Features" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
         <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
         <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" />
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
