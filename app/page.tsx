@@ -2697,6 +2697,28 @@ bg: "bg-purple-50",
         <p className="mb-5 text-center text-3xl font-black text-sky-700">
           💳 Zahlungsmethoden
         </p>
+
+        {!firebaseUser && (
+          <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
+            🔒 Bitte zuerst einloggen, dann bezahlen.
+          </p>
+        )}
+
+        {paymentStatus && (
+          <p className="mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
+            {paymentStatus}
+          </p>
+        )}
+
+        <div className="grid gap-4">
+          <button
+            onClick={startGooglePlayBillingCheckout}
+            disabled={isPaying || !firebaseUser}
+            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
+          >
+            💳 Über Google Play kaufen
+          </button>
+        </div>
 <div id="payment-section" className="mb-6 grid gap-4">
 
   <div className="grid grid-cols-2 gap-3">
@@ -2766,28 +2788,6 @@ bg: "bg-purple-50",
   </div>
 
 </div>
-        {!firebaseUser && (
-          <p className="mb-4 rounded-[1.4rem] bg-amber-50 p-4 text-center font-black text-amber-800">
-            🔒 Bitte zuerst einloggen, dann bezahlen.
-          </p>
-        )}
-
-        {paymentStatus && (
-          <p className="mb-4 rounded-[1.4rem] bg-yellow-50 p-3 text-center font-black text-amber-800">
-            {paymentStatus}
-          </p>
-        )}
-
-        <div className="grid gap-4">
-          <button
-            onClick={startGooglePlayBillingCheckout}
-            disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
-          >
-            💳 Über Google Play kaufen
-          </button>
-        </div>
-
         <p className="mt-5 text-center text-sm font-bold leading-relaxed text-blue-600">
           Nach dem Klick öffnet sich Google Play zur sicheren Zahlung.
           <br />
