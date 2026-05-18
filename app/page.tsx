@@ -320,7 +320,7 @@ const initialTasks: Task[] = [];
 
 const weeklyGoals = [
   "5 Aufgaben erledigen",
-  "3 Tage Streak halten",
+  "3 Tage Serie halten",
   "100 Coins sammeln"
 ];
 
@@ -331,7 +331,7 @@ const dailyGoals = [
 ];
 
 const rareBadges = [
-  "🔥 Streak-Meister",
+  "🔥 Serien-Meister",
   "👑 Familien-Champion",
   "💎 Schatzjäger",
   "🌙 Nachteule"
@@ -4387,7 +4387,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                         <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
 <StatCard icon="🎮" label="Level" value={child.level.toString()} />
 <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
-<StatCard icon="🔥" label="Streak" value={`${child.streak} Tage`} />
+<StatCard icon="🔥" label="Serie" value={`${child.streak} Tage`} />
 <StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
                       </div>
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
@@ -5201,7 +5201,7 @@ onClick={() =>
 
               {parentView === "stats" && (
                 <Panel title="📊 Eltern-Statistik">
-                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Streak" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
+                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Serie" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
                 </Panel>
               )}
              {parentView === "features" && (
@@ -5349,7 +5349,7 @@ setNumberKeypadSetter(() =>
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title={editingChildId ? "✏️ Kind bearbeiten" : "👶 Kind anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">
-                      Lege hier die Kinder deiner Familie an. Jedes Kind bekommt eigene Coins, XP, Level und Streaks.
+                      Lege hier die Kinder deiner Familie an. Jedes Kind bekommt eigene Coins, XP, Level und Serien.
                     </p>
 
                     <div className="grid gap-3">
