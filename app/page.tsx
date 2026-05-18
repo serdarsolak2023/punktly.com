@@ -3634,9 +3634,9 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   </span>
 </div>
 {trialIsActive && trialEndsAt && (
-  <div className="mt-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
+  <div className="flex h-[40px] items-center rounded-full bg-emerald-50 px-4 text-sm font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
 
-    🧪 Testphase aktiv:
+    <span>🧪 Testphase aktiv:</span>
 
     <span className="ml-2">
       {getTrialTimeLeft()}
