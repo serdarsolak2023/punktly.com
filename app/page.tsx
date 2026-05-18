@@ -2386,24 +2386,33 @@ if (
   <span className="text-lime-500">Familie</span>{" "}
   <span className="text-amber-500">genießen!</span>
 </p>
-<div className="absolute left-8 top-6 rounded-[1.5rem] bg-white/90 px-5 py-4 shadow-lg ring-1 ring-sky-100 backdrop-blur-xl">
+<div className="absolute left-8 top-6 rounded-[1.2rem] bg-white/90 px-3 py-2 shadow-md ring-1 ring-sky-100 backdrop-blur">
 
-  <p className="text-[11px] font-black uppercase tracking-wide text-orange-500">
-    ✨ Premium Familie
+  <p className="text-[10px] font-black uppercase text-orange-500">
+    ✨ Premium
   </p>
 
-  <p className="mt-2 text-2xl font-black text-sky-950">
-    ab <span className="text-pink-500">6,99 €</span>
-  </p>
+  <div className="mt-1 flex items-center gap-2">
+    <span className="text-lg font-black text-pink-500">
+      6,99€
+    </span>
 
-  <p className="text-sm font-bold text-slate-500">
-    pro Monat
-  </p>
+    <span className="text-xs font-bold text-slate-500">
+      pro Monat
+    </span>
+  </div>
 
   <button
-    className="mt-3 w-full rounded-[1rem] bg-gradient-to-r from-pink-500 to-violet-500 px-4 py-2 font-black text-white shadow-md"
+    onClick={() => {
+      document
+        .getElementById("payment-section")
+        ?.scrollIntoView({
+          behavior: "smooth"
+        });
+    }}
+    className="mt-2 w-full rounded-xl bg-gradient-to-r from-pink-500 to-violet-500 px-3 py-1.5 text-xs font-black text-white"
   >
-    💎 Premium ansehen
+    💎 Premium Pakete ansehen
   </button>
 
 </div>
