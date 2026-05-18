@@ -4576,7 +4576,12 @@ onClick={() =>
                           </option>
                         ))}
                       </select>
-                      <input value={newTaskTitle} onChange={e => setNewTaskTitle(e.target.value)} placeholder="Eigene Aufgabe anlegen" className="w-full rounded-[1.35rem] border p-3" />
+                      <AppInput
+  value={newTaskTitle}
+  onChange={setNewTaskTitle}
+  placeholder="Eigene Aufgabe anlegen"
+  className="w-full"
+/>
 <input
   value={
     Number(newTaskCoins) === 0
@@ -4658,7 +4663,13 @@ onClick={() =>
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingRewardId ? "✏️ Belohnung bearbeiten" : "🎁 Belohnung anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">Belohnungen können nur Eltern anlegen, bearbeiten und löschen.</p>
-                    <div className="grid gap-3"><input value={newRewardTitle} onChange={e => setNewRewardTitle(e.target.value)} placeholder="Belohnung, z. B. Eis" className="w-full rounded-[1.35rem] border p-3" />
+                    <div className="grid gap-3">
+                      <AppInput
+  value={newRewardTitle}
+  onChange={setNewRewardTitle}
+  placeholder="Belohnung, z. B. Eis"
+  className="w-full"
+/>
 <input
   value={
     Number(newRewardCoins) === 0
@@ -4717,12 +4728,12 @@ onClick={() =>
                     </p>
 
                     <div className="grid gap-3">
-                      <input
-                        value={newShopTitle}
-                        onChange={e => setNewShopTitle(e.target.value)}
-                        placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
-                        className="w-full rounded-[1.35rem] border p-3"
-                      />
+<AppInput
+  value={newShopTitle}
+  onChange={setNewShopTitle}
+  placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
+  className="w-full"
+/>
 <input
   value={
     Number(newShopPrice) === 0
@@ -4858,15 +4869,15 @@ onClick={() =>
   placeholder="🪙 Kistenpreis"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
-                      <select
-                        value={newChestTier}
-                        onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
-                        className="w-full rounded-[1.35rem] border bg-white p-3"
-                      >
-                        <option value="Bronze">Bronze</option>
-                        <option value="Silber">Silber</option>
-                        <option value="Gold">Gold</option>
-                      </select>
+<select
+  value={newChestTier}
+  onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
+  className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 shadow-inner text-lg font-black outline-none"
+>
+  <option value="Bronze">Bronze</option>
+  <option value="Silber">Silber</option>
+  <option value="Gold">Gold</option>
+</select>
 <AppTextarea
   value={newChestContent}
   onChange={setNewChestContent}
