@@ -2703,7 +2703,9 @@ bg: "bg-purple-50",
     );
   }
 
-<div className="fixed right-4 top-4 z-[20000] rounded-[1.5rem] border-2 border-white bg-white/90 px-4 py-3 text-right font-black text-sky-950 shadow-xl backdrop-blur">
+  return (
+    <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
+        <div className="fixed right-4 top-4 z-[20000] rounded-[1.5rem] border-2 border-white bg-white/90 px-4 py-3 text-right font-black text-sky-950 shadow-xl backdrop-blur">
 
   <div className="text-sm text-sky-600">
     {currentDateTime.toLocaleDateString("de-DE", {
@@ -2723,8 +2725,7 @@ bg: "bg-purple-50",
   </div>
 
 </div>
-  return (
-    <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
+        
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
