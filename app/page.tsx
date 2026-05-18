@@ -666,7 +666,7 @@ export default function PunktlyRoleSplit() {
     streak: 0,
     completedCount: 0,
     weeklyPoints: 0,
-    theme: "hell" as Theme,
+    theme: "🦁 Löwe" as Theme,
     goal: "Erstes Ziel",
     goalCoins: 100,
     equipped: [],
@@ -757,7 +757,7 @@ const completedPercent = useMemo(
       : 0,
   [childTasks]
 );
-  const themeClass = { hell: "from-orange-300 to-amber-200", nacht: "from-indigo-400 to-slate-300", wald: "from-emerald-300 to-lime-200", bonbon: "from-pink-300 to-purple-200" }[child.theme];
+  const themeClass = child.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200" : child.theme === "🐬 Delfin" ? "from-sky-100 to-cyan-200" : child.theme === "🐸 Frosch" ? "from-lime-100 to-emerald-200" : child.theme === "🦄 Einhorn" ? "from-pink-100 to-purple-200" : child.theme === "🐯 Tiger" ? "from-orange-100 to-red-200" : child.theme === "🐼 Panda" ? "from-slate-100 to-gray-300" : child.theme === "🦜 Papagei" ? "from-green-100 to-yellow-200" : child.theme === "🐧 Pinguin" ? "from-blue-100 to-indigo-200" : "from-yellow-100 to-orange-200";
   const selectedChildMotiv = (child.profileBadges || [])[0] || "/PunktlyLogo.png";
 
   
@@ -5217,8 +5217,20 @@ c.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200"
                                   <button
                                     key={t}
                                     onClick={() => {
-                                      setSelectedChildId(c.id);
-                                      setChildren(prev => prev.map(childItem => childItem.id === c.id ? { ...childItem, theme: t } : childItem));
+                                      const updatedChild = {
+  ...c,
+  theme: t,
+};
+
+setSelectedChildId(c.id);
+
+setChildren(prev =>
+  prev.map(childItem =>
+    childItem.id === c.id ? updatedChild : childItem
+  )
+);
+
+saveFamilyItem("children", updatedChild);
                                     }}
                                     className={`rounded-[1.35rem] p-3 font-black ${
                                       c.theme === t ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white" : "bg-white/80 text-sky-800"
