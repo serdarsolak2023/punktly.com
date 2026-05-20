@@ -575,6 +575,7 @@ export default function PunktlyRoleSplit() {
   const [mathQuestionData, setMathQuestionData] = useState<any | null>(null);
   const [familyDataLoadedForUid, setFamilyDataLoadedForUid] = useState("");
   const [resetCoinsValue, setResetCoinsValue] = useState(0);
+  const [coinsTargetChild, setCoinsTargetChild] = useState("all");
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -1076,10 +1077,15 @@ async function resetAllChildrenCoins() {
 
   const newCoins = Number(resetCoinsValue || 0);
 
-  const updatedChildren = children.map(child => ({
-    ...child,
-    coins: newCoins,
-  }));
+const updatedChildren = children.map(child => ({
+  ...child,
+  coins:
+    coinsTargetChild === "all"
+      ? newCoins
+      : String(child.id) === coinsTargetChild
+      ? newCoins
+      : child.coins,
+}));
 
   setChildren(updatedChildren);
 
@@ -2143,7 +2149,9 @@ function approveLearningTask(task: any) {
 
   const updatedChild = {
     ...targetChild,
-    coins: targetChild.coins + task.coins,
+    coins:
+  Number(targetChild.coins || 0) +
+  Number(task.coins || 0),
   };
 
   const updatedTask = {
@@ -4728,6 +4736,29 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
+
+<select
+  value={coinsTargetChild}
+  onChange={(e) =>
+    setCoinsTargetChild(e.target.value)
+  }
+  className="mb-3 w-full rounded-[1.5rem] border-[3px] border-yellow-200 bg-white p-4 font-black"
+>
+
+  <option value="all">
+    👨‍👩‍👧 Alle Kinder
+  </option>
+
+  {children.map(c => (
+    <option
+      key={c.id}
+      value={c.id}
+    >
+      🧒 {c.name}
+    </option>
+  ))}
+
+</select>
 <NumberKeypadField
   label="⏱️ Dauer in Minuten"
   value={newLearningMinutes}
@@ -5322,7 +5353,7 @@ onClick={() =>
     onClick={resetAllChildrenCoins}
     className="mt-3 w-full rounded-[1.5rem] bg-yellow-400 px-4 py-4 font-black text-yellow-950 shadow-md"
   >
-    🧹 Alle Coins auf {resetCoinsValue} setzen
+    🧹 Coins auf {resetCoinsValue} setzen
   </button>
 </div>
 
