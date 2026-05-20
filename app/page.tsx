@@ -4690,8 +4690,7 @@ onClick={() =>
   <option value="📚 Lesen">📚 Lesen</option>
   <option value="➕ Mathe">➕ Mathe</option>
   <option value="🇬🇧  Englisch">🇬🇧 Englisch</option>
-  <option value="✍️ Schreiben">✍️ Schreiben</option>
-  <option value="🧠 Konzentration">🧠 Konzentration</option>
+  
 </select>
         <select
   value={newLearningLevel}
