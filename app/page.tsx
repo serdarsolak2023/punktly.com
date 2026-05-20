@@ -1,13 +1,3 @@
-
-// V20-V26 Features aktiviert:
-// - Wochenplan
-// - Tagesziele
-// - Seltene Abzeichen
-// - Shop Erweiterung
-// - Eltern Dashboard PRO
-// - Schlafmodus & Sounds
-
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -2495,7 +2485,7 @@ if (
   <span className="text-lime-500">Familie</span>{" "}
   <span className="text-amber-500">genießen!</span>
 </p>
-<div className="absolute left-8 top-6 rounded-[1.4rem] bg-red-100/95 px-4 py-3 shadow-lg ring-2 ring-red-200 backdrop-blur">
+<div className="relative mx-auto mt-4 w-fit rounded-[1.4rem] bg-red-100/95 px-4 py-3 shadow-lg ring-2 ring-red-200">
 
   <p className="text-[10px] font-black uppercase tracking-wide text-pink-600">
     ✨ PREMIUM
@@ -2833,7 +2823,7 @@ bg: "bg-purple-50",
         <br/>
 <div id="payment-section" className="mb-6 grid gap-4">
 
-<div className="grid grid-cols-2 gap-3">
+<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
   <button
     onClick={startTrial}
@@ -3785,7 +3775,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
           {area === "child" || area === "parent" ? (
             <div className="relative z-10 grid gap-5 xl:grid-cols-[1.15fr_.85fr] lg:items-center">
-              <div className="flex items-center gap-5">
+              <div className="flex flex-col items-center gap-5 sm:flex-row">
                 <img
                   src="/PunktlyLogo.png"
                   alt="Punktly Logo"
@@ -3793,7 +3783,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 />
 
                 <div>
-<h1 className="text-3xl font-black md:text-4xl">
+<h1 className="text-2xl font-black sm:text-3xl md:text-4xl">
   <span className="text-yellow-400">P</span>
   <span className="text-green-500">u</span>
   <span className="text-blue-500">n</span>
@@ -3933,7 +3923,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
   {summaryOpen && (
 
-    <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+    <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
 
       <div className="rounded-[1.5rem] bg-white p-4 shadow-md ring-1 ring-sky-50">
         <p className="text-3xl">🎨</p>
@@ -4060,7 +4050,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     className="h-36 w-auto object-contain"
   />
 </div>
-              <h2 className="mt-4 text-4xl font-black text-blue-950">Kinderbereich</h2>
+              <h2 className="mt-4 text-2xl font-black text-blue-950 sm:text-3xl md:text-4xl">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
 
               {children.length === 0 && (
