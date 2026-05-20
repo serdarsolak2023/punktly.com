@@ -1066,6 +1066,50 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
     }
     celebrate("Aufgabe abgelehnt.");
   }
+async function resetAllChildrenCoins() {
+  const confirmed = window.confirm(
+    "Wirklich alle Coins aller Kinder auf 0 zurücksetzen?"
+  );
+
+  if (!confirmed) return;
+
+  const updatedChildren = children.map(child => ({
+    ...child,
+    coins: 0,
+  }));
+
+  setChildren(updatedChildren);
+
+  const user = auth.currentUser || firebaseUser;
+
+  if (!user) {
+    celebrate("Kein Nutzer gefunden.");
+    return;
+  }
+
+  try {
+    const batch = writeBatch(db);
+
+    updatedChildren.forEach(child => {
+      batch.set(
+        doc(db, "users", user.uid, "children", String(child.id)),
+        {
+          ...child,
+          coins: 0,
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+    });
+
+    await batch.commit();
+
+    celebrate("Alle Coins wurden zurückgesetzt.");
+  } catch {
+    celebrate("Coins konnten nicht zurückgesetzt werden.");
+  }
+}
+
 async function resetFamilyContent() {
   const confirmed = window.confirm(
     "Kinderprofile, Aufgaben, Lernen, Belohnungen, Kisten und Shop wirklich zurücksetzen?"
@@ -5255,7 +5299,27 @@ onClick={() =>
                       </button>
 <br />
 <br />
+<div className="rounded-[1.5rem] bg-yellow-50 p-4 shadow-sm ring-1 ring-yellow-200">
+  <p className="mb-3 font-black text-yellow-800">
+    🪙 Coins verwalten
+  </p>
+
+  <p className="mb-4 text-sm font-bold text-yellow-700">
+    Eltern können hier jederzeit alle Kinder-Coins zurücksetzen.
+  </p>
+
+  <button
+    type="button"
+    onClick={resetAllChildrenCoins}
+    className="w-full rounded-[1.5rem] bg-yellow-400 px-4 py-4 font-black text-yellow-950 shadow-md"
+  >
+    🧹 Alle Coins auf 0 setzen
+  </button>
+</div>
+
 <br />
+<br />
+
 <button
   type="button"
   onClick={resetFamilyContent}
@@ -5276,7 +5340,7 @@ onClick={() =>
 <AppInput
   value={parentDisplayName}
   onChange={setParentDisplayName}
-  placeholder="Name der Eltern, z. B. Mama & Papa"
+  placeholder="Benutzername, z. B. Mama & Papa"
   className="w-full"
 />
 
@@ -5349,7 +5413,7 @@ setNumberKeypadSetter(() =>
 <AppInput
   value={newChildName}
   onChange={setNewChildName}
-  placeholder="👶 Name des Kindes, z. B. Leon, Elias, Emma, Mia ..."
+  placeholder="👶 Nick- oder Fantasienamen für Kinder, z. B. Leofuchs, LunaNi, EmaStar, etc."
   className="w-full text-lg"
 />
 <input
