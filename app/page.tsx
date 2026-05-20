@@ -66,32 +66,56 @@ type Chest = { id: number; title: string; price: number; tier: "Bronze" | "Silbe
 const days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
 const legalPages: Record<LegalPage, { title: string; intro: string; content: string[] }> = {
-  impressum: {
-    title: "Impressum",
-    intro: "Angaben gemäß § 5 TMG",
-    content: [
-      "PunktlyCoinly, Inhaber: Serdar Solak",
-      "Wichtig: Weitere informationen folgen"
-    ],
-  },
-  datenschutz: {
-    title: "Datenschutzerklärung",
-    intro: "Informationen zum Datenschutz",
-    content: [
+impressum: {
+  title: "Impressum",
+  intro: "Angaben gemäß § 5 TMG",
+  content: [
+    "PunktlyCoinly",
+    "Inhaber: Serdar Solak",
+    "Einzelunternehmen (Kleingewerbe)",
+    "Leipziger Straße 159",
+    "34123 Kassel",
+    "Deutschland",
+    "",
+    "Kontakt:",
+    "E-Mail: kontakt@punktlycoinly.de",
+    "",
+    "Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV:",
+    "Serdar Solak",
+    "Leipziger Straße 159",
+    "34123 Kassel"
+  ]
+},
+datenschutz: {
+  title: "Datenschutzerklärung",
+  intro: "Informationen zum Datenschutz",
+  content: [
+
 "1. Verantwortlicher",
 
-"Verantwortlich für die Datenverarbeitung innerhalb der App PunktlyCoinly ist PunktlyCoinly.",
+"Verantwortlich für die Datenverarbeitung innerhalb der App PunktlyCoinly ist:",
+
+"PunktlyCoinly",
+"Inhaber: Serdar Solak",
+"Leipziger Straße 159",
+"34123 Kassel",
+"Deutschland",
 "E-Mail: kontakt@punktlycoinly.de",
 
 
 "2. Erhebung und Verarbeitung personenbezogener Daten",
 
 "Bei der Nutzung der App können personenbezogene Daten verarbeitet werden.",
+
 "Dazu gehören insbesondere:",
 "• E-Mail-Adresse bei Anmeldung mit Google",
-"• Benutzername oder Anzeigename",
-"• Freiwillig eingegebene Inhalte innerhalb der App",
-"• Technische Informationen zur Nutzung der App",
+"• Anzeigename oder Benutzername",
+"• Kinderprofile",
+"• Coins, Fortschritte, Aufgaben und Belohnungen",
+"• Premiumstatus",
+"• Testphasenstatus",
+"• freiwillig eingegebene Inhalte",
+"• technische Informationen zur Nutzung der App",
 
 "Die Verarbeitung erfolgt ausschließlich zum Betrieb und zur Bereitstellung der Funktionen der App.",
 
@@ -99,9 +123,13 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
 "3. Zweck der Datenverarbeitung",
 
 "Die Verarbeitung personenbezogener Daten erfolgt insbesondere zur:",
+
 "• Anmeldung und Authentifizierung",
-"• Speicherung von Aufgaben, Coins, Fortschritten und Belohnungen",
+"• Speicherung von Aufgaben",
+"• Speicherung von Coins, Fortschritten und Belohnungen",
+"• Verwaltung von Kinderprofilen",
 "• Synchronisierung der Familiendaten",
+"• Bereitstellung von Premiumfunktionen",
 "• Verbesserung der Stabilität und Sicherheit der App",
 
 
@@ -120,19 +148,30 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
 "Dublin 4, Irland",
 
 "Weitere Informationen:",
-"https://firebase.google.com/support/privacy",
+"Firebase Datenschutzhinweise:",
+"firebase.google.com/support/privacy",
 
 
-"6. Speicherung und Löschung von Daten",
+"6. Google Play und Premiumdienste",
+
+"Premium-Abonnements sowie digitale Inhalte werden ausschließlich über Google Play verarbeitet.",
+
+"PunktlyCoinly verarbeitet selbst keine Zahlungsdaten wie Kreditkarteninformationen.",
+
+"Die Zahlungsabwicklung erfolgt ausschließlich durch Google Play.",
+
+
+"7. Speicherung und Löschung von Daten",
 
 "Personenbezogene Daten werden nur so lange gespeichert, wie dies für die Nutzung der App erforderlich ist.",
 
 "Nutzer können jederzeit die Löschung ihrer Daten verlangen.",
 
 
-"7. Rechte der betroffenen Personen",
+"8. Rechte der betroffenen Personen",
 
 "Nutzer haben im Rahmen der DSGVO insbesondere folgende Rechte:",
+
 "• Recht auf Auskunft",
 "• Recht auf Berichtigung",
 "• Recht auf Löschung",
@@ -143,42 +182,83 @@ const legalPages: Record<LegalPage, { title: string; intro: string; content: str
 "Anfragen können per E-Mail gestellt werden.",
 
 
-"8. Datensicherheit",
+"9. Datensicherheit",
 
 "Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um personenbezogene Daten bestmöglich vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.",
 
 
-"9. Änderungen dieser Datenschutzerklärung",
+"10. Änderungen dieser Datenschutzerklärung",
 
 "Diese Datenschutzerklärung kann aktualisiert werden, um rechtliche oder technische Änderungen zu berücksichtigen.",
 
 "Stand: Mai 2026"
-    ],
-  },
-  widerruf: {
-    title: "Widerrufsbelehrung",
-    intro: "Informationen zum Widerrufsrecht",
-    content: [
+
+],
+},
+widerruf: {
+  title: "Widerrufsbelehrung",
+  intro: "Informationen zum Widerrufsrecht",
+  content: [
+
 "Widerrufsbelehrung",
 
-"Käufe und Zahlungen innerhalb von PunktlyCoinly werden über Google Play verarbeitet.",
 
-"Für Rückerstattungen, Widerrufe und Zahlungsabwicklungen gelten zusätzlich die Richtlinien von Google Play.",
+"1. Allgemeine Informationen",
 
-"Anfragen zu Rückerstattungen können direkt über das Google-Play-Konto gestellt werden.",
+"Premium-Abonnements, digitale Inhalte und sonstige Käufe innerhalb der App PunktlyCoinly werden ausschließlich über Google Play bereitgestellt und verarbeitet.",
+
+"Vertragspartner für die Zahlungsabwicklung ist im Rahmen der jeweiligen Zahlungsabwicklung zusätzlich Google Play.",
+
+
+"2. Digitale Inhalte",
+
+"Bei den angebotenen Leistungen handelt es sich um digitale Inhalte und digitale Premium-Funktionen, die unmittelbar nach erfolgreicher Zahlung innerhalb der App freigeschaltet werden können.",
+
+"Dazu gehören insbesondere:",
+
+"• Premium-Abonnements",
+"• Premium-Jahreszugänge",
+"• Lifetime-Familienzugänge",
+"• zeitlich begrenzte Premium-Funktionen",
+"• zusätzliche digitale Inhalte innerhalb der App",
+
+
+"3. Zustimmung zur sofortigen Ausführung",
+
+"Mit Abschluss eines Kaufs erklärt sich der Nutzer ausdrücklich damit einverstanden, dass die Bereitstellung der digitalen Inhalte unmittelbar beginnt.",
+
+"Der Nutzer bestätigt gleichzeitig, dass ihm bekannt ist, dass mit Beginn der Vertragsausführung das gesetzliche Widerrufsrecht gemäß den geltenden gesetzlichen Bestimmungen vorzeitig erlöschen kann.",
+
+
+"4. Rückerstattungen und Kündigungen",
+
+"Rückerstattungen, Kündigungen und die Verwaltung von Abonnements erfolgen ausschließlich über Google Play.",
+
+"Nutzer können ihre aktiven Abonnements jederzeit über ihr Google-Konto verwalten oder kündigen.",
+
+"Die Bearbeitung von Rückerstattungen erfolgt gemäß den Richtlinien von Google Play.",
+
+
+"5. Google Play Richtlinien",
+
+"Zusätzlich gelten die Nutzungsbedingungen und Richtlinien von Google Play.",
 
 "Weitere Informationen:",
+
 "https://support.google.com/googleplay/answer/2479637",
 
-"Digitale Inhalte können unmittelbar nach dem Kauf freigeschaltet werden.",
 
-"Mit dem Kauf stimmt der Nutzer ausdrücklich zu, dass die Ausführung des Vertrags sofort beginnt.",
+"6. Kontakt",
 
-"Das Widerrufsrecht kann dadurch vorzeitig erlöschen.",
+"Fragen zu PunktlyCoinly können jederzeit an folgende Adresse gerichtet werden:",
+
+"kontakt@punktlycoinly.de",
+
 
 "Stand: Mai 2026"
-    ],
-  },
+
+],
+},
   agb: {
     title: "AGB",
     intro: "Allgemeine Geschäftsbedingungen",
