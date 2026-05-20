@@ -977,7 +977,7 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
         const receives = task.childId === "all" ? c.id === selectedChildId : c.id === task.childId;
         if (!receives) return c;
 
-        let coins = c.coins + task.coins;
+        let coins = Number(c.coins || 0) + Number(task.coins || 0);
         let xp = c.xp + task.xp;
         let level = c.level;
         let streak = c.streak + (task.repeat === "täglich" ? 1 : 0);
@@ -1006,7 +1006,9 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
               prestigeStars: nextPrestige,
               streak,
               completedCount: c.completedCount + 1,
-              weeklyPoints: c.weeklyPoints + task.coins,
+              weeklyPoints:
+  Number(c.weeklyPoints || 0) +
+  Number(task.coins || 0),
               achievements
             };
 
@@ -1033,7 +1035,9 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
           level,
           streak,
           completedCount: c.completedCount + 1,
-          weeklyPoints: c.weeklyPoints + task.coins,
+          weeklyPoints:
+  Number(c.weeklyPoints || 0) +
+  Number(task.coins || 0),
           achievements
         };
 
