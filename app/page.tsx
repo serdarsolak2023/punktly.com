@@ -4737,28 +4737,7 @@ onClick={() =>
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
 
-<select
-  value={coinsTargetChild}
-  onChange={(e) =>
-    setCoinsTargetChild(e.target.value)
-  }
-  className="mb-3 w-full rounded-[1.5rem] border-[3px] border-yellow-200 bg-white p-4 font-black"
->
 
-  <option value="all">
-    👨‍👩‍👧 Alle Kinder
-  </option>
-
-  {children.map(c => (
-    <option
-      key={c.id}
-      value={c.id}
-    >
-      🧒 {c.name}
-    </option>
-  ))}
-
-</select>
 <NumberKeypadField
   label="⏱️ Dauer in Minuten"
   value={newLearningMinutes}
@@ -5341,6 +5320,29 @@ onClick={() =>
   <p className="mb-4 text-sm font-bold text-yellow-700">
     Eltern können hier alle Kinder-Coins auf einen gewünschten Wert setzen.
   </p>
+
+<select
+  value={coinsTargetChild}
+  onChange={(e) =>
+    setCoinsTargetChild(e.target.value)
+  }
+  className="mb-3 w-full rounded-[1.5rem] border-[3px] border-yellow-200 bg-white p-4 font-black"
+>
+
+  <option value="all">
+    👨‍👩‍👧 Alle Kinder
+  </option>
+
+  {children.map(c => (
+    <option
+      key={c.id}
+      value={c.id}
+    >
+      🧒 {c.name}
+    </option>
+  ))}
+
+</select>
 
   <NumberKeypadField
     label="🪙 Coins setzen"
