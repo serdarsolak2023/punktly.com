@@ -574,6 +574,7 @@ export default function PunktlyRoleSplit() {
   const [mathQuestionTask, setMathQuestionTask] = useState<any | null>(null);
   const [mathQuestionData, setMathQuestionData] = useState<any | null>(null);
   const [familyDataLoadedForUid, setFamilyDataLoadedForUid] = useState("");
+  const [resetCoinsValue, setResetCoinsValue] = useState(0);
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -1068,14 +1069,16 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
   }
 async function resetAllChildrenCoins() {
   const confirmed = window.confirm(
-    "Wirklich alle Coins aller Kinder auf 0 zurücksetzen?"
+    `Wirklich alle Kinder-Coins auf ${resetCoinsValue} setzen?`
   );
 
   if (!confirmed) return;
 
+  const newCoins = Number(resetCoinsValue || 0);
+
   const updatedChildren = children.map(child => ({
     ...child,
-    coins: 0,
+    coins: newCoins,
   }));
 
   setChildren(updatedChildren);
@@ -1095,7 +1098,7 @@ async function resetAllChildrenCoins() {
         doc(db, "users", user.uid, "children", String(child.id)),
         {
           ...child,
-          coins: 0,
+          coins: newCoins,
           updatedAt: serverTimestamp(),
         },
         { merge: true }
@@ -1104,9 +1107,9 @@ async function resetAllChildrenCoins() {
 
     await batch.commit();
 
-    celebrate("Alle Coins wurden zurückgesetzt.");
+    celebrate(`Alle Coins wurden auf ${newCoins} gesetzt.`);
   } catch {
-    celebrate("Coins konnten nicht zurückgesetzt werden.");
+    celebrate("Coins konnten nicht geändert werden.");
   }
 }
 
@@ -5305,15 +5308,21 @@ onClick={() =>
   </p>
 
   <p className="mb-4 text-sm font-bold text-yellow-700">
-    Eltern können hier jederzeit alle Kinder-Coins zurücksetzen.
+    Eltern können hier alle Kinder-Coins auf einen gewünschten Wert setzen.
   </p>
+
+  <NumberKeypadField
+    label="🪙 Coins setzen"
+    value={resetCoinsValue}
+    setter={setResetCoinsValue}
+  />
 
   <button
     type="button"
     onClick={resetAllChildrenCoins}
-    className="w-full rounded-[1.5rem] bg-yellow-400 px-4 py-4 font-black text-yellow-950 shadow-md"
+    className="mt-3 w-full rounded-[1.5rem] bg-yellow-400 px-4 py-4 font-black text-yellow-950 shadow-md"
   >
-    🧹 Alle Coins auf 0 setzen
+    🧹 Alle Coins auf {resetCoinsValue} setzen
   </button>
 </div>
 
