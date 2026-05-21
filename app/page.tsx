@@ -664,6 +664,7 @@ export default function PunktlyRoleSplit() {
   const [coinsTargetChild, setCoinsTargetChild] = useState("all");
 
   const [coinsForOneCent, setCoinsForOneCent] = useState(100);
+  const [coinOpen, setCoinOpen] = useState(false);
 
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
@@ -4949,7 +4950,18 @@ onClick={() =>
   </Panel>
 )}
 {parentView === "coinrechner" && (
+  
   <Panel title="🪙 Coinrechner">
+    <div className="mb-4">
+
+  <button
+    onClick={() => setCoinOpen(!coinOpen)}
+    className="w-full rounded-[1.5rem] bg-blue-500 p-4 font-black text-white"
+  >
+    Coinrechner {coinOpen ? "▲" : "▼"}
+  </button>
+
+</div>
     <div className="grid gap-5">
 
       <div className="rounded-[1.8rem] bg-yellow-50 p-5 shadow-sm ring-1 ring-yellow-200">
