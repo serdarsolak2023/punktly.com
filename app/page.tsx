@@ -24,7 +24,7 @@ return (
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features" | "learning";
-type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings" | "learning";
+type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings" | "learning" | "coinrechner";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
 type Status = "offen" | "wartet" | "erledigt";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
@@ -362,12 +362,18 @@ const taskPacks: TaskPack[] = [
     title: "🌞 Morgenroutine",
     description: "Schnell startklar vor der Kita oder der Schule.",
     presets: ["Zähne putzen morgens", "Bett machen", "Schultasche packen", "Wasserflasche auffüllen"],
-  },
+      },
   {
     id: "schulheld",
     title: "🎒 Schulheld",
     description: "Lernen, Lesen und Vorbereitung gebündelt.",
     presets: ["Hausaufgaben machen", "Lesen üben", "Vokabeln lernen", "Schultasche packen"],
+  },
+  {
+    id: "kindergartenheld",
+    title: "🎒 Kindergartenheld",
+    description: "Lernen, Lesen und Vorbereitung gebündelt.",
+    presets: ["Kreatives lernen", "Lesen üben", "Wortschatz erweitern", "Kindergartentasche packen"],
   },
   {
     id: "haushaltsprofi",
@@ -448,7 +454,7 @@ const initialRewards: Reward[] = [];
 const extraShopItems = [
   { id: 9001, title: "Weltraum Theme", price: 600, owned: false },
   { id: 9002, title: "Goldener Rahmen", price: 450, owned: false },
-  { id: 9003, title: "Fuchs-Krone", price: 800, owned: false },
+  { id: 9003, title: "Krone", price: 800, owned: false },
 ];
 
 const initialShop: ShopItem[] = [];
@@ -656,6 +662,9 @@ export default function PunktlyRoleSplit() {
   const [familyDataLoadedForUid, setFamilyDataLoadedForUid] = useState("");
   const [resetCoinsValue, setResetCoinsValue] = useState(0);
   const [coinsTargetChild, setCoinsTargetChild] = useState("all");
+
+  const [coinsForOneCent, setCoinsForOneCent] = useState(100);
+
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -4780,6 +4789,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 </section>
               )}
 {parentView === "learning" && (
+  
   <Panel title="🧠 Lernmodus">
 
     <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-6 shadow-xl">
@@ -4938,6 +4948,85 @@ onClick={() =>
     </div>
   </Panel>
 )}
+{parentView === "coinrechner" && (
+  <Panel title="🪙 Coinrechner">
+    <div className="grid gap-5">
+
+      <div className="rounded-[1.8rem] bg-yellow-50 p-5 shadow-sm ring-1 ring-yellow-200">
+        <p className="text-xl font-black text-yellow-800">
+          ⚙️ Umrechnung einstellen
+        </p>
+
+        <p className="mt-2 text-sm font-bold text-yellow-700">
+          Lege fest, wie viele Coins einem Cent entsprechen.
+        </p>
+
+        <div className="mt-4">
+          <NumberKeypadField
+            label="🪙 Coins für 1 Cent"
+            value={coinsForOneCent}
+            setter={setCoinsForOneCent}
+          />
+        </div>
+
+        <p className="mt-3 rounded-[1.2rem] bg-white p-3 text-center font-black text-yellow-800">
+          {coinsForOneCent} Coins = 0,01 €
+        </p>
+      </div>
+
+      <div className="rounded-[1.8rem] bg-white p-5 shadow-sm ring-1 ring-sky-100">
+        <p className="mb-4 text-xl font-black text-sky-950">
+          👨‍👩‍👧 Übersicht pro Kind
+        </p>
+
+        <div className="grid gap-3">
+          {children.map(c => {
+            const coins = Number(c.coins || 0);
+            const euro = coinsForOneCent > 0
+              ? (coins / coinsForOneCent / 100).toFixed(2)
+              : "0.00";
+
+            return (
+              <div
+                key={c.id}
+                className="rounded-[1.5rem] bg-sky-50 p-4 shadow-sm"
+              >
+                <p className="font-black text-sky-950">
+                  🧒 {c.name}
+                </p>
+
+                <p className="mt-1 text-sm font-bold text-sky-700">
+                  {coins} Coins
+                </p>
+
+                <p className="mt-2 text-2xl font-black text-green-600">
+                  {euro.replace(".", ",")} €
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="rounded-[1.8rem] bg-green-50 p-5 text-center shadow-sm ring-1 ring-green-200">
+        <p className="text-sm font-black text-green-700">
+          Gesamtwert aller Kinder
+        </p>
+
+        <p className="mt-2 text-3xl font-black text-green-700">
+          {(
+            children.reduce(
+              (sum, c) => sum + Number(c.coins || 0),
+              0
+            ) / coinsForOneCent / 100
+          ).toFixed(2).replace(".", ",")} €
+        </p>
+      </div>
+
+    </div>
+  </Panel>
+)}
+
               {parentView === "tasks" && (
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingTaskId ? "✏️ Aufgabe bearbeiten" : "➕ Aufgabe anlegen"}>
@@ -5650,6 +5739,7 @@ c.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200"
   theme: t,
 };
 
+
 setSelectedChildId(c.id);
 
 setChildren(prev =>
@@ -5905,6 +5995,7 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
         <Tab active={view === "settings"} onClick={() => setView("settings")} icon={<User />} label="Kinder" />
+        <Tab active={view === "coinrechner"} onClick={() => setView("coinrechner")} icon={<Coin />} label="Coinrechner" />
       </div>
     </nav>
   );
