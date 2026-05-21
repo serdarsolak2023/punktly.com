@@ -4952,14 +4952,13 @@ onClick={() =>
 {parentView === "coinrechner" && (
   
   <Panel title="🪙 Coinrechner">
-    <div className="mb-4">
-
-  <button
+      <button
     onClick={() => setCoinOpen(!coinOpen)}
     className="w-full rounded-[1.5rem] bg-blue-500 p-4 font-black text-white"
   >
     Coinrechner {coinOpen ? "▲" : "▼"}
   </button>
+    <div className="mb-4">
 
 </div>
     <div className="grid gap-5">
