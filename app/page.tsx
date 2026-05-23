@@ -1790,7 +1790,9 @@ function toggleProfileBadge(badgeSrc: string) {
         if (typeof data.parentSecurityAnswer === "string") {
           setParentSecurityAnswer(data.parentSecurityAnswer);
         }
-
+if (typeof data.coinsForOneCent === "number") {
+  setCoinsForOneCent(data.coinsForOneCent);
+}
       } else {
         if (user.displayName) setParentDisplayName(user.displayName);
         const localPin = localStorage.getItem("punktlyParentPin");
@@ -1802,7 +1804,25 @@ function toggleProfileBadge(badgeSrc: string) {
       if (localPin) setSavedParentPin(localPin);
     }
   }
+async function saveCoinRate() {
+  const user = firebaseUser || auth.currentUser;
 
+  if (!user) {
+    celebrate("Bitte zuerst einloggen.");
+    return;
+  }
+
+  await setDoc(
+    doc(db, "users", user.uid),
+    {
+      coinsForOneCent: Number(coinsForOneCent || 100),
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  celebrate(`Gespeichert: ${coinsForOneCent} Coins = 0,01 €`);
+}
   async function saveParentProfile() {
     const user = firebaseUser || auth.currentUser;
     if (!user) {
@@ -4970,6 +4990,13 @@ onClick={() =>
         <p className="mt-3 rounded-[1.2rem] bg-white p-3 text-center font-black text-yellow-800">
           {coinsForOneCent} Coins = 0,01 €
         </p>
+        <button
+  type="button"
+  onClick={saveCoinRate}
+  className="mt-3 w-full rounded-[1.4rem] bg-gradient-to-r from-yellow-400 to-orange-400 px-4 py-3 font-black text-yellow-950 shadow-md"
+>
+  💾 Umrechnung speichern
+</button>
       </div>
 
       <div className="rounded-[1.8rem] bg-white p-5 shadow-sm ring-1 ring-sky-100">
