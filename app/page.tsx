@@ -664,8 +664,6 @@ export default function PunktlyRoleSplit() {
   const [coinsTargetChild, setCoinsTargetChild] = useState("all");
 
   const [coinsForOneCent, setCoinsForOneCent] = useState(100);
-  const [coinOpen, setCoinOpen] = useState(false);
-
 
   const [readingQuestionTask, setReadingQuestionTask] = useState<any | null>(null);
   const [readingQuestionText, setReadingQuestionText] = useState<any | null>(null);
@@ -4950,19 +4948,8 @@ onClick={() =>
   </Panel>
 )}
 {parentView === "coinrechner" && (
-  
   <Panel title="🪙 Coinrechner">
-      <button
-    onClick={() => setCoinOpen(!coinOpen)}
-    className="w-full rounded-[1.5rem] bg-blue-500 p-4 font-black text-white"
-  >
-    Coinrechner {coinOpen ? "▲" : "▼"}
-  </button>
-    <div className="mb-4">
-
-</div>
     <div className="grid gap-5">
-
       <div className="rounded-[1.8rem] bg-yellow-50 p-5 shadow-sm ring-1 ring-yellow-200">
         <p className="text-xl font-black text-yellow-800">
           ⚙️ Umrechnung einstellen
@@ -4993,15 +4980,13 @@ onClick={() =>
         <div className="grid gap-3">
           {children.map(c => {
             const coins = Number(c.coins || 0);
-            const euro = coinsForOneCent > 0
-              ? (coins / coinsForOneCent / 100).toFixed(2)
-              : "0.00";
+            const euro =
+              coinsForOneCent > 0
+                ? (coins / coinsForOneCent / 100).toFixed(2)
+                : "0.00";
 
             return (
-              <div
-                key={c.id}
-                className="rounded-[1.5rem] bg-sky-50 p-4 shadow-sm"
-              >
+              <div key={c.id} className="rounded-[1.5rem] bg-sky-50 p-4 shadow-sm">
                 <p className="font-black text-sky-950">
                   🧒 {c.name}
                 </p>
@@ -5026,14 +5011,12 @@ onClick={() =>
 
         <p className="mt-2 text-3xl font-black text-green-700">
           {(
-            children.reduce(
-              (sum, c) => sum + Number(c.coins || 0),
-              0
-            ) / coinsForOneCent / 100
+            children.reduce((sum, c) => sum + Number(c.coins || 0), 0) /
+            coinsForOneCent /
+            100
           ).toFixed(2).replace(".", ",")} €
         </p>
       </div>
-
     </div>
   </Panel>
 )}
