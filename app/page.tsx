@@ -5389,67 +5389,100 @@ onClick={() =>
                   </Panel>
                 </section>
               )}
-
 {parentView === "calendar" && (
-                <Panel title="📅 Wochenplan">
-                  <div className="grid gap-3 md:grid-cols-9">
-                    {days.map(day => (
-                      <div key={day} className="min-h-[170px] rounded-[1.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_25px_70px_rgba(14,165,233,.18)]">
-                        <h3 className="font-black text-sky-950">{day}</h3>
-                        <div className="mt-3 space-y-2">{tasks.filter(t => t.day === day || (t.repeat === "täglich" && ["Mo","Di","Mi","Do","Fr"].includes(day))).slice(0,4).map(t => <div key={`${day}-${t.id}`} className={`rounded-xl p-2 text-sm font-bold ${t.status === "erledigt" ? "bg-emerald-100 text-emerald-800" : "bg-sky-50 text-sky-800"}`}>{t.title}</div>)}</div>
-                      </div>
-                    ))}
-                  </div>
-                </Panel>
-              )}
+  <Panel title="📅 Wochenplan">
+    <div className="grid gap-5">
 
-              {parentView === "family" && (
-                <Panel title="👨‍👩‍👧 Familien-Challenges">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {challenges.map(ch => <div key={ch.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]">
-                    <h3 className="text-xl font-black text-sky-950">{ch.title}</h3><p className="font-bold text-sky-700">Belohnung: +{ch.reward} Familien-Coins</p><Progress value={ch.current} max={ch.goal} /></div>)}
-                  </div>
-                </Panel>
-              )}
-
-              {parentView === "stats" && (
-                <Panel title="📊 Eltern-Statistik">
-                  <div className="grid gap-4 md:grid-cols-2">{children.map(c => <div key={c.id} className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,.10)]"><h3 className="text-2xl font-black text-sky-950">{c.name}</h3><div className="mt-4 grid grid-cols-2 gap-3"><StatCard icon={<Coin />} label="Coins" value={c.coins.toString()} /><StatCard icon="🎮" label="Level" value={c.level.toString()} /><StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(c)}`} /><StatCard icon="🔥" label="Serie" value={`${c.streak}`} /><StatCard icon="📈" label="Wochenpunkte" value={`${c.weeklyPoints}`} /><StatCard icon="✅" label="Erledigt" value={`${c.completedCount}`} /><StatCard icon="🏆" label="Abzeichen" value={`${cleanLevelAchievements(c.achievements).length}`} /></div></div>)}</div>
-                </Panel>
-              )}
-             {parentView === "features" && (
-              <section className="rounded-[2rem] bg-white/90 p-6 shadow-xl">
-        <h2 className="text-3xl font-black text-sky-950">
-      ⭐ Bonus
-    </h2>
-
-    <div className="mt-6 flex items-center justify-between rounded-[1.5rem] bg-sky-50 p-4">
-      
-      <div>
-        <p className="text-lg font-black text-sky-900">
-          🎡 Glücksrad
+      <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-white p-5 shadow-sm ring-1 ring-sky-100">
+        <p className="text-2xl font-black text-sky-950">
+          📅 Wochenübersicht
         </p>
 
-        <p className="text-sm font-bold text-sky-700">
-          Kinder können alle 24 Stunden Bonus-Coins gewinnen.
+        <p className="mt-2 font-bold text-sky-700">
+          Hier sehen Eltern alle geplanten Aufgaben der Woche auf einen Blick.
         </p>
       </div>
 
-      <button
-        onClick={() => setBonusWheelEnabled(!bonusWheelEnabled)}
-        className={`rounded-full px-5 py-2 font-black transition ${
-          bonusWheelEnabled
-            ? "bg-green-500 text-white"
-            : "bg-gray-300 text-gray-700"
-        }`}
-      >
-        {bonusWheelEnabled ? "JA" : "NEIN"}
-      </button>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-7">
+        {days.map(day => {
+          const dayTasks = tasks.filter(
+            t =>
+              t.day === day ||
+              (t.repeat === "täglich" &&
+                ["Mo", "Di", "Mi", "Do", "Fr"].includes(day))
+          );
+
+          const doneCount = dayTasks.filter(
+            t => t.status === "erledigt"
+          ).length;
+
+          return (
+            <div
+              key={day}
+              className="min-h-[190px] rounded-[1.8rem] border-[3px] border-white bg-white/95 p-4 shadow-[0_18px_45px_rgba(14,165,233,.14)]"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 text-lg font-black text-white shadow-md">
+                  {day}
+                </div>
+
+                <div className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-700">
+                  {doneCount}/{dayTasks.length}
+                </div>
+              </div>
+
+              {dayTasks.length === 0 ? (
+                <div className="rounded-[1.3rem] bg-slate-50 p-3 text-sm font-bold text-slate-400">
+                  Keine Aufgaben
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {dayTasks.slice(0, 5).map(t => (
+                    <div
+                      key={`${day}-${t.id}`}
+                      className={`rounded-[1.2rem] p-3 text-sm font-black shadow-sm ${
+                        t.status === "erledigt"
+                          ? "bg-emerald-100 text-emerald-800"
+                          : t.status === "wartet"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : "bg-sky-50 text-sky-800"
+                      }`}
+                    >
+                      <div className="flex items-start gap-2">
+                        <span>
+                          {t.status === "erledigt"
+                            ? "✅"
+                            : t.status === "wartet"
+                            ? "⏳"
+                            : "📝"}
+                        </span>
+
+                        <span className="leading-snug">
+                          {t.title}
+                        </span>
+                      </div>
+
+                      <p className="mt-1 text-xs font-black opacity-70">
+                        🪙 {t.coins} Coins
+                      </p>
+                    </div>
+                  ))}
+
+                  {dayTasks.length > 5 && (
+                    <div className="rounded-[1.2rem] bg-purple-50 p-2 text-center text-xs font-black text-purple-700">
+                      +{dayTasks.length - 5} weitere Aufgaben
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
     </div>
-
-  </section>
-)}              
+  </Panel>
+)}
               {parentView === "profile" && (
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title="👤 Eltern-Profil">
