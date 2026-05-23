@@ -977,16 +977,32 @@ function NumberKeypadField({ label, value, setter }: {
   label: string;
   value: number;
   setter: (value: number) => void;
-}) 
+}) {
+  const showEuroValue =
+    label.toLowerCase().includes("coin") ||
+    label.toLowerCase().includes("preis");
 
-{
   return (
     <button
       type="button"
       onClick={() => openNumberKeypad(value, setter)}
       className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 text-left font-bold text-slate-700"
     >
-      {value > 0 ? `${label}: ${value}` : label}
+      <div className="flex items-center justify-between gap-3">
+        <span>
+          {value > 0 ? `${label}: ${value}` : label}
+        </span>
+
+        {showEuroValue && value > 0 && (
+<span className="text-sm font-black text-green-600">
+  💶 ≈{(
+    Number(value || 0) /
+    Number(coinsForOneCent || 100) /
+    100
+  ).toFixed(2).replace(".", ",")} €
+</span>
+        )}
+      </div>
     </button>
   );
 }
@@ -4853,7 +4869,6 @@ onClick={() =>
   className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
 />
 
-
 <NumberKeypadField
   label="⏱️ Dauer in Minuten"
   value={newLearningMinutes}
@@ -5052,6 +5067,9 @@ onClick={() =>
         </p>
       </div>
     </div>
+    <div className="rounded-[1.4rem] bg-slate-50 p-3 text-xs font-bold text-slate-500">
+  ℹ️ Die Euro-Anzeige dient ausschließlich als persönliche Orientierung für Eltern und stellt kein echtes Guthaben oder Zahlungsmittel dar.
+</div>
   </Panel>
 )}
 
@@ -5078,9 +5096,7 @@ onClick={() =>
   placeholder="Eigene Aufgabe anlegen"
   className="w-full"
 />
-<p className="mt-2 text-sm font-black text-green-600">
-  💶 {coinsToEuroText(Number(newLearningCoins || 0))}
-</p>
+
 <input
   value={
     Number(newTaskCoins) === 0
@@ -5185,9 +5201,7 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
-<p className="mt-2 text-sm font-black text-green-600">
-  💶 {coinsToEuroText(newRewardCoins)}
-</p>
+
    <button
   type="button"
   onClick={() => {
@@ -5252,9 +5266,7 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
-<p className="mt-2 text-sm font-black text-green-600">
-  💶 {coinsToEuroText(newShopPrice)}
-</p>
+
 <div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 pl-6 text-left text-2xl font-black shadow-inner">
   🛒
 </div>
@@ -5370,9 +5382,7 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
-<p className="mt-2 text-sm font-black text-green-600">
-  💶 {coinsToEuroText(newChestPrice)}
-</p>
+
 <select
   value={newChestTier}
   onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
@@ -5598,9 +5608,7 @@ const isToday = day === todayShort;
     value={resetCoinsValue}
     setter={setResetCoinsValue}
   />
-<p className="mt-2 text-sm font-black text-green-600">
-  💶 {coinsToEuroText(newTaskCoins)}
-</p>
+
   <button
     type="button"
     onClick={resetAllChildrenCoins}
