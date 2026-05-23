@@ -5450,18 +5450,18 @@ const isToday = day === todayShort;
           return (
             <div
               key={day}
-              className={`min-h-[190px] rounded-[1.8rem] border-[3px] p-4 shadow-[0_18px_45px_rgba(14,165,233,.14)] ${
+              className={`min-h-[150px] rounded-[1.3rem] border-2 p-3 shadow-md ${
   isToday
     ? "border-green-300 bg-green-100"
     : "border-white bg-white/95"
 }`}
             >
               <div className="mb-3 flex items-center justify-between">
-                <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 text-lg font-black text-white shadow-md">
+                <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 text-xs font-black text-white shadow-sm">
                   {day}
                 </div>
 
-                <div className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-700">
+                <div className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-black text-sky-700">
                   {doneCount}/{dayTasks.length}
                 </div>
               </div>
@@ -5471,11 +5471,11 @@ const isToday = day === todayShort;
                   Keine Aufgaben
                 </div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {dayTasks.slice(0, 5).map(t => (
                     <div
                       key={`${day}-${t.id}`}
-                      className={`rounded-[1.2rem] p-3 text-sm font-black shadow-sm ${
+                      className={`rounded-[0.9rem] p-2 text-[11px] font-black shadow-sm ${
                         t.status === "erledigt"
                           ? "bg-emerald-100 text-emerald-800"
                           : t.status === "wartet"
@@ -5497,7 +5497,7 @@ const isToday = day === todayShort;
                         </span>
                       </div>
 
-                      <p className="mt-1 text-xs font-black opacity-70">
+                      <p className="mt-0.5 text-[10px] font-black opacity-70">
                         🪙 {t.coins} Coins
                       </p>
                     </div>
