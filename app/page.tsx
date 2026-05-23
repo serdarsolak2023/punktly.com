@@ -5411,7 +5411,11 @@ onClick={() =>
               (t.repeat === "täglich" &&
                 ["Mo", "Di", "Mi", "Do", "Fr"].includes(day))
           );
+const todayShort = currentDateTime.toLocaleDateString("de-DE", {
+  weekday: "short",
+}).replace(".", "");
 
+const isToday = day === todayShort;
           const doneCount = dayTasks.filter(
             t => t.status === "erledigt"
           ).length;
@@ -5419,7 +5423,11 @@ onClick={() =>
           return (
             <div
               key={day}
-              className="min-h-[190px] rounded-[1.8rem] border-[3px] border-white bg-white/95 p-4 shadow-[0_18px_45px_rgba(14,165,233,.14)]"
+              className={`min-h-[190px] rounded-[1.8rem] border-[3px] p-4 shadow-[0_18px_45px_rgba(14,165,233,.14)] ${
+  isToday
+    ? "border-green-300 bg-green-100"
+    : "border-white bg-white/95"
+}`}
             >
               <div className="mb-3 flex items-center justify-between">
                 <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 text-lg font-black text-white shadow-md">
