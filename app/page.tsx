@@ -4851,7 +4851,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 />
 
 <NumberKeypadField
-  label="📚 Lernen Coins"
+  label="🪙 Coins"
   value={Number(newLearningCoins) || 0}
   setter={(value) => setNewLearningCoins(String(value))}
   showEuro
@@ -5086,7 +5086,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 />
 
 <NumberKeypadField
-  label="🪙 Aufgaben Coins"
+  label="🪙 Coins"
   value={Number(newTaskCoins) || 0}
   setter={setNewTaskCoins}
   showEuro
@@ -5164,7 +5164,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   className="w-full"
 />
 <NumberKeypadField
-  label="🎁 Belohnung Coins"
+  label="🪙 Coins"
   value={Number(newRewardCoins) || 0}
   setter={setNewRewardCoins}
   showEuro
@@ -5219,7 +5219,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   className="w-full"
 />
 <NumberKeypadField
-  label="🛒 Shop Coins"
+  label="🪙 Coins"
   value={Number(newShopPrice) || 0}
   setter={setNewShopPrice}
   showEuro
@@ -5325,7 +5325,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   className="w-full"
 />
 <NumberKeypadField
-  label="📦 Schatzkiste Coins"
+  label="🪙 Coins"
   value={Number(newChestPrice) || 0}
   setter={setNewChestPrice}
   showEuro
