@@ -843,7 +843,14 @@ const completedPercent = useMemo(
 );
   const themeClass = child.theme === "🦁 Löwe" ? "from-yellow-100 to-orange-200" : child.theme === "🐬 Delfin" ? "from-sky-100 to-cyan-200" : child.theme === "🐸 Frosch" ? "from-lime-100 to-emerald-200" : child.theme === "🦄 Einhorn" ? "from-pink-100 to-purple-200" : child.theme === "🐯 Tiger" ? "from-orange-100 to-red-200" : child.theme === "🐼 Panda" ? "from-slate-100 to-gray-300" : child.theme === "🦜 Papagei" ? "from-green-100 to-yellow-200" : child.theme === "🐧 Pinguin" ? "from-blue-100 to-indigo-200" : "from-yellow-100 to-orange-200";
   const selectedChildMotiv = (child.profileBadges || [])[0] || "/PunktlyLogo.png";
+function coinsToEuroText(coins: number) {
+  const euro =
+    coinsForOneCent > 0
+      ? coins / coinsForOneCent / 100
+      : 0;
 
+  return `${coins} Coins = ${euro.toFixed(2).replace(".", ",")} €`;
+}
   function getTrialTimeLeft() {
   if (!trialEndsAt) return "";
 
@@ -5071,6 +5078,9 @@ onClick={() =>
   placeholder="Eigene Aufgabe anlegen"
   className="w-full"
 />
+<p className="mt-2 text-sm font-black text-green-600">
+  💶 {coinsToEuroText(Number(newLearningCoins || 0))}
+</p>
 <input
   value={
     Number(newTaskCoins) === 0
@@ -5175,6 +5185,9 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
+<p className="mt-2 text-sm font-black text-green-600">
+  💶 {coinsToEuroText(newRewardCoins)}
+</p>
    <button
   type="button"
   onClick={() => {
@@ -5239,7 +5252,9 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
-
+<p className="mt-2 text-sm font-black text-green-600">
+  💶 {coinsToEuroText(newShopPrice)}
+</p>
 <div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 pl-6 text-left text-2xl font-black shadow-inner">
   🛒
 </div>
@@ -5355,6 +5370,9 @@ onClick={() =>
   placeholder="🪙 Coins"
   className="w-full cursor-pointer rounded-[1.35rem] border p-3"
 />
+<p className="mt-2 text-sm font-black text-green-600">
+  💶 {coinsToEuroText(newChestPrice)}
+</p>
 <select
   value={newChestTier}
   onChange={e => setNewChestTier(e.target.value as "Bronze" | "Silber" | "Gold")}
@@ -5580,7 +5598,9 @@ const isToday = day === todayShort;
     value={resetCoinsValue}
     setter={setResetCoinsValue}
   />
-
+<p className="mt-2 text-sm font-black text-green-600">
+  💶 {coinsToEuroText(newTaskCoins)}
+</p>
   <button
     type="button"
     onClick={resetAllChildrenCoins}
