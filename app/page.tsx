@@ -5007,6 +5007,9 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 >
   💾 Umrechnung speichern
 </button>
+   <div className="rounded-[1.4rem] bg-slate-50 p-3 text-xs font-bold text-slate-500">
+  ℹ️ Die Euro-Anzeige dient ausschließlich als persönliche Orientierung für Eltern und stellt kein echtes Guthaben oder Zahlungsmittel dar.
+</div>
       </div>
 
       <div className="rounded-[1.8rem] bg-white p-5 shadow-sm ring-1 ring-sky-100">
@@ -5055,9 +5058,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         </p>
       </div>
     </div>
-    <div className="rounded-[1.4rem] bg-slate-50 p-3 text-xs font-bold text-slate-500">
-  ℹ️ Die Euro-Anzeige dient ausschließlich als persönliche Orientierung für Eltern und stellt kein echtes Guthaben oder Zahlungsmittel dar.
-</div>
+ 
   </Panel>
 )}
 
