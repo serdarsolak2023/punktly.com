@@ -979,31 +979,32 @@ function NumberKeypadField({ label, value, setter, showEuro = false }: {
   setter: (value: number) => void;
   showEuro?: boolean;
 }) {
+  const euro = (
+    Number(value || 0) /
+    Number(coinsForOneCent || 100) /
+    100
+  ).toFixed(2).replace(".", ",");
+
   return (
     <button
       type="button"
       onClick={() => openNumberKeypad(value, setter)}
-      className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 text-left font-bold text-slate-700"
+      className="w-full rounded-[1.5rem] border-2 border-sky-100 bg-white/90 p-4 text-left font-bold text-slate-700 shadow-sm"
     >
-      <span className="inline-flex items-center gap-2">
+      <div className="flex items-center justify-between">
         <span>
-          {value > 0 ? `${label}: ${value}` : label}
+          {label}: {Number(value || 0)}
         </span>
 
-        {showEuro && value > 0 && (
-          <span className="font-black text-green-600">
-            💶 ≈{(
-              Number(value || 0) /
-              Number(coinsForOneCent || 100) /
-              100
-            ).toFixed(2).replace(".", ",")} €
+        {showEuro && (
+          <span className="text-sm font-black text-green-600">
+            💶 ≈{euro} €
           </span>
         )}
-      </span>
+      </div>
     </button>
   );
 }
-
   async function resetParentPin() {
     try {
       if (!parentSecurityQuestion.trim() || !parentSecurityAnswer.trim()) {
