@@ -973,15 +973,12 @@ function openNumberKeypad(
 
   setNumberKeypadOpen(true);
 }
-function NumberKeypadField({ label, value, setter }: {
+function NumberKeypadField({ label, value, setter, showEuro = false }: {
   label: string;
   value: number;
   setter: (value: number) => void;
+  showEuro?: boolean;
 }) {
-  const showEuroValue =
-    label.toLowerCase().includes("coin") ||
-    label.toLowerCase().includes("preis");
-
   return (
     <button
       type="button"
@@ -993,14 +990,14 @@ function NumberKeypadField({ label, value, setter }: {
           {value > 0 ? `${label}: ${value}` : label}
         </span>
 
-        {showEuroValue && value > 0 && (
-<span className="text-sm font-black text-green-600">
-  💶 ≈{(
-    Number(value || 0) /
-    Number(coinsForOneCent || 100) /
-    100
-  ).toFixed(2).replace(".", ",")} €
-</span>
+        {showEuro && value > 0 && (
+          <span className="text-sm font-black text-green-600">
+            💶 ≈{(
+              Number(value || 0) /
+              Number(coinsForOneCent || 100) /
+              100
+            ).toFixed(2).replace(".", ",")} €
+          </span>
         )}
       </div>
     </button>
@@ -4852,21 +4849,11 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   placeholder="📖 Lernaufgabe eintragen"
 />
 
-<input
-  value={
-    Number(newLearningCoins) === 0
-      ? ""
-      : `🪙 ${newLearningCoins} Coins`
-  }
-  readOnly
-onClick={() =>
-  openNumberKeypad(
-    Number(newLearningCoins) || 0,
-    (value) => setNewLearningCoins(String(value))
-  )
-}
-  placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+<NumberKeypadField
+  label="📚 Lernen Coins"
+  value={Number(newLearningCoins) || 0}
+  setter={(value) => setNewLearningCoins(String(value))}
+  showEuro
 />
 
 <NumberKeypadField
@@ -5097,21 +5084,11 @@ onClick={() =>
   className="w-full"
 />
 
-<input
-  value={
-    Number(newTaskCoins) === 0
-      ? ""
-      : `🪙 ${newTaskCoins} Coins`
-  }
-  readOnly
-  onClick={() =>
-    openNumberKeypad(
-      Number(newTaskCoins),
-      setNewTaskCoins
-    )
-  }
-  placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.35rem] border bg-white p-3"
+<NumberKeypadField
+  label="🪙 Aufgaben Coins"
+  value={Number(newTaskCoins) || 0}
+  setter={setNewTaskCoins}
+  showEuro
 />
                       <select value={newTaskRepeat} onChange={e => setNewTaskRepeat(e.target.value as Repeat)} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="einmalig">Einmalig</option><option value="täglich">Täglich</option><option value="wöchentlich">Wöchentlich</option></select>
                       <select value={newTaskDay} onChange={e => setNewTaskDay(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">{days.map(d => <option key={d}>{d}</option>)}</select>
@@ -5185,21 +5162,11 @@ onClick={() =>
   placeholder="Belohnung, z. B. Eis essen gehen, ins Kino gehen, etc."
   className="w-full"
 />
-<input
-  value={
-    Number(newRewardCoins) === 0
-      ? ""
-      : `🪙 ${newRewardCoins} Coins`
-  }
-  readOnly
-  onClick={() =>
-    openNumberKeypad(
-      Number(newRewardCoins),
-      setNewRewardCoins
-    )
-  }
-  placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
+<NumberKeypadField
+  label="🎁 Belohnung Coins"
+  value={Number(newRewardCoins) || 0}
+  setter={setNewRewardCoins}
+  showEuro
 />
 
    <button
@@ -5250,21 +5217,11 @@ onClick={() =>
   placeholder="Produkt, z. B. Nintendo Spiel – Mario Kart"
   className="w-full"
 />
-<input
-  value={
-    Number(newShopPrice) === 0
-      ? ""
-      : `🪙 ${newShopPrice} Coins`
-  }
-  readOnly
-  onClick={() =>
-    openNumberKeypad(
-      Number(newShopPrice),
-      setNewShopPrice
-    )
-  }
-  placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
+<NumberKeypadField
+  label="🛒 Shop Coins"
+  value={Number(newShopPrice) || 0}
+  setter={setNewShopPrice}
+  showEuro
 />
 
 <div className="w-full rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 pl-6 text-left text-2xl font-black shadow-inner">
@@ -5366,21 +5323,11 @@ onClick={() =>
   placeholder="Name der Schatzkiste, z. B. Überraschung"
   className="w-full"
 />
-<input
-  value={
-    Number(newChestPrice) === 0
-      ? ""
-      : `🪙 ${newChestPrice} Coins`
-  }
-  readOnly
-  onClick={() =>
-    openNumberKeypad(
-      Number(newChestPrice),
-      setNewChestPrice
-    )
-  }
-  placeholder="🪙 Coins"
-  className="w-full cursor-pointer rounded-[1.35rem] border p-3"
+<NumberKeypadField
+  label="📦 Schatzkiste Coins"
+  value={Number(newChestPrice) || 0}
+  setter={setNewChestPrice}
+  showEuro
 />
 
 <select
