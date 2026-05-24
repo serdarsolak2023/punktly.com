@@ -5123,7 +5123,7 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
               {group.title}
             </h3>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {filteredLearning.map(task => {
                 const kid = children.find(c => c.id === task.childId);
 
