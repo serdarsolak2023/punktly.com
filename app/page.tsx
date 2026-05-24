@@ -630,6 +630,7 @@ export default function PunktlyRoleSplit() {
   const [childView, setChildView] = useState<ChildView>("home");
   const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
   const [parentView, setParentView] = useState<ParentView>("dashboard");
+  const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
   const [savedParentPin, setSavedParentPin] = useState("");
@@ -4657,8 +4658,9 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   </section>
 )}
 {childView === "tasks" && (
-  <Panel title="✅ Deine Aufgaben">
-    <div className="mb-5 flex flex-wrap gap-2 bg-gray-50">
+<Panel title="✅ Deine Aufgaben">
+
+<div className="mb-5 flex flex-wrap gap-2">
 
 {["alle","offen","wartet","erledigt"].map(status=>(
 <button
@@ -5208,30 +5210,165 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                     </div>
                   </Panel>
 
-                  <Panel title="✅ Bestätigungen & Aufgabenliste">
-                    <div className="mb-5 grid gap-2">
-                      {waitingTasks.length === 0 && <p className="font-bold text-sky-700">Keine offenen Aufgaben.</p>}
-                      {waitingTasks.map(task => (
-                        <div key={task.id} className="rounded-[1.8rem] bg-yellow-50 p-4">
-                          <p className="font-black text-sky-950">{task.title}</p><p className="font-bold text-sky-700">+{task.coins} Coins · +{task.xp} XP</p>
-                          <div className="mt-3 grid grid-cols-2 gap-2"><button onClick={() => approveTask(task)} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 p-3 font-black text-white"><Check className="inline h-4 w-4" /> bestätigen</button><button onClick={() => rejectTask(task.id)} className="rounded-[1.35rem] bg-red-400 p-3 font-black text-white"><X className="inline h-4 w-4" /> ablehnen</button></div>
-                        </div>
-                      ))}
-                    </div>
+<Panel title="📝 Aufgabenverwaltung">
 
-                    <div className="grid gap-2">
-                      {tasks.map(task => (
-                        <div key={task.id} className="rounded-[1.35rem] bg-white p-3 border flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                          <div><p className="font-black text-sky-950">{task.title}</p><p className="text-sm font-bold text-sky-700">{task.day} · {task.repeat} · {task.coins} Coins</p></div>
-                          <div className="flex gap-2"><button onClick={() => editTask(task)} className="rounded-xl bg-blue-100 p-2 text-sky-700"><Edit3 className="h-4 w-4"/></button><button onClick={() => deleteTask(task.id)} className="rounded-xl bg-red-100 p-2 text-red-700"><Trash2 className="h-4 w-4"/></button></div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-4 grid gap-2 md:grid-cols-2">
-                      <button onClick={() => resetRepeating("täglich")} className="rounded-[1.35rem] bg-sky-500 px-4 py-3 font-black text-white"><RefreshCcw className="mr-2 inline h-5 w-5" /> Tagesaufgaben zurücksetzen</button>
-                      <button onClick={() => resetRepeating("wöchentlich")} className="rounded-[1.35rem] bg-purple-500 px-4 py-3 font-black text-white"><RefreshCcw className="mr-2 inline h-5 w-5" /> Wochenaufgaben zurücksetzen</button>
-                    </div>
-                  </Panel>
+<div className="mb-5 flex flex-wrap gap-2">
+
+{["alle","wartet","offen","erledigt"].map(status=>(
+
+<button
+key={status}
+onClick={()=>setParentTaskFilter(status as any)}
+className={`rounded-full px-4 py-2 font-black ${
+parentTaskFilter===status
+? "bg-sky-500 text-white"
+: "bg-slate-100 text-slate-700"
+}`}
+>
+
+{status==="alle" && "📋 Alle"}
+{status==="wartet" && "🔔 Zu bestätigen"}
+{status==="offen" && "📝 Offen"}
+{status==="erledigt" && "✅ Erledigt"}
+
+</button>
+
+))}
+
+</div>
+
+
+{[
+{
+title:"🔔 Zu bestätigen",
+status:"wartet"
+},
+{
+title:"📝 Offene Aufgaben",
+status:"offen"
+},
+{
+title:"✅ Erledigt",
+status:"erledigt"
+}
+]
+.filter(
+group=>
+parentTaskFilter==="alle" ||
+group.status===parentTaskFilter
+)
+.map(group=>{
+
+const filteredTasks=
+tasks.filter(
+t=>t.status===group.status
+);
+
+if(!filteredTasks.length)
+return null;
+
+return(
+
+<div
+key={group.status}
+className="mb-8"
+>
+
+<h3 className="mb-4 text-xl font-black">
+
+{group.title}
+
+</h3>
+
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+{filteredTasks.map(task=>(
+
+<div
+key={task.id}
+className={`rounded-[1.5rem] border-2 p-4 shadow-md
+
+${
+task.status==="wartet"
+? "bg-yellow-50 border-yellow-200"
+
+: task.status==="offen"
+? "bg-orange-50 border-orange-200"
+
+: "bg-green-50 border-green-200"
+}
+`}
+>
+
+<h3 className="text-lg font-black text-sky-950">
+{task.title}
+</h3>
+
+<p className="mt-1 text-sm font-bold text-sky-700">
+
+🪙 {task.coins}
+· {task.day}
+· {task.repeat}
+
+</p>
+
+
+{task.status==="wartet" && (
+
+<div className="mt-4 flex gap-2">
+
+<button
+onClick={()=>approveTask(task.id)}
+className="flex-1 rounded-[1rem] bg-green-300 py-2 font-black text-green-900"
+>
+✅ Bestätigen
+</button>
+
+<button
+onClick={()=>rejectTask(task.id)}
+className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
+>
+❌ Ablehnen
+</button>
+
+</div>
+
+)}
+
+{task.status==="offen" && (
+
+<div className="mt-4 rounded-[1rem] bg-orange-200 py-2 text-center font-black text-orange-900">
+
+📝 Offen
+
+</div>
+
+)}
+
+{task.status==="erledigt" && (
+
+<div className="mt-4 rounded-[1rem] bg-green-200 py-2 text-center font-black text-green-900">
+
+✅ Erledigt
+
+</div>
+
+)}
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+)
+
+})}
+
+</Panel>
                 </section>
               )}
 
