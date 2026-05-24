@@ -1,1902 +1,2117 @@
 export const mathTasks = [
-{
+    {
 category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 1",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 1",
+text:"Löse die Aufgaben der Reihe nach.",
 questions:[
-{question:"Lisa hat 13 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-{question:"4 + 10 = ?",answers:["13","14","15"],correctAnswer:"14"},
-{question:"18 + 5 = ?",answers:["22","24","23"],correctAnswer:"23"},
-{question:"Lisa hat 16 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["15","13","14"],correctAnswer:"14"},
-{question:"19 + 8 = ?",answers:["28","27","26"],correctAnswer:"27"},
-{question:"9 × 12 = ?",answers:["109","108","107"],correctAnswer:"108"},
-{question:"Lisa hat 15 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["15","13","14"],correctAnswer:"14"},
-{question:"19 - 4 = ?",answers:["14","15","16"],correctAnswer:"15"},
-{question:"19 × 3 = ?",answers:["56","57","58"],correctAnswer:"57"},
-{question:"Lisa hat 6 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 2",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"20 × 2 = ?",answers:["39","41","40"],correctAnswer:"40"},
-{question:"23 - 10 = ?",answers:["13","12","14"],correctAnswer:"13"},
-{question:"Lisa hat 17 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"27 × 4 = ?",answers:["109","107","108"],correctAnswer:"108"},
-{question:"20 × 6 = ?",answers:["120","119","121"],correctAnswer:"120"},
-{question:"Lisa hat 17 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","6"],correctAnswer:"7"},
-{question:"5 - 10 = ?",answers:["-6","-4","-5"],correctAnswer:"-5"},
-{question:"6 - 9 = ?",answers:["-2","-4","-3"],correctAnswer:"-3"},
-{question:"Lisa hat 20 Äpfel und gibt 19 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 3",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","5"],correctAnswer:"4"},
-{question:"4 - 3 = ?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"3 × 6 = ?",answers:["18","19","17"],correctAnswer:"18"},
-{question:"Lisa hat 12 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","4"],correctAnswer:"5"},
-{question:"2 - 9 = ?",answers:["-6","-8","-7"],correctAnswer:"-7"},
-{question:"17 + 2 = ?",answers:["18","19","20"],correctAnswer:"19"},
-{question:"Lisa hat 10 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","4"],correctAnswer:"3"},
-{question:"4 - 4 = ?",answers:["0","-1","1"],correctAnswer:"0"},
-{question:"30 - 4 = ?",answers:["26","27","25"],correctAnswer:"26"},
-{question:"Lisa hat 16 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","9"],correctAnswer:"10"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 4",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["8","6","7"],correctAnswer:"7"},
-{question:"6 × 5 = ?",answers:["31","29","30"],correctAnswer:"30"},
-{question:"17 + 11 = ?",answers:["28","27","29"],correctAnswer:"28"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","3"],correctAnswer:"2"},
-{question:"21 - 11 = ?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"16 × 12 = ?",answers:["192","191","193"],correctAnswer:"192"},
-{question:"Lisa hat 15 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"22 + 8 = ?",answers:["31","29","30"],correctAnswer:"30"},
-{question:"8 + 9 = ?",answers:["16","18","17"],correctAnswer:"17"},
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 5",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 20 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["15","16","17"],correctAnswer:"16"},
-{question:"4 × 5 = ?",answers:["19","20","21"],correctAnswer:"20"},
-{question:"22 - 6 = ?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"Lisa hat 18 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"16 - 9 = ?",answers:["6","7","8"],correctAnswer:"7"},
-{question:"6 × 3 = ?",answers:["18","17","19"],correctAnswer:"18"},
-{question:"Lisa hat 18 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"8 - 10 = ?",answers:["-1","-3","-2"],correctAnswer:"-2"},
-{question:"26 - 10 = ?",answers:["17","16","15"],correctAnswer:"16"},
-{question:"Lisa hat 11 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 6",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"22 × 5 = ?",answers:["111","109","110"],correctAnswer:"110"},
-{question:"28 × 8 = ?",answers:["225","223","224"],correctAnswer:"224"},
-{question:"Lisa hat 19 Äpfel und gibt 16 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"2 - 6 = ?",answers:["-5","-4","-3"],correctAnswer:"-4"},
-{question:"24 - 11 = ?",answers:["13","12","14"],correctAnswer:"13"},
-{question:"Lisa hat 14 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["13","11","12"],correctAnswer:"12"},
-{question:"9 + 9 = ?",answers:["17","18","19"],correctAnswer:"18"},
-{question:"17 × 11 = ?",answers:["186","188","187"],correctAnswer:"187"},
-{question:"Lisa hat 14 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 7",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 6 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"17 - 4 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"4 - 8 = ?",answers:["-5","-4","-3"],correctAnswer:"-4"},
-{question:"Lisa hat 8 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","5","6"],correctAnswer:"6"},
-{question:"6 - 11 = ?",answers:["-4","-5","-6"],correctAnswer:"-5"},
-{question:"21 - 11 = ?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"Lisa hat 7 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"2 × 2 = ?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"18 - 4 = ?",answers:["15","13","14"],correctAnswer:"14"},
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 8",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 19 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["11","12","10"],correctAnswer:"11"},
-{question:"10 - 10 = ?",answers:["1","-1","0"],correctAnswer:"0"},
-{question:"25 - 7 = ?",answers:["18","19","17"],correctAnswer:"18"},
-{question:"Lisa hat 19 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["15","14","13"],correctAnswer:"14"},
-{question:"18 + 10 = ?",answers:["27","28","29"],correctAnswer:"28"},
-{question:"21 + 2 = ?",answers:["24","22","23"],correctAnswer:"23"},
-{question:"Lisa hat 18 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["15","14","13"],correctAnswer:"14"},
-{question:"12 × 12 = ?",answers:["144","145","143"],correctAnswer:"144"},
-{question:"27 × 3 = ?",answers:["82","80","81"],correctAnswer:"81"},
-{question:"Lisa hat 9 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 9",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 19 Äpfel und gibt 15 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"26 - 3 = ?",answers:["22","23","24"],correctAnswer:"23"},
-{question:"24 - 6 = ?",answers:["18","19","17"],correctAnswer:"18"},
-{question:"Lisa hat 19 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["11","12","10"],correctAnswer:"11"},
-{question:"19 - 5 = ?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"5 - 8 = ?",answers:["-4","-3","-2"],correctAnswer:"-3"},
-{question:"Lisa hat 10 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"23 + 6 = ?",answers:["28","30","29"],correctAnswer:"29"},
-{question:"6 + 6 = ?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"Lisa hat 6 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 10",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"18 - 8 = ?",answers:["9","10","11"],correctAnswer:"10"},
-{question:"13 + 7 = ?",answers:["20","21","19"],correctAnswer:"20"},
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"16 - 2 = ?",answers:["14","13","15"],correctAnswer:"14"},
-{question:"18 + 3 = ?",answers:["22","20","21"],correctAnswer:"21"},
-{question:"Lisa hat 5 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"30 - 4 = ?",answers:["25","27","26"],correctAnswer:"26"},
-{question:"29 - 12 = ?",answers:["16","17","18"],correctAnswer:"17"},
-{question:"Lisa hat 20 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","2"],correctAnswer:"3"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 11",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","12"],correctAnswer:"11"},
-{question:"27 - 4 = ?",answers:["22","24","23"],correctAnswer:"23"},
-{question:"2 + 12 = ?",answers:["13","14","15"],correctAnswer:"14"},
-{question:"Lisa hat 10 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"16 - 2 = ?",answers:["14","15","13"],correctAnswer:"14"},
-{question:"10 + 11 = ?",answers:["22","20","21"],correctAnswer:"21"},
-{question:"Lisa hat 6 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"7 - 5 = ?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"18 - 5 = ?",answers:["12","13","14"],correctAnswer:"13"},
-{question:"Lisa hat 11 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["4","6","5"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 12",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"18 + 9 = ?",answers:["26","27","28"],correctAnswer:"27"},
-{question:"23 - 12 = ?",answers:["11","12","10"],correctAnswer:"11"},
-{question:"Lisa hat 20 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"24 + 5 = ?",answers:["28","29","30"],correctAnswer:"29"},
-{question:"28 + 12 = ?",answers:["40","39","41"],correctAnswer:"40"},
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"22 - 6 = ?",answers:["17","15","16"],correctAnswer:"16"},
-{question:"4 - 12 = ?",answers:["-8","-7","-9"],correctAnswer:"-8"},
-{question:"Lisa hat 10 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["4","6","5"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 13",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 8 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","7"],correctAnswer:"6"},
-{question:"2 - 6 = ?",answers:["-4","-5","-3"],correctAnswer:"-4"},
-{question:"9 - 2 = ?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"4 - 9 = ?",answers:["-4","-5","-6"],correctAnswer:"-5"},
-{question:"9 + 10 = ?",answers:["18","20","19"],correctAnswer:"19"},
-{question:"Lisa hat 5 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"14 - 2 = ?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"4 × 11 = ?",answers:["43","45","44"],correctAnswer:"44"},
-{question:"Lisa hat 13 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 14",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"3 × 10 = ?",answers:["29","30","31"],correctAnswer:"30"},
-{question:"18 × 10 = ?",answers:["181","179","180"],correctAnswer:"180"},
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"22 + 7 = ?",answers:["29","28","30"],correctAnswer:"29"},
-{question:"19 × 2 = ?",answers:["39","37","38"],correctAnswer:"38"},
-{question:"Lisa hat 18 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["8","10","9"],correctAnswer:"9"},
-{question:"27 × 3 = ?",answers:["82","81","80"],correctAnswer:"81"},
-{question:"23 + 10 = ?",answers:["33","34","32"],correctAnswer:"33"},
-{question:"Lisa hat 11 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","10"],correctAnswer:"9"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 15",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","4"],correctAnswer:"5"},
-{question:"17 + 8 = ?",answers:["25","24","26"],correctAnswer:"25"},
-{question:"26 × 2 = ?",answers:["53","52","51"],correctAnswer:"52"},
-{question:"Lisa hat 5 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","4"],correctAnswer:"3"},
-{question:"22 × 6 = ?",answers:["133","132","131"],correctAnswer:"132"},
-{question:"2 + 9 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"Lisa hat 6 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"11 - 10 = ?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"16 × 3 = ?",answers:["47","49","48"],correctAnswer:"48"},
-{question:"Lisa hat 5 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 16",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["14","15","13"],correctAnswer:"14"},
-{question:"10 + 8 = ?",answers:["19","17","18"],correctAnswer:"18"},
-{question:"20 + 3 = ?",answers:["23","24","22"],correctAnswer:"23"},
-{question:"Lisa hat 14 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["11","12","10"],correctAnswer:"11"},
-{question:"30 × 3 = ?",answers:["89","90","91"],correctAnswer:"90"},
-{question:"17 - 9 = ?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"14 × 6 = ?",answers:["83","85","84"],correctAnswer:"84"},
-{question:"13 - 8 = ?",answers:["4","6","5"],correctAnswer:"5"},
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 17",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 6 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"30 - 6 = ?",answers:["23","24","25"],correctAnswer:"24"},
-{question:"14 × 8 = ?",answers:["111","113","112"],correctAnswer:"112"},
-{question:"Lisa hat 16 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"10 + 3 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"22 + 4 = ?",answers:["26","25","27"],correctAnswer:"26"},
-{question:"Lisa hat 19 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"27 + 8 = ?",answers:["35","36","34"],correctAnswer:"35"},
-{question:"30 × 10 = ?",answers:["301","299","300"],correctAnswer:"300"},
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 18",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"3 + 10 = ?",answers:["12","14","13"],correctAnswer:"13"},
-{question:"15 - 7 = ?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"Lisa hat 11 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"11 × 9 = ?",answers:["99","100","98"],correctAnswer:"99"},
-{question:"5 × 4 = ?",answers:["21","19","20"],correctAnswer:"20"},
-{question:"Lisa hat 9 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"16 - 7 = ?",answers:["8","9","10"],correctAnswer:"9"},
-{question:"19 + 5 = ?",answers:["25","23","24"],correctAnswer:"24"},
-{question:"Lisa hat 13 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 19",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"30 × 2 = ?",answers:["60","59","61"],correctAnswer:"60"},
-{question:"15 + 10 = ?",answers:["25","24","26"],correctAnswer:"25"},
-{question:"Lisa hat 13 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"20 + 7 = ?",answers:["28","27","26"],correctAnswer:"27"},
-{question:"4 + 6 = ?",answers:["10","9","11"],correctAnswer:"10"},
-{question:"Lisa hat 17 Äpfel und gibt 14 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"6 - 2 = ?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"20 + 9 = ?",answers:["28","30","29"],correctAnswer:"29"},
-{question:"Lisa hat 19 Äpfel und gibt 15 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 20",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 6 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"18 + 12 = ?",answers:["30","31","29"],correctAnswer:"30"},
-{question:"4 + 10 = ?",answers:["15","13","14"],correctAnswer:"14"},
-{question:"Lisa hat 10 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"6 - 12 = ?",answers:["-6","-5","-7"],correctAnswer:"-6"},
-{question:"24 + 3 = ?",answers:["26","28","27"],correctAnswer:"27"},
-{question:"Lisa hat 19 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"9 + 11 = ?",answers:["19","21","20"],correctAnswer:"20"},
-{question:"16 - 6 = ?",answers:["11","10","9"],correctAnswer:"10"},
-{question:"Lisa hat 18 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 21",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
 {question:"3 + 2 = ?",answers:["5","4","6"],correctAnswer:"5"},
-{question:"4 + 6 = ?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"Lisa hat 14 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-{question:"24 × 7 = ?",answers:["168","167","169"],correctAnswer:"168"},
-{question:"23 + 8 = ?",answers:["30","32","31"],correctAnswer:"31"},
-{question:"Lisa hat 19 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["15","17","16"],correctAnswer:"16"},
-{question:"8 + 6 = ?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"9 - 6 = ?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"Lisa hat 8 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","7"],correctAnswer:"6"},
+{question:"8 - 3 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"4 + 4 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 - 2 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"5 + 3 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"10 - 4 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"6 + 5 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"7 - 3 = ?",answers:["3","4","5"],correctAnswer:"4"},
+{question:"8 + 4 = ?",answers:["12","11","13"],correctAnswer:"12"},
+{question:"9 - 5 = ?",answers:["5","4","3"],correctAnswer:"4"}
 ]
 },
+
 {
 category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 22",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 2",
+text:"Löse die Aufgaben der Reihe nach.",
 questions:[
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"3 + 5 = ?",answers:["9","8","7"],correctAnswer:"8"},
-{question:"15 × 2 = ?",answers:["31","29","30"],correctAnswer:"30"},
-{question:"Lisa hat 15 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"25 + 3 = ?",answers:["27","29","28"],correctAnswer:"28"},
-{question:"8 × 4 = ?",answers:["32","33","31"],correctAnswer:"32"},
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"28 - 7 = ?",answers:["20","21","22"],correctAnswer:"21"},
-{question:"5 + 2 = ?",answers:["6","7","8"],correctAnswer:"7"},
-{question:"Lisa hat 14 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["8","6","7"],correctAnswer:"7"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 23",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 15 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["9","8","10"],correctAnswer:"9"},
-{question:"4 × 2 = ?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"13 - 10 = ?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"Lisa hat 14 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"22 + 8 = ?",answers:["30","31","29"],correctAnswer:"30"},
-{question:"3 + 8 = ?",answers:["10","11","12"],correctAnswer:"11"},
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"30 - 11 = ?",answers:["19","18","20"],correctAnswer:"19"},
-{question:"12 + 11 = ?",answers:["23","22","24"],correctAnswer:"23"},
-{question:"Lisa hat 11 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["7","5","6"],correctAnswer:"6"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 24",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-{question:"24 - 9 = ?",answers:["15","14","16"],correctAnswer:"15"},
-{question:"28 + 9 = ?",answers:["36","37","38"],correctAnswer:"37"},
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"21 - 5 = ?",answers:["16","15","17"],correctAnswer:"16"},
-{question:"13 + 11 = ?",answers:["25","24","23"],correctAnswer:"24"},
-{question:"Lisa hat 15 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"15 × 3 = ?",answers:["44","46","45"],correctAnswer:"45"},
-{question:"19 - 10 = ?",answers:["8","10","9"],correctAnswer:"9"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 25",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"24 + 9 = ?",answers:["34","32","33"],correctAnswer:"33"},
-{question:"15 × 9 = ?",answers:["136","135","134"],correctAnswer:"135"},
-{question:"Lisa hat 20 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["16","15","17"],correctAnswer:"16"},
-{question:"10 - 11 = ?",answers:["-1","-2","0"],correctAnswer:"-1"},
-{question:"25 + 6 = ?",answers:["30","31","32"],correctAnswer:"31"},
-{question:"Lisa hat 8 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","5","6"],correctAnswer:"6"},
-{question:"11 + 11 = ?",answers:["21","22","23"],correctAnswer:"22"},
-{question:"14 + 6 = ?",answers:["21","20","19"],correctAnswer:"20"},
-{question:"Lisa hat 6 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 26",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"13 - 2 = ?",answers:["12","10","11"],correctAnswer:"11"},
-{question:"3 × 5 = ?",answers:["16","15","14"],correctAnswer:"15"},
-{question:"Lisa hat 5 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"16 - 11 = ?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"5 × 12 = ?",answers:["60","61","59"],correctAnswer:"60"},
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"6 + 2 = ?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"21 + 12 = ?",answers:["32","34","33"],correctAnswer:"33"},
-{question:"Lisa hat 16 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 27",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"27 × 9 = ?",answers:["242","243","244"],correctAnswer:"243"},
-{question:"15 - 3 = ?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"Lisa hat 20 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["18","17","16"],correctAnswer:"17"},
-{question:"14 - 6 = ?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"15 - 2 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"Lisa hat 16 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["8","10","9"],correctAnswer:"9"},
-{question:"22 - 5 = ?",answers:["17","18","16"],correctAnswer:"17"},
-{question:"8 - 2 = ?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","6"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 28",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["12","10","11"],correctAnswer:"11"},
-{question:"3 + 10 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"4 × 11 = ?",answers:["43","44","45"],correctAnswer:"44"},
-{question:"Lisa hat 7 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"18 + 4 = ?",answers:["21","23","22"],correctAnswer:"22"},
-{question:"17 - 5 = ?",answers:["13","11","12"],correctAnswer:"12"},
-{question:"Lisa hat 18 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"4 × 11 = ?",answers:["45","43","44"],correctAnswer:"44"},
-{question:"21 × 8 = ?",answers:["167","169","168"],correctAnswer:"168"},
-{question:"Lisa hat 8 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 29",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 15 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"13 + 3 = ?",answers:["17","15","16"],correctAnswer:"16"},
-{question:"3 × 10 = ?",answers:["29","31","30"],correctAnswer:"30"},
-{question:"Lisa hat 6 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"19 - 12 = ?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"11 + 11 = ?",answers:["22","21","23"],correctAnswer:"22"},
-{question:"Lisa hat 14 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["6","7","5"],correctAnswer:"6"},
-{question:"7 + 2 = ?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"16 - 5 = ?",answers:["11","12","10"],correctAnswer:"11"},
-{question:"Lisa hat 8 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 30",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","6","5"],correctAnswer:"5"},
-{question:"15 + 7 = ?",answers:["21","22","23"],correctAnswer:"22"},
-{question:"3 + 12 = ?",answers:["14","16","15"],correctAnswer:"15"},
-{question:"Lisa hat 19 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["15","17","16"],correctAnswer:"16"},
-{question:"22 + 4 = ?",answers:["27","25","26"],correctAnswer:"26"},
-{question:"8 - 4 = ?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"Lisa hat 10 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"7 × 7 = ?",answers:["49","48","50"],correctAnswer:"49"},
-{question:"6 × 6 = ?",answers:["35","36","37"],correctAnswer:"36"},
-{question:"Lisa hat 11 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 31",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["8","6","7"],correctAnswer:"7"},
-{question:"7 + 8 = ?",answers:["15","16","14"],correctAnswer:"15"},
-{question:"23 - 7 = ?",answers:["15","17","16"],correctAnswer:"16"},
-{question:"Lisa hat 6 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"29 × 9 = ?",answers:["262","261","260"],correctAnswer:"261"},
-{question:"10 × 10 = ?",answers:["100","99","101"],correctAnswer:"100"},
-{question:"Lisa hat 11 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"13 + 7 = ?",answers:["19","20","21"],correctAnswer:"20"},
-{question:"7 × 11 = ?",answers:["76","78","77"],correctAnswer:"77"},
-{question:"Lisa hat 19 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","11"],correctAnswer:"10"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 32",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"11 × 11 = ?",answers:["121","120","122"],correctAnswer:"121"},
-{question:"18 + 7 = ?",answers:["24","26","25"],correctAnswer:"25"},
-{question:"Lisa hat 10 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["10","8","9"],correctAnswer:"9"},
-{question:"2 - 11 = ?",answers:["-10","-9","-8"],correctAnswer:"-9"},
-{question:"18 × 7 = ?",answers:["125","127","126"],correctAnswer:"126"},
-{question:"Lisa hat 12 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"13 - 11 = ?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"2 × 5 = ?",answers:["9","11","10"],correctAnswer:"10"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-]
-},
-{
-category:"leicht",
-minAge:6,
-maxAge:8,
-title:"Leichtes Mathe- und Logiktraining 33",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"3 × 12 = ?",answers:["36","35","37"],correctAnswer:"36"},
-{question:"21 × 10 = ?",answers:["209","210","211"],correctAnswer:"210"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["8","6","7"],correctAnswer:"7"},
-{question:"19 - 2 = ?",answers:["18","16","17"],correctAnswer:"17"},
-{question:"7 + 2 = ?",answers:["10","8","9"],correctAnswer:"9"},
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"28 + 11 = ?",answers:["39","40","38"],correctAnswer:"39"},
-{question:"4 × 6 = ?",answers:["23","25","24"],correctAnswer:"24"},
-{question:"Lisa hat 20 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["19","18","20"],correctAnswer:"19"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 1",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["14","15","13"],correctAnswer:"14"},
-{question:"7 + 5 = ?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"22 + 2 = ?",answers:["24","23","25"],correctAnswer:"24"},
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"23 - 10 = ?",answers:["12","13","14"],correctAnswer:"13"},
-{question:"4 + 10 = ?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"Lisa hat 10 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"8 - 8 = ?",answers:["1","0","-1"],correctAnswer:"0"},
-{question:"14 × 12 = ?",answers:["168","169","167"],correctAnswer:"168"},
-{question:"Lisa hat 18 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 2",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"20 + 6 = ?",answers:["25","26","27"],correctAnswer:"26"},
-{question:"20 + 4 = ?",answers:["25","23","24"],correctAnswer:"24"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"13 × 4 = ?",answers:["53","51","52"],correctAnswer:"52"},
-{question:"3 × 4 = ?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"8 × 10 = ?",answers:["79","81","80"],correctAnswer:"80"},
-{question:"5 + 5 = ?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","2"],correctAnswer:"3"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 3",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"5 + 12 = ?",answers:["17","16","18"],correctAnswer:"17"},
-{question:"12 - 8 = ?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"Lisa hat 11 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"12 × 11 = ?",answers:["132","131","133"],correctAnswer:"132"},
-{question:"21 - 2 = ?",answers:["18","20","19"],correctAnswer:"19"},
-{question:"Lisa hat 19 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["15","14","16"],correctAnswer:"15"},
-{question:"24 × 2 = ?",answers:["49","48","47"],correctAnswer:"48"},
-{question:"24 × 3 = ?",answers:["71","72","73"],correctAnswer:"72"},
-{question:"Lisa hat 16 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["16","15","14"],correctAnswer:"15"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 4",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["10","12","11"],correctAnswer:"11"},
-{question:"17 - 3 = ?",answers:["15","14","13"],correctAnswer:"14"},
-{question:"17 - 11 = ?",answers:["6","7","5"],correctAnswer:"6"},
-{question:"Lisa hat 8 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["6","4","5"],correctAnswer:"5"},
-{question:"17 + 4 = ?",answers:["22","21","20"],correctAnswer:"21"},
-{question:"17 + 10 = ?",answers:["27","28","26"],correctAnswer:"27"},
-{question:"Lisa hat 14 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"30 - 3 = ?",answers:["28","27","26"],correctAnswer:"27"},
-{question:"13 - 5 = ?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"Lisa hat 20 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 5",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"13 - 11 = ?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"29 × 9 = ?",answers:["261","262","260"],correctAnswer:"261"},
-{question:"Lisa hat 8 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","5"],correctAnswer:"4"},
-{question:"20 + 5 = ?",answers:["25","24","26"],correctAnswer:"25"},
-{question:"22 × 5 = ?",answers:["109","111","110"],correctAnswer:"110"},
-{question:"Lisa hat 12 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"9 × 7 = ?",answers:["63","64","62"],correctAnswer:"63"},
-{question:"7 - 5 = ?",answers:["1","3","2"],correctAnswer:"2"},
-{question:"Lisa hat 6 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 6",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"27 × 6 = ?",answers:["162","161","163"],correctAnswer:"162"},
-{question:"10 + 5 = ?",answers:["16","15","14"],correctAnswer:"15"},
-{question:"Lisa hat 11 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"3 - 2 = ?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"18 - 12 = ?",answers:["5","6","7"],correctAnswer:"6"},
-{question:"Lisa hat 7 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"2 - 5 = ?",answers:["-3","-2","-4"],correctAnswer:"-3"},
-{question:"29 × 5 = ?",answers:["146","145","144"],correctAnswer:"145"},
-{question:"Lisa hat 8 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 7",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 16 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-{question:"30 + 8 = ?",answers:["37","38","39"],correctAnswer:"38"},
-{question:"10 - 8 = ?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"Lisa hat 16 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","6"],correctAnswer:"7"},
-{question:"30 - 12 = ?",answers:["17","19","18"],correctAnswer:"18"},
-{question:"28 + 9 = ?",answers:["36","38","37"],correctAnswer:"37"},
-{question:"Lisa hat 20 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"18 + 7 = ?",answers:["25","26","24"],correctAnswer:"25"},
-{question:"19 × 5 = ?",answers:["94","95","96"],correctAnswer:"95"},
-{question:"Lisa hat 14 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","6"],correctAnswer:"5"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 8",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["11","10","9"],correctAnswer:"10"},
-{question:"14 + 10 = ?",answers:["24","25","23"],correctAnswer:"24"},
-{question:"22 - 2 = ?",answers:["20","19","21"],correctAnswer:"20"},
-{question:"Lisa hat 15 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["15","13","14"],correctAnswer:"14"},
-{question:"15 × 8 = ?",answers:["120","121","119"],correctAnswer:"120"},
-{question:"20 + 6 = ?",answers:["25","27","26"],correctAnswer:"26"},
-{question:"Lisa hat 15 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"16 + 5 = ?",answers:["22","20","21"],correctAnswer:"21"},
-{question:"27 + 12 = ?",answers:["38","39","40"],correctAnswer:"39"},
-{question:"Lisa hat 7 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 9",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","6"],correctAnswer:"7"},
-{question:"26 - 9 = ?",answers:["16","18","17"],correctAnswer:"17"},
-{question:"24 × 8 = ?",answers:["192","191","193"],correctAnswer:"192"},
-{question:"Lisa hat 8 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"13 × 5 = ?",answers:["65","64","66"],correctAnswer:"65"},
-{question:"17 - 9 = ?",answers:["9","8","7"],correctAnswer:"8"},
-{question:"Lisa hat 14 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"3 × 3 = ?",answers:["8","9","10"],correctAnswer:"9"},
-{question:"18 × 7 = ?",answers:["127","126","125"],correctAnswer:"126"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 10",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"29 + 5 = ?",answers:["34","33","35"],correctAnswer:"34"},
-{question:"27 + 4 = ?",answers:["30","31","32"],correctAnswer:"31"},
-{question:"Lisa hat 5 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-{question:"24 × 5 = ?",answers:["119","121","120"],correctAnswer:"120"},
-{question:"23 × 3 = ?",answers:["68","70","69"],correctAnswer:"69"},
-{question:"Lisa hat 16 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["11","13","12"],correctAnswer:"12"},
-{question:"17 + 10 = ?",answers:["27","26","28"],correctAnswer:"27"},
-{question:"30 × 4 = ?",answers:["119","120","121"],correctAnswer:"120"},
-{question:"Lisa hat 18 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["13","12","11"],correctAnswer:"12"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 11",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 8 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"24 - 11 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"28 - 9 = ?",answers:["19","18","20"],correctAnswer:"19"},
-{question:"Lisa hat 5 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","2"],correctAnswer:"3"},
-{question:"22 + 12 = ?",answers:["35","33","34"],correctAnswer:"34"},
-{question:"23 + 7 = ?",answers:["30","31","29"],correctAnswer:"30"},
-{question:"Lisa hat 18 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"24 × 8 = ?",answers:["191","193","192"],correctAnswer:"192"},
-{question:"5 - 12 = ?",answers:["-7","-8","-6"],correctAnswer:"-7"},
-{question:"Lisa hat 19 Äpfel und gibt 18 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 12",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 16 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","11"],correctAnswer:"10"},
-{question:"19 - 2 = ?",answers:["17","16","18"],correctAnswer:"17"},
-{question:"28 - 9 = ?",answers:["19","18","20"],correctAnswer:"19"},
-{question:"Lisa hat 19 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"27 - 3 = ?",answers:["23","25","24"],correctAnswer:"24"},
-{question:"24 + 6 = ?",answers:["31","30","29"],correctAnswer:"30"},
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"19 + 11 = ?",answers:["30","29","31"],correctAnswer:"30"},
-{question:"5 + 2 = ?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 13",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"8 × 2 = ?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"22 + 4 = ?",answers:["27","26","25"],correctAnswer:"26"},
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"13 - 4 = ?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"29 + 6 = ?",answers:["34","35","36"],correctAnswer:"35"},
-{question:"Lisa hat 13 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"17 × 11 = ?",answers:["188","186","187"],correctAnswer:"187"},
-{question:"26 × 8 = ?",answers:["208","209","207"],correctAnswer:"208"},
-{question:"Lisa hat 17 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["13","15","14"],correctAnswer:"14"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 14",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"4 - 12 = ?",answers:["-7","-9","-8"],correctAnswer:"-8"},
-{question:"22 - 2 = ?",answers:["21","19","20"],correctAnswer:"20"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["6","4","5"],correctAnswer:"5"},
-{question:"6 + 9 = ?",answers:["14","15","16"],correctAnswer:"15"},
-{question:"16 + 4 = ?",answers:["19","20","21"],correctAnswer:"20"},
-{question:"Lisa hat 5 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"16 - 12 = ?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"2 + 2 = ?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"Lisa hat 15 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 15",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 18 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["16","15","17"],correctAnswer:"16"},
-{question:"20 - 9 = ?",answers:["12","11","10"],correctAnswer:"11"},
-{question:"6 - 3 = ?",answers:["4","3","2"],correctAnswer:"3"},
-{question:"Lisa hat 16 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"10 - 11 = ?",answers:["-1","-2","0"],correctAnswer:"-1"},
-{question:"3 × 11 = ?",answers:["33","34","32"],correctAnswer:"33"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"20 + 8 = ?",answers:["28","27","29"],correctAnswer:"28"},
-{question:"23 × 8 = ?",answers:["183","185","184"],correctAnswer:"184"},
-{question:"Lisa hat 12 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["11","10","12"],correctAnswer:"11"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 16",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"11 × 4 = ?",answers:["43","45","44"],correctAnswer:"44"},
-{question:"29 × 10 = ?",answers:["290","289","291"],correctAnswer:"290"},
-{question:"Lisa hat 20 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["17","18","16"],correctAnswer:"17"},
-{question:"27 + 8 = ?",answers:["36","35","34"],correctAnswer:"35"},
-{question:"11 + 11 = ?",answers:["22","23","21"],correctAnswer:"22"},
-{question:"Lisa hat 17 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-{question:"27 - 8 = ?",answers:["20","19","18"],correctAnswer:"19"},
-{question:"19 + 7 = ?",answers:["25","27","26"],correctAnswer:"26"},
-{question:"Lisa hat 19 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","9"],correctAnswer:"10"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 17",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 18 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"8 + 5 = ?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"27 - 6 = ?",answers:["21","22","20"],correctAnswer:"21"},
-{question:"Lisa hat 15 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"9 - 2 = ?",answers:["6","7","8"],correctAnswer:"7"},
-{question:"13 - 12 = ?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"Lisa hat 13 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"10 × 10 = ?",answers:["101","99","100"],correctAnswer:"100"},
-{question:"3 × 5 = ?",answers:["14","15","16"],correctAnswer:"15"},
-{question:"Lisa hat 11 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","7"],correctAnswer:"6"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 18",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"12 + 5 = ?",answers:["16","17","18"],correctAnswer:"17"},
-{question:"2 + 2 = ?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"Lisa hat 17 Äpfel und gibt 16 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"5 - 3 = ?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"22 × 3 = ?",answers:["66","67","65"],correctAnswer:"66"},
-{question:"Lisa hat 8 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"9 + 5 = ?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"13 × 2 = ?",answers:["27","25","26"],correctAnswer:"26"},
-{question:"Lisa hat 11 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 19",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"26 + 2 = ?",answers:["28","29","27"],correctAnswer:"28"},
-{question:"20 - 11 = ?",answers:["10","9","8"],correctAnswer:"9"},
-{question:"Lisa hat 18 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"14 - 3 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"7 + 9 = ?",answers:["17","15","16"],correctAnswer:"16"},
-{question:"Lisa hat 17 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"28 + 5 = ?",answers:["33","34","32"],correctAnswer:"33"},
-{question:"30 - 4 = ?",answers:["25","27","26"],correctAnswer:"26"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","3"],correctAnswer:"2"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 20",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","10"],correctAnswer:"9"},
-{question:"22 + 7 = ?",answers:["28","29","30"],correctAnswer:"29"},
-{question:"25 + 2 = ?",answers:["27","28","26"],correctAnswer:"27"},
-{question:"Lisa hat 20 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["14","15","16"],correctAnswer:"15"},
-{question:"10 - 8 = ?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"2 × 6 = ?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"Lisa hat 8 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"12 - 9 = ?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"18 × 2 = ?",answers:["37","36","35"],correctAnswer:"36"},
-{question:"Lisa hat 20 Äpfel und gibt 16 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","5"],correctAnswer:"4"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 21",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"10 + 5 = ?",answers:["14","16","15"],correctAnswer:"15"},
-{question:"11 + 8 = ?",answers:["18","20","19"],correctAnswer:"19"},
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"27 - 10 = ?",answers:["18","17","16"],correctAnswer:"17"},
-{question:"16 × 2 = ?",answers:["31","32","33"],correctAnswer:"32"},
-{question:"Lisa hat 14 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"8 × 6 = ?",answers:["49","47","48"],correctAnswer:"48"},
-{question:"28 × 4 = ?",answers:["113","111","112"],correctAnswer:"112"},
-{question:"Lisa hat 9 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 22",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"21 × 12 = ?",answers:["253","252","251"],correctAnswer:"252"},
-{question:"20 + 6 = ?",answers:["27","25","26"],correctAnswer:"26"},
-{question:"Lisa hat 19 Äpfel und gibt 14 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"18 - 7 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"4 - 2 = ?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"Lisa hat 11 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"3 × 4 = ?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"13 - 10 = ?",answers:["4","3","2"],correctAnswer:"3"},
-{question:"Lisa hat 6 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","2"],correctAnswer:"3"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 23",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"11 × 3 = ?",answers:["33","32","34"],correctAnswer:"33"},
-{question:"18 × 2 = ?",answers:["37","36","35"],correctAnswer:"36"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"21 + 4 = ?",answers:["24","26","25"],correctAnswer:"25"},
-{question:"10 + 10 = ?",answers:["21","19","20"],correctAnswer:"20"},
-{question:"Lisa hat 9 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"18 × 5 = ?",answers:["89","90","91"],correctAnswer:"90"},
-{question:"13 × 3 = ?",answers:["40","38","39"],correctAnswer:"39"},
-{question:"Lisa hat 11 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["9","8","10"],correctAnswer:"9"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 24",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 19 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"5 + 8 = ?",answers:["14","13","12"],correctAnswer:"13"},
-{question:"29 + 5 = ?",answers:["34","35","33"],correctAnswer:"34"},
-{question:"Lisa hat 15 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["11","13","12"],correctAnswer:"12"},
-{question:"24 × 8 = ?",answers:["193","192","191"],correctAnswer:"192"},
-{question:"14 - 2 = ?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"Lisa hat 10 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"28 - 11 = ?",answers:["16","17","18"],correctAnswer:"17"},
-{question:"12 + 10 = ?",answers:["22","23","21"],correctAnswer:"22"},
-{question:"Lisa hat 10 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","2"],correctAnswer:"3"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 25",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"4 - 7 = ?",answers:["-2","-4","-3"],correctAnswer:"-3"},
-{question:"9 - 4 = ?",answers:["5","4","6"],correctAnswer:"5"},
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"23 - 11 = ?",answers:["13","12","11"],correctAnswer:"12"},
-{question:"21 - 3 = ?",answers:["19","17","18"],correctAnswer:"18"},
-{question:"Lisa hat 16 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["11","13","12"],correctAnswer:"12"},
-{question:"5 - 6 = ?",answers:["0","-1","-2"],correctAnswer:"-1"},
-{question:"5 × 2 = ?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"Lisa hat 5 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 26",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["14","13","12"],correctAnswer:"13"},
-{question:"30 - 6 = ?",answers:["24","25","23"],correctAnswer:"24"},
-{question:"10 × 5 = ?",answers:["49","51","50"],correctAnswer:"50"},
-{question:"Lisa hat 17 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"8 × 10 = ?",answers:["80","79","81"],correctAnswer:"80"},
-{question:"30 - 10 = ?",answers:["20","21","19"],correctAnswer:"20"},
-{question:"Lisa hat 18 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"12 + 5 = ?",answers:["17","18","16"],correctAnswer:"17"},
-{question:"20 + 8 = ?",answers:["27","28","29"],correctAnswer:"28"},
-{question:"Lisa hat 10 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 27",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 18 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","10"],correctAnswer:"9"},
-{question:"11 + 2 = ?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"21 - 7 = ?",answers:["15","14","13"],correctAnswer:"14"},
-{question:"Lisa hat 19 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","7"],correctAnswer:"6"},
-{question:"25 × 3 = ?",answers:["76","74","75"],correctAnswer:"75"},
-{question:"15 × 7 = ?",answers:["104","105","106"],correctAnswer:"105"},
-{question:"Lisa hat 9 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"25 - 9 = ?",answers:["17","16","15"],correctAnswer:"16"},
-{question:"15 + 3 = ?",answers:["17","18","19"],correctAnswer:"18"},
-{question:"Lisa hat 18 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 28",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 16 Äpfel und gibt 14 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"14 × 9 = ?",answers:["126","125","127"],correctAnswer:"126"},
-{question:"25 - 7 = ?",answers:["18","17","19"],correctAnswer:"18"},
-{question:"Lisa hat 19 Äpfel und gibt 18 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"22 + 7 = ?",answers:["29","30","28"],correctAnswer:"29"},
-{question:"14 - 9 = ?",answers:["4","6","5"],correctAnswer:"5"},
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","2"],correctAnswer:"3"},
-{question:"20 + 5 = ?",answers:["25","24","26"],correctAnswer:"25"},
-{question:"28 + 11 = ?",answers:["38","39","40"],correctAnswer:"39"},
-{question:"Lisa hat 16 Äpfel und gibt 15 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 29",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 4 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-{question:"11 - 10 = ?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"18 × 10 = ?",answers:["180","181","179"],correctAnswer:"180"},
-{question:"Lisa hat 15 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["6","7","8"],correctAnswer:"7"},
-{question:"21 - 12 = ?",answers:["8","9","10"],correctAnswer:"9"},
-{question:"23 × 3 = ?",answers:["70","68","69"],correctAnswer:"69"},
-{question:"Lisa hat 16 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"22 × 10 = ?",answers:["221","219","220"],correctAnswer:"220"},
-{question:"15 - 9 = ?",answers:["6","5","7"],correctAnswer:"6"},
-{question:"Lisa hat 19 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["15","17","16"],correctAnswer:"16"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 30",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"18 + 4 = ?",answers:["22","23","21"],correctAnswer:"22"},
-{question:"24 × 7 = ?",answers:["167","168","169"],correctAnswer:"168"},
-{question:"Lisa hat 19 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","8"],correctAnswer:"9"},
-{question:"18 - 5 = ?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"22 × 11 = ?",answers:["241","243","242"],correctAnswer:"242"},
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"27 - 2 = ?",answers:["26","25","24"],correctAnswer:"25"},
-{question:"11 + 8 = ?",answers:["20","19","18"],correctAnswer:"19"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 31",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 20 Äpfel und gibt 19 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"20 - 5 = ?",answers:["16","15","14"],correctAnswer:"15"},
-{question:"6 × 4 = ?",answers:["25","24","23"],correctAnswer:"24"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"18 - 9 = ?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"27 × 2 = ?",answers:["53","55","54"],correctAnswer:"54"},
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"10 + 4 = ?",answers:["13","14","15"],correctAnswer:"14"},
-{question:"29 + 11 = ?",answers:["39","40","41"],correctAnswer:"40"},
-{question:"Lisa hat 17 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 32",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","2"],correctAnswer:"3"},
-{question:"16 × 2 = ?",answers:["33","31","32"],correctAnswer:"32"},
-{question:"9 + 2 = ?",answers:["12","11","10"],correctAnswer:"11"},
-{question:"Lisa hat 13 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","13"],correctAnswer:"12"},
-{question:"15 - 11 = ?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"9 - 12 = ?",answers:["-2","-3","-4"],correctAnswer:"-3"},
-{question:"Lisa hat 16 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"2 + 5 = ?",answers:["8","6","7"],correctAnswer:"7"},
-{question:"13 + 8 = ?",answers:["20","22","21"],correctAnswer:"21"},
-{question:"Lisa hat 15 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","7"],correctAnswer:"6"},
-]
-},
-{
-category:"mittel",
-minAge:8,
-maxAge:10,
-title:"Mittleres Mathe- und Logiktraining 33",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","5"],correctAnswer:"4"},
-{question:"14 + 12 = ?",answers:["25","27","26"],correctAnswer:"26"},
-{question:"28 × 7 = ?",answers:["195","197","196"],correctAnswer:"196"},
-{question:"Lisa hat 9 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"9 + 8 = ?",answers:["16","17","18"],correctAnswer:"17"},
-{question:"12 + 4 = ?",answers:["17","16","15"],correctAnswer:"16"},
-{question:"Lisa hat 5 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"19 - 9 = ?",answers:["11","9","10"],correctAnswer:"10"},
-{question:"13 + 7 = ?",answers:["20","21","19"],correctAnswer:"20"},
-{question:"Lisa hat 15 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 1",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"9 × 9 = ?",answers:["80","82","81"],correctAnswer:"81"},
-{question:"21 × 9 = ?",answers:["188","189","190"],correctAnswer:"189"},
-{question:"Lisa hat 15 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"6 × 3 = ?",answers:["19","18","17"],correctAnswer:"18"},
-{question:"19 × 6 = ?",answers:["113","114","115"],correctAnswer:"114"},
-{question:"Lisa hat 7 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"24 × 3 = ?",answers:["73","71","72"],correctAnswer:"72"},
-{question:"12 × 5 = ?",answers:["61","59","60"],correctAnswer:"60"},
-{question:"Lisa hat 20 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","7"],correctAnswer:"8"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 2",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"4 - 5 = ?",answers:["-2","0","-1"],correctAnswer:"-1"},
-{question:"11 - 7 = ?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"Lisa hat 11 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"23 × 12 = ?",answers:["276","275","277"],correctAnswer:"276"},
-{question:"2 × 12 = ?",answers:["24","25","23"],correctAnswer:"24"},
-{question:"Lisa hat 10 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-{question:"7 + 6 = ?",answers:["12","13","14"],correctAnswer:"13"},
-{question:"24 + 12 = ?",answers:["35","36","37"],correctAnswer:"36"},
-{question:"Lisa hat 8 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 3",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","2"],correctAnswer:"3"},
-{question:"19 × 6 = ?",answers:["115","114","113"],correctAnswer:"114"},
-{question:"20 × 5 = ?",answers:["100","99","101"],correctAnswer:"100"},
-{question:"Lisa hat 16 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","4"],correctAnswer:"5"},
-{question:"2 × 3 = ?",answers:["5","6","7"],correctAnswer:"6"},
-{question:"30 × 11 = ?",answers:["331","330","329"],correctAnswer:"330"},
-{question:"Lisa hat 10 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"8 × 7 = ?",answers:["55","57","56"],correctAnswer:"56"},
-{question:"24 × 8 = ?",answers:["193","192","191"],correctAnswer:"192"},
-{question:"Lisa hat 11 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 4",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 16 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","9"],correctAnswer:"8"},
-{question:"18 × 2 = ?",answers:["37","36","35"],correctAnswer:"36"},
-{question:"15 × 12 = ?",answers:["179","181","180"],correctAnswer:"180"},
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","7"],correctAnswer:"8"},
-{question:"7 + 10 = ?",answers:["18","17","16"],correctAnswer:"17"},
-{question:"19 + 6 = ?",answers:["26","24","25"],correctAnswer:"25"},
-{question:"Lisa hat 14 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"8 - 12 = ?",answers:["-3","-5","-4"],correctAnswer:"-4"},
-{question:"23 × 9 = ?",answers:["206","207","208"],correctAnswer:"207"},
-{question:"Lisa hat 10 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 5",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"6 × 4 = ?",answers:["25","24","23"],correctAnswer:"24"},
-{question:"12 + 12 = ?",answers:["24","25","23"],correctAnswer:"24"},
-{question:"Lisa hat 8 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"21 - 9 = ?",answers:["13","11","12"],correctAnswer:"12"},
-{question:"24 + 6 = ?",answers:["30","29","31"],correctAnswer:"30"},
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"11 + 5 = ?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"16 + 3 = ?",answers:["19","18","20"],correctAnswer:"19"},
-{question:"Lisa hat 17 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 6",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 20 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["18","16","17"],correctAnswer:"17"},
-{question:"16 + 9 = ?",answers:["25","26","24"],correctAnswer:"25"},
-{question:"25 - 11 = ?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"Lisa hat 16 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"2 + 7 = ?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"22 × 11 = ?",answers:["242","243","241"],correctAnswer:"242"},
-{question:"Lisa hat 10 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"2 + 8 = ?",answers:["10","9","11"],correctAnswer:"10"},
-{question:"7 × 12 = ?",answers:["85","84","83"],correctAnswer:"84"},
-{question:"Lisa hat 6 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["3","4","2"],correctAnswer:"3"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 7",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 15 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["12","13","11"],correctAnswer:"12"},
-{question:"12 - 5 = ?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"28 + 6 = ?",answers:["35","33","34"],correctAnswer:"34"},
-{question:"Lisa hat 6 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"30 + 2 = ?",answers:["32","31","33"],correctAnswer:"32"},
-{question:"17 - 4 = ?",answers:["14","13","12"],correctAnswer:"13"},
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
-{question:"3 - 9 = ?",answers:["-5","-7","-6"],correctAnswer:"-6"},
-{question:"Lisa hat 14 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["12","14","13"],correctAnswer:"13"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 8",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 7 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"18 - 8 = ?",answers:["9","11","10"],correctAnswer:"10"},
-{question:"2 + 12 = ?",answers:["15","14","13"],correctAnswer:"14"},
-{question:"Lisa hat 15 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["9","11","10"],correctAnswer:"10"},
-{question:"27 × 11 = ?",answers:["296","297","298"],correctAnswer:"297"},
-{question:"17 × 3 = ?",answers:["51","50","52"],correctAnswer:"51"},
-{question:"Lisa hat 16 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["8","7","6"],correctAnswer:"7"},
-{question:"14 × 11 = ?",answers:["155","153","154"],correctAnswer:"154"},
-{question:"25 - 12 = ?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"Lisa hat 16 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 9",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","5"],correctAnswer:"6"},
-{question:"29 + 5 = ?",answers:["34","35","33"],correctAnswer:"34"},
-{question:"24 + 3 = ?",answers:["27","28","26"],correctAnswer:"27"},
-{question:"Lisa hat 20 Äpfel und gibt 19 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"18 × 5 = ?",answers:["90","89","91"],correctAnswer:"90"},
-{question:"10 + 3 = ?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"Lisa hat 20 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["15","17","16"],correctAnswer:"16"},
-{question:"22 + 3 = ?",answers:["25","26","24"],correctAnswer:"25"},
-{question:"24 + 9 = ?",answers:["33","34","32"],correctAnswer:"33"},
-{question:"Lisa hat 10 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 10",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 19 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["15","16","17"],correctAnswer:"16"},
-{question:"27 + 9 = ?",answers:["37","36","35"],correctAnswer:"36"},
-{question:"22 + 10 = ?",answers:["32","31","33"],correctAnswer:"32"},
-{question:"Lisa hat 20 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["13","15","14"],correctAnswer:"14"},
-{question:"26 + 3 = ?",answers:["28","29","30"],correctAnswer:"29"},
-{question:"14 + 5 = ?",answers:["18","19","20"],correctAnswer:"19"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","3"],correctAnswer:"2"},
-{question:"5 - 4 = ?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"20 × 3 = ?",answers:["59","60","61"],correctAnswer:"60"},
-{question:"Lisa hat 14 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 11",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 11 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["8","10","9"],correctAnswer:"9"},
-{question:"18 - 10 = ?",answers:["8","9","7"],correctAnswer:"8"},
-{question:"3 - 11 = ?",answers:["-9","-7","-8"],correctAnswer:"-8"},
-{question:"Lisa hat 20 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","8"],correctAnswer:"9"},
-{question:"3 + 12 = ?",answers:["15","14","16"],correctAnswer:"15"},
-{question:"8 + 9 = ?",answers:["17","18","16"],correctAnswer:"17"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"4 + 6 = ?",answers:["9","11","10"],correctAnswer:"10"},
-{question:"29 × 12 = ?",answers:["347","348","349"],correctAnswer:"348"},
-{question:"Lisa hat 11 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","1"],correctAnswer:"2"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 12",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 17 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["15","17","16"],correctAnswer:"16"},
-{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
-{question:"27 + 2 = ?",answers:["28","30","29"],correctAnswer:"29"},
-{question:"Lisa hat 18 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["12","13","11"],correctAnswer:"12"},
-{question:"14 × 5 = ?",answers:["71","70","69"],correctAnswer:"70"},
-{question:"13 × 7 = ?",answers:["90","92","91"],correctAnswer:"91"},
-{question:"Lisa hat 7 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","1"],correctAnswer:"2"},
-{question:"8 - 4 = ?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"12 - 11 = ?",answers:["1","0","2"],correctAnswer:"1"},
-{question:"Lisa hat 13 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","13"],correctAnswer:"12"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 13",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["10","8","9"],correctAnswer:"9"},
-{question:"16 + 11 = ?",answers:["28","27","26"],correctAnswer:"27"},
-{question:"25 + 12 = ?",answers:["37","36","38"],correctAnswer:"37"},
-{question:"Lisa hat 11 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"13 × 11 = ?",answers:["144","143","142"],correctAnswer:"143"},
-{question:"24 × 2 = ?",answers:["49","47","48"],correctAnswer:"48"},
-{question:"Lisa hat 16 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"13 + 6 = ?",answers:["20","18","19"],correctAnswer:"19"},
-{question:"11 × 7 = ?",answers:["76","77","78"],correctAnswer:"77"},
-{question:"Lisa hat 14 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","4"],correctAnswer:"5"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 14",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["12","13","11"],correctAnswer:"12"},
-{question:"23 - 7 = ?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"30 + 5 = ?",answers:["34","35","36"],correctAnswer:"35"},
-{question:"Lisa hat 7 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["4","6","5"],correctAnswer:"5"},
-{question:"14 - 9 = ?",answers:["5","6","4"],correctAnswer:"5"},
-{question:"7 + 11 = ?",answers:["17","19","18"],correctAnswer:"18"},
-{question:"Lisa hat 12 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["7","8","6"],correctAnswer:"7"},
-{question:"4 × 5 = ?",answers:["21","19","20"],correctAnswer:"20"},
-{question:"11 - 11 = ?",answers:["0","-1","1"],correctAnswer:"0"},
-{question:"Lisa hat 16 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 15",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","11"],correctAnswer:"10"},
-{question:"19 + 2 = ?",answers:["21","22","20"],correctAnswer:"21"},
-{question:"9 + 2 = ?",answers:["10","12","11"],correctAnswer:"11"},
-{question:"Lisa hat 17 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"29 × 10 = ?",answers:["291","289","290"],correctAnswer:"290"},
-{question:"9 + 2 = ?",answers:["12","11","10"],correctAnswer:"11"},
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["4","5","3"],correctAnswer:"4"},
-{question:"25 + 4 = ?",answers:["28","30","29"],correctAnswer:"29"},
-{question:"19 + 12 = ?",answers:["31","32","30"],correctAnswer:"31"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","3"],correctAnswer:"2"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 16",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 3 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["1","0","2"],correctAnswer:"1"},
+{question:"2 + 6 = ?",answers:["7","9","8"],correctAnswer:"8"},
 {question:"7 - 2 = ?",answers:["6","4","5"],correctAnswer:"5"},
-{question:"22 - 11 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"Lisa hat 11 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"12 × 11 = ?",answers:["131","132","133"],correctAnswer:"132"},
-{question:"15 × 11 = ?",answers:["165","166","164"],correctAnswer:"165"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["8","6","7"],correctAnswer:"7"},
-{question:"8 × 4 = ?",answers:["31","33","32"],correctAnswer:"32"},
-{question:"28 - 7 = ?",answers:["20","21","22"],correctAnswer:"21"},
-{question:"Lisa hat 13 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
+{question:"5 + 5 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"10 - 6 = ?",answers:["5","4","3"],correctAnswer:"4"},
+{question:"7 + 4 = ?",answers:["11","10","12"],correctAnswer:"11"},
+{question:"8 - 5 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"6 + 6 = ?",answers:["13","12","11"],correctAnswer:"12"},
+{question:"9 - 4 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"3 + 8 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"10 - 2 = ?",answers:["9","8","7"],correctAnswer:"8"}
 ]
 },
 {
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 17",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 3",
+text:"Löse die Aufgaben der Reihe nach.",
 questions:[
-{question:"Lisa hat 18 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"22 × 10 = ?",answers:["220","219","221"],correctAnswer:"220"},
-{question:"13 × 10 = ?",answers:["129","130","131"],correctAnswer:"130"},
-{question:"Lisa hat 11 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"5 - 12 = ?",answers:["-6","-8","-7"],correctAnswer:"-7"},
-{question:"14 + 3 = ?",answers:["18","17","16"],correctAnswer:"17"},
-{question:"Lisa hat 6 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"19 - 4 = ?",answers:["15","16","14"],correctAnswer:"15"},
-{question:"25 + 4 = ?",answers:["30","29","28"],correctAnswer:"29"},
-{question:"Lisa hat 19 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["17","18","19"],correctAnswer:"18"},
+{question:"4 + 5 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"8 - 2 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"3 + 6 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"9 - 4 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"7 + 3 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"10 - 5 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"5 + 6 = ?",answers:["11","10","12"],correctAnswer:"11"},
+{question:"8 - 3 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"2 + 7 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"9 - 6 = ?",answers:["4","2","3"],correctAnswer:"3"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 4",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 + 2 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"7 - 4 = ?",answers:["4","2","3"],correctAnswer:"3"},
+{question:"5 + 4 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 - 2 = ?",answers:["8","9","7"],correctAnswer:"8"},
+{question:"3 + 7 = ?",answers:["9","10","11"],correctAnswer:"10"},
+{question:"8 - 6 = ?",answers:["1","3","2"],correctAnswer:"2"},
+{question:"4 + 8 = ?",answers:["11","13","12"],correctAnswer:"12"},
+{question:"9 - 3 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"6 + 5 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"7 - 5 = ?",answers:["3","2","1"],correctAnswer:"2"}
 ]
 },
 {
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 18",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 5",
+text:"Löse die Aufgaben der Reihe nach.",
 questions:[
-{question:"Lisa hat 17 Äpfel und gibt 16 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"30 - 8 = ?",answers:["21","23","22"],correctAnswer:"22"},
-{question:"27 + 2 = ?",answers:["30","29","28"],correctAnswer:"29"},
-{question:"Lisa hat 5 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"3 × 5 = ?",answers:["15","14","16"],correctAnswer:"15"},
-{question:"14 × 12 = ?",answers:["169","167","168"],correctAnswer:"168"},
-{question:"Lisa hat 11 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["10","9","11"],correctAnswer:"10"},
+{question:"2 + 5 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"9 - 3 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"4 + 6 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"8 - 2 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"7 + 5 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"10 - 4 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"3 + 8 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"6 - 2 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"5 + 7 = ?",answers:["11","13","12"],correctAnswer:"12"},
+{question:"9 - 5 = ?",answers:["3","5","4"],correctAnswer:"4"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 6",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 + 3 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"8 - 4 = ?",answers:["5","4","3"],correctAnswer:"4"},
+{question:"2 + 9 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"10 - 3 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"4 + 7 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"7 - 2 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"5 + 5 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"9 - 4 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"8 + 3 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"6 - 5 = ?",answers:["2","0","1"],correctAnswer:"1"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 7",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 + 2 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"9 - 6 = ?",answers:["2","3","4"],correctAnswer:"3"},
+{question:"3 + 5 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"10 - 5 = ?",answers:["4","5","6"],correctAnswer:"5"},
+{question:"6 + 6 = ?",answers:["11","13","12"],correctAnswer:"12"},
+{question:"8 - 3 = ?",answers:["4","6","5"],correctAnswer:"5"},
+{question:"4 + 4 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"7 - 4 = ?",answers:["2","3","4"],correctAnswer:"3"},
+{question:"9 + 2 = ?",answers:["11","10","12"],correctAnswer:"11"},
+{question:"5 - 2 = ?",answers:["2","3","4"],correctAnswer:"3"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 8",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"5 + 2 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"8 - 5 = ?",answers:["4","3","2"],correctAnswer:"3"},
+{question:"6 + 4 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 2 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"7 + 4 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"10 - 6 = ?",answers:["5","4","3"],correctAnswer:"4"},
+{question:"3 + 7 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"6 - 3 = ?",answers:["2","3","4"],correctAnswer:"3"},
+{question:"8 + 5 = ?",answers:["13","12","14"],correctAnswer:"13"},
+{question:"7 - 5 = ?",answers:["1","2","3"],correctAnswer:"2"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 9",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"4 + 3 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"10 - 4 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"5 + 6 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"8 - 2 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"2 + 8 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 3 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"6 + 7 = ?",answers:["12","14","13"],correctAnswer:"13"},
+{question:"7 - 6 = ?",answers:["2","1","0"],correctAnswer:"1"},
+{question:"3 + 9 = ?",answers:["12","11","13"],correctAnswer:"12"},
+{question:"8 - 5 = ?",answers:["4","3","2"],correctAnswer:"3"}
+]
+},
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 10",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"5 + 3 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"9 - 2 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"4 + 7 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"8 - 4 = ?",answers:["3","5","4"],correctAnswer:"4"},
+{question:"6 + 6 = ?",answers:["11","13","12"],correctAnswer:"12"},
+{question:"10 - 3 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"2 + 9 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"7 - 5 = ?",answers:["3","2","1"],correctAnswer:"2"},
+{question:"5 + 8 = ?",answers:["12","13","14"],correctAnswer:"13"},
+{question:"9 - 6 = ?",answers:["2","4","3"],correctAnswer:"3"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 11",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"3 + 4 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"10 - 5 = ?",answers:["4","6","5"],correctAnswer:"5"},
+{question:"6 + 5 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"9 - 3 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"7 + 2 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 - 6 = ?",answers:["1","3","2"],correctAnswer:"2"},
+{question:"4 + 8 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"6 - 2 = ?",answers:["5","4","3"],correctAnswer:"4"},
+{question:"5 + 7 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"7 - 4 = ?",answers:["2","3","4"],correctAnswer:"3"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 12",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 + 2 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 5 = ?",answers:["3","4","5"],correctAnswer:"4"},
+{question:"3 + 8 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"10 - 6 = ?",answers:["3","5","4"],correctAnswer:"4"},
+{question:"7 + 5 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 3 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"2 + 7 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"6 - 4 = ?",answers:["3","1","2"],correctAnswer:"2"},
+{question:"4 + 9 = ?",answers:["12","13","14"],correctAnswer:"13"},
+{question:"7 - 2 = ?",answers:["6","5","4"],correctAnswer:"5"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 13",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 + 4 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"8 - 2 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"5 + 5 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"10 - 7 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"7 + 6 = ?",answers:["12","14","13"],correctAnswer:"13"},
+{question:"9 - 4 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"2 + 8 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"6 - 3 = ?",answers:["4","3","2"],correctAnswer:"3"},
+{question:"3 + 9 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 6 = ?",answers:["3","1","2"],correctAnswer:"2"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 14",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"4 + 6 = ?",answers:["9","10","11"],correctAnswer:"10"},
+{question:"9 - 4 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"7 + 3 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"8 - 5 = ?",answers:["4","2","3"],correctAnswer:"3"},
+{question:"5 + 8 = ?",answers:["13","14","12"],correctAnswer:"13"},
+{question:"10 - 2 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"6 + 7 = ?",answers:["12","14","13"],correctAnswer:"13"},
+{question:"7 - 3 = ?",answers:["5","4","3"],correctAnswer:"4"},
+{question:"2 + 9 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"9 - 7 = ?",answers:["1","2","3"],correctAnswer:"2"}
+]
+},
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 15",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"3 + 5 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"10 - 4 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"6 + 4 = ?",answers:["9","11","10"],correctAnswer:"10"},
+{question:"8 - 3 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"2 + 7 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"9 - 5 = ?",answers:["3","4","5"],correctAnswer:"4"},
+{question:"7 + 5 = ?",answers:["12","11","13"],correctAnswer:"12"},
+{question:"6 - 2 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"4 + 8 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 6 = ?",answers:["1","2","3"],correctAnswer:"2"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 16",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"5 + 4 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 - 2 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"3 + 8 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"10 - 5 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"6 + 6 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"8 - 4 = ?",answers:["3","4","5"],correctAnswer:"4"},
+{question:"2 + 9 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"7 - 3 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"5 + 7 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"6 - 5 = ?",answers:["0","2","1"],correctAnswer:"1"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 17",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"4 + 4 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 - 2 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"6 + 5 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"10 - 6 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"7 + 2 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"9 - 4 = ?",answers:["4","5","6"],correctAnswer:"5"},
+{question:"3 + 9 = ?",answers:["12","13","11"],correctAnswer:"12"},
+{question:"7 - 5 = ?",answers:["1","3","2"],correctAnswer:"2"},
+{question:"5 + 6 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"8 - 7 = ?",answers:["2","0","1"],correctAnswer:"1"}
+]
+},
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 18",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"2 + 6 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"10 - 3 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"5 + 5 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 4 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"7 + 4 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"8 - 5 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"4 + 7 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"6 - 2 = ?",answers:["3","5","4"],correctAnswer:"4"},
+{question:"3 + 8 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"7 - 6 = ?",answers:["2","0","1"],correctAnswer:"1"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 19",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 + 2 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 - 3 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"4 + 5 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 - 7 = ?",answers:["4","3","2"],correctAnswer:"3"},
+{question:"5 + 7 = ?",answers:["13","12","11"],correctAnswer:"12"},
+{question:"9 - 5 = ?",answers:["3","4","5"],correctAnswer:"4"},
+{question:"2 + 8 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"7 - 4 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"6 + 6 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 6 = ?",answers:["1","3","2"],correctAnswer:"2"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 20",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"3 + 7 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 2 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"5 + 4 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 - 5 = ?",answers:["4","6","5"],correctAnswer:"5"},
+{question:"6 + 7 = ?",answers:["14","12","13"],correctAnswer:"13"},
+{question:"8 - 4 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"2 + 9 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"7 - 3 = ?",answers:["3","5","4"],correctAnswer:"4"},
+{question:"4 + 8 = ?",answers:["11","13","12"],correctAnswer:"12"},
+{question:"6 - 5 = ?",answers:["2","0","1"],correctAnswer:"1"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 21",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"5 + 3 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"8 - 2 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"7 + 5 = ?",answers:["13","12","11"],correctAnswer:"12"},
+{question:"9 - 6 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"4 + 6 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"10 - 4 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"3 + 9 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 5 = ?",answers:["4","2","3"],correctAnswer:"3"},
+{question:"6 + 5 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"7 - 2 = ?",answers:["6","5","4"],correctAnswer:"5"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 22",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"2 + 8 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"9 - 3 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"5 + 6 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"8 - 4 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"7 + 4 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"10 - 6 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"4 + 7 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"6 - 3 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"3 + 8 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"8 - 7 = ?",answers:["0","2","1"],correctAnswer:"1"}
+]
+},
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 23",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"4 + 5 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"10 - 2 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 + 4 = ?",answers:["11","9","10"],correctAnswer:"10"},
 {question:"9 - 5 = ?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"26 × 8 = ?",answers:["208","207","209"],correctAnswer:"208"},
-{question:"Lisa hat 18 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["12","11","10"],correctAnswer:"11"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 19",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 18 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["8","10","9"],correctAnswer:"9"},
-{question:"11 - 3 = ?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"29 + 5 = ?",answers:["34","33","35"],correctAnswer:"34"},
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"3 + 9 = ?",answers:["11","12","13"],correctAnswer:"12"},
-{question:"11 + 12 = ?",answers:["24","22","23"],correctAnswer:"23"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"18 + 7 = ?",answers:["24","26","25"],correctAnswer:"25"},
-{question:"23 + 8 = ?",answers:["31","30","32"],correctAnswer:"31"},
-{question:"Lisa hat 15 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["10","8","9"],correctAnswer:"9"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 20",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"18 + 11 = ?",answers:["29","30","28"],correctAnswer:"29"},
-{question:"24 × 3 = ?",answers:["73","71","72"],correctAnswer:"72"},
-{question:"Lisa hat 13 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["12","10","11"],correctAnswer:"11"},
-{question:"17 × 4 = ?",answers:["67","68","69"],correctAnswer:"68"},
-{question:"7 × 5 = ?",answers:["36","35","34"],correctAnswer:"35"},
-{question:"Lisa hat 20 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"28 + 9 = ?",answers:["36","37","38"],correctAnswer:"37"},
-{question:"29 × 5 = ?",answers:["144","146","145"],correctAnswer:"145"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 21",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
-{question:"15 - 10 = ?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"12 × 2 = ?",answers:["24","23","25"],correctAnswer:"24"},
-{question:"Lisa hat 20 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"29 - 6 = ?",answers:["23","22","24"],correctAnswer:"23"},
-{question:"19 - 8 = ?",answers:["10","12","11"],correctAnswer:"11"},
-{question:"Lisa hat 15 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["9","7","8"],correctAnswer:"8"},
-{question:"9 × 11 = ?",answers:["99","98","100"],correctAnswer:"99"},
-{question:"9 × 5 = ?",answers:["46","44","45"],correctAnswer:"45"},
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 22",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 20 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","8"],correctAnswer:"9"},
-{question:"19 - 12 = ?",answers:["6","7","8"],correctAnswer:"7"},
-{question:"17 - 12 = ?",answers:["5","6","4"],correctAnswer:"5"},
-{question:"Lisa hat 20 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"13 - 3 = ?",answers:["10","11","9"],correctAnswer:"10"},
-{question:"21 × 12 = ?",answers:["251","252","253"],correctAnswer:"252"},
-{question:"Lisa hat 20 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["12","13","11"],correctAnswer:"12"},
-{question:"10 × 9 = ?",answers:["90","89","91"],correctAnswer:"90"},
-{question:"20 + 5 = ?",answers:["24","26","25"],correctAnswer:"25"},
-{question:"Lisa hat 19 Äpfel und gibt 7 an ihren Freund. Wie viele bleiben übrig?",answers:["13","12","11"],correctAnswer:"12"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 23",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["11","10","9"],correctAnswer:"10"},
-{question:"6 - 12 = ?",answers:["-5","-7","-6"],correctAnswer:"-6"},
-{question:"12 - 8 = ?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"Lisa hat 16 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["13","14","12"],correctAnswer:"13"},
-{question:"14 - 3 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"16 + 12 = ?",answers:["28","27","29"],correctAnswer:"28"},
-{question:"Lisa hat 12 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"16 - 12 = ?",answers:["5","4","3"],correctAnswer:"4"},
-{question:"26 + 10 = ?",answers:["37","35","36"],correctAnswer:"36"},
-{question:"Lisa hat 14 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","5"],correctAnswer:"6"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 24",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 14 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["5","4","6"],correctAnswer:"5"},
-{question:"10 × 2 = ?",answers:["21","19","20"],correctAnswer:"20"},
-{question:"20 + 6 = ?",answers:["27","26","25"],correctAnswer:"26"},
-{question:"Lisa hat 12 Äpfel und gibt 9 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","4"],correctAnswer:"3"},
-{question:"10 - 5 = ?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"18 - 12 = ?",answers:["7","5","6"],correctAnswer:"6"},
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","4"],correctAnswer:"3"},
-{question:"3 - 9 = ?",answers:["-7","-6","-5"],correctAnswer:"-6"},
-{question:"24 - 6 = ?",answers:["18","17","19"],correctAnswer:"18"},
-{question:"Lisa hat 14 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["9","10","11"],correctAnswer:"10"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 25",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["4","2","3"],correctAnswer:"3"},
-{question:"12 + 3 = ?",answers:["15","14","16"],correctAnswer:"15"},
-{question:"14 - 10 = ?",answers:["3","4","5"],correctAnswer:"4"},
-{question:"Lisa hat 6 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","0"],correctAnswer:"1"},
-{question:"16 - 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"30 - 3 = ?",answers:["27","26","28"],correctAnswer:"27"},
-{question:"Lisa hat 7 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"25 - 5 = ?",answers:["21","20","19"],correctAnswer:"20"},
-{question:"23 × 6 = ?",answers:["138","137","139"],correctAnswer:"138"},
-{question:"Lisa hat 17 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["14","12","13"],correctAnswer:"13"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 26",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"4 × 5 = ?",answers:["19","20","21"],correctAnswer:"20"},
-{question:"28 + 12 = ?",answers:["40","41","39"],correctAnswer:"40"},
-{question:"Lisa hat 18 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["16","17","15"],correctAnswer:"16"},
-{question:"28 + 11 = ?",answers:["38","39","40"],correctAnswer:"39"},
-{question:"29 + 12 = ?",answers:["41","40","42"],correctAnswer:"41"},
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"18 + 6 = ?",answers:["24","23","25"],correctAnswer:"24"},
-{question:"10 - 12 = ?",answers:["-2","-1","-3"],correctAnswer:"-2"},
-{question:"Lisa hat 19 Äpfel und gibt 14 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 27",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 12 Äpfel und gibt 5 an ihren Freund. Wie viele bleiben übrig?",answers:["6","8","7"],correctAnswer:"7"},
-{question:"27 × 8 = ?",answers:["216","215","217"],correctAnswer:"216"},
-{question:"8 + 4 = ?",answers:["11","13","12"],correctAnswer:"12"},
-{question:"Lisa hat 17 Äpfel und gibt 16 an ihren Freund. Wie viele bleiben übrig?",answers:["2","1","0"],correctAnswer:"1"},
-{question:"13 + 7 = ?",answers:["19","20","21"],correctAnswer:"20"},
-{question:"25 + 7 = ?",answers:["33","32","31"],correctAnswer:"32"},
-{question:"Lisa hat 16 Äpfel und gibt 10 an ihren Freund. Wie viele bleiben übrig?",answers:["5","6","7"],correctAnswer:"6"},
-{question:"10 - 5 = ?",answers:["4","5","6"],correctAnswer:"5"},
-{question:"24 × 5 = ?",answers:["120","121","119"],correctAnswer:"120"},
-{question:"Lisa hat 15 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 28",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 9 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","9","8"],correctAnswer:"8"},
-{question:"29 + 12 = ?",answers:["42","40","41"],correctAnswer:"41"},
-{question:"29 × 3 = ?",answers:["86","87","88"],correctAnswer:"87"},
-{question:"Lisa hat 3 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["1","2","3"],correctAnswer:"2"},
-{question:"23 × 12 = ?",answers:["275","276","277"],correctAnswer:"276"},
-{question:"19 + 4 = ?",answers:["24","23","22"],correctAnswer:"23"},
-{question:"Lisa hat 19 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["14","15","16"],correctAnswer:"15"},
-{question:"8 + 3 = ?",answers:["10","11","12"],correctAnswer:"11"},
-{question:"23 × 6 = ?",answers:["138","137","139"],correctAnswer:"138"},
-{question:"Lisa hat 7 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","5"],correctAnswer:"6"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 29",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 4 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["3","2","4"],correctAnswer:"3"},
-{question:"26 × 5 = ?",answers:["129","130","131"],correctAnswer:"130"},
-{question:"11 - 6 = ?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"Lisa hat 7 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["0","2","1"],correctAnswer:"1"},
-{question:"3 - 7 = ?",answers:["-5","-3","-4"],correctAnswer:"-4"},
-{question:"9 × 12 = ?",answers:["109","108","107"],correctAnswer:"108"},
-{question:"Lisa hat 9 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"15 × 7 = ?",answers:["104","105","106"],correctAnswer:"105"},
-{question:"3 + 7 = ?",answers:["11","10","9"],correctAnswer:"10"},
-{question:"Lisa hat 19 Äpfel und gibt 17 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 30",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 18 Äpfel und gibt 12 an ihren Freund. Wie viele bleiben übrig?",answers:["5","7","6"],correctAnswer:"6"},
-{question:"30 + 3 = ?",answers:["33","32","34"],correctAnswer:"33"},
-{question:"29 × 6 = ?",answers:["175","174","173"],correctAnswer:"174"},
-{question:"Lisa hat 9 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","7"],correctAnswer:"6"},
-{question:"26 × 5 = ?",answers:["129","130","131"],correctAnswer:"130"},
-{question:"20 + 11 = ?",answers:["30","32","31"],correctAnswer:"31"},
-{question:"Lisa hat 9 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["6","7","5"],correctAnswer:"6"},
-{question:"3 - 4 = ?",answers:["-1","-2","0"],correctAnswer:"-1"},
-{question:"17 - 5 = ?",answers:["12","13","11"],correctAnswer:"12"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["6","7","8"],correctAnswer:"7"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 31",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 20 Äpfel und gibt 15 an ihren Freund. Wie viele bleiben übrig?",answers:["6","4","5"],correctAnswer:"5"},
-{question:"27 × 4 = ?",answers:["108","107","109"],correctAnswer:"108"},
-{question:"3 + 2 = ?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"Lisa hat 16 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"15 - 11 = ?",answers:["3","5","4"],correctAnswer:"4"},
-{question:"25 × 12 = ?",answers:["299","301","300"],correctAnswer:"300"},
-{question:"Lisa hat 8 Äpfel und gibt 6 an ihren Freund. Wie viele bleiben übrig?",answers:["1","3","2"],correctAnswer:"2"},
-{question:"2 - 12 = ?",answers:["-11","-10","-9"],correctAnswer:"-10"},
-{question:"10 + 3 = ?",answers:["14","12","13"],correctAnswer:"13"},
-{question:"Lisa hat 7 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["2","3","4"],correctAnswer:"3"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 32",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 13 Äpfel und gibt 8 an ihren Freund. Wie viele bleiben übrig?",answers:["6","4","5"],correctAnswer:"5"},
-{question:"20 + 10 = ?",answers:["30","31","29"],correctAnswer:"30"},
-{question:"13 - 5 = ?",answers:["7","8","9"],correctAnswer:"8"},
-{question:"Lisa hat 7 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["6","5","4"],correctAnswer:"5"},
-{question:"30 + 3 = ?",answers:["34","32","33"],correctAnswer:"33"},
-{question:"17 + 11 = ?",answers:["29","28","27"],correctAnswer:"28"},
-{question:"Lisa hat 5 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["2","4","3"],correctAnswer:"3"},
-{question:"2 - 8 = ?",answers:["-5","-6","-7"],correctAnswer:"-6"},
-{question:"11 + 11 = ?",answers:["23","21","22"],correctAnswer:"22"},
-{question:"Lisa hat 10 Äpfel und gibt 4 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","5"],correctAnswer:"6"},
-]
-},
-{
-category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 33",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
-questions:[
-{question:"Lisa hat 10 Äpfel und gibt 2 an ihren Freund. Wie viele bleiben übrig?",answers:["8","9","7"],correctAnswer:"8"},
-{question:"5 + 2 = ?",answers:["8","7","6"],correctAnswer:"7"},
-{question:"28 - 6 = ?",answers:["21","23","22"],correctAnswer:"22"},
-{question:"Lisa hat 8 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["7","6","8"],correctAnswer:"7"},
-{question:"27 + 8 = ?",answers:["36","34","35"],correctAnswer:"35"},
-{question:"6 × 10 = ?",answers:["61","59","60"],correctAnswer:"60"},
-{question:"Lisa hat 14 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["2","0","1"],correctAnswer:"1"},
-{question:"8 × 5 = ?",answers:["39","40","41"],correctAnswer:"40"},
+{question:"3 + 7 = ?",answers:["9","11","10"],correctAnswer:"10"},
+{question:"8 - 3 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"5 + 6 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"7 - 4 = ?",answers:["2","3","4"],correctAnswer:"3"},
 {question:"2 + 9 = ?",answers:["11","10","12"],correctAnswer:"11"},
-{question:"Lisa hat 5 Äpfel und gibt 1 an ihren Freund. Wie viele bleiben übrig?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"6 - 2 = ?",answers:["3","5","4"],correctAnswer:"4"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 24",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"5 + 4 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 - 2 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"7 + 3 = ?",answers:["11","9","10"],correctAnswer:"10"},
+{question:"10 - 5 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"6 + 6 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"9 - 4 = ?",answers:["4","6","5"],correctAnswer:"5"},
+{question:"4 + 8 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"7 - 6 = ?",answers:["0","2","1"],correctAnswer:"1"},
+{question:"3 + 9 = ?",answers:["13","12","11"],correctAnswer:"12"},
+{question:"8 - 5 = ?",answers:["4","2","3"],correctAnswer:"3"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 25",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 + 2 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"9 - 3 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"5 + 5 = ?",answers:["11","10","9"],correctAnswer:"10"},
+{question:"8 - 4 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"2 + 8 = ?",answers:["9","11","10"],correctAnswer:"10"},
+{question:"10 - 6 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"7 + 5 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"6 - 5 = ?",answers:["2","0","1"],correctAnswer:"1"},
+{question:"4 + 7 = ?",answers:["10","11","12"],correctAnswer:"11"},
+{question:"9 - 7 = ?",answers:["1","3","2"],correctAnswer:"2"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 26",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"3 + 6 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"8 - 5 = ?",answers:["4","2","3"],correctAnswer:"3"},
+{question:"6 + 5 = ?",answers:["12","10","11"],correctAnswer:"11"},
+{question:"10 - 3 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"5 + 7 = ?",answers:["11","12","13"],correctAnswer:"12"},
+{question:"9 - 6 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"2 + 9 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"7 - 2 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"4 + 8 = ?",answers:["13","11","12"],correctAnswer:"12"},
+{question:"8 - 4 = ?",answers:["3","5","4"],correctAnswer:"4"}
+]
+},
+
+{
+category:"leicht",
+minAge:5,
+maxAge:7,
+title:"Leichtes Mathetraining 27",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"4 + 4 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"10 - 4 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"7 + 4 = ?",answers:["10","12","11"],correctAnswer:"11"},
+{question:"9 - 5 = ?",answers:["5","3","4"],correctAnswer:"4"},
+{question:"3 + 8 = ?",answers:["11","10","12"],correctAnswer:"11"},
+{question:"8 - 2 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"5 + 6 = ?",answers:["12","11","10"],correctAnswer:"11"},
+{question:"6 - 3 = ?",answers:["2","4","3"],correctAnswer:"3"},
+{question:"2 + 7 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"7 - 5 = ?",answers:["1","2","3"],correctAnswer:"2"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 1",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"22 + 15 = ?",answers:["36","37","38"],correctAnswer:"37"},
+{question:"48 - 16 = ?",answers:["31","32","33"],correctAnswer:"32"},
+{question:"34 + 22 = ?",answers:["55","57","56"],correctAnswer:"56"},
+{question:"67 - 25 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"13 + 46 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"72 - 31 = ?",answers:["42","40","41"],correctAnswer:"41"},
+{question:"25 + 33 = ?",answers:["57","58","59"],correctAnswer:"58"},
+{question:"54 - 22 = ?",answers:["31","33","32"],correctAnswer:"32"},
+{question:"41 + 27 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 2",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"31 + 28 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"75 - 32 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"24 + 45 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"66 - 24 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"18 + 51 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"83 - 41 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"36 + 23 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"57 - 15 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"42 + 36 = ?",answers:["77","78","79"],correctAnswer:"78"},
+{question:"64 - 21 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 3",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"15 + 42 = ?",answers:["58","57","56"],correctAnswer:"57"},
+{question:"81 - 39 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"33 + 26 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"74 - 31 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"27 + 41 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"69 - 27 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"44 + 15 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"56 - 13 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"71 - 29 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 1",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"22 + 15 = ?",answers:["36","37","38"],correctAnswer:"37"},
+{question:"48 - 16 = ?",answers:["31","32","33"],correctAnswer:"32"},
+{question:"34 + 22 = ?",answers:["55","57","56"],correctAnswer:"56"},
+{question:"67 - 25 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"13 + 46 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"72 - 31 = ?",answers:["42","40","41"],correctAnswer:"41"},
+{question:"25 + 33 = ?",answers:["57","58","59"],correctAnswer:"58"},
+{question:"54 - 22 = ?",answers:["31","33","32"],correctAnswer:"32"},
+{question:"41 + 27 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 2",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"31 + 28 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"75 - 32 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"24 + 45 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"66 - 24 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"18 + 51 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"83 - 41 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"36 + 23 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"57 - 15 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"42 + 36 = ?",answers:["77","78","79"],correctAnswer:"78"},
+{question:"64 - 21 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 3",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"15 + 42 = ?",answers:["58","57","56"],correctAnswer:"57"},
+{question:"81 - 39 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"33 + 26 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"74 - 31 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"27 + 41 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"69 - 27 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"44 + 15 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"56 - 13 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"71 - 29 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 4",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"28 + 34 = ?",answers:["61","62","63"],correctAnswer:"62"},
+{question:"91 - 48 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"26 + 37 = ?",answers:["62","64","63"],correctAnswer:"63"},
+{question:"68 - 25 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"17 + 52 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"84 - 41 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"39 + 20 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"76 - 34 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"45 + 24 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"62 - 20 = ?",answers:["43","41","42"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 5",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"14 + 45 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"25 + 43 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"79 - 37 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"31 + 28 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"73 - 31 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"46 + 22 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"54 - 12 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["70","68","69"],correctAnswer:"69"},
+{question:"61 - 18 = ?",answers:["44","42","43"],correctAnswer:"43"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 6",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"23 + 35 = ?",answers:["57","58","59"],correctAnswer:"58"},
+{question:"84 - 42 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"18 + 50 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"77 - 34 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"42 + 27 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"65 - 23 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"36 + 23 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"81 - 38 = ?",answers:["43","44","42"],correctAnswer:"43"},
+{question:"29 + 39 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["41","43","42"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 7",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"17 + 42 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"88 - 45 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"24 + 44 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"69 - 27 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"35 + 24 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"72 - 30 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"43 + 25 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"83 - 40 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"16 + 53 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"62 - 20 = ?",answers:["41","42","43"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 8",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"28 + 31 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"95 - 52 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"14 + 54 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"73 - 31 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"45 + 24 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"67 - 25 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"34 + 25 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"85 - 42 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"27 + 41 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"61 - 19 = ?",answers:["41","42","43"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 9",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"15 + 44 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"87 - 44 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"22 + 46 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"38 + 21 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"76 - 33 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"14 + 54 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"83 - 41 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"43 + 26 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"62 - 19 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 10",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"32 + 27 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"92 - 49 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"41 + 27 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"79 - 37 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"24 + 35 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"86 - 43 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"17 + 52 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"63 - 20 = ?",answers:["44","43","42"],correctAnswer:"43"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 11",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"26 + 33 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"81 - 38 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"45 + 23 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"18 + 41 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"85 - 42 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"37 + 31 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"24 + 45 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"72 - 29 = ?",answers:["44","42","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 12",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"34 + 25 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"90 - 47 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"68 - 26 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"13 + 46 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"76 - 33 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"42 + 26 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"61 - 19 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"27 + 42 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"84 - 41 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 13",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"15 + 44 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"87 - 45 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"36 + 32 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"73 - 30 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"48 + 11 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"23 + 45 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"51 + 18 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"71 - 28 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 14",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"38 + 21 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"79 - 36 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"14 + 54 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"62 - 20 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"25 + 34 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"86 - 43 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"41 + 27 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"63 - 20 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 15",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"22 + 37 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"83 - 40 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"53 + 15 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"69 - 27 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"45 + 14 = ?",answers:["60","59","58"],correctAnswer:"59"},
+{question:"91 - 48 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"32 + 36 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"62 - 20 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"17 + 52 = ?",answers:["70","68","69"],correctAnswer:"69"},
+{question:"81 - 38 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 16",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"24 + 35 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"43 + 25 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"18 + 41 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"85 - 42 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"61 - 19 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"27 + 42 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"84 - 41 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 17",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"31 + 28 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"76 - 33 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"45 + 23 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"14 + 45 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"88 - 45 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"37 + 31 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["70","68","69"],correctAnswer:"69"},
+{question:"72 - 29 = ?",answers:["44","42","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 18",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"38 + 21 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"91 - 48 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"53 + 15 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"68 - 26 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"13 + 46 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"23 + 45 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"61 - 19 = ?",answers:["41","42","43"],correctAnswer:"42"},
+{question:"51 + 18 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"74 - 31 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 19",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"26 + 33 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"79 - 36 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"42 + 26 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"62 - 20 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"17 + 42 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"86 - 43 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"32 + 36 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"24 + 45 = ?",answers:["70","69","68"],correctAnswer:"69"},
+{question:"81 - 38 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 20",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"22 + 37 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"87 - 44 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"41 + 27 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"45 + 14 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"83 - 40 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"74 - 32 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["70","68","69"],correctAnswer:"69"},
+{question:"72 - 29 = ?",answers:["42","43","44"],correctAnswer:"43"}
+]
+},
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 21",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"35 + 24 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"84 - 41 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"73 - 31 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"18 + 41 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"43 + 25 = ?",answers:["69","67","68"],correctAnswer:"68"},
+{question:"61 - 19 = ?",answers:["41","43","42"],correctAnswer:"42"},
+{question:"24 + 45 = ?",answers:["70","68","69"],correctAnswer:"69"},
+{question:"86 - 43 = ?",answers:["42","44","43"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 22",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"22 + 37 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"91 - 48 = ?",answers:["44","42","43"],correctAnswer:"43"},
+{question:"53 + 15 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"14 + 45 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"87 - 44 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"32 + 36 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"63 - 21 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"81 - 38 = ?",answers:["42","43","44"],correctAnswer:"43"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 23",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"38 + 21 = ?",answers:["58","59","60"],correctAnswer:"59"},
+{question:"79 - 36 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"42 + 26 = ?",answers:["69","68","67"],correctAnswer:"68"},
+{question:"62 - 20 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"13 + 46 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"83 - 40 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"23 + 45 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"61 - 18 = ?",answers:["42","44","43"],correctAnswer:"43"},
+{question:"51 + 18 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"74 - 32 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 24",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"26 + 33 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"85 - 42 = ?",answers:["44","43","42"],correctAnswer:"43"},
+{question:"41 + 27 = ?",answers:["67","69","68"],correctAnswer:"68"},
+{question:"68 - 26 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"17 + 42 = ?",answers:["60","58","59"],correctAnswer:"59"},
+{question:"88 - 45 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"52 + 16 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"63 - 20 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"24 + 45 = ?",answers:["68","70","69"],correctAnswer:"69"},
+{question:"81 - 39 = ?",answers:["43","42","41"],correctAnswer:"42"}
+]
+},
+
+{
+category:"mittel",
+minAge:5,
+maxAge:7,
+title:"Mittleres Mathetraining 25",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"31 + 28 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"76 - 33 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"45 + 23 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"73 - 31 = ?",answers:["43","41","42"],correctAnswer:"42"},
+{question:"18 + 41 = ?",answers:["58","60","59"],correctAnswer:"59"},
+{question:"82 - 39 = ?",answers:["42","43","44"],correctAnswer:"43"},
+{question:"37 + 31 = ?",answers:["67","68","69"],correctAnswer:"68"},
+{question:"64 - 22 = ?",answers:["43","42","41"],correctAnswer:"42"},
+{question:"16 + 53 = ?",answers:["68","69","70"],correctAnswer:"69"},
+{question:"84 - 41 = ?",answers:["42","44","43"],correctAnswer:"43"}
 ]
 },
 {
 category:"schwer",
-minAge:10,
-maxAge:14,
-title:"Schweres Mathe- und Logiktraining 34",
-text:"Löse die Aufgaben der Reihe nach. Es gibt normale Matheaufgaben und Text-/Logikaufgaben.",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 1",
+text:"Löse die Aufgaben der Reihe nach.",
 questions:[
-{question:"Lisa hat 14 Äpfel und gibt 13 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"22 × 7 = ?",answers:["153","155","154"],correctAnswer:"154"},
-{question:"23 + 9 = ?",answers:["32","31","33"],correctAnswer:"32"},
-{question:"Lisa hat 4 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["0","1","2"],correctAnswer:"1"},
-{question:"15 × 8 = ?",answers:["120","121","119"],correctAnswer:"120"},
-{question:"25 × 11 = ?",answers:["276","275","274"],correctAnswer:"275"},
-{question:"Lisa hat 5 Äpfel und gibt 3 an ihren Freund. Wie viele bleiben übrig?",answers:["3","1","2"],correctAnswer:"2"},
-{question:"8 - 11 = ?",answers:["-2","-3","-4"],correctAnswer:"-3"},
-{question:"30 × 9 = ?",answers:["271","270","269"],correctAnswer:"270"},
-{question:"Lisa hat 15 Äpfel und gibt 11 an ihren Freund. Wie viele bleiben übrig?",answers:["4","3","5"],correctAnswer:"4"},
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"72 ÷ 8 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"63 ÷ 9 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"7 × 8 = ?",answers:["55","57","56"],correctAnswer:"56"},
+{question:"54 ÷ 6 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","55","54"],correctAnswer:"54"},
+{question:"42 ÷ 7 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"8 × 8 = ?",answers:["62","66","64"],correctAnswer:"64"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"}
 ]
 },
-];
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 2",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"9 × 7 = ?",answers:["64","63","62"],correctAnswer:"63"},
+{question:"48 ÷ 6 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 × 6 = ?",answers:["47","48","49"],correctAnswer:"48"},
+{question:"72 ÷ 9 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"10 × 6 = ?",answers:["61","59","60"],correctAnswer:"60"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"45 ÷ 5 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 1",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"72 ÷ 8 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"63 ÷ 9 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"7 × 8 = ?",answers:["55","57","56"],correctAnswer:"56"},
+{question:"54 ÷ 6 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","55","54"],correctAnswer:"54"},
+{question:"42 ÷ 7 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"8 × 8 = ?",answers:["62","66","64"],correctAnswer:"64"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 2",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"9 × 7 = ?",answers:["64","63","62"],correctAnswer:"63"},
+{question:"48 ÷ 6 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 × 6 = ?",answers:["47","48","49"],correctAnswer:"48"},
+{question:"72 ÷ 9 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"10 × 6 = ?",answers:["61","59","60"],correctAnswer:"60"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"45 ÷ 5 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 3",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"63 ÷ 7 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"56 ÷ 7 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"8 × 9 = ?",answers:["74","70","72"],correctAnswer:"72"},
+{question:"36 ÷ 6 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"10 × 8 = ?",answers:["82","80","78"],correctAnswer:"80"},
+{question:"49 ÷ 7 = ?",answers:["8","6","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 4",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 7 = ?",answers:["40","44","42"],correctAnswer:"42"},
+{question:"72 ÷ 8 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"8 × 8 = ?",answers:["62","66","64"],correctAnswer:"64"},
+{question:"54 ÷ 9 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"9 × 5 = ?",answers:["46","45","44"],correctAnswer:"45"},
+{question:"64 ÷ 8 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["50","49","48"],correctAnswer:"49"},
+{question:"42 ÷ 6 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"10 × 7 = ?",answers:["71","69","70"],correctAnswer:"70"},
+{question:"27 ÷ 3 = ?",answers:["10","9","8"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 5",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 6 = ?",answers:["47","49","48"],correctAnswer:"48"},
+{question:"90 ÷ 10 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"35 ÷ 5 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"7 × 8 = ?",answers:["54","58","56"],correctAnswer:"56"},
+{question:"48 ÷ 8 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"10 × 9 = ?",answers:["88","92","90"],correctAnswer:"90"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 6 = ?",answers:["35","37","36"],correctAnswer:"36"},
+{question:"72 ÷ 9 = ?",answers:["9","8","7"],correctAnswer:"8"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 6",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"64 ÷ 8 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"9 × 8 = ?",answers:["70","74","72"],correctAnswer:"72"},
+{question:"45 ÷ 5 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"8 × 7 = ?",answers:["54","58","56"],correctAnswer:"56"},
+{question:"36 ÷ 6 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"10 × 8 = ?",answers:["82","80","78"],correctAnswer:"80"},
+{question:"63 ÷ 7 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 7",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 7 = ?",answers:["61","65","63"],correctAnswer:"63"},
+{question:"72 ÷ 8 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 × 9 = ?",answers:["74","70","72"],correctAnswer:"72"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"54 ÷ 6 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"42 ÷ 6 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"8 × 8 = ?",answers:["62","66","64"],correctAnswer:"64"},
+{question:"27 ÷ 3 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 8",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 9 = ?",answers:["79","83","81"],correctAnswer:"81"},
+{question:"48 ÷ 6 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 7 = ?",answers:["58","56","54"],correctAnswer:"56"},
+{question:"63 ÷ 9 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"10 × 6 = ?",answers:["58","62","60"],correctAnswer:"60"},
+{question:"72 ÷ 9 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["50","49","48"],correctAnswer:"49"},
+{question:"35 ÷ 5 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 9",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 9 = ?",answers:["70","74","72"],correctAnswer:"72"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 9 = ?",answers:["65","61","63"],correctAnswer:"63"},
+{question:"56 ÷ 8 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"9 × 6 = ?",answers:["52","56","54"],correctAnswer:"54"},
+{question:"45 ÷ 5 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 7 = ?",answers:["44","42","40"],correctAnswer:"42"},
+{question:"36 ÷ 4 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"10 × 9 = ?",answers:["92","90","88"],correctAnswer:"90"},
+{question:"49 ÷ 7 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 10",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 7 = ?",answers:["50","48","49"],correctAnswer:"49"},
+{question:"72 ÷ 8 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 × 8 = ?",answers:["66","62","64"],correctAnswer:"64"},
+{question:"54 ÷ 9 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"9 × 8 = ?",answers:["74","70","72"],correctAnswer:"72"},
+{question:"81 ÷ 9 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 7 = ?",answers:["69","71","70"],correctAnswer:"70"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"6 × 9 = ?",answers:["52","56","54"],correctAnswer:"54"},
+{question:"63 ÷ 7 = ?",answers:["10","9","8"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 11",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"72 ÷ 9 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"45 ÷ 5 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"10 × 8 = ?",answers:["78","80","82"],correctAnswer:"80"},
+{question:"54 ÷ 6 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"63 ÷ 7 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 12",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 6 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"42 ÷ 6 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"36 ÷ 4 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"49 ÷ 7 = ?",answers:["8","6","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 13",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"72 ÷ 8 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"8 × 9 = ?",answers:["70","74","72"],correctAnswer:"72"},
+{question:"54 ÷ 9 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"9 × 6 = ?",answers:["52","56","54"],correctAnswer:"54"},
+{question:"63 ÷ 9 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"8 × 7 = ?",answers:["58","54","56"],correctAnswer:"56"},
+{question:"45 ÷ 5 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 7 = ?",answers:["71","70","69"],correctAnswer:"70"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 14",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 8 = ?",answers:["50","48","46"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"48 ÷ 6 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"35 ÷ 5 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"72 ÷ 9 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"6 × 9 = ?",answers:["55","54","53"],correctAnswer:"54"},
+{question:"42 ÷ 7 = ?",answers:["5","7","6"],correctAnswer:"6"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 15",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"10 × 8 = ?",answers:["82","78","80"],correctAnswer:"80"},
+{question:"64 ÷ 8 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 8 = ?",answers:["74","72","70"],correctAnswer:"72"},
+{question:"45 ÷ 5 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 6 = ?",answers:["40","44","42"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"54 ÷ 6 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 16",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"56 ÷ 8 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"45 ÷ 9 = ?",answers:["4","5","6"],correctAnswer:"5"},
+{question:"8 × 6 = ?",answers:["47","48","49"],correctAnswer:"48"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"42 ÷ 6 = ?",answers:["6","7","8"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 17",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"63 ÷ 7 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"54 ÷ 9 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"48 ÷ 8 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"9 × 5 = ?",answers:["44","45","46"],correctAnswer:"45"},
+{question:"35 ÷ 7 = ?",answers:["4","5","6"],correctAnswer:"5"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 18",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"36 ÷ 6 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"72 ÷ 8 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"40 ÷ 5 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"27 ÷ 3 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 19",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"49 ÷ 7 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"60 ÷ 10 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"5 × 9 = ?",answers:["44","45","46"],correctAnswer:"45"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"10 × 8 = ?",answers:["78","80","82"],correctAnswer:"80"},
+{question:"54 ÷ 6 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 20",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 6 = ?",answers:["35","36","37"],correctAnswer:"36"},
+{question:"80 ÷ 10 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"45 ÷ 5 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"8 × 5 = ?",answers:["38","40","42"],correctAnswer:"40"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 7 = ?",answers:["62","63","64"],correctAnswer:"63"},
+{question:"56 ÷ 8 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 21",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"63 ÷ 9 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"72 ÷ 8 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"42 ÷ 6 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"10 × 8 = ?",answers:["78","80","82"],correctAnswer:"80"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"45 ÷ 5 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 22",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"54 ÷ 6 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"36 ÷ 4 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"49 ÷ 7 = ?",answers:["6","7","8"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 23",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"48 ÷ 6 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"56 ÷ 8 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"35 ÷ 5 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 24",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"63 ÷ 7 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"8 × 6 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"45 ÷ 9 = ?",answers:["4","5","6"],correctAnswer:"5"},
+{question:"7 × 8 = ?",answers:["55","56","57"],correctAnswer:"56"},
+{question:"54 ÷ 9 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"72 ÷ 8 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 25",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"36 ÷ 6 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"10 × 8 = ?",answers:["78","80","82"],correctAnswer:"80"},
+{question:"49 ÷ 7 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"54 ÷ 6 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 26",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 4 = ?",answers:["30","32","34"],correctAnswer:"32"},
+{question:"42 ÷ 6 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"9 × 5 = ?",answers:["43","45","47"],correctAnswer:"45"},
+{question:"64 ÷ 8 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"36 ÷ 4 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"10 × 5 = ?",answers:["48","50","52"],correctAnswer:"50"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"45 ÷ 9 = ?",answers:["6","4","5"],correctAnswer:"5"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 27",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 4 = ?",answers:["34","36","38"],correctAnswer:"36"},
+{question:"72 ÷ 8 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"54 ÷ 6 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"63 ÷ 7 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"5 × 8 = ?",answers:["38","40","42"],correctAnswer:"40"},
+{question:"27 ÷ 3 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"81 ÷ 9 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 28",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"48 ÷ 6 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"35 ÷ 5 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"6 × 6 = ?",answers:["35","36","37"],correctAnswer:"36"},
+{question:"90 ÷ 10 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 29",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 5 = ?",answers:["38","40","42"],correctAnswer:"40"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"45 ÷ 5 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"54 ÷ 9 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"36 ÷ 6 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"49 ÷ 7 = ?",answers:["6","7","8"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 30",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"72 ÷ 9 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"63 ÷ 9 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"42 ÷ 6 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 6 = ?",answers:["47","48","49"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 31",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"48 ÷ 8 = ?",answers:["5","7","6"],correctAnswer:"6"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"63 ÷ 7 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"54 ÷ 6 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"45 ÷ 9 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"10 × 8 = ?",answers:["78","80","82"],correctAnswer:"80"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 32",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"72 ÷ 8 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 5 = ?",answers:["43","45","47"],correctAnswer:"45"},
+{question:"36 ÷ 6 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"35 ÷ 5 = ?",answers:["8","6","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 33",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"64 ÷ 8 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"9 × 8 = ?",answers:["74","70","72"],correctAnswer:"72"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 6 = ?",answers:["46","50","48"],correctAnswer:"48"},
+{question:"45 ÷ 5 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","55","54"],correctAnswer:"54"},
+{question:"27 ÷ 3 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"49 ÷ 7 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 34",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","58","56"],correctAnswer:"56"},
+{question:"90 ÷ 10 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"7 × 6 = ?",answers:["44","42","40"],correctAnswer:"42"},
+{question:"63 ÷ 9 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"48 ÷ 6 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 6 = ?",answers:["35","36","37"],correctAnswer:"36"},
+{question:"54 ÷ 9 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"42 ÷ 6 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 35",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"72 ÷ 9 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"56 ÷ 8 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"36 ÷ 4 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 8 = ?",answers:["82","78","80"],correctAnswer:"80"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["50","48","46"],correctAnswer:"48"},
+{question:"45 ÷ 5 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 36",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"63 ÷ 7 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"54 ÷ 6 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 8 = ?",answers:["70","74","72"],correctAnswer:"72"},
+{question:"48 ÷ 8 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"81 ÷ 9 = ?",answers:["8","9","10"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 37",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"72 ÷ 8 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"45 ÷ 5 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"35 ÷ 7 = ?",answers:["4","5","6"],correctAnswer:"5"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"64 ÷ 8 = ?",answers:["9","8","7"],correctAnswer:"8"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 38",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 8 = ?",answers:["54","58","56"],correctAnswer:"56"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"63 ÷ 9 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"36 ÷ 6 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"54 ÷ 9 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"6 × 9 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"42 ÷ 6 = ?",answers:["8","6","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 39",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 6 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"56 ÷ 7 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"9 × 8 = ?",answers:["74","72","70"],correctAnswer:"72"},
+{question:"45 ÷ 9 = ?",answers:["6","4","5"],correctAnswer:"5"},
+{question:"6 × 7 = ?",answers:["44","42","40"],correctAnswer:"42"},
+{question:"64 ÷ 8 = ?",answers:["9","8","7"],correctAnswer:"8"},
+{question:"10 × 8 = ?",answers:["82","80","78"],correctAnswer:"80"},
+{question:"49 ÷ 7 = ?",answers:["6","8","7"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 40",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"48 ÷ 6 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"8 × 7 = ?",answers:["58","56","54"],correctAnswer:"56"},
+{question:"90 ÷ 10 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 6 = ?",answers:["44","42","40"],correctAnswer:"42"},
+{question:"63 ÷ 7 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"10 × 6 = ?",answers:["62","60","58"],correctAnswer:"60"},
+{question:"54 ÷ 6 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["50","48","46"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 41",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"64 ÷ 8 = ?",answers:["7","9","8"],correctAnswer:"8"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"45 ÷ 5 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"72 ÷ 8 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 7 = ?",answers:["69","70","71"],correctAnswer:"70"},
+{question:"42 ÷ 7 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"9 × 8 = ?",answers:["70","74","72"],correctAnswer:"72"},
+{question:"54 ÷ 9 = ?",answers:["5","7","6"],correctAnswer:"6"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 42",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 6 = ?",answers:["46","50","48"],correctAnswer:"48"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"56 ÷ 7 = ?",answers:["9","7","8"],correctAnswer:"8"},
+{question:"9 × 7 = ?",answers:["61","65","63"],correctAnswer:"63"},
+{question:"36 ÷ 4 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"10 × 8 = ?",answers:["82","78","80"],correctAnswer:"80"},
+{question:"63 ÷ 9 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"48 ÷ 6 = ?",answers:["7","9","8"],correctAnswer:"8"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 43",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"49 ÷ 7 = ?",answers:["8","6","7"],correctAnswer:"7"},
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["50","49","48"],correctAnswer:"49"},
+{question:"45 ÷ 9 = ?",answers:["6","5","4"],correctAnswer:"5"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"54 ÷ 6 = ?",answers:["8","9","10"],correctAnswer:"9"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"35 ÷ 5 = ?",answers:["8","7","6"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 44",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","58","56"],correctAnswer:"56"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"42 ÷ 6 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"10 × 6 = ?",answers:["58","60","62"],correctAnswer:"60"},
+{question:"56 ÷ 8 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"6 × 9 = ?",answers:["55","53","54"],correctAnswer:"54"},
+{question:"27 ÷ 3 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 45",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"90 ÷ 10 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"8 × 8 = ?",answers:["66","62","64"],correctAnswer:"64"},
+{question:"63 ÷ 7 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"9 × 7 = ?",answers:["65","61","63"],correctAnswer:"63"},
+{question:"48 ÷ 8 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"54 ÷ 9 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"6 × 7 = ?",answers:["44","40","42"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["10","8","9"],correctAnswer:"9"}
+]
+},
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 46",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 8 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"7 × 7 = ?",answers:["48","49","50"],correctAnswer:"49"},
+{question:"72 ÷ 8 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"45 ÷ 5 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 8 = ?",answers:["82","78","80"],correctAnswer:"80"},
+{question:"63 ÷ 9 = ?",answers:["6","8","7"],correctAnswer:"7"},
+{question:"8 × 6 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"36 ÷ 4 = ?",answers:["8","10","9"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 47",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"42 ÷ 7 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"48 ÷ 6 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"54 ÷ 6 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"49 ÷ 7 = ?",answers:["8","7","6"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 48",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"7 × 9 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"64 ÷ 8 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"8 × 8 = ?",answers:["62","64","66"],correctAnswer:"64"},
+{question:"35 ÷ 5 = ?",answers:["6","7","8"],correctAnswer:"7"},
+{question:"9 × 6 = ?",answers:["52","54","56"],correctAnswer:"54"},
+{question:"72 ÷ 9 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"10 × 7 = ?",answers:["68","70","72"],correctAnswer:"70"},
+{question:"56 ÷ 8 = ?",answers:["8","7","6"],correctAnswer:"7"},
+{question:"6 × 7 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 49",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"8 × 7 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"90 ÷ 10 = ?",answers:["10","8","9"],correctAnswer:"9"},
+{question:"9 × 9 = ?",answers:["79","81","83"],correctAnswer:"81"},
+{question:"63 ÷ 7 = ?",answers:["8","10","9"],correctAnswer:"9"},
+{question:"7 × 6 = ?",answers:["40","42","44"],correctAnswer:"42"},
+{question:"45 ÷ 9 = ?",answers:["4","6","5"],correctAnswer:"5"},
+{question:"10 × 8 = ?",answers:["82","80","78"],correctAnswer:"80"},
+{question:"54 ÷ 9 = ?",answers:["7","5","6"],correctAnswer:"6"},
+{question:"6 × 8 = ?",answers:["46","48","50"],correctAnswer:"48"},
+{question:"42 ÷ 6 = ?",answers:["6","7","8"],correctAnswer:"7"}
+]
+},
+
+{
+category:"schwer",
+minAge:5,
+maxAge:7,
+title:"Schweres Mathetraining 50",
+text:"Löse die Aufgaben der Reihe nach.",
+questions:[
+{question:"9 × 7 = ?",answers:["61","63","65"],correctAnswer:"63"},
+{question:"48 ÷ 8 = ?",answers:["5","6","7"],correctAnswer:"6"},
+{question:"8 × 9 = ?",answers:["70","72","74"],correctAnswer:"72"},
+{question:"81 ÷ 9 = ?",answers:["10","9","8"],correctAnswer:"9"},
+{question:"7 × 8 = ?",answers:["54","56","58"],correctAnswer:"56"},
+{question:"36 ÷ 6 = ?",answers:["7","6","5"],correctAnswer:"6"},
+{question:"10 × 9 = ?",answers:["88","90","92"],correctAnswer:"90"},
+{question:"56 ÷ 7 = ?",answers:["7","8","9"],correctAnswer:"8"},
+{question:"6 × 9 = ?",answers:["53","54","55"],correctAnswer:"54"},
+{question:"64 ÷ 8 = ?",answers:["7","9","8"],correctAnswer:"8"}
+]
+}]
