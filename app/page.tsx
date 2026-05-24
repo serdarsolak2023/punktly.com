@@ -5319,7 +5319,7 @@ task.status==="wartet"
 <div className="mt-4 flex gap-2">
 
 <button
-onClick={()=>approveTask(task.id)}
+onClick={()=> approveTask(task)}
 className="flex-1 rounded-[1rem] bg-green-300 py-2 font-black text-green-900"
 >
 ✅ Bestätigen
