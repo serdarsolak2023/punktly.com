@@ -628,6 +628,7 @@ export default function PunktlyRoleSplit() {
   const [isCheckingPaid, setIsCheckingPaid] = useState(false);
   const [area, setArea] = useState<Area>("start");
   const [childView, setChildView] = useState<ChildView>("home");
+  const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
   const [parentView, setParentView] = useState<ParentView>("dashboard");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
@@ -4655,46 +4656,119 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
   </section>
 )}
-              {childView === "tasks" && (
-                <Panel title="✅ Deine Aufgaben">
-                  <div className="grid gap-3">
-                    {childTasks.map(task => (
-                      <div key={task.id} className="rounded-[1.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_25px_70px_rgba(14,165,233,.18)]">
-                        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                          <div><h3 className="text-xl font-black text-sky-950">{task.title}</h3>
-    
-    <p className="font-bold text-sky-700">{task.day} · {task.repeat} · +{task.coins} Coins · +{task.xp} XP</p></div>
-                          <StatusBadge status={task.status} />
-                        </div>
+{childView === "tasks" && (
+<Panel title="✅ Deine Aufgaben">
 
-<div className="flex flex-col gap-2">
-  {task.status === "offen" && (
-    <button
-      type="button"
-      onClick={() => submitTask(task.id)}
-      className="rounded-[1.3rem] bg-orange-200 px-4 py-2 font-black text-orange-900"
-    >
-      🔔 Bitte erledigen
-    </button>
-  )}
+<div className="mb-5 flex flex-wrap gap-2">
 
-  {task.status === "wartet" && (
-    <p className="rounded-[1.3rem] bg-yellow-100 px-4 py-2 text-center font-black text-yellow-800">
-      ⏳ Wartet auf Elternbestätigung
-    </p>
-  )}
+{["alle","offen","wartet","erledigt"].map(status=>(
+<button
+key={status}
+onClick={()=>setTaskFilter(status as any)}
+className={`rounded-full px-4 py-2 font-black ${
+taskFilter===status
+? "bg-sky-500 text-white"
+: "bg-slate-100 text-slate-700"
+}`}
+>
+{status==="alle" && "📋 Alle"}
+{status==="offen" && "🟢 Offen"}
+{status==="wartet" && "⏳ Wartet"}
+{status==="erledigt" && "✅ Erledigt"}
+</button>
+))}
 
-  {task.status === "erledigt" && (
-    <p className="rounded-[1.3rem] bg-green-100 px-4 py-2 text-center font-black text-green-800">
-      ✅ Erledigt
-    </p>
-  )}
 </div>
-                      </div>
-                    ))}
-                  </div>
-                </Panel>
-              )}
+
+{[
+{
+title:"🟢 Offene Aufgaben",
+status:"offen"
+},
+{
+title:"⏳ Wartet",
+status:"wartet"
+},
+{
+title:"✅ Erledigt",
+status:"erledigt"
+}
+]
+.filter(group=>taskFilter==="alle"||group.status===taskFilter)
+.map(group=>{
+
+const groupTasks=
+childTasks.filter(
+t=>t.status===group.status
+);
+
+if(groupTasks.length===0)
+return null;
+
+return(
+
+<div key={group.status} className="mb-8">
+
+<h3 className="mb-4 text-xl font-black text-sky-950">
+{group.title}
+</h3>
+
+<div className="grid grid-cols-2 gap-3">
+
+{groupTasks.map(task=>(
+
+<div
+key={task.id}
+className="rounded-[1.5rem] border-2 border-white bg-white p-3 shadow-md"
+>
+
+<h3 className="line-clamp-2 text-sm font-black text-sky-950">
+{task.title}
+</h3>
+
+<p className="mt-1 text-xs font-bold text-sky-700">
+🪙 {task.coins}
+</p>
+
+<p className="text-xs text-slate-500">
+{task.day}
+</p>
+
+{task.status==="offen" && (
+<button
+onClick={() => submitTask(task.id)}
+className="mt-3 w-full rounded-[1rem] bg-orange-200 py-2 text-xs font-black"
+>
+🔔 Erledigt
+</button>
+)}
+
+{task.status==="wartet" && (
+<p className="mt-3 rounded-[1rem] bg-yellow-100 py-2 text-center text-xs font-black text-yellow-800">
+⏳ Wartet
+</p>
+)}
+
+{task.status==="erledigt" && (
+<p className="mt-3 rounded-[1rem] bg-green-100 py-2 text-center text-xs font-black text-green-800">
+✅ Erledigt
+</p>
+)}
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+);
+
+})}
+
+</Panel>
+)}
               {childView === "chests" && (
                 <Panel title="🎁 Schatzkisten">
                   <p className="mb-4 font-bold text-sky-700">
