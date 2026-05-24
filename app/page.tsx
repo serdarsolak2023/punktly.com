@@ -676,6 +676,7 @@ export default function PunktlyRoleSplit() {
   const [familyDataLoadedForUid, setFamilyDataLoadedForUid] = useState("");
   const [resetCoinsValue, setResetCoinsValue] = useState(0);
   const [coinsTargetChild, setCoinsTargetChild] = useState("all");
+  const [showCoinResetModal, setShowCoinResetModal] = useState(false);
 
   const [coinsForOneCent, setCoinsForOneCent] = useState(100);
 
@@ -1196,11 +1197,7 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
     celebrate("Aufgabe abgelehnt.");
   }
 async function resetAllChildrenCoins() {
-  const confirmed = window.confirm(
-    `Wirklich alle Kinder-Coins auf ${resetCoinsValue} setzen?`
-  );
 
-  if (!confirmed) return;
 
   const newCoins = Number(resetCoinsValue || 0);
 
@@ -2528,7 +2525,7 @@ if (
 ) {
 
   celebrate(
-    `⏰ Zeit vorbei!\n\n${mathStep}/10 Aufgaben geschafft.\nKeine Belohnung erhalten.`
+    `⏰ Zeit vorbei!\n\n${mathStep}/10 Aufgaben geschafft.\nKeine Coins erhalten.`
   );
 
   setActiveLearningTask(null);
@@ -5926,7 +5923,7 @@ const isToday = day === todayShort;
 
   <button
     type="button"
-    onClick={resetAllChildrenCoins}
+    onClick={() => setShowCoinResetModal(true)}
     className="mt-3 w-full rounded-[1.5rem] bg-yellow-400 px-4 py-4 font-black text-yellow-950 shadow-md"
   >
     🧹 Coins auf {resetCoinsValue} setzen
@@ -6361,6 +6358,54 @@ setNumberKeypadSetter(() =>
     </div>
 
   </div>
+)}
+{showCoinResetModal && (
+
+<div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+
+<div className="w-[92%] max-w-md rounded-[2rem] bg-white p-6 shadow-2xl">
+
+<h2 className="text-2xl font-black text-sky-950">
+🪙 Coins ändern
+</h2>
+
+<p className="mt-4 text-lg font-bold text-slate-700">
+
+{coinsTargetChild==="all"
+? `Alle Kinder wirklich auf ${resetCoinsValue} Coins setzen?`
+: `Dieses Kind wirklich auf ${resetCoinsValue} Coins setzen?`
+}
+
+</p>
+
+<div className="mt-6 grid grid-cols-2 gap-3">
+
+<button
+onClick={() => setShowCoinResetModal(false)}
+className="rounded-[1.4rem] bg-slate-100 py-3 font-black"
+>
+❌ Abbrechen
+</button>
+
+<button
+onClick={async()=>{
+
+await resetAllChildrenCoins();
+
+setShowCoinResetModal(false);
+
+}}
+className="rounded-[1.4rem] bg-gradient-to-r from-yellow-400 via-orange-300 to-amber-400 py-3 font-black text-white"
+>
+✅ Bestätigen
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 )}
     </main>
     
