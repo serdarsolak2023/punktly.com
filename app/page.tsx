@@ -4719,7 +4719,17 @@ return(
 
 <div
 key={task.id}
-className="rounded-[1.5rem] border-2 border-white bg-white p-3 shadow-md"
+className={`rounded-[1.5rem] border-2 p-3 shadow-md
+${
+task.status==="offen"
+? "bg-orange-50 border-orange-100"
+
+: task.status==="wartet"
+? "bg-yellow-50 border-yellow-100"
+
+: "bg-green-50 border-green-100"
+}
+`}
 >
 
 <h3 className="line-clamp-2 text-sm font-black text-sky-950">
@@ -4737,20 +4747,19 @@ className="rounded-[1.5rem] border-2 border-white bg-white p-3 shadow-md"
 {task.status==="offen" && (
 <button
 onClick={() => submitTask(task.id)}
-className="mt-3 w-full rounded-[1rem] bg-orange-200 py-2 text-xs font-black"
->
-🔔 Erledigt
+className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900">
+🔔 Offen
 </button>
 )}
 
 {task.status==="wartet" && (
-<p className="mt-3 rounded-[1rem] bg-yellow-100 py-2 text-center text-xs font-black text-yellow-800">
+<p className="mt-3 rounded-[1rem] bg-yellow-200 py-2 text-center text-xs font-black text-yellow-900">
 ⏳ Wartet
 </p>
 )}
 
 {task.status==="erledigt" && (
-<p className="mt-3 rounded-[1rem] bg-green-100 py-2 text-center text-xs font-black text-green-800">
+<p className="mt-3 rounded-[1rem] bg-green-200 py-2 text-center text-xs font-black text-green-900">
 ✅ Erledigt
 </p>
 )}
