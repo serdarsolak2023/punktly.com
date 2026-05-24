@@ -57,7 +57,17 @@ favoriteColor?: string;
 favoriteAnimal?: string;
 };
 
-type Task = { id: number; childId: number | "all"; title: string; coins: number; xp: number; repeat: Repeat; status: Status; day: string; };
+type Task = {
+  id: number;
+  childId: number | "all";
+  title: string;
+  coins: number;
+  xp: number;
+  repeat: Repeat;
+  status: Status;
+  day: string;
+  completedAt?: number;
+};
 type Reward = { id: number; title: string; coins: number; icon: string; status: RewardStatus; };
 type ShopItem = { id: number; title: string; price: number; icon: string; ownedBy: number[]; category?: "Haustier" | "Avatar" | "Hintergrund" | "Booster" | "Spezial" | "Limited"; rarity?: "Gewöhnlich" | "Selten" | "Episch" | "Legendär"; description?: string; daily?: boolean; limited?: boolean; };
 type Challenge = { id: number; title: string; goal: number; current: number; reward: number; done: boolean; };
@@ -1078,7 +1088,11 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
   } 
 
   function approveTask(task: Task) {
-    const approvedTask: Task = { ...task, status: "erledigt" };
+    const approvedTask: Task = {
+  ...task,
+  status: "erledigt",
+  completedAt: Date.now(),
+};
 
     setTasks(prev => prev.map(t => t.id === task.id ? approvedTask : t));
     saveTaskNow(approvedTask);
@@ -5236,8 +5250,6 @@ parentTaskFilter===status
 ))}
 
 </div>
-
-
 {[
 {
 title:"🔔 Zu bestätigen",
@@ -5259,10 +5271,20 @@ group.status===parentTaskFilter
 )
 .map(group=>{
 
-const filteredTasks=
-tasks.filter(
-t=>t.status===group.status
-);
+const filteredTasks = tasks.filter(t => {
+  if (t.status !== group.status) return false;
+
+  if (t.status === "erledigt") {
+    if (!t.completedAt) return true;
+
+    return (
+      Date.now() - t.completedAt <=
+      48 * 60 * 60 * 1000
+    );
+  }
+
+  return true;
+});
 
 if(!filteredTasks.length)
 return null;
