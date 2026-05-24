@@ -639,8 +639,10 @@ export default function PunktlyRoleSplit() {
   const [area, setArea] = useState<Area>("start");
   const [childView, setChildView] = useState<ChildView>("home");
   const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
+  const [learningFilter, setLearningFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
   const [parentView, setParentView] = useState<ParentView>("dashboard");
   const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt">("alle");
+  const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
   const [savedParentPin, setSavedParentPin] = useState("");
@@ -4611,65 +4613,138 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 </section>
               )}
 {childView === "learning" && (
-  <section className="grid gap-5">
+<section className="grid gap-5">
 
-    <Panel title="🧠 Meine Lernaufgaben">
+<Panel title="🧠 Meine Lernaufgaben">
 
-      <div className="grid gap-4">
+<div className="mb-5 flex flex-wrap gap-2">
 
-        {learningTasks
-          .filter(task => task.childId === child.id)
-          .map(task => (
-            <div
-              key={task.id}
-              className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-5 shadow-xl"
-            >
+{["alle","offen","wartet","erledigt"].map(status=>(
 
-              <div className="flex items-center justify-between gap-4">
+<button
+key={status}
+onClick={()=>setLearningFilter(status as any)}
+className={`rounded-full px-4 py-2 font-black ${
+learningFilter===status
+? "bg-sky-500 text-white"
+: "bg-slate-100 text-slate-700"
+}`}
+>
 
-                <div>
-                  <p className="text-sm font-black text-sky-600">
-                    {task.category}
-                  </p>
+{status==="alle" && "📋 Alle"}
+{status==="offen" && "🟠 Offen"}
+{status==="wartet" && "🟡 Wartet"}
+{status==="erledigt" && "🟢 Erledigt"}
 
-                  <h3 className="text-2xl font-black text-sky-950">
-                    {task.title}
-                  </h3>
+</button>
 
-                  <p className="mt-1 font-black text-amber-600">
-                    🪙 {task.coins} Coins
-                  </p>
-                </div>
-{task.status === "wartet" && (
-  <p className="mt-3 rounded-full bg-yellow-100 px-4 py-2 text-center font-black text-yellow-800">
-    ⏳ Wartet auf Elternbestätigung
-  </p>
+))}
+
+</div>
+
+{[
+{title:"🟠 Offene Lernaufgaben",status:"offen"},
+{title:"🟡 Wartet",status:"wartet"},
+{title:"🟢 Erledigt",status:"erledigt"}
+]
+.filter(
+group =>
+learningFilter==="alle" ||
+group.status===learningFilter
+)
+.map(group=>{
+
+const groupTasks=
+learningTasks.filter(
+task =>
+task.childId===child.id &&
+task.status===group.status
+);
+
+if(groupTasks.length===0) return null;
+
+return (
+
+<div key={group.status} className="mb-8">
+
+<h3 className="mb-4 text-xl font-black text-sky-950">
+{group.title}
+</h3>
+
+<div className="grid grid-cols-2 gap-3">
+
+{groupTasks.map(task=>(
+
+<div
+key={task.id}
+className={`rounded-[1.5rem] border-2 p-3 shadow-md
+
+${
+task.status==="offen"
+? "bg-orange-50 border-orange-100"
+
+: task.status==="wartet"
+? "bg-yellow-50 border-yellow-100"
+
+: "bg-green-50 border-green-100"
+}
+`}
+>
+
+<p className="text-xs font-black text-sky-600">
+{task.category}
+</p>
+
+<h3 className="line-clamp-2 text-sm font-black text-sky-950">
+{task.title}
+</h3>
+
+<p className="mt-2 text-xs font-black text-amber-600">
+🪙 {task.coins}
+</p>
+
+{task.status==="offen" && (
+
+<button
+onClick={()=>startLearningSession(task)}
+className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
+>
+📚 Offen
+</button>
+
 )}
 
-{task.status === "erledigt" && (
-  <p className="mt-3 rounded-full bg-green-100 px-4 py-2 text-center font-black text-green-800">
-    ✅ Erledigt
-  </p>
+{task.status==="wartet" && (
+
+<p className="mt-3 rounded-[1rem] bg-yellow-200 py-2 text-center text-xs font-black text-yellow-900">
+⏳ Wartet
+</p>
+
 )}
 
-{task.status === "offen" && (
-  <button
-    onClick={() => startLearningSession(task)}
-    className="rounded-[1.5rem] bg-gradient-to-r from-lime-200 to-green-200 px-5 py-3 font-black text-green-900 shadow-lg"
-  >
-    📚 Starten
-  </button>
+{task.status==="erledigt" && (
+
+<p className="mt-3 rounded-[1rem] bg-green-200 py-2 text-center text-xs font-black text-green-900">
+✅ Erledigt
+</p>
+
 )}
-              </div>
 
-            </div>
-          ))}
+</div>
 
-      </div>
+))}
 
-    </Panel>
+</div>
 
-  </section>
+</div>
+
+)
+
+})}
+
+</Panel>
+
+</section>
 )}
 {childView === "tasks" && (
 <Panel title="✅ Deine Aufgaben">
