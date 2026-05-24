@@ -4657,9 +4657,8 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   </section>
 )}
 {childView === "tasks" && (
-<Panel title="✅ Deine Aufgaben">
-
-<div className="mb-5 flex flex-wrap gap-2">
+  <Panel title="✅ Deine Aufgaben">
+    <div className="mb-5 flex flex-wrap gap-2 bg-gray-50">
 
 {["alle","offen","wartet","erledigt"].map(status=>(
 <button
