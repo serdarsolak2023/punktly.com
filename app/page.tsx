@@ -4762,7 +4762,7 @@ taskFilter===status
 }`}
 >
 {status==="alle" && "📋 Alle"}
-{status==="offen" && "🟢 Offen"}
+{status==="offen" && "🟠 Offen"}
 {status==="wartet" && "⏳ Wartet"}
 {status==="erledigt" && "✅ Erledigt"}
 </button>
@@ -4772,7 +4772,7 @@ taskFilter===status
 
 {[
 {
-title:"🟢 Offene Aufgaben",
+title:"🟠 Offene Aufgaben",
 status:"offen"
 },
 {
@@ -5002,11 +5002,8 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                 </section>
               )}
 {parentView === "learning" && (
-  
   <Panel title="🧠 Lernmodus">
-
     <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-6 shadow-xl">
-      
       <h2 className="text-3xl font-black text-sky-950">
         📚 Lernaufgaben
       </h2>
@@ -5016,138 +5013,191 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
       </p>
 
       <div className="mt-6 grid gap-4">
+        <AppInput
+          value={newLearningTitle}
+          onChange={setNewLearningTitle}
+          placeholder="📖 Lernaufgabe eintragen"
+        />
 
-<AppInput
-  value={newLearningTitle}
-  onChange={setNewLearningTitle}
-  placeholder="📖 Lernaufgabe eintragen"
-/>
+        <NumberKeypadField
+          label="🪙 Coins"
+          value={Number(newLearningCoins) || 0}
+          setter={(value) => setNewLearningCoins(String(value))}
+          showEuro
+        />
 
-<NumberKeypadField
-  label="🪙 Coins"
-  value={Number(newLearningCoins) || 0}
-  setter={(value) => setNewLearningCoins(String(value))}
-  showEuro
-/>
+        <NumberKeypadField
+          label="⏱️ Dauer in Minuten"
+          value={newLearningMinutes}
+          setter={(value) => setNewLearningMinutes(Number(value) || 0)}
+        />
 
-<NumberKeypadField
-  label="⏱️ Dauer in Minuten"
-  value={newLearningMinutes}
-  setter={(value) => setNewLearningMinutes(Number(value) || 0)}
-/>
-<select
-  value={newLearningCategory}
-  onChange={(e) => setNewLearningCategory(e.target.value)}
-  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
->
-  <option value="📚 Lesen">📚 Lesen</option>
-  <option value="➕ Mathe">➕ Mathe</option>
-  <option value="🇬🇧  Englisch">🇬🇧 Englisch</option>
-  
-</select>
         <select
-  value={newLearningLevel}
-  onChange={(e) => setNewLearningLevel(e.target.value as "leicht" | "mittel" | "schwer")}
-  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
->
-  <option value="leicht">🌱 Leicht</option>
-  <option value="mittel">🌼 Mittel</option>
-  <option value="schwer">🔥 Schwer</option>
-</select>
+          value={newLearningCategory}
+          onChange={(e) => setNewLearningCategory(e.target.value)}
+          className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+        >
+          <option value="📚 Lesen">📚 Lesen</option>
+          <option value="➕ Mathe">➕ Mathe</option>
+          <option value="🇬🇧  Englisch">🇬🇧 Englisch</option>
+        </select>
 
-<select
-  value={selectedChildId}
-  onChange={(e) => setSelectedChildId(Number(e.target.value))}
-  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
->
-  {children.map((kid) => (
-    <option key={kid.id} value={kid.id}>
-      👶 Für {kid.name}
-    </option>
-  ))}
-</select>
-<button
-  type="button"
-  onClick={() => {
-    setNewLearningTitle("");
-    setNewLearningCoins("");
-    setNewLearningMinutes(0);
-    setNewLearningCategory("📚 Lesen");
-    setNewLearningLevel("leicht");
-  }}
-  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
->
-  🗑️ Leeren
-</button>
-<button
-  onClick={saveLearningTask}
-  className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
->
-  {editingLearningTaskId ? "✏️ Lernaufgabe ändern" : "➕ Lernaufgabe hinzufügen"}
-</button>
-<div className="mt-6 grid gap-4">
+        <select
+          value={newLearningLevel}
+          onChange={(e) => setNewLearningLevel(e.target.value as "leicht" | "mittel" | "schwer")}
+          className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+        >
+          <option value="leicht">🌱 Leicht</option>
+          <option value="mittel">🌼 Mittel</option>
+          <option value="schwer">🔥 Schwer</option>
+        </select>
 
-  {learningTasks.map((task) => {
-    const kid = children.find(c => c.id === task.childId);
+        <select
+          value={selectedChildId}
+          onChange={(e) => setSelectedChildId(Number(e.target.value))}
+          className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+        >
+          {children.map((kid) => (
+            <option key={kid.id} value={kid.id}>
+              👶 Für {kid.name}
+            </option>
+          ))}
+        </select>
 
-    return (
-      <div
-        key={task.id}
-        className="rounded-[2rem] bg-white/90 p-5 shadow-xl"
-      >
+        <button
+          type="button"
+          onClick={() => {
+            setNewLearningTitle("");
+            setNewLearningCoins("");
+            setNewLearningMinutes(0);
+            setNewLearningCategory("📚 Lesen");
+            setNewLearningLevel("leicht");
+          }}
+          className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+        >
+          🗑️ Leeren
+        </button>
 
-        <div className="flex items-center justify-between gap-4">
+        <button
+          onClick={saveLearningTask}
+          className="rounded-[1.5rem] bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-500 px-6 py-4 text-xl font-black text-white shadow-xl"
+        >
+          {editingLearningTaskId ? "✏️ Lernaufgabe ändern" : "➕ Lernaufgabe hinzufügen"}
+        </button>
+      </div>
+    </div>
 
-          <div>
-            <p className="text-sm font-black text-sky-500">
-              {task.category}
-            </p>
+    <div className="mt-6 flex flex-wrap gap-2">
+      {["alle", "wartet", "offen", "erledigt"].map(status => (
+        <button
+          key={status}
+          onClick={() => setParentLearningFilter(status as any)}
+          className={`rounded-full px-4 py-2 font-black ${
+            parentLearningFilter === status
+              ? "bg-sky-500 text-white"
+              : "bg-slate-100 text-slate-700"
+          }`}
+        >
+          {status === "alle" && "📋 Alle"}
+          {status === "wartet" && "🔔 Zu bestätigen"}
+          {status === "offen" && "📝 Offen"}
+          {status === "erledigt" && "✅ Erledigt"}
+        </button>
+      ))}
+    </div>
 
-            <h3 className="text-2xl font-black text-sky-950">
-              {task.title}
+    {[
+      { title: "🔔 Zu bestätigen", status: "wartet" },
+      { title: "📝 Offene Lernaufgaben", status: "offen" },
+      { title: "✅ Erledigt", status: "erledigt" },
+    ]
+      .filter(group => parentLearningFilter === "alle" || group.status === parentLearningFilter)
+      .map(group => {
+        const filteredLearning = learningTasks.filter(t => t.status === group.status);
+
+        if (!filteredLearning.length) return null;
+
+        return (
+          <div key={group.status} className="mt-6">
+            <h3 className="mb-4 text-xl font-black text-sky-950">
+              {group.title}
             </h3>
 
-            <p className="mt-1 font-black text-amber-600">
-              🪙 {task.coins} Coins
-            </p>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {filteredLearning.map(task => {
+                const kid = children.find(c => c.id === task.childId);
 
-            <p className="mt-1 font-bold text-sky-700">
-              👶 {kid?.name || "Kind"}
-            </p>
+                return (
+                  <div
+                    key={task.id}
+                    className={`rounded-[1.5rem] border-2 p-4 shadow-md ${
+                      task.status === "wartet"
+                        ? "bg-yellow-50 border-yellow-200"
+                        : task.status === "offen"
+                        ? "bg-orange-50 border-orange-200"
+                        : "bg-green-50 border-green-200"
+                    }`}
+                  >
+                    <p className="text-sm font-black text-sky-700">
+                      {task.category}
+                    </p>
+
+                    <h3 className="line-clamp-2 text-lg font-black text-sky-950">
+                      {task.title}
+                    </h3>
+
+                    <p className="mt-2 font-bold text-amber-600">
+                      🪙 {task.coins} Coins
+                    </p>
+
+                    <p className="mt-1 font-bold text-sky-700">
+                      👶 {kid?.name || "Kind"}
+                    </p>
+
+                    {task.status === "wartet" && (
+                      <button
+                        type="button"
+                        onClick={() => approveLearningTask(task)}
+                        className="mt-4 w-full rounded-[1rem] bg-green-300 py-2 font-black text-green-900"
+                      >
+                        ✅ Eltern bestätigen
+                      </button>
+                    )}
+
+                    {task.status === "offen" && (
+                      <div className="mt-4 rounded-[1rem] bg-orange-200 py-2 text-center font-black text-orange-900">
+                        📝 Offen
+                      </div>
+                    )}
+
+                    {task.status === "erledigt" && (
+                      <div className="mt-4 rounded-[1rem] bg-green-200 py-2 text-center font-black text-green-900">
+                        ✅ Erledigt
+                      </div>
+                    )}
+
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      <button
+                        onClick={() => editLearningTask(task)}
+                        className="rounded-[1rem] bg-yellow-200 px-4 py-2 font-black text-yellow-900"
+                      >
+                        ✏️ Bearbeiten
+                      </button>
+
+                      <button
+                        onClick={() => deleteLearningTask(task.id)}
+                        className="rounded-[1rem] bg-red-300 px-4 py-2 font-black text-red-900"
+                      >
+                        🗑️ Löschen
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-
-          <div className="flex flex-col gap-2">
-
-            <button
-              onClick={() => editLearningTask(task)}
-              className="rounded-[1.3rem] bg-yellow-200 px-4 py-2 font-black text-yellow-900"
-            >
-              ✏️ Bearbeiten
-            </button>
-
-            <button
-              onClick={() => deleteLearningTask(task.id)}
-              className="rounded-[1.3rem] bg-red-300 px-4 py-2 font-black text-red-900"
-            >
-              🗑️ Löschen
-            </button>
-            {task.status === "wartet" && (
-            <button
-             type="button"
-             onClick={() => approveLearningTask(task)}
-             className="mt-4 w-full rounded-[1.3rem] bg-green-300 px-4 py-3 font-black text-green-900"
-             >
-           ✅ Eltern bestätigen
-            </button>
-)}
-          </div>
-        </div>
-      </div>
-    );
-  })}
-</div>
-     </div>
-    </div>
+        );
+      })}
   </Panel>
 )}
 {parentView === "coinrechner" && (
