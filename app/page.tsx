@@ -977,6 +977,20 @@ function coinsToEuroText(coins: number) {
 
   return `${hours} Std ${minutes} Min`;
 }
+function getDailyBonusTime() {
+  const next = new Date();
+
+  next.setHours(24, 0, 0, 0);
+
+  const diff = next.getTime() - Date.now();
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor(
+    (diff / (1000 * 60)) % 60
+  );
+
+  return `${hours} Std ${minutes} Min`;
+}
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
 
@@ -4722,11 +4736,15 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     </button>
     <br />
     <br />
-    <button
+<button
   onClick={claimDailyLoginBonus}
   className="mt-4 rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03]"
 >
   🎁 Täglichen Bonus abholen
+
+  <div className="mt-2 text-sm font-bold opacity-90">
+    ⏰ Nächster Bonus in: {getDailyBonusTime()}
+  </div>
 </button>
 
     {wheelResult !== null && (
