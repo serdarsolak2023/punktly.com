@@ -3519,20 +3519,23 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         Von: {firebaseUser?.email || auth.currentUser?.email || "Nicht eingeloggt"}
       </div>
 
-      <input
-        value={contactSubject}
-        onChange={(e) => setContactSubject(e.target.value)}
-        placeholder="Betreff"
-        className="mb-3 w-full rounded-2xl border-2 border-sky-100 p-4 font-bold outline-none"
-      />
+<div className="mb-3">
+  <AppInput
+    value={contactSubject}
+    onChange={setContactSubject}
+    placeholder="Betreff"
+    className="w-full"
+  />
+</div>
 
-      <textarea
-        value={contactMessage}
-        onChange={(e) => setContactMessage(e.target.value)}
-        placeholder="Deine Nachricht an den Support"
-        rows={6}
-        className="mb-4 w-full rounded-2xl border-2 border-sky-100 p-4 font-bold outline-none"
-      />
+<div className="mb-4">
+  <AppTextarea
+    value={contactMessage}
+    onChange={setContactMessage}
+    placeholder="Deine Nachricht an den Support"
+    className="w-full"
+  />
+</div>
 
       <button
         type="button"
