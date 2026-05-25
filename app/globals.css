@@ -51,3 +51,10 @@ svg {
     font-size: 11px;
   }
 }
+/* Tablet kompakter */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-compact {
+    transform: scale(0.88);
+    transform-origin: top center;
+  }
+}
