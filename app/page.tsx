@@ -5023,10 +5023,10 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 </section>
 )}
 {childView === "tasks" && (
-<Panel title="✅ Deine Aufgaben">
+<Panel title="📋 Deine Aufgaben">
   {childTasks.length === 0 && (
   <EmptyState
-    icon="✅"
+    icon="📋"
     title="Noch keine Aufgaben vorhanden"
     text="Deine Eltern können im Elternbereich Aufgaben erstellen. Sobald Aufgaben angelegt sind, erscheinen sie hier automatisch."
   />
