@@ -660,10 +660,6 @@ function syncPrestigeStars(child: Child): Child {
 }
 
 export default function PunktlyRoleSplit() {
-  const maintenanceMode = false;
-
-  const [maintenancePassword, setMaintenancePassword] = useState("");
-  const adminPassword = "LeonEliasSolak1010!!!";
   
   const [isPurchased, setIsPurchased] = useState(false);
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
@@ -685,6 +681,9 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const maintenanceMode = true;
+const [maintenancePassword, setMaintenancePassword] = useState("");
+const adminPassword = "LeonEliasSolak1010!!!";
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
   const [newLearningMinutes, setNewLearningMinutes] = useState(3);
   const [activeLearningTask, setActiveLearningTask] = useState<any | null>(null);
@@ -2655,8 +2654,41 @@ if (
 
   return () => clearTimeout(timer);
 }, [activeLearningTask, learningTimeLeft, activeReadingText, activeMathTask]);
+if (maintenanceMode && maintenancePassword !== adminPassword) {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
+      <div className="w-full max-w-md rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
+        <FoxCoinImage className="mx-auto h-24 w-24" />
 
-  if (!isPurchased) {
+        <h1 className="mt-4 text-3xl font-black text-sky-900">
+          PunktlyCoinly
+        </h1>
+
+        <div className="mt-5 rounded-[1.5rem] bg-yellow-50 p-4">
+          <div className="text-5xl">🚧</div>
+
+          <h2 className="mt-2 text-xl font-black text-orange-700">
+            Wartungsarbeiten
+          </h2>
+
+          <p className="mt-3 font-bold text-slate-700">
+            Die App wird gerade verbessert.
+          </p>
+
+          <input
+            type="password"
+            placeholder="Passwort"
+            value={maintenancePassword}
+            onChange={(e) => setMaintenancePassword(e.target.value)}
+            className="mt-5 w-full rounded-xl border-2 p-3"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+if (!isPurchased) {
     return (
     <main className="relative min-h-[120vh] sm:min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
