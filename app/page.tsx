@@ -4756,14 +4756,7 @@ scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
                       </div>
-                      <div className="mt-5 grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
-                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
-<div className="flex flex-col gap-2">
-
-<div className="flex flex-col gap-2">
-
-<div className="flex flex-col gap-3">
+                      <div className="mt-4 rounded-[1.5rem] bg-yellow-50 p-4 space-y-3">
 
   <div className="flex justify-between">
     <span>
@@ -4802,6 +4795,14 @@ scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
   </div>
 
 </div>
+                      <div className="mt-5 grid gap-4 md:grid-cols-2">
+                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
+                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
+<div className="flex flex-col gap-2">
+
+<div className="flex flex-col gap-2">
+
+
 
 </div>
 
