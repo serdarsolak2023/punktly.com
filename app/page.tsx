@@ -4557,7 +4557,9 @@ scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
 
         {area === "child" && (
           <>
-            <ChildTabs view={childView} setView={setChildView} />
+            <div className="mb-6">
+  <ChildTabs view={childView} setView={setChildView} />
+</div>
 
 <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-pink-100 via-yellow-100 via-sky-100 to-purple-100 p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white">
   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
