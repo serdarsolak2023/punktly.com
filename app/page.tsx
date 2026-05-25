@@ -922,27 +922,7 @@ function coinsToEuroText(coins: number) {
   return `${hours} Std ${minutes} Min`;
 }
 if (!isAuthReady) {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
-      <div className="w-full max-w-sm rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
 
-        <FoxCoinImage className="mx-auto h-24 w-24 animate-bounce" />
-
-        <h1 className="mt-4 text-2xl font-black text-sky-900">
-          PunktlyCoinly
-        </h1>
-
-        <p className="mt-2 font-bold text-sky-700">
-          App wird geladen...
-        </p>
-
-        <div className="mt-6 h-3 overflow-hidden rounded-full bg-sky-100">
-          <div className="h-full w-1/2 animate-pulse rounded-full bg-sky-400"></div>
-        </div>
-
-      </div>
-    </div>
-  );
 }
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
