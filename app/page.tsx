@@ -4720,6 +4720,8 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     >
       {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
     </button>
+    <br />
+    <br />
     <button
   onClick={claimDailyLoginBonus}
   className="mt-4 rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03]"
