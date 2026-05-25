@@ -921,9 +921,7 @@ function coinsToEuroText(coins: number) {
 
   return `${hours} Std ${minutes} Min`;
 }
-if (!isAuthReady) {
 
-}
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
 
@@ -6557,8 +6555,8 @@ className="rounded-[1.4rem] bg-gradient-to-r from-yellow-400 via-orange-300 to-a
 
 function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView) => void }) {
   return (
-    <nav className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
-      <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
+    <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
+      <div className="flex gap-1 overflow-x-auto punktly-scrollbar-none">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
@@ -6574,8 +6572,8 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
 
 function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentView) => void }) {
   return (
-    <nav className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-2 shadow-[0_30px_80px_rgba(14,165,233,.20)] backdrop-blur-xl">
-      <div className="grid grid-cols-5 gap-1 overflow-x-auto md:grid-cols-10 punktly-scrollbar-none">
+    <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
+      <div className="flex gap-1 overflow-x-auto punktly-scrollbar-none">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
@@ -6588,16 +6586,31 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
         <Tab active={view === "settings"} onClick={() => setView("settings")} icon={<User />} label="Kinder" />
-        <Tab active={view === "coinrechner"} onClick={() => setView("coinrechner")} icon={<Coin />} label="Coinrechner" />
+        <Tab active={view === "coinrechner"} onClick={() => setView("coinrechner")} icon={<Coin />} label="Rechner" />
       </div>
     </nav>
   );
 }
 
 function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
-  return <button onClick={onClick} className={`rounded-[1.8rem] p-3 text-center font-black transition active:scale-95 ${active ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]" : "text-sky-700 hover:bg-cyan-50"}`}><div className="relative z-10 mx-auto mb-1 h-5 w-5">{icon}</div><div className="truncate text-[10px] md:text-xs">{label}</div></button>;
+  return (
+    <button
+      onClick={onClick}
+      className={`min-w-[64px] shrink-0 rounded-[0.9rem] px-2 py-1.5 text-center font-black transition active:scale-95 sm:min-w-[76px] sm:px-2.5 sm:py-2 ${
+        active
+          ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-md"
+          : "text-sky-700 hover:bg-cyan-50"
+      }`}
+    >
+      <div className="mx-auto mb-0.5 flex h-4 w-4 items-center justify-center sm:h-5 sm:w-5">
+        {icon}
+      </div>
+      <div className="truncate text-[9px] leading-tight sm:text-[10px]">
+        {label}
+      </div>
+    </button>
+  );
 }
-
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="rounded-[1.4rem] border-2 border-white bg-white/90 p-3 shadow-[0_14px_40px_rgba(37,99,235,.10)] backdrop-blur-xl sm:p-4 lg:p-5">

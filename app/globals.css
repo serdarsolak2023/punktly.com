@@ -39,7 +39,6 @@ body * {
 img,
 svg {
   -webkit-user-drag: none;
-  user-drag: none;
 }
 @media (max-width: 1024px) {
   html {
