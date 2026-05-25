@@ -4759,7 +4759,25 @@ scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
                         <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}</span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span></div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
                         <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
-<span>Ziel: {childRewardGoalLabel}</span>
+<div className="flex flex-col gap-2">
+
+<div className="flex flex-col gap-2">
+
+  <span>
+    🎁 Ziel für Shop: {shop.length > 0 ? shop[0].title : "Kein Ziel"}
+  </span>
+
+  <span>
+    🏆 Ziel für Belohnung: {childRewardGoalLabel || "Kein Ziel"}
+  </span>
+
+  <span>
+    💎 Ziel für Schatzkiste: {chests.length > 0 ? chests[0].title : "Kein Ziel"}
+  </span>
+
+</div>
+
+</div>
 <span className="flex items-center gap-1">{child.coins}/{childRewardGoalTotal} <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" /></span>
 </div>
 
@@ -5043,7 +5061,7 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 </Panel>
 )}
               {childView === "chests" && (
-                <Panel title="🎁 Schatzkisten">
+                <Panel title="💎 Schatzkisten">
                   <p className="mb-4 font-bold text-sky-700">
                     Eltern legen fest, was in den Schatzkisten steckt. Du kaufst eine Kiste mit Coins und öffnest sie.
                   </p>
@@ -5915,7 +5933,8 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
                     </div>
                   </Panel>
 
-                  <Panel title="📦 Schatzkisten verwalten">
+                  <Panel title="💎
+                 Schatzkisten verwalten">
                     <div className="grid gap-3">
                       {chests.map((chest) => (
                         <div key={chest.id} className="rounded-[1.8rem] border-[3px] border-white bg-white/90 p-4 shadow-[0_25px_70px_rgba(14,165,233,.18)]">
