@@ -921,7 +921,7 @@ function coinsToEuroText(coins: number) {
 
   return `${hours} Std ${minutes} Min`;
 }
-if (!isAuthReady || isCheckingPaid) {
+if (!isAuthReady) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
       <div className="w-full max-w-sm rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
