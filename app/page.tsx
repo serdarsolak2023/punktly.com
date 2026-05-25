@@ -493,7 +493,7 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
       : "Heute kannst du wieder Punkte sammeln!";
 
   return (
-    <div className="relative overflow-hidden rounded-[1.8rem] border border-white bg-gradient-to-br from-yellow-100 via-white to-orange-100 p-6 text-center shadow-[0_20px_55px_rgba(14,165,233,.15)]">
+    <div className="relative overflow-hidden rounded-[1.3rem] border border-white bg-gradient-to-br from-yellow-100 via-white to-orange-100 p-3 text-center shadow-[0_14px_35px_rgba(14,165,233,.12)] sm:p-4">
       <div className="absolute left-6 top-6 text-2xl animate-floaty">✨</div>
       <div className="absolute right-8 top-8 text-2xl animate-floaty">⭐</div>
 
@@ -506,13 +506,13 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
         <img
           src={activeMotiv}
           alt="Gewähltes Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl md:h-80 md:w-80"
+          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl"
         />
       ) : (
         <img
           src="/PunktlyLogo.png"
           alt="Punktly Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
+          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty drop-shadow-xl"
         />
       )}
 
@@ -2702,7 +2702,7 @@ if (
       <img
         src="/PunktlyLogo.png"
         alt="Punktly Logo"
-        className="mx-auto h-24 w-24 object-contain drop-shadow-xl md:h-28 md:w-28"
+        className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain drop-shadow-xl md:h-28 md:w-28"
       />
 <h1 className="text-3xl font-black md:text-4xl">
   <span className="text-yellow-400">P</span>
@@ -2817,7 +2817,7 @@ color: "text-yellow-400",
 bg: "bg-yellow-50",
       })
     }
-    className="rounded-[1.7rem] bg-red-50/78 px-5 py-4 text-left shadow-md transition hover:scale-[1.02]"
+    className="rounded-[1.2rem] bg-red-50/78 px-3 py-2 text-left shadow-sm transition hover:scale-[1.01] sm:px-4 sm:py-3"
   >
     <p className="text-base font-black text-yellow-400 md:text-lg">
       ✅ Aufgaben und Motivation
@@ -2952,7 +2952,7 @@ bg: "bg-purple-50",
 {featurePopup && (
   <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
     
-    <div className={`relative flex max-h-[80vh] w-full max-w-4xl flex-col rounded-[2rem] p-6 shadow-2xl ${featurePopup.bg}`}>
+    <div className={`relative flex max-h-[90vh] w-full max-w-lg flex-col overflow-y-auto rounded-[1.3rem] p-4 shadow-xl sm:p-5 ${featurePopup.bg}`}>
       
       <button
         onClick={() => setFeaturePopup(null)}
@@ -3556,11 +3556,11 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
       {showLoginWelcomePopup && isPurchased && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-slate-950/60 p-3 backdrop-blur-md">
           <div className="my-4 max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-[1.5rem] border-2 border-yellow-300 bg-white p-4 text-center shadow-[0_30px_90px_rgba(15,23,42,.25)] sm:p-5">
-            <div className="relative z-10 mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
-              <FoxCoinImage className="h-24 w-24" />
+            <div className="relative z-10 mx-auto mb-4 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
+              <FoxCoinImage className="h-12 w-12 sm:h-16 sm:w-16" />
             </div>
 
-<h1 className="text-4xl font-black tracking-tight text-center leading-tight sm:text-3xl animate-pulse">
+<h1 className="text-2xl sm:text-3xl font-black tracking-tight text-center leading-tight sm:text-3xl animate-pulse">
   <span className="text-yellow-400">⭐ Herzlich</span>{" "}
   <span className="text-green-500">Willkommen</span>{" "}
   <span className="text-blue-500">bei ⭐</span>{" "}
@@ -4013,10 +4013,10 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
               </div>
 
               <img src="/badges/badge-01.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -bottom-8 left-3 h-24 w-24 rotate-[-18deg] rounded-full object-contain opacity-90" />
+                className="punktly-coin-float pointer-events-none absolute -bottom-8 left-3 h-12 w-12 sm:h-16 sm:w-16 rotate-[-18deg] rounded-full object-contain opacity-90" />
 
               <img src="/badges/badge-02.png" alt="" aria-hidden="true"
-                className="punktly-coin-drift pointer-events-none absolute top-8 left-[38%] h-24 w-24 rotate-[14deg] rounded-full object-contain opacity-90"
+                className="punktly-coin-drift pointer-events-none absolute top-8 left-[38%] h-12 w-12 sm:h-16 sm:w-16 rotate-[14deg] rounded-full object-contain opacity-90"
                 style={{ animationDelay: ".4s" }} />
 
               <img src="/badges/badge-03.png" alt="" aria-hidden="true"
@@ -4028,7 +4028,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 style={{ animationDelay: ".7s" }} />
 
               <img src="/badges/badge-05.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute -right-5 bottom-4 h-24 w-24 rotate-[18deg] rounded-full object-contain opacity-80"
+                className="punktly-coin-float pointer-events-none absolute -right-5 bottom-4 h-12 w-12 sm:h-16 sm:w-16 rotate-[18deg] rounded-full object-contain opacity-80"
                 style={{ animationDelay: "1.4s" }} />
 
               <img src="/badges/badge-06.png" alt="" aria-hidden="true"
@@ -4625,10 +4625,10 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                             <img
                               src={(child.profileBadges || [])[0]}
                               alt="Gewähltes Profil-Motiv"
-                              className="h-28 w-28 animate-floaty rounded-full object-cover shadow-sm overflow-hidden"
+                              className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty rounded-full object-cover shadow-sm overflow-hidden"
                             />
                           ) : (
-                            <FoxCoinImage className="h-28 w-28 animate-floaty" />
+                            <FoxCoinImage className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty" />
                           )}
                         </div>
                         <div className="flex-1">
