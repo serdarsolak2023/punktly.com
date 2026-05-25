@@ -2800,7 +2800,7 @@ if (
   </div>
 )}
 
-<div className="mt-8 grid gap-4 sm:grid-cols-2">
+<div className="mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2">
 
   <button
     onClick={() =>
@@ -3731,7 +3731,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
               Die Aufgaben werden wieder auf „offen“ gesetzt.
             </p>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <button
                 onClick={() => setResetConfirmKind(null)}
                 className="rounded-[1.35rem] bg-slate-100 px-4 py-4 font-black text-slate-700"
@@ -4765,7 +4765,7 @@ return (
 {group.title}
 </h3>
 
-<div className="grid grid-cols-2 gap-3">
+<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
 {groupTasks.map(task=>(
 
@@ -4897,7 +4897,7 @@ return(
 {group.title}
 </h3>
 
-<div className="grid grid-cols-2 gap-3">
+<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
 {groupTasks.map(task=>(
 
@@ -5052,7 +5052,7 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                               <button
                                 onClick={() => buyItem(item)}
                                 disabled={!canBuy}
-                                className={`mt-4 w-full rounded-[1.35rem] px-4 py-3 font-black shadow-md transition ${
+                                className={`mt-4 w-full rounded-[1.35rem] p-3 font-black shadow-md transition ${
                                   canBuy
                                     ? "bg-gradient-to-r from-sky-500 to-cyan-400 text-white hover:scale-[1.02]"
                                     : "bg-slate-100 text-slate-400"
@@ -5217,7 +5217,7 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
               {group.title}
             </h3>
 
-            <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
               {filteredLearning.map(task => {
                 const kid = children.find(c => c.id === task.childId);
 
@@ -5867,7 +5867,7 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-7">
+      <div className="grid grid-cols-1 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-7">
         {days.map(day => {
           const dayTasks = tasks.filter(
             t =>
@@ -6475,7 +6475,7 @@ setNumberKeypadSetter(() =>
 
 </p>
 
-<div className="mt-6 grid grid-cols-2 gap-3">
+<div className="mt-6 grid grid-cols-1 gap-3 grid-cols-1 sm:grid-cols-2">
 
 <button
 onClick={() => setShowCoinResetModal(false)}
