@@ -2656,7 +2656,7 @@ if (
 
   if (!isPurchased) {
     return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
+    <main className="relative min-h-[120vh] sm:min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
@@ -3922,7 +3922,8 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 .punktly-coin-drift { animation: punktlyCoinDrift 8s ease-in-out infinite; }
 `}</style>
 
-<div className="relative z-10 mx-auto max-w-[92rem]">
+<div className="relative z-10 mx-auto max-w-[92rem] origin-top
+scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
         {(area === "child" || area === "parent") && (
           <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
             area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
