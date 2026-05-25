@@ -4727,13 +4727,18 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
       🎡
     </div>
 
-    <button
-      onClick={spinBonusWheel}
-      disabled={wheelSpinning}
-      className="mt-6 rounded-[1.5rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-60"
-    >
-      {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
-    </button>
+<button
+  onClick={spinBonusWheel}
+  disabled={wheelSpinning}
+  className="mt-6 rounded-[1.5rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-60"
+>
+  {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
+
+  <div className="mt-2 text-sm font-bold opacity-90">
+    ⏰ Nächster Dreh in: {getDailyBonusTime()}
+  </div>
+
+</button>
     <br />
     <br />
 <button
