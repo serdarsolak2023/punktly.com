@@ -562,7 +562,59 @@ function Coin({ className = "w-7 h-7" }: { className?: string }) {
     />
   );
 }
+function GoalProgress({
+  icon,
+  title,
+  name,
+  current,
+  target,
+  motivSrc,
+}: {
+  icon: string;
+  title: string;
+  name: string;
+  current: number;
+  target: number;
+  motivSrc: string;
+}) {
+  const percent =
+    target > 0
+      ? Math.min(100, Math.round((current / target) * 100))
+      : 0;
 
+  return (
+    <div className="rounded-[1.3rem] bg-white/80 p-3 shadow-sm">
+
+      <div className="flex justify-between">
+        <span className="font-black">
+          {icon} {title}: {name}
+        </span>
+
+        <span className="font-black">
+          {percent}%
+        </span>
+      </div>
+
+      <div className="mt-2 h-3 overflow-hidden rounded-full bg-sky-100">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500"
+          style={{
+            width: `${percent}%`
+          }}
+        />
+      </div>
+
+      <div className="mt-2 text-right text-sm font-black">
+        {current}/{target}{" "}
+        <CoinlyLabel
+          motivSrc={motivSrc}
+          text="Coinly"
+        />
+      </div>
+
+    </div>
+  );
+}
 const MAX_LEVEL = 100;
 
 function xpToNext(level: number) {
@@ -4757,41 +4809,36 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                       </div>
                       <div className="mt-4 rounded-[1.5rem] bg-yellow-50 p-4 space-y-3">
 
-  <div className="flex justify-between">
-    <span>
-      🎁 Ziel für Shop: {shop.length > 0 ? shop[0].title : "Kein Ziel"}
-    </span>
+  <div className="mt-4 grid gap-3">
 
-    <span className="font-black">
-      {child.coins}/{shop.length > 0 ? shop[0].price : 0}
-      {" "}
-      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
-    </span>
-  </div>
+  <GoalProgress
+    icon="🎁"
+    title="Ziel für Shop"
+    name={shop.length > 0 ? shop[0].title : "Kein Ziel"}
+    current={child.coins}
+    target={shop.length > 0 ? shop[0].price : 0}
+    motivSrc={selectedChildMotiv}
+  />
 
-  <div className="flex justify-between">
-    <span>
-      🏆 Ziel für Belohnung: {childRewardGoalLabel || "Kein Ziel"}
-    </span>
+  <GoalProgress
+    icon="🏆"
+    title="Ziel für Belohnung"
+    name={childRewardGoalLabel || "Kein Ziel"}
+    current={child.coins}
+    target={childRewardGoalTotal}
+    motivSrc={selectedChildMotiv}
+  />
 
-    <span className="font-black">
-      {child.coins}/{childRewardGoalTotal}
-      {" "}
-      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
-    </span>
-  </div>
+  <GoalProgress
+    icon="💎"
+    title="Ziel für Schatzkiste"
+    name={chests.length > 0 ? chests[0].title : "Kein Ziel"}
+    current={child.coins}
+    target={chests.length > 0 ? chests[0].price : 0}
+    motivSrc={selectedChildMotiv}
+  />
 
-  <div className="flex justify-between">
-    <span>
-      💎 Ziel für Schatzkiste: {chests.length > 0 ? chests[0].title : "Kein Ziel"}
-    </span>
-
-    <span className="font-black">
-      {child.coins}/{chests.length > 0 ? chests[0].price : 0}
-      {" "}
-      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
-    </span>
-  </div>
+</div>
 
 </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
