@@ -4008,7 +4008,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 .punktly-coin-drift { animation: punktlyCoinDrift 8s ease-in-out infinite; }
 `}</style>
 
-<div className="relative z-10 mx-auto max-w-[92rem] origin-top scale-[0.72] sm:scale-[0.80] md:scale-[0.88] lg:scale-100">
+<div className="relative z-10 mx-auto max-w-[92rem] origin-top scale-[0.90] sm:scale-[0.88] md:scale-[0.88] lg:scale-100">
         {(area === "child" || area === "parent") && (
           <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-black text-white shadow-lg ${
             area === "child" ? "bg-gradient-to-r from-sky-500 to-blue-600" : "bg-gradient-to-r from-violet-600 to-purple-500"
