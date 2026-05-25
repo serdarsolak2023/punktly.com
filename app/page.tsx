@@ -4050,7 +4050,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 style={{ animationDelay: "2.5s" }} />
 
               <img src="/badges/badge-07.png" alt="" aria-hidden="true"
-                className="punktly-coin-float pointer-events-none absolute bottom-2 left-[28%] h-10 w-10 rotate-[18deg] rounded-full object-contain opacity-65"
+                className="punktly-coin-float pointer-events-none absolute bottom-2 left-[41%] h-10 w-10 rotate-[18deg] rounded-full object-contain opacity-65"
                 style={{ animationDelay: "1s" }} />
 
               <img src="/badges/badge-08.png" alt="" aria-hidden="true"
