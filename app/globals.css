@@ -42,3 +42,14 @@ svg {
   -webkit-user-drag: none;
   user-drag: none;
 }
+@media (max-width: 1024px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 12px;
+  }
+}
