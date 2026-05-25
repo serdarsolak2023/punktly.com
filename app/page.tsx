@@ -4843,8 +4843,13 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
                         <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950">
-                          <span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}
-                          </span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span>
+                          <span>
+  {child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}
+</span>
+
+<span className="flex items-center gap-1">
+  {child.xp}/{xpToNext(child.level)} <span>🎯</span>
+</span>
                           </div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
                         
                         
