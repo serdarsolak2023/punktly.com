@@ -36,7 +36,6 @@ body * {
   user-select: none !important;
   -webkit-touch-callout: none !important;
 }
-
 img,
 svg {
   -webkit-user-drag: none;
@@ -44,11 +43,11 @@ svg {
 }
 @media (max-width: 1024px) {
   html {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
   html {
     font-size: 11px;
   }
