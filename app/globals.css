@@ -48,8 +48,8 @@ svg {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   html {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
