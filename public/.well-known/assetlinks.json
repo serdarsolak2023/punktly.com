@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "de.punktlycoinly.app",
+      "sha256_cert_fingerprints": [
+        "95:2D:81:AD:71:05:D2:D1:D6:6C:41:1D:E2:BB:E4:4E:27:6B:72:C4:46:E3:A1:A6:19:39:E9:9D:A3:B9:E2:E9"
+      ]
+    }
+  }
+]
