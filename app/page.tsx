@@ -524,7 +524,35 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
     </div>
   );
 }
+function EmptyState({
+  icon = "✨",
+  title,
+  text,
+  action,
+}: {
+  icon?: string;
+  title: string;
+  text: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-[1.4rem] border-2 border-dashed border-sky-200 bg-white/80 p-4 text-center shadow-sm sm:p-5">
+      <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-sky-50 text-2xl">
+        {icon}
+      </div>
 
+      <h3 className="text-lg font-black text-sky-950">
+        {title}
+      </h3>
+
+      <p className="mx-auto mt-2 max-w-md text-sm font-bold leading-relaxed text-sky-700">
+        {text}
+      </p>
+
+      {action && <div className="mt-4">{action}</div>}
+    </div>
+  );
+}
 function Coin({ className = "w-7 h-7" }: { className?: string }) {
   return (
     <img
@@ -892,6 +920,29 @@ function coinsToEuroText(coins: number) {
   }
 
   return `${hours} Std ${minutes} Min`;
+}
+if (!isAuthReady || isCheckingPaid) {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
+      <div className="w-full max-w-sm rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
+
+        <FoxCoinImage className="mx-auto h-24 w-24 animate-bounce" />
+
+        <h1 className="mt-4 text-2xl font-black text-sky-900">
+          PunktlyCoinly
+        </h1>
+
+        <p className="mt-2 font-bold text-sky-700">
+          App wird geladen...
+        </p>
+
+        <div className="mt-6 h-3 overflow-hidden rounded-full bg-sky-100">
+          <div className="h-full w-1/2 animate-pulse rounded-full bg-sky-400"></div>
+        </div>
+
+      </div>
+    </div>
+  );
 }
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
@@ -3855,42 +3906,40 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     75% { transform: translateY(5px); clip-path: inset(12% 0 0 0); opacity: 1; }
   }
 
-  @keyframes punktlyRainbowText {
-    0% { background-position: 0% 50%; transform: translateY(0) scale(1); }
-    35% { transform: translateY(-3px) scale(1.01); }
-    70% { transform: translateY(3px) scale(1); }
-    100% { background-position: 100% 50%; transform: translateY(0) scale(1); }
-  }
+@keyframes punktlyRainbowText {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
 
-  @keyframes punktlySparklePulse {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: .85; }
-    50% { transform: scale(1.22) rotate(8deg); opacity: 1; }
-  }
+@keyframes punktlySparklePulse {
+  0%, 100% { transform: scale(1); opacity: .85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
 
-  @keyframes punktlyCoinFloat {
-    0% { transform: translateY(0) rotate(-10deg) scale(1); opacity: .75; }
-    50% { transform: translateY(-16px) rotate(14deg) scale(1.08); opacity: 1; }
-    100% { transform: translateY(0) rotate(-10deg) scale(1); opacity: .75; }
-  }
+@keyframes punktlyCoinFloat {
+  0% { transform: translateY(0) rotate(-4deg); opacity: .75; }
+  50% { transform: translateY(-6px) rotate(4deg); opacity: .95; }
+  100% { transform: translateY(0) rotate(-4deg); opacity: .75; }
+}
 
-  @keyframes punktlyCoinDrift {
-    0% { transform: translateX(-10px) translateY(0) rotate(0deg); }
-    50% { transform: translateX(12px) translateY(-8px) rotate(18deg); }
-    100% { transform: translateX(-10px) translateY(0) rotate(0deg); }
-  }
+@keyframes punktlyCoinDrift {
+  0% { transform: translateX(-3px) translateY(0); }
+  50% { transform: translateX(4px) translateY(-3px); }
+  100% { transform: translateX(-3px) translateY(0); }
+}
 
-  .punktly-welcome-wipe { animation: punktlyWelcomeWipe 3.2s ease-in-out infinite; }
-  .punktly-rainbow-text {
-    background: linear-gradient(90deg, #38bdf8, #34d399, #facc15, #fb7185, #a78bfa, #38bdf8);
-    background-size: 350% 350%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: punktlyRainbowText 4s ease-in-out infinite alternate;
-  }
-  .punktly-sparkle { display: inline-block; animation: punktlySparklePulse 1.8s ease-in-out infinite; }
-  .punktly-coin-float { animation: punktlyCoinFloat 4.2s ease-in-out infinite; }
-  .punktly-coin-drift { animation: punktlyCoinDrift 5s ease-in-out infinite; }
+.punktly-welcome-wipe { animation: punktlyWelcomeWipe 5s ease-in-out infinite; }
+.punktly-rainbow-text {
+  background: linear-gradient(90deg, #38bdf8, #34d399, #facc15, #fb7185, #a78bfa, #38bdf8);
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: punktlyRainbowText 8s ease-in-out infinite alternate;
+}
+.punktly-sparkle { display: inline-block; animation: punktlySparklePulse 3s ease-in-out infinite; }
+.punktly-coin-float { animation: punktlyCoinFloat 7s ease-in-out infinite; }
+.punktly-coin-drift { animation: punktlyCoinDrift 8s ease-in-out infinite; }
 `}</style>
 
 <div className="relative z-10 mx-auto max-w-[92rem]">
@@ -4356,11 +4405,15 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
               <h2 className="mt-4 text-2xl font-black text-blue-950 sm:text-3xl md:text-4xl">Kinderbereich</h2>
               <p className="mt-2 font-bold text-sky-800">Aufgaben erledigen, Coins sammeln, Shop und Belohnungen ansehen.</p>
 
-              {children.length === 0 && (
-                <div className="mt-5 rounded-[1.8rem] bg-white/80 p-4 font-black text-sky-800">
-                  Noch keine Kinder angelegt. Öffne den Elternbereich und lege das erste Kind an.
-                </div>
-              )}
+{children.length === 0 && (
+  <div className="mt-5">
+    <EmptyState
+      icon="👶"
+      title="Noch kein Kind angelegt"
+      text="Lege zuerst im Elternbereich ein Kinderprofil an. Danach kann dein Kind Aufgaben erledigen, Lernen, Punkte und Coins sammeln."
+    />
+  </div>
+)}
 
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 {children.map(c => (
@@ -4845,6 +4898,13 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 )}
 {childView === "tasks" && (
 <Panel title="✅ Deine Aufgaben">
+  {childTasks.length === 0 && (
+  <EmptyState
+    icon="✅"
+    title="Noch keine Aufgaben vorhanden"
+    text="Deine Eltern können im Elternbereich Aufgaben erstellen. Sobald Aufgaben angelegt sind, erscheinen sie hier automatisch."
+  />
+)}
 
 <div className="mb-5 flex flex-wrap gap-2">
 
@@ -5029,9 +5089,11 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                   </p>
 
                   {shop.length === 0 ? (
-                    <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-yellow-50 p-5 font-black text-amber-800">
-                      Der Shop ist noch leer. Bitte im Elternbereich Produkte anlegen.
-                    </div>
+<EmptyState
+  icon="🛍️"
+  title="Der Shop ist noch leer"
+  text="Eltern können im Elternbereich eigene Belohnungen oder Wunschprodukte anlegen. Danach erscheinen sie hier und können mit Coins eingelöst werden."
+/>
                   ) : (
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                       {shop.map(item => {
