@@ -6681,17 +6681,17 @@ function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () =>
   return (
     <button
       onClick={onClick}
-      className={`min-w-[82px] rounded-[1.8rem] px-3 py-3 text-center font-black transition active:scale-95 ${
+      className={`min-w-[76px] shrink-0 rounded-[1.4rem] px-2 py-2 text-center font-black transition active:scale-95 sm:min-w-[86px] sm:px-3 sm:py-2.5 ${
         active
-          ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]"
+          ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-md"
           : "text-sky-700 hover:bg-cyan-50"
       }`}
     >
-      <div className="relative z-10 mx-auto mb-1 h-6 w-6">
+      <div className="mx-auto mb-1 flex h-5 w-5 items-center justify-center sm:h-6 sm:w-6">
         {icon}
       </div>
 
-      <div className="truncate text-[11px] sm:text-xs">
+      <div className="truncate text-[10px] leading-tight sm:text-[11px]">
         {label}
       </div>
     </button>
