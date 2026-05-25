@@ -506,13 +506,13 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
         <img
           src={activeMotiv}
           alt="Gewähltes Motiv"
-          className="mx-auto h-64 w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl md:h-80 md:w-80"
+          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl md:h-80 md:w-80"
         />
       ) : (
         <img
           src="/PunktlyLogo.png"
           alt="Punktly Motiv"
-          className="mx-auto h-64 w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
+          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty drop-shadow-xl md:h-80 md:w-80"
         />
       )}
 
@@ -2241,7 +2241,7 @@ function AppInput({
   return (
     <div
       onClick={() => openTextKeyboard(value, onChange)}
-      className={`w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
+      className={`w-full cursor-pointer rounded-[1.3rem] border-2 border-sky-100 bg-white/90 p-3 text-sm font-bold shadow-inner sm:p-4 sm:text-base ${className}`}
     >
       {value || placeholder}
     </div>
@@ -2261,7 +2261,7 @@ function AppTextarea({
   return (
     <div
       onClick={() => openTextKeyboard(value, onChange)}
-      className={`min-h-[110px] w-full cursor-pointer rounded-[1.8rem] border-[3px] border-sky-100 bg-white/90 p-4 font-bold shadow-inner ${className}`}
+      className={`min-h-[90px] w-full cursor-pointer rounded-[1.3rem] border-2 border-sky-100 bg-white/90 p-3 text-sm font-bold shadow-inner sm:min-h-[110px] sm:p-4 sm:text-base ${className}`}
     >
       {value || placeholder}
     </div>
@@ -3554,8 +3554,8 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
       )}
 
       {showLoginWelcomePopup && isPurchased && (
-        <div className="fixed inset-0 z-[80] grid place-items-center bg-slate-950/60 p-4 backdrop-blur-md">
-          <div className="w-full max-w-2xl rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] border-4 border-yellow-300 bg-white p-6 text-center shadow-[0_30px_90px_rgba(15,23,42,.35)]">
+        <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-slate-950/60 p-3 backdrop-blur-md">
+          <div className="my-4 max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-[1.5rem] border-2 border-yellow-300 bg-white p-4 text-center shadow-[0_30px_90px_rgba(15,23,42,.25)] sm:p-5">
             <div className="relative z-10 mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-yellow-50 shadow-[0_12px_40px_rgba(251,191,36,.25)]">
               <FoxCoinImage className="h-24 w-24" />
             </div>
@@ -6553,7 +6553,14 @@ function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () =>
 }
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
-  return <section className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-[3px] border-white bg-white/90 p-5 shadow-[0_18px_55px_rgba(37,99,235,.12)] backdrop-blur-xl"><h2 className="mb-4 text-2xl font-black tracking-tight text-sky-950">{title}</h2>{children}</section>;
+  return (
+    <section className="rounded-[1.4rem] border-2 border-white bg-white/90 p-3 shadow-[0_14px_40px_rgba(37,99,235,.10)] backdrop-blur-xl sm:p-4 lg:p-5">
+      <h2 className="mb-3 text-xl font-black tracking-tight text-sky-950 sm:text-2xl">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
 }
 
 function BigNumber({ value, label }: { value: number; label: string }) {

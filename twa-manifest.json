@@ -1,6 +1,6 @@
 {
   "packageId": "de.punktlycoinly.app",
-  "host": "punktly-com.vercel.app",
+  "host": "www.punktlycoinly.de",
   "name": "PunktlyCoinly",
   "launcherName": "Punktly",
   "display": "standalone",
@@ -12,9 +12,9 @@
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#38BDF8",
   "enableNotifications": true,
-  "startUrl": "punktly-com.vercel.app",
-  "iconUrl": "https://punktly-com.vercel.app/PunktlyLogo.png",
-  "maskableIconUrl": "https://punktly-com.vercel.app/PunktlyLogo.png",
+  "startUrl": "/",
+  "iconUrl": "https://www.punktlycoinly.de/PunktlyLogo.png",
+  "maskableIconUrl": "https://www.punktlycoinly.de/PunktlyLogo.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "C:\\Punktly APP\\punktly.com\\android.keystore",
@@ -24,7 +24,7 @@
   "appVersionCode": 1,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
-  "webManifestUrl": "https://punktly-com.vercel.app/manifest.json",
+  "webManifestUrl": "https://www.punktlycoinly.de/manifest.json",
   "fallbackType": "customtabs",
   "features": {
     "playBilling": {
@@ -37,7 +37,7 @@
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
   "isMetaQuest": false,
-  "fullScopeUrl": "https://punktly-com.vercel.app/",
+  "fullScopeUrl": "https://www.punktlycoinly.de/",
   "minSdkVersion": 21,
   "orientation": "any",
   "fingerprints": [],

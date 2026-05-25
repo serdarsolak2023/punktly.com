@@ -22,7 +22,7 @@ plugins {
 
 def twaManifest = [
     applicationId: 'de.punktlycoinly.app',
-    hostName: 'punktly-com.vercel.app', // The domain being opened in the TWA.
+    hostName: 'www.punktlycoinly.de', // The domain being opened in the TWA.
     launchUrl: '/', // The start path for the TWA. Must be relative to the domain.
     name: 'PunktlyCoinly', // The application name.
     launcherName: 'Punktly', // The name shown on the Android Launcher.
@@ -76,12 +76,12 @@ android {
             // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
             // is used by Chrome OS and Meta Quest to open the Web version of the PWA instead of
             // the TWA, as it will probably give a better user experience for non-mobile devices.
-            resValue "string", "webManifestUrl", 'https://punktly-com.vercel.app/manifest.json'
+            resValue "string", "webManifestUrl", 'https://www.punktlycoinly.de/manifest.json'
         
 
         
             // This is used by Meta Quest.
-            resValue "string", "fullScopeUrl", 'https://punktly-com.vercel.app/'
+            resValue "string", "fullScopeUrl", 'https://www.punktlycoinly.de/'
         
 
         
@@ -150,11 +150,21 @@ android {
 
         
     }
-    buildTypes {
-        release {
-            minifyEnabled true
-        }
+signingConfigs {
+    release {
+        storeFile file("../android.keystore")
+        storePassword "LeonEliasSolak1010!!"
+        keyAlias "android"
+        keyPassword "LeonEliasSolak1010!!"
     }
+}
+
+buildTypes {
+    release {
+        minifyEnabled true
+        signingConfig signingConfigs.release
+    }
+}
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
