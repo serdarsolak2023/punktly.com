@@ -5,7 +5,7 @@ import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, R
 import type { User as FirebaseUser } from "firebase/auth";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
@@ -88,6 +88,8 @@ impressum: {
     "Deutschland",
     "",
     "Kontakt:",
+    "E-Mail: serdarsolak@punktlycoinly.de",
+    "E-Mail: support@punktlycoinly.de",
     "E-Mail: kontakt@punktlycoinly.de",
     "",
     "Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV:",
@@ -658,6 +660,10 @@ export default function PunktlyRoleSplit() {
   const [mathStep, setMathStep] = useState(0);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [showContactPopup, setShowContactPopup] = useState(false);
+  const [contactSubject, setContactSubject] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [isSendingContact, setIsSendingContact] = useState(false);
 
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
@@ -926,7 +932,44 @@ function coinsToEuroText(coins: number) {
       // Sound ist optional.
     }
   }
+async function sendContactMessage() {
+  const user = firebaseUser || auth.currentUser;
 
+  if (!user) {
+    celebrate("Bitte zuerst mit Google einloggen.");
+    return;
+  }
+
+  if (!contactSubject.trim() || !contactMessage.trim()) {
+    celebrate("Bitte Betreff und Nachricht ausfüllen.");
+    return;
+  }
+
+  try {
+    setIsSendingContact(true);
+
+    await addDoc(collection(db, "supportMessages"), {
+      to: "support@punktlycoinly.de",
+      fromEmail: user.email || "",
+      fromName: user.displayName || "",
+      subject: contactSubject.trim(),
+      message: contactMessage.trim(),
+      uid: user.uid,
+      createdAt: serverTimestamp(),
+      status: "neu",
+    });
+
+    setContactSubject("");
+    setContactMessage("");
+    setShowContactPopup(false);
+    celebrate("Nachricht wurde gesendet. Danke!");
+  } catch (error) {
+    console.error(error);
+    celebrate("Nachricht konnte nicht gesendet werden.");
+  } finally {
+    setIsSendingContact(false);
+  }
+}
 function celebrate(message: string) {
     playSound("success");
     setCelebration(message);
@@ -3455,6 +3498,53 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     </div>
   </div>
 )}
+{showContactPopup && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/45 p-4">
+    <div className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h2 className="text-2xl font-black text-sky-800">
+          ✉️ Kontakt aufnehmen
+        </h2>
+
+        <button
+          type="button"
+          onClick={() => setShowContactPopup(false)}
+          className="rounded-full bg-slate-100 px-3 py-2 font-black text-slate-600"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="mb-3 rounded-2xl bg-sky-50 p-3 text-sm font-bold text-sky-800">
+        Von: {firebaseUser?.email || auth.currentUser?.email || "Nicht eingeloggt"}
+      </div>
+
+      <input
+        value={contactSubject}
+        onChange={(e) => setContactSubject(e.target.value)}
+        placeholder="Betreff"
+        className="mb-3 w-full rounded-2xl border-2 border-sky-100 p-4 font-bold outline-none"
+      />
+
+      <textarea
+        value={contactMessage}
+        onChange={(e) => setContactMessage(e.target.value)}
+        placeholder="Deine Nachricht an den Support"
+        rows={6}
+        className="mb-4 w-full rounded-2xl border-2 border-sky-100 p-4 font-bold outline-none"
+      />
+
+      <button
+        type="button"
+        onClick={sendContactMessage}
+        disabled={isSendingContact}
+        className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 px-5 py-4 font-black text-white shadow-lg disabled:opacity-60"
+      >
+        {isSendingContact ? "Wird gesendet..." : "Nachricht senden"}
+      </button>
+    </div>
+  </div>
+)}
       {celebration && (
         <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
           {celebration}
@@ -3826,6 +3916,13 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     })}
   </span>
 </div>
+<button
+  type="button"
+  onClick={() => setShowContactPopup(true)}
+  className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-pink-600 shadow-sm transition hover:scale-105"
+>
+  ✉️ Kontakt aufnehmen
+</button>
 {trialIsActive && trialEndsAt && (
   <div className="flex h-[40px] items-center rounded-full bg-emerald-50 px-4 text-sm font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
 
