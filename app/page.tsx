@@ -426,18 +426,18 @@ const rareBadges = [
 ];
 
 const punktlyCoinPositions = [
-  { left: "2%", top: "8%", size: 64, badge: 1, delay: "0s" },
+  { left: "22%", top: "8%", size: 64, badge: 1, delay: "0s" },
   { left: "16%", top: "2%", size: 70, badge: 2, delay: ".4s" },
   { left: "32%", top: "12%", size: 52, badge: 3, delay: ".8s" },
   { left: "58%", top: "8%", size: 72, badge: 4, delay: "1.2s" },
   { left: "76%", top: "14%", size: 66, badge: 5, delay: "1.6s" },
   { left: "95%", top: "6%", size: 86, badge: 6, delay: "2s" },
 
-  { left: "8%", top: "30%", size: 72, badge: 7, delay: ".7s" },
+  { left: "28%", top: "30%", size: 72, badge: 7, delay: ".7s" },
   { left: "22%", top: "43%", size: 54, badge: 8, delay: "1.1s" },
   { left: "36%", top: "29%", size: 50, badge: 9, delay: "1.5s" },
   { left: "67%", top: "33%", size: 70, badge: 10, delay: "1.9s" },
-  { left: "86%", top: "37%", size: 58, badge: 11, delay: "2.3s" },
+  { left: "77%", top: "37%", size: 58, badge: 11, delay: "2.3s" },
 
   { left: "2%", top: "63%", size: 72, badge: 12, delay: ".3s" },
   { left: "13%", top: "77%", size: 64, badge: 13, delay: ".9s" },
