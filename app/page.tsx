@@ -1463,10 +1463,37 @@ async function resetFamilyContent() {
       setEditingTaskId(null);
       celebrate("Aufgabe bearbeitet!");
     } else {
-      const newTask = { id: Date.now(), childId: newTaskTarget, title: newTaskTitle, coins: Math.max(1, newTaskCoins), xp: Math.max(5, newTaskCoins * 2), repeat: newTaskRepeat, status: "offen" as Status, day: newTaskDay };
-      setTasks(prev => [...prev, newTask]);
-      saveFamilyItem("tasks", newTask);
-      celebrate("Aufgabe angelegt!");
+if (newTaskTarget === "all") {
+  const tasksForChildren = children.map((childItem, index) => ({
+    id: Date.now() + index,
+    childId: childItem.id,
+    title: newTaskTitle,
+    coins: Math.max(1, newTaskCoins),
+    xp: Math.max(5, newTaskCoins * 2),
+    repeat: newTaskRepeat,
+    status: "offen" as Status,
+    day: newTaskDay,
+  }));
+
+  setTasks(prev => [...prev, ...tasksForChildren]);
+  tasksForChildren.forEach(taskItem => saveFamilyItem("tasks", taskItem));
+  celebrate("Aufgabe für alle Kinder einzeln angelegt!");
+} else {
+  const newTask = {
+    id: Date.now(),
+    childId: newTaskTarget,
+    title: newTaskTitle,
+    coins: Math.max(1, newTaskCoins),
+    xp: Math.max(5, newTaskCoins * 2),
+    repeat: newTaskRepeat,
+    status: "offen" as Status,
+    day: newTaskDay,
+  };
+
+  setTasks(prev => [...prev, newTask]);
+  saveFamilyItem("tasks", newTask);
+  celebrate("Aufgabe angelegt!");
+}
     }
     setNewTaskTitle("");
     setSelectedPreset("");
@@ -1477,27 +1504,31 @@ async function resetFamilyContent() {
     if (!pack) return celebrate("Bitte ein Aufgabenpaket auswählen.");
 
     const existingTitles = new Set(tasks.map((task) => `${task.title}-${task.childId}`));
-    const tasksToAdd = pack.presets
-      .map((title, index) => {
-        const preset = taskPresets.find((item) => item.title === title);
-        if (!preset) return null;
+const tasksToAdd = pack.presets.flatMap((title, index) => {
+  const preset = taskPresets.find((item) => item.title === title);
+  if (!preset) return [];
 
-        const childId = newTaskTarget;
-        const dedupeKey = `${preset.title}-${childId}`;
-        if (existingTitles.has(dedupeKey)) return null;
+  const targetChildren =
+    newTaskTarget === "all"
+      ? children
+      : children.filter((childItem) => childItem.id === newTaskTarget);
 
-        return {
-          id: Date.now() + index,
-          childId,
-          title: preset.title,
-          coins: preset.coins,
-          xp: Math.max(5, preset.coins * 2),
-          repeat: preset.repeat,
-          status: "offen" as Status,
-          day: preset.day,
-        };
-      })
-      .filter((task): task is Task => task !== null);
+  return targetChildren
+    .filter((childItem) => {
+      const dedupeKey = `${preset.title}-${childItem.id}`;
+      return !existingTitles.has(dedupeKey);
+    })
+    .map((childItem, childIndex) => ({
+      id: Date.now() + index * 100 + childIndex,
+      childId: childItem.id,
+      title: preset.title,
+      coins: preset.coins,
+      xp: Math.max(5, preset.coins * 2),
+      repeat: preset.repeat,
+      status: "offen" as Status,
+      day: preset.day,
+    }));
+});
 
     if (tasksToAdd.length === 0) {
       celebrate("Dieses Paket ist für die Auswahl schon angelegt.");
