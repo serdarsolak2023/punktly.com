@@ -6802,7 +6802,7 @@ function Tab({
       }`}
     >
       {badge > 0 && (
-        <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-400 px-1 text-[11px] font-black text-white shadow-md ring-2 ring-white">
+        <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-400 px-1 text-[10px] font-black text-white shadow-md ring-2 ring-white">
           {badge}
         </span>
       )}
