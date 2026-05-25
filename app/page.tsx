@@ -4730,24 +4730,23 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 <button
   onClick={spinBonusWheel}
   disabled={wheelSpinning}
-  className="mt-6 rounded-[1.5rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03] disabled:opacity-60"
+  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(251,146,60,.35)] transition hover:scale-[1.03] disabled:opacity-60"
 >
-  {wheelSpinning ? "Dreht sich..." : "🎡 Glücksrad drehen"}
+  {wheelSpinning ? "🎡 Dreht sich..." : "🎡 Glücksrad drehen"}
 
-  <div className="mt-2 text-sm font-bold opacity-90">
+  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
     ⏰ Nächster Dreh in: {getDailyBonusTime()}
   </div>
-
 </button>
-    <br />
+  
     <br />
 <button
   onClick={claimDailyLoginBonus}
-  className="mt-4 rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 px-6 py-4 text-xl font-black text-white shadow-xl transition hover:scale-[1.03]"
+  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-pink-500 via-purple-400 to-cyan-400 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(168,85,247,.35)] transition hover:scale-[1.03]"
 >
   🎁 Täglichen Bonus abholen
 
-  <div className="mt-2 text-sm font-bold opacity-90">
+  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
     ⏰ Nächster Bonus in: {getDailyBonusTime()}
   </div>
 </button>
