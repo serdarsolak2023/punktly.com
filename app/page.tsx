@@ -4855,7 +4855,36 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 </div>
 
 </div>
+<div className="mt-4 grid gap-3">
 
+  <GoalProgress
+    icon="🎁"
+    title="Ziel für Shop"
+    name={shop.length > 0 ? shop[0].title : "Kein Ziel"}
+    current={child.coins}
+    target={shop.length > 0 ? shop[0].price : 0}
+    motivSrc={selectedChildMotiv}
+  />
+
+  <GoalProgress
+    icon="🏆"
+    title="Ziel für Belohnung"
+    name={childRewardGoalLabel || "Kein Ziel"}
+    current={child.coins}
+    target={childRewardGoalTotal}
+    motivSrc={selectedChildMotiv}
+  />
+
+  <GoalProgress
+    icon="💎"
+    title="Ziel für Schatzkiste"
+    name={chests.length > 0 ? chests[0].title : "Kein Ziel"}
+    current={child.coins}
+    target={chests.length > 0 ? chests[0].price : 0}
+    motivSrc={selectedChildMotiv}
+  />
+
+</div>
 </div>
 
 
