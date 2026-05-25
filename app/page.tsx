@@ -6658,7 +6658,7 @@ function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView)
 function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentView) => void }) {
   return (
     <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
-      <div className="flex gap-1 overflow-x-auto punktly-scrollbar-none">
+      <div className="flex flex-wrap gap-2">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
         <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
