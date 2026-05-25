@@ -4140,16 +4140,16 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
           )}
 
           {area === "child" || area === "parent" ? (
-            <div className="relative z-10 grid gap-5 xl:grid-cols-[1.15fr_.85fr] lg:items-center">
-              <div className="flex flex-col items-center gap-5 sm:flex-row">
+            <div className="relative z-10 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+              <div className="flex items-center gap-3">
                 <img
                   src="/PunktlyLogo.png"
                   alt="Punktly Logo"
-                  className="h-20 w-20 flex-none sm:h-24 sm:w-24 rounded-full object-contain drop-shadow-xl md:h-28 md:w-28"
+                  className="h-16 w-16 flex-none rounded-full object-contain drop-shadow-xl md:h-20 md:w-20 lg:h-28 lg:w-28"
                 />
 
                 <div>
-<h1 className="text-2xl font-black sm:text-3xl md:text-4xl">
+<h1 className="text-xl font-black sm:text-2xl lg:text-4xl">
   <span className="text-yellow-400">P</span>
   <span className="text-green-500">u</span>
   <span className="text-blue-500">n</span>
@@ -4171,7 +4171,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                 </div>
               </div>
 
-              <div className="grid gap-3">
+              <div className="grid gap-2 md:justify-items-end">
                 <nav className="flex flex-nowrap justify-start gap-1.5 lg:justify-end">
                   {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
                     <button
@@ -4184,9 +4184,9 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                   ))}
                 </nav>
 
-                <div className="flex flex-wrap justify-start gap-3 lg:justify-end">
+                <div className="flex flex-wrap justify-start gap-2 md:justify-end">
                   {firebaseUser && (
-                    <div className="rounded-[1.6rem] bg-gradient-to-r from-emerald-500 to-green-400 px-5 py-3 text-sm font-black text-white shadow-[0_10px_24px_rgba(16,185,129,.30)] ring-2 ring-white/80">
+                  <div className="rounded-[1.2rem] bg-gradient-to-r from-emerald-500 to-green-400 px-3 py-2 text-xs font-black text-white shadow-[0_10px_24px_rgba(16,185,129,.30)] ring-2 ring-white/80 lg:px-5 lg:py-3 lg:text-sm">
                       👤 Login: {firebaseUser.email}
                     </div>
                   )}
@@ -4196,7 +4196,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
                       setSoundEnabled(!soundEnabled);
                       playSound("click");
                     }}
-                    className={`rounded-[1.6rem] px-5 py-3 text-sm font-black shadow-sm ring-2 ring-white/80 ${
+                    className={`rounded-[1.2rem] px-3 py-2 text-xs font-black shadow-sm ring-2 ring-white/80 lg:px-5 lg:py-3 lg:text-sm ${
                       soundEnabled ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"
                     }`}
                   >
@@ -4205,7 +4205,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
                   <button
                     onClick={goStart}
-                    className={`rounded-[1.6rem] bg-white/95 px-5 py-3 text-base font-black shadow-[0_10px_24px_rgba(37,99,235,.18)] ring-2 transition hover:scale-[1.02] ${
+                    className={`rounded-[1.2rem] bg-white/95 px-3 py-2 text-xs font-black shadow-[0_10px_24px_rgba(37,99,235,.18)] ring-2 transition hover:scale-[1.02] lg:px-5 lg:py-3 lg:text-base ${
                       area === "parent"
                         ? "text-purple-700 ring-purple-200"
                         : "text-sky-700 ring-sky-200"
