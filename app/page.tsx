@@ -869,6 +869,27 @@ const adminPassword = "LeonEliasSolak1010!!!";
   const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
   const waitingTasks = tasks.filter((t) => t.status === "wartet");
   const waitingRewards = rewards.filter((r) => r.status === "wartet");
+  const childOpenTaskCount = childTasks.filter((t) => t.status === "offen").length;
+
+const childOpenLearningCount = learningTasks.filter(
+  (t) => t.childId === child.id && t.status === "offen"
+).length;
+
+const dailyBonusKey = `dailyBonus_${child.id}`;
+const wheelBonusKey = `punktlyWheelLastSpin_${child.id}`;
+const twentyFourHours = 24 * 60 * 60 * 1000;
+
+const dailyBonusAvailable =
+  typeof window !== "undefined" &&
+  Date.now() - Number(localStorage.getItem(dailyBonusKey) || 0) >= twentyFourHours;
+
+const wheelBonusAvailable =
+  typeof window !== "undefined" &&
+  Date.now() - Number(localStorage.getItem(wheelBonusKey) || 0) >= twentyFourHours;
+
+const childBonusBadgeCount =
+  (dailyBonusEnabled && dailyBonusAvailable ? 1 : 0) +
+  (bonusWheelEnabled && wheelBonusAvailable ? 1 : 0);
   const motivationMessages = [
   "Super gemacht! Du kannst stolz auf dich sein.",
   "Toll erledigt! Weiter so.",
@@ -4623,7 +4644,13 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         {area === "child" && (
           <>
             <div className="mb-6">
-  <ChildTabs view={childView} setView={setChildView} />
+  <ChildTabs
+  view={childView}
+  setView={setChildView}
+  taskBadge={childOpenTaskCount}
+  learningBadge={childOpenLearningCount}
+  bonusBadge={childBonusBadgeCount}
+/>
 </div>
 
 <div className="rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-pink-100 via-yellow-100 via-sky-100 to-purple-100 p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white">
@@ -6701,18 +6728,30 @@ className="rounded-[1.4rem] bg-gradient-to-r from-yellow-400 via-orange-300 to-a
       );
 }
 
-function ChildTabs({ view, setView }: { view: ChildView; setView: (v: ChildView) => void }) {
+function ChildTabs({
+  view,
+  setView,
+  taskBadge = 0,
+  learningBadge = 0,
+  bonusBadge = 0,
+}: {
+  view: ChildView;
+  setView: (v: ChildView) => void;
+  taskBadge?: number;
+  learningBadge?: number;
+  bonusBadge?: number;
+}) {
   return (
     <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
       <div className="flex gap-1 overflow-x-auto punktly-scrollbar-none">
         <Tab active={view === "home"} onClick={() => setView("home")} icon={<Home />} label="Start" />
-        <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
-        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
+        <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" badge={taskBadge} />
+        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" badge={learningBadge} />
         <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
         <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
         <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
+        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" badge={bonusBadge} />
       </div>
     </nav>
   );
@@ -6740,16 +6779,34 @@ function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentVi
   );
 }
 
-function Tab({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
+function Tab({
+  active,
+  onClick,
+  icon,
+  label,
+  badge = 0,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+  badge?: number;
+}) {
   return (
     <button
       onClick={onClick}
-      className={`min-w-[76px] shrink-0 rounded-[1.4rem] px-2 py-2 text-center font-black transition active:scale-95 sm:min-w-[86px] sm:px-3 sm:py-2.5 ${
+      className={`relative min-w-[76px] shrink-0 rounded-[1.4rem] px-2 py-2 text-center font-black transition active:scale-95 sm:min-w-[86px] sm:px-3 sm:py-2.5 ${
         active
           ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-md"
           : "text-sky-700 hover:bg-cyan-50"
       }`}
     >
+      {badge > 0 && (
+        <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-400 px-1 text-[11px] font-black text-white shadow-md ring-2 ring-white">
+          {badge}
+        </span>
+      )}
+
       <div className="mx-auto mb-1 flex h-5 w-5 items-center justify-center sm:h-6 sm:w-6">
         {icon}
       </div>
