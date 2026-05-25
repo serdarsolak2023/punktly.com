@@ -4842,54 +4842,13 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
 </div>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
-                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950"><span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}
+                        <div className="rounded-[1.8rem] bg-sky-50 p-4"><div className="mb-2 flex justify-between gap-3 font-black text-sky-950">
+                          <span>{child.level >= MAX_LEVEL ? "XP bis Prestige" : `XP bis Level ${child.level + 1}`}
                           </span><span className="flex items-center gap-1">{child.xp}/{xpToNext(child.level)} <CoinlyLabel motivSrc={selectedChildMotiv} text="Punktly" /></span>
                           </div><Progress value={child.xp} max={xpToNext(child.level)} /></div>
-                        <div className="rounded-[1.8rem] bg-yellow-50 p-4"><div className="mb-2 flex justify-between font-black text-sky-950">
-<div className="flex flex-col gap-2">
-
-<div className="flex flex-col gap-2">
-
-
-
-</div>
-
-</div>
-<div className="mt-4 grid gap-3">
-
-  <GoalProgress
-    icon="🎁"
-    title="Ziel für Shop"
-    name={shop.length > 0 ? shop[0].title : "Kein Ziel"}
-    current={child.coins}
-    target={shop.length > 0 ? shop[0].price : 0}
-    motivSrc={selectedChildMotiv}
-  />
-
-  <GoalProgress
-    icon="🏆"
-    title="Ziel für Belohnung"
-    name={childRewardGoalLabel || "Kein Ziel"}
-    current={child.coins}
-    target={childRewardGoalTotal}
-    motivSrc={selectedChildMotiv}
-  />
-
-  <GoalProgress
-    icon="💎"
-    title="Ziel für Schatzkiste"
-    name={chests.length > 0 ? chests[0].title : "Kein Ziel"}
-    current={child.coins}
-    target={chests.length > 0 ? chests[0].price : 0}
-    motivSrc={selectedChildMotiv}
-  />
-
-</div>
-</div>
-
-
-</div>
-                      </div>
+                        
+                        
+                                         </div>
                     </Panel>
 
                   </div>
