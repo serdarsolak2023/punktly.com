@@ -497,8 +497,8 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
       <div className="absolute left-6 top-6 text-2xl animate-floaty">✨</div>
       <div className="absolute right-8 top-8 text-2xl animate-floaty">⭐</div>
 
-      <div className="relative z-10 mx-auto mb-4 max-w-sm rounded-[1.8rem] bg-gradient-to-br from-white via-sky-50 to-yellow-50 p-4 shadow-sm">
-        <p className="text-lg font-black text-sky-950">„{message}“</p>
+      <div className="relative z-10 mx-auto mb-3 max-w-sm rounded-[1.2rem] bg-gradient-to-br from-white via-sky-50 to-yellow-50 p-3 shadow-sm sm:rounded-[1.5rem] sm:p-4">
+        <p className="text-sm font-black text-sky-950 sm:text-base">„{message}“</p>
         <p className="mt-1 text-sm font-bold text-blue-600">Dein eigenes Zimmer</p>
       </div>
 
@@ -506,20 +506,20 @@ function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }
         <img
           src={activeMotiv}
           alt="Gewähltes Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl"
+          className="mx-auto h-28 w-28 animate-floaty rounded-full bg-white/80 object-contain p-2 drop-shadow-xl sm:h-40 sm:w-40 sm:p-3 md:h-48 md:w-48"
         />
       ) : (
         <img
           src="/PunktlyLogo.png"
           alt="Punktly Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty drop-shadow-xl"
+          className="mx-auto h-28 w-28 animate-floaty drop-shadow-xl sm:h-40 sm:w-40 md:h-48 md:w-48"
         />
       )}
 
-      <div className="mt-4 grid grid-cols-3 gap-2">
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-sky-800">Level {child.level}</div>
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-orange-700">🔥 {child.streak}</div>
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-amber-700">{child.coins} Coins</div>
+      <div className="mt-3 grid grid-cols-3 gap-1.5 sm:gap-2">
+        <div className="rounded-[1rem] bg-white/85 p-2 text-center text-xs font-black text-sky-800 sm:p-3 sm:text-sm">Level {child.level}</div>
+        <div className="rounded-[1rem] bg-white/85 p-2 text-center text-xs font-black text-orange-700 sm:p-3 sm:text-sm">🔥 {child.streak}</div>
+        <div className="rounded-[1rem] bg-white/85 p-2 text-center text-xs font-black text-amber-700 sm:p-3 sm:text-sm">{child.coins} Coins</div>
       </div>
     </div>
   );
@@ -629,6 +629,191 @@ function syncPrestigeStars(child: Child): Child {
     prestigeStars: Math.max(Number(child.prestigeStars || 0), countPrestigeStars(child)),
     achievements: cleanAchievements(child.achievements || []),
   };
+}
+
+
+function ResponsiveStyles() {
+  return (
+    <style jsx global>{`
+      /* PunktlyCoinly responsive compact layer:
+         Mobile first = kompakt, Tablet = mittel, Desktop = normaler. */
+      .punktly-responsive {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      .punktly-responsive * {
+        box-sizing: border-box;
+      }
+
+      .punktly-responsive .punktly-card-compact {
+        border-radius: 1.25rem;
+      }
+
+      @media (max-width: 640px) {
+        .punktly-responsive {
+          font-size: 14px;
+        }
+
+        .punktly-responsive main,
+        main.punktly-responsive {
+          padding-left: 0.75rem !important;
+          padding-right: 0.75rem !important;
+          padding-top: 0.75rem !important;
+        }
+
+        .punktly-responsive section {
+          padding: 0.75rem !important;
+          border-radius: 1.15rem !important;
+        }
+
+        .punktly-responsive h1 {
+          font-size: clamp(1.45rem, 7vw, 2.2rem) !important;
+          line-height: 1.08 !important;
+        }
+
+        .punktly-responsive h2 {
+          font-size: clamp(1.15rem, 5vw, 1.45rem) !important;
+          line-height: 1.12 !important;
+          margin-bottom: 0.7rem !important;
+        }
+
+        .punktly-responsive h3 {
+          font-size: 1rem !important;
+          line-height: 1.18 !important;
+        }
+
+        .punktly-responsive p,
+        .punktly-responsive span,
+        .punktly-responsive label,
+        .punktly-responsive li {
+          line-height: 1.25 !important;
+        }
+
+        .punktly-responsive button {
+          min-height: 2.35rem;
+          padding: 0.55rem 0.75rem !important;
+          border-radius: 1rem !important;
+          font-size: 0.86rem !important;
+          line-height: 1.15 !important;
+        }
+
+        .punktly-responsive input,
+        .punktly-responsive textarea,
+        .punktly-responsive select {
+          padding: 0.7rem !important;
+          border-radius: 1rem !important;
+          font-size: 0.9rem !important;
+          line-height: 1.2 !important;
+        }
+
+        .punktly-responsive textarea {
+          min-height: 5.5rem !important;
+        }
+
+        .punktly-responsive svg {
+          width: 1rem !important;
+          height: 1rem !important;
+          flex-shrink: 0;
+        }
+
+        .punktly-responsive img[alt="Punktly Motiv"],
+        .punktly-responsive img[alt="Gewähltes Motiv"],
+        .punktly-responsive img[alt="Punktly Logo"] {
+          max-width: 8.5rem !important;
+          max-height: 8.5rem !important;
+        }
+
+        .punktly-responsive [class*="gap-5"],
+        .punktly-responsive [class*="gap-6"],
+        .punktly-responsive [class*="gap-8"] {
+          gap: 0.75rem !important;
+        }
+
+        .punktly-responsive [class*="p-6"],
+        .punktly-responsive [class*="p-5"] {
+          padding: 0.85rem !important;
+        }
+
+        .punktly-responsive [class*="px-5"],
+        .punktly-responsive [class*="px-6"] {
+          padding-left: 0.85rem !important;
+          padding-right: 0.85rem !important;
+        }
+
+        .punktly-responsive [class*="py-4"],
+        .punktly-responsive [class*="py-5"] {
+          padding-top: 0.65rem !important;
+          padding-bottom: 0.65rem !important;
+        }
+
+        .punktly-responsive [class*="text-6xl"] {
+          font-size: 2rem !important;
+        }
+
+        .punktly-responsive [class*="text-5xl"] {
+          font-size: 1.8rem !important;
+        }
+
+        .punktly-responsive [class*="text-4xl"] {
+          font-size: 1.55rem !important;
+        }
+
+        .punktly-responsive [class*="text-3xl"] {
+          font-size: 1.35rem !important;
+        }
+
+        .punktly-responsive [class*="text-2xl"] {
+          font-size: 1.15rem !important;
+        }
+
+        .punktly-responsive .fixed {
+          overscroll-behavior: contain;
+        }
+
+        .punktly-responsive .fixed > div {
+          max-height: 92dvh !important;
+          overflow-y: auto !important;
+        }
+      }
+
+      @media (min-width: 641px) and (max-width: 1024px) {
+        .punktly-responsive {
+          font-size: 15px;
+        }
+
+        .punktly-responsive section {
+          padding: 1rem !important;
+          border-radius: 1.5rem !important;
+        }
+
+        .punktly-responsive button {
+          padding: 0.7rem 1rem !important;
+          border-radius: 1.15rem !important;
+          font-size: 0.95rem !important;
+        }
+
+        .punktly-responsive input,
+        .punktly-responsive textarea,
+        .punktly-responsive select {
+          padding: 0.9rem !important;
+          border-radius: 1.2rem !important;
+        }
+
+        .punktly-responsive img[alt="Punktly Motiv"],
+        .punktly-responsive img[alt="Gewähltes Motiv"],
+        .punktly-responsive img[alt="Punktly Logo"] {
+          max-width: 12rem !important;
+          max-height: 12rem !important;
+        }
+
+        .punktly-responsive .fixed > div {
+          max-height: 92dvh !important;
+          overflow-y: auto !important;
+        }
+      }
+    `}</style>
+  );
 }
 
 export default function PunktlyRoleSplit() {
@@ -1047,7 +1232,7 @@ function NumberKeypadField({ label, value, setter, showEuro = false }: {
     <button
       type="button"
       onClick={() => openNumberKeypad(value, setter)}
-      className="w-full rounded-[1.5rem] border-2 border-sky-100 bg-white/90 p-4 text-left font-bold text-slate-700 shadow-sm"
+      className="w-full rounded-[1.1rem] border-2 border-sky-100 bg-white/90 p-3 text-left text-sm font-bold text-slate-700 shadow-sm sm:rounded-[1.35rem] sm:p-4 sm:text-base"
     >
       <div className="flex items-center justify-between">
         <span>
@@ -2625,7 +2810,8 @@ if (
 
   if (!isPurchased) {
     return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
+    <main className="punktly-responsive relative min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
+        <ResponsiveStyles />
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
@@ -3197,7 +3383,8 @@ bg: "bg-purple-50",
   }
 
   return (
-    <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
+    <main className="punktly-responsive relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
+      <ResponsiveStyles />
       
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
@@ -3227,7 +3414,7 @@ bg: "bg-purple-50",
         {numberKeypadValue || "0"}
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 
         {["1","2","3","4","5","6","7","8","9"].map((num) => (
           <button
@@ -4410,7 +4597,7 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
         {pinInput.length > 0 ? "●".repeat(pinInput.length) : "PIN"}
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {["1","2","3","4","5","6","7","8","9"].map((num) => (
           <button
             key={num}
@@ -6564,12 +6751,12 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 }
 
 function BigNumber({ value, label }: { value: number; label: string }) {
-  return <div className="text-center"><div className="text-6xl font-black text-sky-950">{value}</div><div className="mt-2 font-bold text-sky-700">{label}</div></div>;
+  return <div className="text-center"><div className="text-3xl font-black text-sky-950 sm:text-5xl lg:text-6xl">{value}</div><div className="mt-1 text-sm font-bold text-sky-700 sm:mt-2 sm:text-base">{label}</div></div>;
 }
 
 function Progress({ value, max }: { value: number; max: number }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
-  return <div><div className="h-4 w-full overflow-hidden rounded-full border border-sky-100 bg-white/90"><div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 transition-all" style={{ width: `${pct}%` }} /></div><div className="mt-1 text-xs font-black text-sky-700">{pct}% geschafft</div></div>;
+  return <div><div className="h-3 w-full overflow-hidden rounded-full border border-sky-100 bg-white/90 sm:h-4"><div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 transition-all" style={{ width: `${pct}%` }} /></div><div className="mt-1 text-xs font-black text-sky-700">{pct}% geschafft</div></div>;
 }
 
 function CoinlyLabel({ motivSrc, text = "Coinly" }: { motivSrc: string; text?: string }) {
