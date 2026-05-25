@@ -4763,17 +4763,45 @@ scale-[0.82] sm:scale-[0.88] md:scale-[0.94] lg:scale-100">
 
 <div className="flex flex-col gap-2">
 
-  <span>
-    🎁 Ziel für Shop: {shop.length > 0 ? shop[0].title : "Kein Ziel"}
-  </span>
+<div className="flex flex-col gap-3">
 
-  <span>
-    🏆 Ziel für Belohnung: {childRewardGoalLabel || "Kein Ziel"}
-  </span>
+  <div className="flex justify-between">
+    <span>
+      🎁 Ziel für Shop: {shop.length > 0 ? shop[0].title : "Kein Ziel"}
+    </span>
 
-  <span>
-    💎 Ziel für Schatzkiste: {chests.length > 0 ? chests[0].title : "Kein Ziel"}
-  </span>
+    <span className="font-black">
+      {child.coins}/{shop.length > 0 ? shop[0].price : 0}
+      {" "}
+      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
+    </span>
+  </div>
+
+  <div className="flex justify-between">
+    <span>
+      🏆 Ziel für Belohnung: {childRewardGoalLabel || "Kein Ziel"}
+    </span>
+
+    <span className="font-black">
+      {child.coins}/{childRewardGoalTotal}
+      {" "}
+      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
+    </span>
+  </div>
+
+  <div className="flex justify-between">
+    <span>
+      💎 Ziel für Schatzkiste: {chests.length > 0 ? chests[0].title : "Kein Ziel"}
+    </span>
+
+    <span className="font-black">
+      {child.coins}/{chests.length > 0 ? chests[0].price : 0}
+      {" "}
+      <CoinlyLabel motivSrc={selectedChildMotiv} text="Coinly" />
+    </span>
+  </div>
+
+</div>
 
 </div>
 
