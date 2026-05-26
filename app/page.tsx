@@ -4684,7 +4684,7 @@ window.open(
 />
 </div>
 <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-4 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
-  <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_480px] lg:grid-cols-[minmax(0,1fr)_560px]">
+  <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_430px] lg:grid-cols-[minmax(0,1fr)_560px]">
 
     <div className="flex items-center gap-3 md:gap-4">
       <div className="flex items-center justify-center">
@@ -4736,12 +4736,12 @@ window.open(
         </select>
       )}
 
-      <div className="flex max-w-[240px] flex-wrap gap-1 lg:max-w-[320px] lg:gap-2">
+      <div className="grid grid-cols-3 gap-2 max-w-[420px]">
         <span className="rounded-full bg-pink-100 px-4 py-2 text-[11px] md:text-xs font-black text-pink-700">
           🎂 {child.age || "-"} Jahre
         </span>
 
-        <span className="rounded-full bg-green-100 px-4 py-2 text-[11px] md:text-xsfont-black text-green-700">
+        <span className="rounded-full bg-green-100 px-4 py-2 text-[11px] md:text-xs font-black text-green-700">
           🎨 {child.favoriteColor || "-"}
         </span>
 
@@ -4750,7 +4750,7 @@ window.open(
         </span>
       </div>
 
-      <div className="mt-2 flex max-w-[240px] flex-wrap items-center gap-1 lg:max-w-[320px] lg:gap-2">
+      <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-white/80 px-4 py-3 text-xs font-black text-sky-800">
           {(child.profileBadges || [])[0] ? "Motiv gewählt ✨" : "Noch kein Motiv gewählt ✨"}
         </span>
