@@ -4100,13 +4100,15 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     })}
   </span>
 </div>
-<button
-  type="button"
-  onClick={() => setShowContactPopup(true)}
-  className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-pink-600 shadow-sm transition hover:scale-105"
->
-  ✉️ Kontakt aufnehmen
-</button>
+{area === "parent" && (
+  <button
+    type="button"
+    onClick={() => setShowContactPopup(true)}
+    className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-pink-600 shadow-sm transition hover:scale-105"
+  >
+    ✉️ Kontakt aufnehmen
+  </button>
+)}
 {trialIsActive && trialEndsAt && (
   <div className="flex h-[40px] items-center rounded-full bg-emerald-50 px-4 text-sm font-black text-emerald-700 shadow-sm ring-1 ring-emerald-200">
 
