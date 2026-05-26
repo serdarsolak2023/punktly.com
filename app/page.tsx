@@ -1158,12 +1158,13 @@ function celebrate(message: string) {
         return;
       }
 
-      setSavedParentPin(pinInput.trim());
+      const newPinHash = await hashPin(pinInput.trim());
+setSavedParentPin(newPinHash);
       
       const user = firebaseUser || auth.currentUser;
       if (user) {
         setDoc(doc(db, "users", user.uid), {
-          parentPinHash: await hashPin(pinInput.trim()),
+          parentPinHash: newPinHash,
           updatedAt: serverTimestamp(),
         }, { merge: true });
       }
@@ -1175,7 +1176,9 @@ function celebrate(message: string) {
       return;
     }
 
-    if (pinInput.trim() === savedParentPin) {
+    const enteredPinHash = await hashPin(pinInput.trim());
+
+if (enteredPinHash === savedParentPin) {
       setParentUnlocked(true);
       setArea("parent");
       setParentView("dashboard");
@@ -1254,13 +1257,14 @@ function NumberKeypadField({ label, value, setter, showEuro = false }: {
         return;
       }
 
-      setSavedParentPin(resetNewParentPin.trim());
+      const resetPinHash = await hashPin(resetNewParentPin.trim());
+setSavedParentPin(resetPinHash);
       
 
       const user = firebaseUser || auth.currentUser;
       if (user) {
         await setDoc(doc(db, "users", user.uid), {
-          parentPinHash: await hashPin(resetNewParentPin.trim()),
+          parentPinHash: resetPinHash,
           updatedAt: serverTimestamp(),
         }, { merge: true });
       }
