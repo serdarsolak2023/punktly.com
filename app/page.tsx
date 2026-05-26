@@ -4742,67 +4742,142 @@ window.open(
               {childView === "home" && (
                 <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
                   <div className="space-y-5">
-                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-5 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                        <div className="flex items-center justify-center">
-                          {(child.profileBadges || [])[0] ? (
-                            <img
-                              src={(child.profileBadges || [])[0]}
-                              alt="Gewähltes Profil-Motiv"
-                              className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty rounded-full object-cover shadow-sm overflow-hidden"
-                            />
-                          ) : (
-                            <FoxCoinImage className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h2 className="text-3xl font-black text-sky-950">Hallo {child.name} 👋</h2>
-                          <p className="text-lg font-bold text-sky-900">Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}</p>
-                          {!(child.profileBadges || [])[0] && (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              <span className="rounded-full bg-white/60 px-3 py-1 font-black text-sky-800">Such dir dein Profil-Motiv aus ✨</span>
-                            </div>
-                          )}
+                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-4 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
+  <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
 
-                          {showBadgeChooser && (
-                            <div className="mt-4 rounded-[1.8rem] bg-white/80 p-3 shadow-inner">
-                              <div className="mb-2 flex items-center justify-between gap-3">
-                                <p className="text-sm font-black text-sky-900">Wähle ein Motiv für dein Profil.</p>
-                                <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-black text-sky-700">{(child.profileBadges || []).length}/1</span>
-                              </div>
-                              <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10">
-                                {profileBadgeOptions.map(badge => {
-                                  const active = (child.profileBadges || []).includes(badge.src);
-                                  return (
-                                    <button
-                                      key={badge.id}
-                                      onClick={() => toggleProfileBadge(badge.src)}
-                                      className={`rounded-2xl border-2 p-2 shadow-sm transition hover:scale-105 active:scale-95 ${active ? "border-sky-500 bg-sky-100" : "border-white bg-white/90"}`}
-                                      title={badge.label}
-                                    >
-                                      <img
-                                        src={badge.src}
-                                        alt={badge.label}
-                                        className="mx-auto h-9 w-9 object-contain"
-                                        onError={(event) => { event.currentTarget.style.opacity = "0.2"; }}
-                                      />
-                                    </button>
-                                  );
-                                })}
-                              </div>
-                              <p className="mt-2 text-xs font-bold text-sky-700">PNG-Dateien bitte als badge-01.png bis badge-30.png in public/badges ablegen. Es kann immer nur ein Motiv aktiv sein.</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+    <div className="flex items-center gap-4">
+      <div className="flex items-center justify-center">
+        {(child.profileBadges || [])[0] ? (
+          <img
+            src={(child.profileBadges || [])[0]}
+            alt="Gewähltes Profil-Motiv"
+            className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty rounded-full object-cover shadow-sm overflow-hidden"
+          />
+        ) : (
+          <FoxCoinImage className="h-16 w-16 sm:h-20 sm:w-20 animate-floaty" />
+        )}
+      </div>
+
+      <div className="flex-1">
+        <h2 className="text-3xl font-black text-sky-950">
+          Hallo {child.name} 👋
+        </h2>
+
+        <p className="text-lg font-bold text-sky-900">
+          Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}
+        </p>
+
+        {!(child.profileBadges || [])[0] && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="rounded-full bg-white/60 px-3 py-1 font-black text-sky-800">
+              Such dir dein Profil-Motiv aus ✨
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div className="relative rounded-[1.5rem] bg-white/45 p-3 pr-4">
+      {children.length > 1 && (
+        <select
+          value={selectedChildId}
+          onChange={(e) => {
+            setSelectedChildId(Number(e.target.value));
+            setShowBadgeChooser(false);
+          }}
+          className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-2 text-xs font-black text-sky-800 shadow-sm"
+        >
+          {children.map((kid) => (
+            <option key={kid.id} value={kid.id}>
+              {kid.name}
+            </option>
+          ))}
+        </select>
+      )}
+
+      <div className="flex flex-wrap gap-2 pr-28">
+        <span className="rounded-full bg-pink-100 px-3 py-1 text-xs font-black text-pink-700">
+          🎂 {child.age || "-"} Jahre
+        </span>
+
+        <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-black text-green-700">
+          🎨 {child.favoriteColor || "-"}
+        </span>
+
+        <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-black text-cyan-700">
+          🐾 {child.favoriteAnimal || "-"}
+        </span>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <span className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-sky-800">
+          {(child.profileBadges || [])[0] ? "Motiv gewählt ✨" : "Noch kein Motiv gewählt ✨"}
+        </span>
+
+        <button
+          type="button"
+          onClick={() => setShowBadgeChooser(!showBadgeChooser)}
+          className="rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-sky-300 px-4 py-2 text-xs font-black text-white shadow-sm transition hover:scale-105"
+        >
+          🎨 Motiv auswählen
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  {showBadgeChooser && (
+    <div className="mt-4 rounded-[1.8rem] bg-white/80 p-3 shadow-inner">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <p className="text-sm font-black text-sky-900">
+          Wähle ein Motiv für dein Profil.
+        </p>
+
+        <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-black text-sky-700">
+          {(child.profileBadges || []).length}/1
+        </span>
+      </div>
+
+      <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10">
+        {profileBadgeOptions.map(badge => {
+          const active = (child.profileBadges || []).includes(badge.src);
+
+          return (
+            <button
+              key={badge.id}
+              onClick={() => toggleProfileBadge(badge.src)}
+              className={`rounded-2xl border-2 p-2 shadow-sm transition hover:scale-105 active:scale-95 ${
+                active ? "border-sky-500 bg-sky-100" : "border-white bg-white/90"
+              }`}
+              title={badge.label}
+            >
+              <img
+                src={badge.src}
+                alt={badge.label}
+                className="mx-auto h-9 w-9 object-contain"
+                onError={(event) => {
+                  event.currentTarget.style.opacity = "0.2";
+                }}
+              />
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="mt-2 text-xs font-bold text-sky-700">
+        PNG-Dateien bitte als badge-01.png bis badge-30.png in public/badges ablegen. Es kann immer nur ein Motiv aktiv sein.
+      </p>
+    </div>
+  )}
+</div>
+
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
-                        <StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
+<StatCard icon={<Coin />} label="Coins" value={child.coins.toString()} />
 <StatCard icon="🎮" label="Level" value={child.level.toString()} />
 <StatCard icon="⭐" label="Sterne" value={`${starsFromAchievements(child)}`} />
 <StatCard icon="🔥" label="Serie" value={`${child.streak} Tage`} />
-<StatCard icon="✅" label="Erledigt" value={`${completedPercent}%`} />
+<StatCard icon="📋" label="Erledigt" value={`${completedPercent}%`} />
                       </div>
                       <div className={`mt-4 inline-flex rounded-full px-4 py-2 font-black ${levelRank(child.level).color}`}>
                         {levelRank(child.level).emoji} Rang: {levelRank(child.level).title}
