@@ -4726,7 +4726,7 @@ window.open(
             setSelectedChildId(Number(e.target.value));
             setShowBadgeChooser(false);
           }}
-          className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-2 text-xs font-black text-sky-800 shadow-sm"
+          className="absolute right-6 top-3 rounded-full border-2 border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 px-5 py-2 text-sm font-black text-sky-900 shadow-md"
         >
           {children.map((kid) => (
             <option key={kid.id} value={kid.id}>
@@ -4737,28 +4737,28 @@ window.open(
       )}
 
       <div className="flex max-w-[240px] flex-wrap gap-1 lg:max-w-[320px] lg:gap-2">
-        <span className="rounded-full bg-pink-100 px-3 py-1 text-[11px] md:text-xs font-black text-pink-700">
+        <span className="rounded-full bg-pink-100 px-4 py-2 text-[11px] md:text-xs font-black text-pink-700">
           🎂 {child.age || "-"} Jahre
         </span>
 
-        <span className="rounded-full bg-green-100 px-3 py-1 text-[11px] md:text-xsfont-black text-green-700">
+        <span className="rounded-full bg-green-100 px-4 py-2 text-[11px] md:text-xsfont-black text-green-700">
           🎨 {child.favoriteColor || "-"}
         </span>
 
-        <span className="rounded-full bg-cyan-100 px-3 py-1 text-[11px] md:text-xs font-black text-cyan-700">
+        <span className="rounded-full bg-cyan-100 px-4 py-2 text-[11px] md:text-xs font-black text-cyan-700">
           🐾 {child.favoriteAnimal || "-"}
         </span>
       </div>
 
       <div className="mt-2 flex max-w-[240px] flex-wrap items-center gap-1 lg:max-w-[320px] lg:gap-2">
-        <span className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-sky-800">
+        <span className="rounded-full bg-white/80 px-4 py-3 text-xs font-black text-sky-800">
           {(child.profileBadges || [])[0] ? "Motiv gewählt ✨" : "Noch kein Motiv gewählt ✨"}
         </span>
 
         <button
           type="button"
           onClick={() => setShowBadgeChooser(!showBadgeChooser)}
-          className="rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-sky-300 px-4 py-1.5 text-xs font-black text-white shadow-sm transition hover:scale-105"
+          className="rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-sky-300 px-5 py-2 text-xs font-black text-white shadow-sm transition hover:scale-105"
         >
           🎨 Motiv auswählen
         </button>
