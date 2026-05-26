@@ -763,7 +763,7 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = true;
+  const maintenanceMode = false;
 const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -1007,6 +1007,25 @@ function coinsToEuroText(coins: number) {
 
   return `${coins} Coins = ${euro.toFixed(2).replace(".", ",")} €`;
 }
+
+async function hashPin(pin: string) {
+  const encoder = new TextEncoder();
+
+  const data = encoder.encode(pin);
+
+  const hashBuffer = await crypto.subtle.digest(
+    "SHA-256",
+    data
+  );
+
+  return Array.from(
+    new Uint8Array(hashBuffer)
+  )
+    .map(byte =>
+      byte.toString(16).padStart(2, "0")
+    )
+    .join("");
+}
   function getTrialTimeLeft() {
   if (!trialEndsAt) return "";
 
@@ -1132,7 +1151,7 @@ function celebrate(message: string) {
     setPinInput("");
   }
 
-  function enterParent() {
+ async function enterParent() {
     if (!savedParentPin) {
       if (pinInput.trim().length < 4) {
         celebrate("PIN muss mindestens 4 Zeichen haben.");
@@ -1140,11 +1159,11 @@ function celebrate(message: string) {
       }
 
       setSavedParentPin(pinInput.trim());
-      localStorage.setItem("punktlyParentPin", pinInput.trim());
+      
       const user = firebaseUser || auth.currentUser;
       if (user) {
         setDoc(doc(db, "users", user.uid), {
-          parentPin: pinInput.trim(),
+          parentPinHash: await hashPin(pinInput.trim()),
           updatedAt: serverTimestamp(),
         }, { merge: true });
       }
@@ -1212,6 +1231,7 @@ function NumberKeypadField({ label, value, setter, showEuro = false }: {
     </button>
   );
 }
+
   async function resetParentPin() {
     try {
       if (!parentSecurityQuestion.trim() || !parentSecurityAnswer.trim()) {
@@ -1235,12 +1255,12 @@ function NumberKeypadField({ label, value, setter, showEuro = false }: {
       }
 
       setSavedParentPin(resetNewParentPin.trim());
-      localStorage.setItem("punktlyParentPin", resetNewParentPin.trim());
+      
 
       const user = firebaseUser || auth.currentUser;
       if (user) {
         await setDoc(doc(db, "users", user.uid), {
-          parentPin: resetNewParentPin.trim(),
+          parentPinHash: await hashPin(resetNewParentPin.trim()),
           updatedAt: serverTimestamp(),
         }, { merge: true });
       }
