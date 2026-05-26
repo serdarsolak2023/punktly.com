@@ -2916,12 +2916,10 @@ if (!isPurchased) {
 </p>
 <div className="relative mx-auto mt-4 w-fit rounded-[1.4rem] bg-red-100/95 px-4 py-3 shadow-lg ring-2 ring-red-200">
 
-  <p className="text-[10px] font-black uppercase tracking-wide text-pink-600">
+  <p className="text-xl font-black text-pink-600">
     ✨ PREMIUM
   </p>
-      <p className="mt-1 text-sm font-black text-gray-400 line-through">
-        Premium Monat
-      </p>
+
       <div className="mt-1 flex items-center gap-2">
     <span className="text-xl font-black text-pink-600">
       6,99 €
