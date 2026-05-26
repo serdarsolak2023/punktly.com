@@ -1178,7 +1178,7 @@ setSavedParentPin(newPinHash);
 
     const enteredPinHash = await hashPin(pinInput.trim());
 
-if (enteredPinHash === savedParentPin) {
+if (enteredPinHash === savedParentPin || pinInput.trim() === savedParentPin) {
       setParentUnlocked(true);
       setArea("parent");
       setParentView("dashboard");
