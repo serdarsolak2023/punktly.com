@@ -4686,7 +4686,7 @@ window.open(
 <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-4 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
   <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
 
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3 md:gap-4">
       <div className="flex items-center justify-center">
         {(child.profileBadges || [])[0] ? (
           <img
@@ -4700,11 +4700,11 @@ window.open(
       </div>
 
       <div className="flex-1">
-        <h2 className="text-3xl font-black text-sky-950">
+        <h2 className="text-2xl font-black leading-tight text-sky-950 md:text-3xl">
           Hallo {child.name} 👋
         </h2>
 
-        <p className="text-lg font-bold text-sky-900">
+        <p className="mt-1 text-sm font-black leading-tight text-sky-900 md:text-base">
           Heute sammeln wir Punkte und Coins! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}
         </p>
 
@@ -4718,7 +4718,7 @@ window.open(
       </div>
     </div>
 
-    <div className="relative rounded-[1.5rem] bg-white/45 p-3 pr-4">
+    <div className="relative rounded-[1.5rem] bg-white/45 p-3">
       {children.length > 1 && (
         <select
           value={selectedChildId}
@@ -4737,15 +4737,15 @@ window.open(
       )}
 
       <div className="flex flex-wrap gap-2 pr-28">
-        <span className="rounded-full bg-pink-100 px-3 py-1 text-xs font-black text-pink-700">
+        <span className="rounded-full bg-pink-100 px-3 py-1 text-[11px] md:text-xs font-black text-pink-700">
           🎂 {child.age || "-"} Jahre
         </span>
 
-        <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-black text-green-700">
+        <span className="rounded-full bg-green-100 px-3 py-1 text-[11px] md:text-xsfont-black text-green-700">
           🎨 {child.favoriteColor || "-"}
         </span>
 
-        <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-black text-cyan-700">
+        <span className="rounded-full bg-cyan-100 px-3 py-1 text-[11px] md:text-xs font-black text-cyan-700">
           🐾 {child.favoriteAnimal || "-"}
         </span>
       </div>
