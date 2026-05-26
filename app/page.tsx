@@ -4726,7 +4726,7 @@ window.open(
             setSelectedChildId(Number(e.target.value));
             setShowBadgeChooser(false);
           }}
-          className="absolute right-6 top-[3.8rem] rounded-full border-2 border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 px-5 py-2 text-sm font-black text-sky-900 shadow-md"
+          className="absolute right-6 top-[4.2rem] rounded-full border-2 border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 px-5 py-2 text-sm font-black text-sky-900 shadow-md"
         >
           {children.map((kid) => (
             <option key={kid.id} value={kid.id}>
