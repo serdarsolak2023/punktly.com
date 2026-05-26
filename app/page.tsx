@@ -4736,7 +4736,7 @@ window.open(
         </select>
       )}
 
-      <div className="flex flex-wrap gap-2 pr-28">
+      <div className="flex max-w-[240px] flex-wrap gap-2">
         <span className="rounded-full bg-pink-100 px-3 py-1 text-[11px] md:text-xs font-black text-pink-700">
           🎂 {child.age || "-"} Jahre
         </span>
@@ -4750,7 +4750,7 @@ window.open(
         </span>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+      <div className="mt-3 flex max-w-[240px] flex-wrap items-center gap-2">
         <span className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-sky-800">
           {(child.profileBadges || [])[0] ? "Motiv gewählt ✨" : "Noch kein Motiv gewählt ✨"}
         </span>
