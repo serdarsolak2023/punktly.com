@@ -122,7 +122,7 @@ datenschutz: {
 "Dazu gehören insbesondere:",
 "• E-Mail-Adresse bei Anmeldung mit Google",
 "• Anzeigename oder Benutzername",
-"• Kinderprofile",
+"• Kinderprofile (z. B. Benutzername, Alter, Lieblingsfarbe, Lieblingstier)",
 "• Coins, Fortschritte, Aufgaben und Belohnungen",
 "• Premiumstatus",
 "• Testphasenstatus",
@@ -164,13 +164,28 @@ datenschutz: {
 "firebase.google.com/support/privacy",
 
 
-"6. Google Play und Premiumdienste",
+"6. Google Play, Testphase und Premiumdienste",
 
-"Premium-Abonnements sowie digitale Inhalte werden ausschließlich über Google Play verarbeitet.",
+"PunktlyCoinly bietet eine kostenlose Testphase von 48 Stunden.",
+
+"Nach Ablauf der Testphase endet der Zugriff automatisch.",
+
+"Es erfolgt keine automatische Verlängerung und keine automatische Abbuchung.",
+
+"Nutzer entscheiden selbst, ob anschließend freiwillig ein Premium-Zugang abgeschlossen wird.",
+
+"Mögliche Premiumzugänge:",
+
+"• Premium Monat – 6,99 €",
+"• Premium Jahr – 55,99 €",
+
+"Premium-Abonnements werden ausschließlich über Google Play verarbeitet.",
 
 "PunktlyCoinly verarbeitet selbst keine Zahlungsdaten wie Kreditkarteninformationen.",
 
 "Die Zahlungsabwicklung erfolgt ausschließlich durch Google Play.",
+
+"Abonnements können jederzeit über Google Play verwaltet oder beendet werden.",
 
 
 "7. Speicherung und Löschung von Daten",
@@ -286,9 +301,13 @@ widerruf: {
 
 "2. Leistungen der App",
 
-"PunktlyCoinly ist eine Familien- und Motivations-App zur Verwaltung von Aufgaben, Coins, Fortschritten und Belohnungen.",
+"PunktlyCoinly ist eine Familien- und Motivations-App zur Verwaltung von Aufgaben, Coins, Fortschritten, Lernbereichen und Belohnungen.",
 
-"Bestimmte Funktionen können zukünftig kostenpflichtig sein.",
+"Die App kann zunächst für 48 Stunden kostenlos getestet werden.",
+
+"Nach Ablauf der Testphase endet der Zugriff automatisch.",
+
+"Es erfolgt keine automatische Verlängerung und keine automatische Abbuchung.",
 
 
 "3. Nutzerkonten",
@@ -298,11 +317,22 @@ widerruf: {
 "Nutzer sind verpflichtet, ihre Zugangsdaten sicher aufzubewahren.",
 
 
-"4. Käufe und Zahlungen",
+"4. Premium-Zugänge und Zahlungen",
 
-"Digitale Käufe und Zahlungen innerhalb der App werden über Google Play verarbeitet.",
+"Nach Ablauf der kostenlosen Testphase können Nutzer freiwillig einen Premium-Zugang erwerben.",
+
+"Mögliche Premiumzugänge:",
+
+"• Premium Monat – 6,99 €",
+"• Premium Jahr – 55,99 €",
+
+"Ein Premium-Zugang wird nicht automatisch abgeschlossen.",
+
+"Digitale Käufe und Zahlungen werden ausschließlich über Google Play verarbeitet.",
 
 "Es gelten zusätzlich die Nutzungsbedingungen und Zahlungsrichtlinien von Google Play.",
+
+"Abonnements können jederzeit über Google Play verwaltet oder beendet werden.",
 
 
 "5. Pflichten der Nutzer",
@@ -735,7 +765,7 @@ export default function PunktlyRoleSplit() {
   const [isAuthReady, setIsAuthReady] = useState(false);
   const maintenanceMode = false;
 const [maintenancePassword, setMaintenancePassword] = useState("");
-const adminPassword = "LeonEliasSolak1010!!!";
+
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
   const [newLearningMinutes, setNewLearningMinutes] = useState(3);
   const [activeLearningTask, setActiveLearningTask] = useState<any | null>(null);
@@ -2107,8 +2137,9 @@ updates.updatedAt = serverTimestamp();
 const data = snap.data();
 
 if (data?.trialActive && data?.trialEndsAt > Date.now()) {
-  setHasPaid(true);
+  setHasPaid(false);
   setIsPurchased(true);
+  setTrialIsActive(true);
   setTrialEndsAt(data.trialEndsAt);
 setTrialIsActive(true);
   
@@ -2134,6 +2165,7 @@ setTrialIsActive(false);
       if (snap.exists() && snap.data().paid === true) {
         setHasPaid(true);
         setIsPurchased(true);
+         setTrialIsActive(true);
 setShowLoginWelcomePopup(true);
 
 if (familyDataLoadedForUid !== user.uid) {
@@ -2772,39 +2804,7 @@ if (
 
   return () => clearTimeout(timer);
 }, [activeLearningTask, learningTimeLeft, activeReadingText, activeMathTask]);
-if (maintenanceMode && maintenancePassword !== adminPassword) {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
-      <div className="w-full max-w-md rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
-        <FoxCoinImage className="mx-auto h-24 w-24" />
 
-        <h1 className="mt-4 text-3xl font-black text-sky-900">
-          PunktlyCoinly
-        </h1>
-
-        <div className="mt-5 rounded-[1.5rem] bg-yellow-50 p-4">
-          <div className="text-5xl">🚧</div>
-
-          <h2 className="mt-2 text-xl font-black text-orange-700">
-            Wartungsarbeiten
-          </h2>
-
-          <p className="mt-3 font-bold text-slate-700">
-            Die App wird gerade verbessert.
-          </p>
-
-          <input
-            type="password"
-            placeholder="Passwort"
-            value={maintenancePassword}
-            onChange={(e) => setMaintenancePassword(e.target.value)}
-            className="mt-5 w-full rounded-xl border-2 p-3"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 if (!isPurchased) {
     return (
@@ -2920,7 +2920,7 @@ if (!isPurchased) {
     ✨ PREMIUM
   </p>
       <p className="mt-1 text-sm font-black text-gray-400 line-through">
-        statt 9,99 €
+        Premium Monat
       </p>
       <div className="mt-1 flex items-center gap-2">
     <span className="text-xl font-black text-pink-600">
@@ -3272,7 +3272,7 @@ bg: "bg-purple-50",
     </p>
 
     <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      statt 9,99 €
+      Premium Monat
     </p>
 
     <p className="text-2xl font-black text-pink-600">
@@ -3298,7 +3298,7 @@ bg: "bg-purple-50",
     </p>
 
     <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      statt 89,99 €
+      Spare gegenüber Monatsabo
     </p>
 
     <p className="text-2xl font-black text-yellow-600">
@@ -3310,7 +3310,7 @@ bg: "bg-purple-50",
     </p>
 
     <p className="mt-1 text-[11px] font-black text-green-600">
-      🎉 Spare 30 €
+      🎉 Spare 27,89 €
     </p>
   </div>
 
@@ -3324,23 +3324,23 @@ bg: "bg-purple-50",
     }`}
   >
     <p className="text-xs font-black text-purple-700">
-      👑 Lifetime Familie
+      👑 Kommt Bald
     </p>
 
     <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      statt 199,99 €
+      Neue Kaufoption erscheint demnächst
     </p>
 
     <p className="text-2xl font-black text-purple-600">
-      149,99 €
+      -
     </p>
 
     <p className="text-xs font-black text-purple-700">
-      einmalig
+      -
     </p>
 
     <p className="mt-1 text-[11px] font-black text-green-600">
-      🎉 Spare 50 €
+      -
     </p>
   </div>
 

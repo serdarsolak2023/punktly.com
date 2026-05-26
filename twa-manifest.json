@@ -20,12 +20,12 @@
     "path": "C:\\Punktly APP\\punktly.com\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "appVersionCode": 100,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://www.punktlycoinly.de/manifest.json",
-  "fallbackType": "webview",
+  "fallbackType": "customtabs",
   "features": {
     "playBilling": {
       "enabled": true
@@ -38,8 +38,8 @@
   "isChromeOSOnly": false,
   "isMetaQuest": false,
   "fullScopeUrl": "https://www.punktlycoinly.de/",
-  "minSdkVersion": 21,
-  "orientation": "any",
+  "minSdkVersion": 24,
+  "orientation": "portrait",
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
