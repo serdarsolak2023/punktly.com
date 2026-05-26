@@ -4683,66 +4683,7 @@ window.open(
   bonusBadge={childBonusBadgeCount}
 />
 </div>
-
-
-{childView === "features" && bonusWheelEnabled && (
-  <section className="rounded-[2rem] bg-white/90 p-6 text-center shadow-xl">
-    <h2 className="text-3xl font-black text-sky-950">
-      🎡 Glücksrad
-    </h2>
-
-    <p className="mt-2 font-bold text-sky-700">
-      Drehe einmal alle 24 Stunden und gewinne Bonus-Coins!
-    </p>
-
-    <div
-      className={`mx-auto mt-6 grid h-56 w-56 place-items-center rounded-full border-[10px] border-yellow-300 bg-gradient-to-br from-yellow-200 via-pink-200 to-sky-200 text-5xl shadow-2xl ${
-        wheelSpinning ? "animate-spin" : ""
-      }`}
-    >
-      🎡
-    </div>
-
-<button
-  onClick={spinBonusWheel}
-  disabled={wheelSpinning}
-  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(251,146,60,.35)] transition hover:scale-[1.03] disabled:opacity-60"
->
-  {wheelSpinning ? "🎡 Dreht sich..." : "🎡 Glücksrad drehen"}
-
-  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
-    ⏰ Nächster Dreh in: {getDailyBonusTime()}
-  </div>
-</button>
-  
-    <br />
-<button
-  onClick={claimDailyLoginBonus}
-  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-pink-500 via-purple-400 to-cyan-400 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(168,85,247,.35)] transition hover:scale-[1.03]"
->
-  🎁 Täglichen Bonus abholen
-
-  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
-    ⏰ Nächster Bonus in: {getDailyBonusTime()}
-  </div>
-</button>
-
-    {wheelResult !== null && (
-      <p className="mt-5 text-xl font-black text-green-600">
-        🎉 Du hast {wheelResult} Coins gewonnen!
-      </p>
-    )}
-
-    <div className="mt-6 rounded-[1.5rem] bg-yellow-50 p-4 text-sm font-bold text-yellow-700">
-      Gewinne: 5 Coins, 10 Coins, 15 Coins oder 25 Coins
-    </div>
-  </section>
-)}
-            <div className="mt-5">
-              {childView === "home" && (
-                <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
-                  <div className="space-y-5">
-                    <div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-4 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
+<div className={`rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${themeClass} p-4 shadow-[0_24px_70px_rgba(245,158,11,.20)] border-[3px] border-white`}>
   <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
 
     <div className="flex items-center gap-4">
@@ -4764,7 +4705,7 @@ window.open(
         </h2>
 
         <p className="text-lg font-bold text-sky-900">
-          Heute sammeln wir Punkte! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}
+          Heute sammeln wir Punkte und Coins! · {levelRank(child.level).emoji} {levelRank(child.level).title} · Sterne {starsFromAchievements(child)}
         </p>
 
         {!(child.profileBadges || [])[0] && (
@@ -4870,6 +4811,65 @@ window.open(
     </div>
   )}
 </div>
+
+{childView === "features" && bonusWheelEnabled && (
+  <section className="rounded-[2rem] bg-white/90 p-6 text-center shadow-xl">
+    <h2 className="text-3xl font-black text-sky-950">
+      🎡 Glücksrad
+    </h2>
+
+    <p className="mt-2 font-bold text-sky-700">
+      Drehe einmal alle 24 Stunden und gewinne Bonus-Coins!
+    </p>
+
+    <div
+      className={`mx-auto mt-6 grid h-56 w-56 place-items-center rounded-full border-[10px] border-yellow-300 bg-gradient-to-br from-yellow-200 via-pink-200 to-sky-200 text-5xl shadow-2xl ${
+        wheelSpinning ? "animate-spin" : ""
+      }`}
+    >
+      🎡
+    </div>
+
+<button
+  onClick={spinBonusWheel}
+  disabled={wheelSpinning}
+  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(251,146,60,.35)] transition hover:scale-[1.03] disabled:opacity-60"
+>
+  {wheelSpinning ? "🎡 Dreht sich..." : "🎡 Glücksrad drehen"}
+
+  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
+    ⏰ Nächster Dreh in: {getDailyBonusTime()}
+  </div>
+</button>
+  
+    <br />
+<button
+  onClick={claimDailyLoginBonus}
+  className="mt-4 w-full rounded-[1.8rem] bg-gradient-to-br from-pink-500 via-purple-400 to-cyan-400 px-6 py-5 text-xl font-black text-white shadow-[0_12px_30px_rgba(168,85,247,.35)] transition hover:scale-[1.03]"
+>
+  🎁 Täglichen Bonus abholen
+
+  <div className="mt-2 text-sm font-bold bg-white/20 rounded-xl p-2">
+    ⏰ Nächster Bonus in: {getDailyBonusTime()}
+  </div>
+</button>
+
+    {wheelResult !== null && (
+      <p className="mt-5 text-xl font-black text-green-600">
+        🎉 Du hast {wheelResult} Coins gewonnen!
+      </p>
+    )}
+
+    <div className="mt-6 rounded-[1.5rem] bg-yellow-50 p-4 text-sm font-bold text-yellow-700">
+      Gewinne: 5 Coins, 10 Coins, 15 Coins oder 25 Coins
+    </div>
+  </section>
+)}
+            <div className="mt-5">
+              {childView === "home" && (
+                <section className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
+                  <div className="space-y-5">
+                    
 
                     <Panel title="🏠 Dein Dashboard">
                       <div className="grid gap-4 md:grid-cols-5">
