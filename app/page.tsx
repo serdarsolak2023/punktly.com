@@ -4109,26 +4109,20 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 
   </div>
 )}
-<p className="mb-5 text-center text-2xl font-black text-sky-700">
-  💛 Spenden 💛
-  <br />
-  ❤️ Danke für Eure Unterstüzung ❤️
-</p>
-<button
-  onClick={() => window.open("https://paypal.me/serdarsolak0203@gmail.com", "_blank")}
-  className="mt-4 flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-[#0070BA] px-5 py-4 text-base font-black text-white shadow-xl transition hover:scale-[1.01] hover:bg-[#005ea6] md:text-lg"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    className="h-7 w-7"
-    fill="currentColor"
+{area === "parent" && (
+  <button
+    type="button"
+    onClick={() =>
+window.open(
+  "https://www.paypal.com/paypalme/serdarsolak0203",
+  "_blank"
+)
+    }
+    className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-yellow-600 shadow-sm transition hover:scale-105"
   >
-    <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 1.673A.77.77 0 0 1 5.706 1h7.823c2.61 0 4.412.548 5.356 1.63.443.509.726 1.041.863 1.626.143.61.145 1.338.006 2.225l-.01.064v.565l.44.248c.37.208.665.471.89.8.37.538.563 1.222.572 2.032.01.842-.174 1.73-.548 2.64-.43 1.044-1.02 1.898-1.757 2.538-.67.58-1.48 1.02-2.406 1.307-.897.277-1.92.417-3.04.417h-.72c-.515 0-.916.38-.995.89l-.052.282-.364 2.31-.016.085c-.067.42-.429.73-.855.73H7.076z"/>
-  </svg>
-
-  Spenden mit PayPal
-</button>
+    💛 Spenden und Unterstüzung
+  </button>
+)}
 
           </div>
         )}
