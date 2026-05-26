@@ -4718,7 +4718,7 @@ window.open(
       </div>
     </div>
 
-    <div className="relative rounded-[1.5rem] bg-white/45 p-3">
+    <div className="relative rounded-[1.5rem] bg-white/45 p-2">
       {children.length > 1 && (
         <select
           value={selectedChildId}
@@ -4736,7 +4736,7 @@ window.open(
         </select>
       )}
 
-      <div className="flex max-w-[240px] flex-wrap gap-2">
+      <div className="flex max-w-[240px] flex-wrap gap-1">
         <span className="rounded-full bg-pink-100 px-3 py-1 text-[11px] md:text-xs font-black text-pink-700">
           🎂 {child.age || "-"} Jahre
         </span>
@@ -4750,7 +4750,7 @@ window.open(
         </span>
       </div>
 
-      <div className="mt-3 flex max-w-[240px] flex-wrap items-center gap-2">
+      <div className="mt-2 flex max-w-[240px] flex-wrap items-center gap-1">
         <span className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-sky-800">
           {(child.profileBadges || [])[0] ? "Motiv gewählt ✨" : "Noch kein Motiv gewählt ✨"}
         </span>
@@ -4758,7 +4758,7 @@ window.open(
         <button
           type="button"
           onClick={() => setShowBadgeChooser(!showBadgeChooser)}
-          className="rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-sky-300 px-4 py-2 text-xs font-black text-white shadow-sm transition hover:scale-105"
+          className="rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-sky-300 px-4 py-1.5 text-xs font-black text-white shadow-sm transition hover:scale-105"
         >
           🎨 Motiv auswählen
         </button>
