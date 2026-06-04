@@ -6181,7 +6181,10 @@ const kidLearningWaiting = learningTasks.filter(
     <div className="grid grid-cols-2 gap-3">
       <button
         type="button"
-        onClick={() => setUsePresetTask(true)}
+        onClick={() => {
+  setUsePresetTask(true);
+  setUseCustomTask(false);
+}}
         className={`rounded-[1rem] py-3 font-black ${
           usePresetTask ? "bg-sky-500 text-white" : "bg-white text-sky-700"
         }`}
@@ -6224,7 +6227,10 @@ const kidLearningWaiting = learningTasks.filter(
     <div className="grid grid-cols-2 gap-3">
       <button
         type="button"
-        onClick={() => setUseCustomTask(true)}
+        onClick={() => {
+  setUseCustomTask(true);
+  setUsePresetTask(false);
+}}
         className={`rounded-[1rem] py-3 font-black ${
           useCustomTask ? "bg-emerald-500 text-white" : "bg-white text-emerald-700"
         }`}
@@ -6243,8 +6249,8 @@ const kidLearningWaiting = learningTasks.filter(
       </button>
     </div>
 
-    {useCustomTask && (
-      <div className="mt-3 grid gap-3">
+    {(useCustomTask || usePresetTask) && (
+  <div className="mt-3 grid gap-3">
         <AppInput
           value={newTaskTitle}
           onChange={setNewTaskTitle}
