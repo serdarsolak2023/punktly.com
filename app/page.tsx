@@ -3,7 +3,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon, BookOpen } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  setPersistence,
+  browserLocalPersistence,
+  deleteUser,
+  reauthenticateWithPopup,
+} from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
 import { FcGoogle } from "react-icons/fc";
@@ -192,7 +201,8 @@ datenschutz: {
 
 "Personenbezogene Daten werden nur so lange gespeichert, wie dies für die Nutzung der App erforderlich ist.",
 
-"Nutzer können jederzeit die Löschung ihrer Daten verlangen.",
+"Nutzer können ihr Konto und die zugehörigen Daten direkt innerhalb der App löschen.",
+"Nutzer können die Datenlöschung außerdem per E-Mail an kontakt@punktlycoinly.de beantragen.",
 
 
 "8. Rechte der betroffenen Personen",
@@ -245,7 +255,6 @@ widerruf: {
 
 "• Premium-Abonnements",
 "• Premium-Jahreszugänge",
-"• Lifetime-Familienzugänge",
 "• zeitlich begrenzte Premium-Funktionen",
 "• zusätzliche digitale Inhalte innerhalb der App",
 
@@ -763,7 +772,8 @@ export default function PunktlyRoleSplit() {
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = true;
+  const maintenanceMode =
+  process.env.NODE_ENV === "production";
 const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -778,11 +788,11 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
   const [contactSubject, setContactSubject] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [isSendingContact, setIsSendingContact] = useState(false);
-
   const [numberKeypadOpen, setNumberKeypadOpen] = useState(false);
+  
   const [numberKeypadValue, setNumberKeypadValue] = useState("");
-  const [numberKeypadSetter, setNumberKeypadSetter] =
-         useState<((value: string) => void) | null>(null);
+  const [numberKeypadIsPin, setNumberKeypadIsPin] = useState(false);
+  const [numberKeypadSetter, setNumberKeypadSetter] = useState<((value: string) => void) | null>(null);
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [selectedChildId, setSelectedChildId] = useState(1);
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
@@ -817,8 +827,8 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
   const [newTaskTarget, setNewTaskTarget] = useState<number | "all">("all");
   const [newTaskDay, setNewTaskDay] = useState("Mo");
   const [selectedPreset, setSelectedPreset] = useState("");
-  const [selectedPremiumPlan, setSelectedPremiumPlan] =
-  useState<"monthly" | "yearly" | "lifetime">("yearly");
+  const [selectedPremiumPlan, setSelectedPremiumPlan] = useState<"monthly" | "yearly">("yearly");
+  
   const [selectedTaskPack, setSelectedTaskPack] = useState(taskPacks[0]?.id || "");
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [learningTasks, setLearningTasks] = useState<any[]>([]);
@@ -1009,21 +1019,24 @@ function coinsToEuroText(coins: number) {
 }
 
 async function hashPin(pin: string) {
-  const encoder = new TextEncoder();
+  if (
+    typeof window === "undefined" ||
+    !window.crypto ||
+    !window.crypto.subtle
+  ) {
+    return pin;
+  }
 
+  const encoder = new TextEncoder();
   const data = encoder.encode(pin);
 
-  const hashBuffer = await crypto.subtle.digest(
+  const hashBuffer = await window.crypto.subtle.digest(
     "SHA-256",
     data
   );
 
-  return Array.from(
-    new Uint8Array(hashBuffer)
-  )
-    .map(byte =>
-      byte.toString(16).padStart(2, "0")
-    )
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
 }
   function getTrialTimeLeft() {
@@ -1192,6 +1205,8 @@ function openNumberKeypad(
   currentValue: number,
   setter: (value: number) => void
 ) {
+  setNumberKeypadIsPin(false);
+
   setNumberKeypadValue(
     currentValue > 0 ? String(currentValue) : ""
   );
@@ -1643,6 +1658,78 @@ celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
     setResetConfirmKind(kind);
   }
 
+async function deleteCompleteAccount() {
+  const user = auth.currentUser || firebaseUser;
+
+  if (!user) {
+    celebrate("Kein Nutzer gefunden.");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    "Möchtest du dein Konto wirklich vollständig löschen?\n\nDabei werden gelöscht:\n• Kinderprofile\n• Aufgaben\n• Lernaufgaben\n• Belohnungen\n• Schatzkisten\n• Shopdaten\n• Fortschritte\n• Kontodaten\n\nDieser Vorgang kann nicht rückgängig gemacht werden."
+  );
+
+  if (!confirmed) return;
+
+  try {
+    const collectionsToDelete = [
+      "children",
+      "tasks",
+      "learningTasks",
+      "rewards",
+      "chests",
+      "shop",
+    ];
+
+    const batch = writeBatch(db);
+
+    for (const collectionName of collectionsToDelete) {
+      const snap = await getDocs(
+        collection(doc(db, "users", user.uid), collectionName)
+      );
+
+      snap.docs.forEach((documentItem) => {
+        batch.delete(documentItem.ref);
+      });
+    }
+
+    batch.delete(doc(db, "users", user.uid));
+
+    await batch.commit();
+
+    try {
+      await deleteUser(user);
+    } catch (error: any) {
+      if (error?.code === "auth/requires-recent-login") {
+        const provider = new GoogleAuthProvider();
+        await reauthenticateWithPopup(user, provider);
+        await deleteUser(user);
+      } else {
+        throw error;
+      }
+    }
+
+    setChildren([]);
+    setTasks([]);
+    setLearningTasks([]);
+    setRewards([]);
+    setChests([]);
+    setShop([]);
+    setFirebaseUser(null);
+    setIsPurchased(false);
+    setHasPaid(false);
+    setTrialIsActive(false);
+    setParentUnlocked(false);
+    setArea("start");
+
+    celebrate("Konto und Daten wurden gelöscht.");
+  } catch (error) {
+    console.error(error);
+    celebrate("Konto konnte nicht gelöscht werden.");
+  }
+}
+
 async function confirmResetRepeating() {
   if (!resetConfirmKind) return;
 
@@ -2053,13 +2140,19 @@ function toggleProfileBadge(badgeSrc: string) {
 
       if (snap.exists()) {
         const data = snap.data();
-        if (typeof data.parentPin === "string") {
-          setSavedParentPin(data.parentPin);
-          localStorage.setItem("punktlyParentPin", data.parentPin);
-        } else {
-          const localPin = localStorage.getItem("punktlyParentPin");
-          if (localPin) setSavedParentPin(localPin);
-        }
+if (typeof data.parentPinHash === "string") {
+  setSavedParentPin(data.parentPinHash);
+} else if (typeof data.parentPin === "string") {
+  const migratedPinHash = await hashPin(data.parentPin);
+
+  setSavedParentPin(migratedPinHash);
+
+  await setDoc(userRef, {
+    parentPinHash: migratedPinHash,
+    parentPin: null,
+    updatedAt: serverTimestamp(),
+  }, { merge: true });
+}
 
         if (typeof data.parentDisplayName === "string") {
           setParentDisplayName(data.parentDisplayName);
@@ -2078,13 +2171,11 @@ if (typeof data.coinsForOneCent === "number") {
 }
       } else {
         if (user.displayName) setParentDisplayName(user.displayName);
-        const localPin = localStorage.getItem("punktlyParentPin");
-        if (localPin) setSavedParentPin(localPin);
+
       }
     } catch (error) {
       console.error(error);
-      const localPin = localStorage.getItem("punktlyParentPin");
-      if (localPin) setSavedParentPin(localPin);
+
     }
   }
 async function saveCoinRate() {
@@ -2130,12 +2221,15 @@ if (user.email) {
 
 updates.uid = user.uid;
 
-    if (newParentPin.trim()) {
-      updates.parentPin = newParentPin.trim();
-      setSavedParentPin(newParentPin.trim());
-      localStorage.setItem("punktlyParentPin", newParentPin.trim());
-      setNewParentPin("");
-    }
+if (newParentPin.trim()) {
+  const newParentPinHash = await hashPin(newParentPin.trim());
+
+  updates.parentPinHash = newParentPinHash;
+  updates.parentPin = null;
+
+  setSavedParentPin(newParentPinHash);
+  setNewParentPin("");
+}
 
     if (parentSecurityQuestion.trim() || parentSecurityAnswer.trim()) {
       if (!parentSecurityQuestion.trim() || !parentSecurityAnswer.trim()) {
@@ -2164,9 +2258,7 @@ if (data?.trialActive && data?.trialEndsAt > Date.now()) {
   setHasPaid(false);
   setIsPurchased(true);
   setTrialIsActive(true);
-  setTrialEndsAt(data.trialEndsAt);
-setTrialIsActive(true);
-  
+  setTrialEndsAt(data.trialEndsAt); 
   setShowLoginWelcomePopup(true);
 
   await loadFamilyData(user);
@@ -2695,7 +2787,7 @@ setTrialIsActive(true);
   }
 }
   async function startGooglePlayBillingCheckout(
-  plan: "monthly" | "yearly" | "lifetime"
+  plan: "monthly" | "yearly"
 ) {
     try {
       setIsPaying(true);
@@ -2710,9 +2802,7 @@ if (plan === "yearly") {
   productId = "premium_yearly";
 }
 
-if (plan === "lifetime") {
-  productId = "premium_lifetime";
-}
+
 
 console.log("Ausgewähltes Paket:", productId);
       let currentUser = firebaseUser || auth.currentUser;
@@ -3318,7 +3408,7 @@ bg: "bg-purple-50",
     </p>
 
     <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      Premium Monat
+     -
     </p>
 
     <p className="text-2xl font-black text-pink-600">
@@ -3343,12 +3433,12 @@ bg: "bg-purple-50",
       ⭐ BELIEBT
     </p>
 
-    <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      Spare gegenüber Monatsabo
-    </p>
+<p className="mt-1 text-sm font-black text-amber-700">
+  Nutze 1 Jahr das komplette Premium Paket
+</p>
 
     <p className="text-2xl font-black text-yellow-600">
-      59,99 €
+      55,99 €
     </p>
 
     <p className="text-xs font-black text-yellow-700">
@@ -3356,40 +3446,33 @@ bg: "bg-purple-50",
     </p>
 
     <p className="mt-1 text-[11px] font-black text-green-600">
-      🎉 Spare 27,89 €
+      🎉 Spare gegenüber Monatsabo
     </p>
   </div>
 
+<div
+  className="rounded-[1.5rem] border-2 border-purple-300 bg-gradient-to-r from-pink-100 via-purple-100 to-sky-100 p-4 opacity-90"
+>
+  <p className="text-xs font-black text-purple-700">
+    👑 BALD VERFÜGBAR
+  </p>
 
-  <div
-    onClick={() => setSelectedPremiumPlan("lifetime")}
-    className={`cursor-pointer rounded-[1.5rem] border-2 p-4 ${
-      selectedPremiumPlan === "lifetime"
-        ? "border-purple-500 bg-purple-100 ring-4 ring-purple-200"
-        : "border-purple-100 bg-purple-50"
-    }`}
-  >
-    <p className="text-xs font-black text-purple-700">
-      👑 Kommt Bald
-    </p>
+  <p className="mt-1 text-lg font-black text-purple-800">
+    Lifetime Familie
+  </p>
 
-    <p className="mt-1 text-sm font-black text-gray-400 line-through">
-      Neue Kaufoption erscheint demnächst
-    </p>
+  <p className="mt-1 text-sm font-black text-gray-500">
+    Einmalzahlung für die ganze Familie
+  </p>
 
-    <p className="text-2xl font-black text-purple-600">
-      -
-    </p>
+  <p className="mt-2 text-2xl font-black text-purple-600">
+    ?
+  </p>
 
-    <p className="text-xs font-black text-purple-700">
-      -
-    </p>
-
-    <p className="mt-1 text-[11px] font-black text-green-600">
-      -
-    </p>
-  </div>
-
+  <p className="text-xs font-black text-purple-700">
+    Weitere Infos folgen
+  </p>
+</div>
 </div>
 
 </div>
@@ -3434,7 +3517,11 @@ bg: "bg-purple-50",
     <div className="w-full max-w-xs rounded-[2rem] bg-white p-5 shadow-2xl">
 
       <div className="mb-4 rounded-[1rem] bg-slate-100 p-4 text-center text-3xl font-black text-sky-900">
-        {numberKeypadValue || "0"}
+{numberKeypadIsPin
+  ? numberKeypadValue
+    ? "●".repeat(numberKeypadValue.length)
+    : "🔐 PIN"
+  : numberKeypadValue}
       </div>
 
       <div className="grid grid-cols-3 gap-3">
@@ -3800,23 +3887,27 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
 </h1>
 
 <p className="mt-3 text-base font-bold leading-relaxed text-sky-700">
-  PunktlyCoinly hilft Kindern, Aufgaben spielerisch zu erledigen, Punkte und Coins zu sammeln
-  und im Shop, Belohnungen oder Schatzkisten einzulösen - alles unter der liebevollen Aufsicht der Eltern.
+PunktlyCoinly verbindet Motivation, Lernen und Familienalltag in einer App. Kinder sammeln durch Aufgaben, 
+Lernzeiten und gute Gewohnheiten Punkte und Coins, schalten Belohnungen frei und erleben Fortschritte spielerisch – 
+während Eltern alles einfach und sicher verwalten können.
 </p>
 
             <div className="mt-6 grid gap-3 text-left">
-              <div className="rounded-[1.8rem] bg-sky-50 p-4 font-bold text-sky-900">
-                ✅ Kinder erledigen Aufgaben und warten auf die Bestätigung der Eltern.
-              </div>
-              <div className="rounded-[1.8rem] bg-yellow-50 p-4 font-bold text-amber-900">
-                ⭐ Leveln und atraktive Erfolge motivieren Kinder, regelmäßig aktiv zu bleiben.
-              </div>
-              <div className="rounded-[1.8rem] bg-emerald-50 p-4 font-bold text-emerald-900">
-                🛍️ Coins können im Shop, Belohnungen oder Schatzkisten eingelöst werden.
-              </div>
-              <div className="rounded-[1.8rem] bg-purple-50 p-4 font-bold text-purple-900">
-                👨‍👩‍👧 Eltern verwalten Aufgaben, Belohnungen, Kinderprofile und Freigaben.
-              </div>
+<div className="rounded-[1.8rem] bg-sky-50 p-4 font-bold text-sky-900">
+  🎯 Kinder meistern Aufgaben, entwickeln gute Gewohnheiten und sammeln dabei wertvolle Erfolgserlebnisse.
+</div>
+
+<div className="rounded-[1.8rem] bg-yellow-50 p-4 font-bold text-amber-900">
+  ⭐ Level, Auszeichnungen und spannende Herausforderungen sorgen jeden Tag für neue Motivation.
+</div>
+
+<div className="rounded-[1.8rem] bg-emerald-50 p-4 font-bold text-emerald-900">
+  🪙 Für ihre Erfolge sammeln Kinder Coins, die sie gegen Belohnungen, Wunschprämien oder Schatzkisten eintauschen können.
+</div>
+
+<div className="rounded-[1.8rem] bg-purple-50 p-4 font-bold text-purple-900">
+  👨‍👩‍👧 Eltern begleiten den Fortschritt ihrer Kinder, verwalten Aufgaben und schaffen gemeinsam positive Familienroutinen.
+</div>
             </div>
 
             <p className="mt-5 text-sm font-bold text-slate-500">
@@ -6327,6 +6418,16 @@ const isToday = day === todayShort;
   🗑️ Kinder & Inhalte zurücksetzen
 </button>
                     </div>
+                    <button
+  type="button"
+  onClick={deleteCompleteAccount}
+  className="w-full rounded-[1.5rem] border-2 border-red-200 bg-red-50 p-4 text-left font-black text-red-700 shadow-sm transition hover:scale-[1.01]"
+>
+  🗑️ Konto & alle Daten endgültig löschen
+  <p className="mt-1 text-xs font-bold text-red-500">
+    Löscht das Benutzerkonto, Kinderprofile, Aufgaben, Fortschritte und Familiendaten dauerhaft.
+  </p>
+</button>
                   </Panel>
 
                   <Panel title="🔐 Eltern-PIN & Profil bearbeiten">
@@ -6346,6 +6447,7 @@ const isToday = day === todayShort;
 <div
   onClick={() => {
     setNumberKeypadValue(newParentPin || "");
+    setNumberKeypadIsPin(true);
 
 setNumberKeypadSetter(() =>
   (value: string) =>
@@ -6710,7 +6812,8 @@ Bitte konzentriert lernen 😄
       <div className="mt-8 grid gap-4">
 <div
   onClick={() => {
-    setNumberKeypadValue(learningPinInput || "");
+setNumberKeypadValue(learningPinInput || "");
+setNumberKeypadIsPin(true);
 setNumberKeypadSetter(() =>
   (value: string) =>
     setLearningPinInput(value)
@@ -6724,16 +6827,18 @@ setNumberKeypadSetter(() =>
     : "🔐 PIN"}
 </div>
 <button
-  onClick={() => {
-    if (learningPinInput === savedParentPin) {
-      setActiveLearningTask(null);
-      setActiveReadingText(null);
-      setLearningPinInput("");
-      celebrate("🔓 Lernzeit wurde von den Eltern beendet.");
-    } else {
-      celebrate("❌ Falscher PIN");
-    }
-  }}
+onClick={async () => {
+  const learningPinHash = await hashPin(learningPinInput.trim());
+
+  if (learningPinHash === savedParentPin || learningPinInput.trim() === savedParentPin) {
+    setActiveLearningTask(null);
+    setActiveReadingText(null);
+    setLearningPinInput("");
+    celebrate("🔓 Lernzeit wurde von den Eltern beendet.");
+  } else {
+    celebrate("❌ Falscher PIN");
+  }
+}}
   className="rounded-[1.5rem] bg-gradient-to-r from-pink-400 to-red-400 px-6 py-4 text-xl font-black text-white shadow-xl"
 >
   🔓 Lernzeit beenden

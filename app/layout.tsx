@@ -8,13 +8,18 @@ export const viewport = {
   maximumScale: 1,
   viewportFit: 'cover',
   themeColor: '#eef9ff',
-  manifest: '/manifest.json',
-  appleWebApp: { capable: true, title: 'Punktly', statusBarStyle: 'default' },
+
+appleWebApp: {
+  capable: true,
+  title: "PunktlyCoinly",
+  statusBarStyle: "black-translucent",
+},
 };
 
 export const metadata: Metadata = {
-  title: "Punktly",
-  description: "Kinderfreundliche Aufgaben-App mit getrenntem Kinder- und Elternbereich.",
+  title: "PunktlyCoinly",
+description: "Kinder sammeln durch Aufgaben Punkte und Coins, schalten Belohnungen frei und lernen spielerisch Verantwortung – gemeinsam mit ihren Eltern.",
+  manifest: "/manifest.json",
   icons: { icon: "/icon.svg" },
 };
 
