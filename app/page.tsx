@@ -6212,20 +6212,93 @@ const kidLearningWaiting = learningTasks.filter(
       </button>
     </div>
 
-    {usePresetTask && (
+
+{usePresetTask && (
+  <div className="mt-3 grid gap-3">
+
+    <select
+      value={selectedPreset}
+      onChange={(e) => applyTaskPreset(e.target.value)}
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      <option value="">Alltagsaufgabe auswählen</option>
+
+      {taskPresets.map((preset) => (
+        <option key={preset.title} value={preset.title}>
+          {preset.category}: {preset.title} · {preset.coins} Coins
+        </option>
+      ))}
+    </select>
+
+    <NumberKeypadField
+      label="🪙 Coins"
+      value={Number(newTaskCoins) || 0}
+      setter={setNewTaskCoins}
+      showEuro
+    />
+
+    <select
+      value={newTaskRepeat}
+      onChange={(e) => setNewTaskRepeat(e.target.value as Repeat)}
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      <option value="täglich">Täglich</option>
+      <option value="einmalig">Einmalig</option>
+      <option value="wöchentlich">Wöchentlich</option>
+    </select>
+
+    {newTaskRepeat === "einmalig" && (
       <select
-        value={selectedPreset}
-        onChange={(e) => applyTaskPreset(e.target.value)}
-        className="mt-3 w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+        value={newTaskDeadline}
+        onChange={(e) =>
+          setNewTaskDeadline(
+            e.target.value as
+              | "today"
+              | "tomorrow"
+              | "threeDays"
+              | "sevenDays"
+          )
+        }
+        className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
       >
-        <option value="">Alltagsaufgabe auswählen</option>
-        {taskPresets.map((preset) => (
-          <option key={preset.title} value={preset.title}>
-            {preset.category}: {preset.title} · {preset.coins} Coins
-          </option>
-        ))}
+        <option value="today">Frist: Heute</option>
+        <option value="tomorrow">Frist: Morgen</option>
+        <option value="threeDays">Frist: In 3 Tagen</option>
+        <option value="sevenDays">Frist: In 7 Tagen</option>
       </select>
     )}
+
+    <select
+      value={newTaskDay}
+      onChange={(e) => setNewTaskDay(e.target.value)}
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      {days.map((d) => (
+        <option key={d}>{d}</option>
+      ))}
+    </select>
+
+    <select
+      value={String(newTaskTarget)}
+      onChange={(e) =>
+        setNewTaskTarget(
+          e.target.value === "all"
+            ? "all"
+            : Number(e.target.value)
+        )
+      }
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      <option value="all">Für alle Kinder</option>
+
+      {children.map((c) => (
+        <option key={c.id} value={c.id}>
+          Nur für {c.name}
+        </option>
+      ))}
+    </select>
+  </div>
+)}
   </div>
 
   <div className="rounded-[1.4rem] bg-emerald-50 p-4">
@@ -6258,75 +6331,86 @@ const kidLearningWaiting = learningTasks.filter(
       </button>
     </div>
 
-    {(useCustomTask || usePresetTask) && (
+
+{useCustomTask && (
   <div className="mt-3 grid gap-3">
-        <AppInput
-          value={newTaskTitle}
-          onChange={setNewTaskTitle}
-          placeholder="Name der Aufgabe"
-          className="w-full"
-        />
 
-        <NumberKeypadField
-          label="🪙 Coins"
-          value={Number(newTaskCoins) || 0}
-          setter={setNewTaskCoins}
-          showEuro
-        />
+    <AppInput
+      value={newTaskTitle}
+      onChange={setNewTaskTitle}
+      placeholder="Name der Aufgabe"
+      className="w-full"
+    />
 
-        <select
-          value={newTaskRepeat}
-          onChange={(e) => setNewTaskRepeat(e.target.value as Repeat)}
-          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-        >
-          <option value="täglich">Täglich</option>
-          <option value="einmalig">Einmalig</option>
-          <option value="wöchentlich">Wöchentlich</option>
-        </select>
+    <NumberKeypadField
+      label="🪙 Coins"
+      value={Number(newTaskCoins) || 0}
+      setter={setNewTaskCoins}
+      showEuro
+    />
 
-        {newTaskRepeat === "einmalig" && (
-          <select
-            value={newTaskDeadline}
-            onChange={(e) =>
-              setNewTaskDeadline(
-                e.target.value as "today" | "tomorrow" | "threeDays" | "sevenDays"
-              )
-            }
-            className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-          >
-            <option value="today">Frist: Heute</option>
-            <option value="tomorrow">Frist: Morgen</option>
-            <option value="threeDays">Frist: In 3 Tagen</option>
-            <option value="sevenDays">Frist: In 7 Tagen</option>
-          </select>
-        )}
+    <select
+      value={newTaskRepeat}
+      onChange={(e) => setNewTaskRepeat(e.target.value as Repeat)}
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      <option value="täglich">Täglich</option>
+      <option value="einmalig">Einmalig</option>
+      <option value="wöchentlich">Wöchentlich</option>
+    </select>
 
-        <select
-          value={newTaskDay}
-          onChange={(e) => setNewTaskDay(e.target.value)}
-          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-        >
-          {days.map((d) => (
-            <option key={d}>{d}</option>
-          ))}
-        </select>
-
-        <select
-          value={String(newTaskTarget)}
-          onChange={(e) =>
-            setNewTaskTarget(e.target.value === "all" ? "all" : Number(e.target.value))
-          }
-          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-        >
-          <option value="all">Für alle Kinder</option>
-          {children.map((c) => (
-            <option key={c.id} value={c.id}>
-              Nur für {c.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    {newTaskRepeat === "einmalig" && (
+      <select
+        value={newTaskDeadline}
+        onChange={(e) =>
+          setNewTaskDeadline(
+            e.target.value as
+              | "today"
+              | "tomorrow"
+              | "threeDays"
+              | "sevenDays"
+          )
+        }
+        className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+      >
+        <option value="today">Frist: Heute</option>
+        <option value="tomorrow">Frist: Morgen</option>
+        <option value="threeDays">Frist: In 3 Tagen</option>
+        <option value="sevenDays">Frist: In 7 Tagen</option>
+      </select>
     )}
+
+    <select
+      value={newTaskDay}
+      onChange={(e) => setNewTaskDay(e.target.value)}
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      {days.map((d) => (
+        <option key={d}>{d}</option>
+      ))}
+    </select>
+
+    <select
+      value={String(newTaskTarget)}
+      onChange={(e) =>
+        setNewTaskTarget(
+          e.target.value === "all"
+            ? "all"
+            : Number(e.target.value)
+        )
+      }
+      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+    >
+      <option value="all">Für alle Kinder</option>
+
+      {children.map((c) => (
+        <option key={c.id} value={c.id}>
+          Nur für {c.name}
+        </option>
+      ))}
+    </select>
+  </div>
+)}
   </div>
 
   <button
