@@ -35,7 +35,7 @@ type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features" | "learning";
 type ParentView = "dashboard" | "tasks" | "rewards" | "chests" | "shop" | "features" | "calendar" | "family" | "stats" | "profile" | "settings" | "learning" | "coinrechner";
 type Repeat = "einmalig" | "täglich" | "wöchentlich";
-type Status = "offen" | "wartet" | "erledigt";
+type Status = "offen" | "wartet" | "erledigt" | "verpasst";
 type RewardStatus = "frei" | "wartet" | "eingelöst";
 type Theme = "🦁 Löwe" | "🐬 Delfin" | "🐸 Frosch" | "🦄 Einhorn" | "🐯 Tiger" | "🐼 Panda" | "🦜 Papagei" | "🐧 Pinguin";
 type TaskPreset = { title: string; coins: number; repeat: Repeat; day: string; category: string };
@@ -76,11 +76,46 @@ type Task = {
   status: Status;
   day: string;
   completedAt?: number;
+submittedAt?: number;
+missedAt?: number;
+deadlineAt?: number;
 };
-type Reward = { id: number; title: string; coins: number; icon: string; status: RewardStatus; };
-type ShopItem = { id: number; title: string; price: number; icon: string; ownedBy: number[]; category?: "Haustier" | "Avatar" | "Hintergrund" | "Booster" | "Spezial" | "Limited"; rarity?: "Gewöhnlich" | "Selten" | "Episch" | "Legendär"; description?: string; daily?: boolean; limited?: boolean; };
+type Reward = {
+  id: number;
+  title: string;
+  coins: number;
+  icon: string;
+  status: RewardStatus;
+  requestedAt?: number;
+  redeemedAt?: number;
+};
+
+type ShopItem = {
+  id: number;
+  title: string;
+  price: number;
+  icon: string;
+  ownedBy: number[];
+  category?: "Haustier" | "Avatar" | "Hintergrund" | "Booster" | "Spezial" | "Limited";
+  rarity?: "Gewöhnlich" | "Selten" | "Episch" | "Legendär";
+  description?: string;
+  daily?: boolean;
+  limited?: boolean;
+  boughtAt?: number;
+};
+
 type Challenge = { id: number; title: string; goal: number; current: number; reward: number; done: boolean; };
-type Chest = { id: number; title: string; price: number; tier: "Bronze" | "Silber" | "Gold"; content: string; opened: boolean; openedBy?: number; };
+
+type Chest = {
+  id: number;
+  title: string;
+  price: number;
+  tier: "Bronze" | "Silber" | "Gold";
+  content: string;
+  opened: boolean;
+  openedBy?: number;
+  openedAt?: number;
+};
 
 const days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
@@ -760,11 +795,15 @@ export default function PunktlyRoleSplit() {
   const [isCheckingPaid, setIsCheckingPaid] = useState(false);
   const [area, setArea] = useState<Area>("start");
   const [childView, setChildView] = useState<ChildView>("home");
-  const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
-  const [learningFilter, setLearningFilter] = useState<"alle"|"offen"|"wartet"|"erledigt">("alle");
-  const [parentView, setParentView] = useState<ParentView>("dashboard");
-  const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt">("alle");
-  const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt">("alle");
+  const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt"|"verpasst">("alle");
+const [learningFilter, setLearningFilter] = useState<"alle"|"offen"|"wartet"|"erledigt"|"verpasst">("alle");
+const [parentView, setParentView] = useState<ParentView>("dashboard");
+const [dashboardDayFilter, setDashboardDayFilter] = useState<
+  "today" | "yesterday" | "beforeYesterday" | "last7"
+>("today");
+  const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
+  const [parentTaskChildFilter, setParentTaskChildFilter] = useState<"all" | number>("all");
+  const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
   const [savedParentPin, setSavedParentPin] = useState("");
@@ -784,6 +823,9 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
   const [mathStep, setMathStep] = useState(0);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [currentDayKey, setCurrentDayKey] = useState(
+  new Date().toISOString().slice(0, 10)
+);
   const [showContactPopup, setShowContactPopup] = useState(false);
   const [contactSubject, setContactSubject] = useState("");
   const [contactMessage, setContactMessage] = useState("");
@@ -821,6 +863,9 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
   const [newChildColor, setNewChildColor] = useState("");
   const [newChildAnimal, setNewChildAnimal] = useState("");
   const [editingChildId, setEditingChildId] = useState<number | null>(null);
+  const [usePresetTask, setUsePresetTask] = useState(false);
+const [useCustomTask, setUseCustomTask] = useState(true);
+const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "threeDays" | "sevenDays">("today");
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskCoins, setNewTaskCoins] = useState(0);
   const [newTaskRepeat, setNewTaskRepeat] = useState<Repeat>("täglich");
@@ -876,14 +921,48 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
   const [dailyBonusEnabled, setDailyBonusEnabled] = useState(true);
   const [newLearningLevel, setNewLearningLevel] = useState<"leicht" | "mittel" | "schwer">("leicht");
   const [activeReadingText, setActiveReadingText] = useState<any>(null);
-  useEffect(() => {
+useEffect(() => {
   const timer = setInterval(() => {
-    setCurrentDateTime(new Date());
+    const now = new Date();
+
+    setCurrentDateTime(now);
+
+    const newDayKey = now.toISOString().slice(0, 10);
+
+    if (newDayKey !== currentDayKey) {
+      setCurrentDayKey(newDayKey);
+    }
   }, 1000);
 
   return () => clearInterval(timer);
-}, []);
-        
+}, [currentDayKey]);
+        useEffect(() => {
+  const tasksToMiss = tasks.filter(shouldTaskBeMissed);
+
+  if (tasksToMiss.length === 0) return;
+
+  const now = Date.now();
+
+  const updatedTasks = tasks.map(task =>
+    shouldTaskBeMissed(task)
+      ? {
+          ...task,
+          status: "verpasst" as Status,
+          missedAt: now,
+        }
+      : task
+  );
+
+  setTasks(updatedTasks);
+
+  tasksToMiss.forEach(task => {
+    saveTaskNow({
+      ...task,
+      status: "verpasst" as Status,
+      missedAt: now,
+    });
+  });
+}, [tasks]);
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
     name: "Kein Kind",
@@ -906,10 +985,69 @@ const [maintenancePassword, setMaintenancePassword] = useState("");
     achievements: [],
     profileBadges: []
   };
-  const childTasks = tasks.filter((t) => t.childId === "all" || t.childId === child.id);
-  const waitingTasks = tasks.filter((t) => t.status === "wartet");
-  const waitingRewards = rewards.filter((r) => r.status === "wartet");
-  const childOpenTaskCount = childTasks.filter((t) => t.status === "offen").length;
+  const childTasks = tasks.filter((t) => {
+  const belongsToChild =
+    t.childId === "all" || t.childId === child.id;
+
+  if (!belongsToChild) return false;
+
+  if (t.status === "offen") {
+    return isTaskForToday(t);
+  }
+
+  return true;
+});
+const waitingTasks = tasks.filter((t) => t.status === "wartet");
+const waitingRewards = rewards.filter((r) => r.status === "wartet");
+
+const waitingLearningTasks = learningTasks.filter(
+  (t) =>
+    t.status === "wartet" &&
+    isTimestampInDashboardFilter(t.submittedAt)
+);
+
+const waitingTasksForDashboard = tasks.filter(
+  (t) =>
+    t.status === "wartet" &&
+    isTimestampInDashboardFilter(t.submittedAt)
+);
+
+const waitingRewardsForDashboard = rewards.filter(
+  (r) =>
+    r.status === "wartet" &&
+    isTimestampInDashboardFilter(r.requestedAt)
+);
+
+const openTasksToday = tasks.filter(
+  (t) => t.status === "offen"
+).length;
+
+const missedTasks = tasks.filter(
+  (t) =>
+    t.status === "verpasst" &&
+    isTimestampInDashboardFilter(t.missedAt)
+).length;
+
+const completedTasks = tasks.filter(
+  (t) =>
+    t.status === "erledigt" &&
+    isTimestampInDashboardFilter(t.completedAt)
+).length;
+
+const freeRewards = rewards.filter(
+  (r) => r.status === "frei"
+).length;
+
+const openedChests = chests.filter(
+  (c) => c.opened
+).length;
+
+const totalShopItemsOwned = shop.reduce(
+  (sum, item) => sum + item.ownedBy.length,
+  0
+);
+
+const childOpenTaskCount = childTasks.filter((t) => t.status === "offen").length;
 
 const childOpenLearningCount = learningTasks.filter(
   (t) => t.childId === child.id && t.status === "offen"
@@ -1038,6 +1176,75 @@ async function hashPin(pin: string) {
   return Array.from(new Uint8Array(hashBuffer))
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
+}
+function formatDateTime(timestamp?: number) {
+  if (!timestamp) return "";
+
+  return `${new Date(timestamp).toLocaleDateString("de-DE")} um ${new Date(
+    timestamp
+  ).toLocaleTimeString("de-DE", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })} Uhr`;
+}
+
+function getStartOfDay(offset = 0) {
+  const date = new Date();
+  date.setDate(date.getDate() - offset);
+  date.setHours(0, 0, 0, 0);
+  return date.getTime();
+}
+
+function getEndOfDay(offset = 0) {
+  const date = new Date();
+  date.setDate(date.getDate() - offset);
+  date.setHours(23, 59, 59, 999);
+  return date.getTime();
+}
+
+function isTimestampInDashboardFilter(timestamp?: number) {
+  if (!timestamp) return false;
+
+  if (dashboardDayFilter === "today") {
+    return timestamp >= getStartOfDay(0) && timestamp <= getEndOfDay(0);
+  }
+
+  if (dashboardDayFilter === "yesterday") {
+    return timestamp >= getStartOfDay(1) && timestamp <= getEndOfDay(1);
+  }
+
+  if (dashboardDayFilter === "beforeYesterday") {
+    return timestamp >= getStartOfDay(2) && timestamp <= getEndOfDay(2);
+  }
+
+  return timestamp >= getStartOfDay(6) && timestamp <= getEndOfDay(0);
+}
+function getTodayDay() {
+  const jsDay = new Date().getDay();
+
+  const dayMap: Record<number, string> = {
+    0: "So",
+    1: "Mo",
+    2: "Di",
+    3: "Mi",
+    4: "Do",
+    5: "Fr",
+    6: "Sa",
+  };
+
+  return dayMap[jsDay];
+}
+
+function shouldTaskBeMissed(task: Task) {
+  if (task.status !== "offen") return false;
+  if (task.repeat === "täglich") return false;
+  if (task.repeat === "einmalig") return false;
+
+  return task.day !== getTodayDay();
+}
+
+function isTaskForToday(task: Task) {
+  return task.day === getTodayDay();
 }
   function getTrialTimeLeft() {
   if (!trialEndsAt) return "";
@@ -1309,7 +1516,11 @@ setSavedParentPin(resetPinHash);
   function submitTask(taskId: number) {
     const task = tasks.find(t => t.id === taskId);
     if (task) {
-      const waitingTask: Task = { ...task, status: "wartet" };
+      const waitingTask: Task = {
+  ...task,
+  status: "wartet",
+  submittedAt: Date.now(),
+};
       setTasks(prev => prev.map(t => t.id === taskId ? waitingTask : t));
       saveTaskNow(waitingTask);
     }
@@ -1805,7 +2016,11 @@ async function confirmResetRepeating() {
 
   function requestReward(reward: Reward) {
     if (child.coins < reward.coins) return celebrate("Noch nicht genug Coins!");
-    const waitingReward: Reward = { ...reward, status: "wartet" };
+    const waitingReward: Reward = {
+  ...reward,
+  status: "wartet",
+  requestedAt: Date.now(),
+};
     setRewards(prev => prev.map(r => r.id === reward.id ? waitingReward : r));
     saveFamilyItem("rewards", waitingReward);
     celebrate("Warten auf die Bestätigung deiner Eltern!");
@@ -1815,7 +2030,11 @@ async function confirmResetRepeating() {
     if (child.coins < reward.coins) return celebrate("Nicht genug Coins.");
 
     const updatedChild: Child = { ...child, coins: child.coins - reward.coins };
-    const redeemedReward: Reward = { ...reward, status: "eingelöst" };
+   const redeemedReward: Reward = {
+  ...reward,
+  status: "eingelöst",
+  redeemedAt: Date.now(),
+};
 
     setChildren(prev => prev.map(c => c.id === child.id ? updatedChild : c));
     setRewards(prev => prev.map(r => r.id === reward.id ? redeemedReward : r));
@@ -1844,7 +2063,12 @@ async function confirmResetRepeating() {
       coins: c.coins - chest.price,
       achievements: cleanAchievements(c.achievements || [])
     } : c));
-    const openedChest: Chest = { ...chest, opened: true, openedBy: child.id };
+    const openedChest: Chest = {
+  ...chest,
+  opened: true,
+  openedBy: child.id,
+  openedAt: Date.now(),
+};
     setChests(prev => prev.map(ch => ch.id === chest.id ? openedChest : ch));
     saveFamilyItem("chests", openedChest);
     const updatedChild: Child = { ...child, coins: child.coins - chest.price, achievements: cleanAchievements(child.achievements || []) };
@@ -1914,7 +2138,11 @@ async function confirmResetRepeating() {
       return;
     }
 
-    const updatedItem: ShopItem = { ...item, ownedBy: [...item.ownedBy, child.id] };
+    const updatedItem: ShopItem = {
+  ...item,
+  ownedBy: [...item.ownedBy, child.id],
+  boughtAt: Date.now(),
+};
     const updatedChild: Child = {
       ...child,
       coins: child.coins - item.price,
@@ -2888,10 +3116,11 @@ if (
       return;
     }
 
-    const updatedTask = {
-      ...finishedTask,
-      status: "wartet",
-    };
+const updatedTask = {
+  ...finishedTask,
+  status: "wartet",
+  submittedAt: Date.now(),
+};
 
     setLearningTasks(prev =>
       prev.map(task =>
@@ -2933,11 +3162,11 @@ if (maintenanceMode) {
           <div className="text-5xl">🚧</div>
 
           <h2 className="mt-2 text-xl font-black text-orange-700">
-            Aktuell befinden sich Wartungsarbeiten.
+            Aktuell befinden sich Wartungsarbeiten. Die PunktlyCoinly App wird demnächst auf Google Play verfügbar sein.
           </h2>
 
           <p className="mt-3 font-bold text-slate-700">
-            Die App wird gerade verbessert, daher bitte ich um Geduld.
+            Die App wird gerade verbessert, daher bitte ich um Geduld. (A)
           </p>
         </div>
       </div>
@@ -3712,9 +3941,10 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
             onClick={() => {
               if (answer === readingQuestionText.correctAnswer) {
                 const updatedTask = {
-                  ...readingQuestionTask,
-                  status: "wartet",
-                };
+  ...readingQuestionTask,
+  status: "wartet",
+  submittedAt: Date.now(),
+};
 
                 setLearningTasks(prev =>
                   prev.map(task =>
@@ -3763,9 +3993,10 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
             onClick={() => {
               if (answer === mathQuestionData.correctAnswer) {
                 const updatedTask = {
-                  ...mathQuestionTask,
-                  status: "wartet",
-                };
+  ...mathQuestionTask,
+  status: "wartet",
+  submittedAt: Date.now(),
+};
 
                 setLearningTasks(prev =>
                   prev.map(task =>
@@ -5083,7 +5314,7 @@ window.open(
 
 <div className="mb-5 flex flex-wrap gap-2">
 
-{["alle","offen","wartet","erledigt"].map(status=>(
+{["alle","offen","wartet","erledigt","verpasst"].map(status=>(
 
 <button
 key={status}
@@ -5099,6 +5330,7 @@ learningFilter===status
 {status==="offen" && "🟠 Offen"}
 {status==="wartet" && "🟡 Wartet"}
 {status==="erledigt" && "🟢 Erledigt"}
+{status==="verpasst" && "🔴 Verpasst"}
 
 </button>
 
@@ -5465,15 +5697,180 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 
         {area === "parent" && (
           <>
-            <ParentTabs view={parentView} setView={setParentView} />
-            <div className="mt-5">
-              {parentView === "dashboard" && (
-                <section className="grid gap-5 md:grid-cols-3">
-                  <Panel title="🔐 Offene Aufgaben"><BigNumber value={waitingTasks.length} label="Bestätigungen" /></Panel>
-                  <Panel title="🎁 Offene Belohnungen"><BigNumber value={waitingRewards.length} label="Einlösungen" /></Panel>
-                  <Panel title="👶 Kinder"><BigNumber value={children.length} label="Profile" /></Panel>
-                </section>
-              )}
+<ParentTabs
+  view={parentView}
+  setView={setParentView}
+  taskBadge={tasks.filter((task) => task.status === "wartet").length}
+  learningBadge={learningTasks.filter((task) => task.status === "wartet").length}
+  rewardBadge={rewards.filter((reward) => reward.status === "wartet").length}
+  chestBadge={chests.filter((chest) => chest.opened).length}
+  shopBadge={shop.filter((item) => item.ownedBy.length > 0).length}
+  familyBadge={children.length}
+/>
+<div className="mt-5">
+{parentView === "dashboard" && (
+  <Panel title="🏠 Eltern-Übersicht">
+    <div className="space-y-5">
+      <div className="rounded-[1.5rem] bg-white/90 p-4 shadow-sm">
+  <p className="mb-2 text-sm font-black text-sky-700">
+    📅 Zeitraum auswählen
+  </p>
+
+  <select
+    value={dashboardDayFilter}
+    onChange={(e) =>
+      setDashboardDayFilter(
+        e.target.value as
+          | "today"
+          | "yesterday"
+          | "beforeYesterday"
+          | "last7"
+      )
+    }
+    className="w-full rounded-[1rem] border-2 border-sky-100 bg-white p-3 font-black text-sky-900"
+  >
+    <option value="today">Heute</option>
+    <option value="yesterday">Gestern</option>
+    <option value="beforeYesterday">Vorgestern</option>
+    <option value="last7">Letzte 7 Tage</option>
+  </select>
+</div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-[1.8rem] bg-gradient-to-br from-yellow-100 to-orange-200 p-5 shadow-lg">
+          <p className="text-sm font-black text-orange-700">
+            ⏳ Zu bestätigen
+          </p>
+
+          <div className="mt-3 space-y-2 text-lg font-black text-slate-900">
+            <p>✅ Aufgaben: {waitingTasksForDashboard.length}</p>
+<p>📚 Lernen: {waitingLearningTasks.length}</p>
+<p>🎁 Belohnungen: {waitingRewardsForDashboard.length}</p>
+          </div>
+        </div>
+
+        <div className="rounded-[1.8rem] bg-gradient-to-br from-sky-100 to-cyan-200 p-5 shadow-lg">
+          <p className="text-sm font-black text-sky-700">
+            📌 Heute
+          </p>
+
+          <div className="mt-3 space-y-2 text-lg font-black text-slate-900">
+            <p>📋 Offen: {openTasksToday}</p>
+            <p>✅ Erledigt: {completedTasks}</p>
+            <p>🔴 Verpasst: {missedTasks}</p>
+          </div>
+        </div>
+
+        <div className="rounded-[1.8rem] bg-gradient-to-br from-emerald-100 to-lime-200 p-5 shadow-lg">
+          <p className="text-sm font-black text-emerald-700">
+            🎁 Familie
+          </p>
+
+          <div className="mt-3 space-y-2 text-lg font-black text-slate-900">
+            <p>👧 Kinder: {children.length}</p>
+            <p>🎁 Freie Belohnungen: {freeRewards}</p>
+            <p>🛍️ Shop-Einlösungen: {totalShopItemsOwned}</p>
+            <p>📦 Geöffnete Kisten: {openedChests}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {children.map((kid) => {
+          const kidOpenTasks = tasks.filter(
+            (t) => t.childId === kid.id && t.status === "offen"
+          ).length;
+
+const kidWaitingTasks = tasks.filter(
+  (t) =>
+    t.childId === kid.id &&
+    t.status === "wartet" &&
+    isTimestampInDashboardFilter(t.submittedAt)
+).length;
+
+const kidMissedTasks = tasks.filter(
+  (t) =>
+    t.childId === kid.id &&
+    t.status === "verpasst" &&
+    isTimestampInDashboardFilter(t.missedAt)
+).length;
+
+const kidLearningWaiting = learningTasks.filter(
+  (t) =>
+    t.childId === kid.id &&
+    t.status === "wartet" &&
+    isTimestampInDashboardFilter(t.submittedAt)
+).length;
+
+          return (
+            <div
+              key={kid.id}
+              className="rounded-[1.8rem] bg-white/90 p-5 shadow-lg"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-2xl font-black text-slate-900">
+                    👧 {kid.name}
+                  </p>
+
+                  <p className="mt-1 font-bold text-sky-700">
+                    Level {kid.level} · {kid.coins} Coins
+                  </p>
+                </div>
+
+                <div className="text-right text-sm font-black text-slate-700">
+                  <p>📋 Offen: {kidOpenTasks}</p>
+                  <p>⏳ Wartet: {kidWaitingTasks}</p>
+                  <p>📚 Lernen: {kidLearningWaiting}</p>
+                  <p>🔴 Verpasst: {kidMissedTasks}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="rounded-[1.8rem] bg-red-50 p-5 shadow-lg">
+        <p className="text-xl font-black text-red-700">
+          ⚠️ Hinweise
+        </p>
+
+        <div className="mt-3 space-y-2 font-bold text-red-900">
+          {children.length === 0 && (
+            <p>⚠️ Noch keine Kinder angelegt.</p>
+          )}
+
+          {tasks.length === 0 && (
+            <p>⚠️ Noch keine Aufgaben angelegt.</p>
+          )}
+
+          {learningTasks.length === 0 && (
+            <p>⚠️ Noch keine Lernaufgaben angelegt.</p>
+          )}
+
+          {rewards.length === 0 && (
+            <p>⚠️ Noch keine Belohnungen angelegt.</p>
+          )}
+
+          {!savedParentPin && (
+            <p>⚠️ Eltern-PIN noch nicht gesetzt.</p>
+          )}
+
+          {children.length > 0 &&
+            tasks.length > 0 &&
+            rewards.length > 0 &&
+            savedParentPin && (
+              <p className="text-emerald-700">
+                ✅ Alles sieht gut aus.
+              </p>
+            )}
+        </div>
+      </div>
+
+    </div>
+  </Panel>
+)}
+
 {parentView === "learning" && (
   <Panel title="🧠 Lernmodus">
     <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-indigo-100 p-6 shadow-xl">
@@ -5626,6 +6023,11 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                     <p className="mt-1 font-bold text-sky-700">
                       👶 {kid?.name || "Kind"}
                     </p>
+                    {task.status === "wartet" && task.submittedAt && (
+  <p className="mt-2 rounded-xl bg-yellow-100 px-3 py-2 text-sm font-black text-yellow-800">
+    ⏰ Erledigt am {formatDateTime(task.submittedAt)}
+  </p>
+)}
 
                     {task.status === "wartet" && (
                       <button
@@ -5762,51 +6164,176 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
                 <section className="grid gap-5 lg:grid-cols-2">
                   <Panel title={editingTaskId ? "✏️ Aufgabe bearbeiten" : "➕ Aufgabe anlegen"}>
                     <p className="mb-4 font-bold text-sky-700">
-                      Wähle eine typische Alltagsaufgabe aus oder schreibe eine eigene ➡️ Aufgabe anlegen. 
-                      <br />
-                      Coins, Wiederholung, Tag und Kind kannst du danach frei anpassen.
-                    </p>
-                    <div className="grid gap-3">
-                      <select value={selectedPreset} onChange={e => applyTaskPreset(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">
-                        <option value="">Alltagsaufgabe auswählen (optional)</option>
-                        {taskPresets.map((preset) => (
-                          <option key={preset.title} value={preset.title}>
-                            {preset.category}: {preset.title} · {preset.coins} Coins
-                          </option>
-                        ))}
-                      </select>
-                      <AppInput
-  value={newTaskTitle}
-  onChange={setNewTaskTitle}
-  placeholder="Eigene Aufgabe anlegen"
-  className="w-full"
-/>
+  Lege fest, ob du eine Alltagsaufgabe verwenden oder eine eigene Aufgabe erstellen möchtest.
+</p>
 
-<NumberKeypadField
-  label="🪙 Coins"
-  value={Number(newTaskCoins) || 0}
-  setter={setNewTaskCoins}
-  showEuro
-/>
-                      <select value={newTaskRepeat} onChange={e => setNewTaskRepeat(e.target.value as Repeat)} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="einmalig">Einmalig</option><option value="täglich">Täglich</option><option value="wöchentlich">Wöchentlich</option></select>
-                      <select value={newTaskDay} onChange={e => setNewTaskDay(e.target.value)} className="w-full rounded-[1.35rem] border bg-white p-3">{days.map(d => <option key={d}>{d}</option>)}</select>
-                      <select value={String(newTaskTarget)} onChange={e => setNewTaskTarget(e.target.value === "all" ? "all" : Number(e.target.value))} className="w-full rounded-[1.35rem] border bg-white p-3"><option value="all">Für alle Kinder</option>{children.map(c => <option key={c.id} value={c.id}>Nur für {c.name}</option>)}</select>
-                      <button
-  type="button"
-  onClick={() => {
-    setNewTaskTitle("");
-    setNewTaskCoins(0);
-    setNewTaskRepeat("täglich");
-    setNewTaskTarget("all");
-    setNewTaskDay("Mo");
-    setSelectedPreset("");
-  }}
-  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
->
-  🗑️ Leeren
-</button>
-                      <button onClick={saveTask} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(16,185,129,.25)] hover:scale-[1.02] active:scale-[.98] transition">{editingTaskId ? "Änderung speichern" : "Aufgabe hinzufügen"}</button>
-                    </div>
+<div className="grid gap-4">
+  <div className="rounded-[1.4rem] bg-sky-50 p-4">
+    <p className="mb-3 text-sm font-black text-sky-700">
+      📋 Alltagsaufgabe verwenden?
+    </p>
+
+    <div className="grid grid-cols-2 gap-3">
+      <button
+        type="button"
+        onClick={() => setUsePresetTask(true)}
+        className={`rounded-[1rem] py-3 font-black ${
+          usePresetTask ? "bg-sky-500 text-white" : "bg-white text-sky-700"
+        }`}
+      >
+        ✅ Ja
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setUsePresetTask(false)}
+        className={`rounded-[1rem] py-3 font-black ${
+          !usePresetTask ? "bg-sky-500 text-white" : "bg-white text-sky-700"
+        }`}
+      >
+        ❌ Nein
+      </button>
+    </div>
+
+    {usePresetTask && (
+      <select
+        value={selectedPreset}
+        onChange={(e) => applyTaskPreset(e.target.value)}
+        className="mt-3 w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+      >
+        <option value="">Alltagsaufgabe auswählen</option>
+        {taskPresets.map((preset) => (
+          <option key={preset.title} value={preset.title}>
+            {preset.category}: {preset.title} · {preset.coins} Coins
+          </option>
+        ))}
+      </select>
+    )}
+  </div>
+
+  <div className="rounded-[1.4rem] bg-emerald-50 p-4">
+    <p className="mb-3 text-sm font-black text-emerald-700">
+      ✍️ Eigene Aufgabe anlegen?
+    </p>
+
+    <div className="grid grid-cols-2 gap-3">
+      <button
+        type="button"
+        onClick={() => setUseCustomTask(true)}
+        className={`rounded-[1rem] py-3 font-black ${
+          useCustomTask ? "bg-emerald-500 text-white" : "bg-white text-emerald-700"
+        }`}
+      >
+        ✅ Ja
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setUseCustomTask(false)}
+        className={`rounded-[1rem] py-3 font-black ${
+          !useCustomTask ? "bg-emerald-500 text-white" : "bg-white text-emerald-700"
+        }`}
+      >
+        ❌ Nein
+      </button>
+    </div>
+
+    {useCustomTask && (
+      <div className="mt-3 grid gap-3">
+        <AppInput
+          value={newTaskTitle}
+          onChange={setNewTaskTitle}
+          placeholder="Name der Aufgabe"
+          className="w-full"
+        />
+
+        <NumberKeypadField
+          label="🪙 Coins"
+          value={Number(newTaskCoins) || 0}
+          setter={setNewTaskCoins}
+          showEuro
+        />
+
+        <select
+          value={newTaskRepeat}
+          onChange={(e) => setNewTaskRepeat(e.target.value as Repeat)}
+          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+        >
+          <option value="täglich">Täglich</option>
+          <option value="einmalig">Einmalig</option>
+          <option value="wöchentlich">Wöchentlich</option>
+        </select>
+
+        {newTaskRepeat === "einmalig" && (
+          <select
+            value={newTaskDeadline}
+            onChange={(e) =>
+              setNewTaskDeadline(
+                e.target.value as "today" | "tomorrow" | "threeDays" | "sevenDays"
+              )
+            }
+            className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+          >
+            <option value="today">Frist: Heute</option>
+            <option value="tomorrow">Frist: Morgen</option>
+            <option value="threeDays">Frist: In 3 Tagen</option>
+            <option value="sevenDays">Frist: In 7 Tagen</option>
+          </select>
+        )}
+
+        <select
+          value={newTaskDay}
+          onChange={(e) => setNewTaskDay(e.target.value)}
+          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+        >
+          {days.map((d) => (
+            <option key={d}>{d}</option>
+          ))}
+        </select>
+
+        <select
+          value={String(newTaskTarget)}
+          onChange={(e) =>
+            setNewTaskTarget(e.target.value === "all" ? "all" : Number(e.target.value))
+          }
+          className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+        >
+          <option value="all">Für alle Kinder</option>
+          {children.map((c) => (
+            <option key={c.id} value={c.id}>
+              Nur für {c.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    )}
+  </div>
+
+  <button
+    type="button"
+    onClick={() => {
+      setNewTaskTitle("");
+      setNewTaskCoins(0);
+      setNewTaskRepeat("täglich");
+      setNewTaskTarget("all");
+      setNewTaskDay("Mo");
+      setSelectedPreset("");
+      setUsePresetTask(false);
+      setUseCustomTask(true);
+      setNewTaskDeadline("today");
+    }}
+    className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+  >
+    🗑️ Leeren
+  </button>
+
+  <button
+    onClick={saveTask}
+    className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 px-4 py-3 font-black text-white shadow-[0_10px_25px_rgba(16,185,129,.25)] hover:scale-[1.02] active:scale-[.98] transition"
+  >
+    {editingTaskId ? "Änderung speichern" : "Aufgabe hinzufügen"}
+  </button>
+</div>
 
                     <div className="mt-5 rounded-[1.8rem] border-[3px] border-sky-100 bg-sky-50/80 p-4">
                       <h3 className="text-xl font-black text-sky-950">⚡ Aufgabenpakete</h3>
@@ -5826,7 +6353,7 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 
 <div className="mb-5 flex flex-wrap gap-2">
 
-{["alle","wartet","offen","erledigt"].map(status=>(
+{["alle","wartet","offen","erledigt","verpasst"].map(status=>(
 
 <button
 key={status}
@@ -5842,11 +6369,33 @@ parentTaskFilter===status
 {status==="wartet" && "🔔 Zu bestätigen"}
 {status==="offen" && "📝 Offen"}
 {status==="erledigt" && "✅ Erledigt"}
+{status==="verpasst" && "🔴 Verpasst"}
 
 </button>
 
 ))}
+<div className="mt-4 rounded-[1.8rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-lg">
+  <p className="mb-3 text-sm font-black text-sky-800">
+    👧 Aufgaben nach Kind filtern
+  </p>
 
+  <select
+    value={String(parentTaskChildFilter)}
+    onChange={(e) =>
+      setParentTaskChildFilter(
+        e.target.value === "all" ? "all" : Number(e.target.value)
+      )
+    }
+    className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
+  >
+    <option value="all">🌈 Alle Kinder anzeigen</option>
+    {children.map((childItem) => (
+      <option key={childItem.id} value={childItem.id}>
+        👧 Nur {childItem.name}
+      </option>
+    ))}
+  </select>
+</div>
 </div>
 {[
 {
@@ -5860,6 +6409,10 @@ status:"offen"
 {
 title:"✅ Erledigt",
 status:"erledigt"
+},
+{
+title:"🔴 Verpasst",
+status:"verpasst"
 }
 ]
 .filter(
@@ -5870,7 +6423,15 @@ group.status===parentTaskFilter
 .map(group=>{
 
 const filteredTasks = tasks.filter(t => {
+  if (parentTaskChildFilter !== "all" && t.childId !== parentTaskChildFilter) {
+    return false;
+  }
+
   if (t.status !== group.status) return false;
+
+  if (t.status === "offen") {
+    return isTaskForToday(t);
+  }
 
   if (t.status === "erledigt") {
     if (!t.completedAt) return true;
@@ -5916,6 +6477,8 @@ task.status==="wartet"
 : task.status==="offen"
 ? "bg-orange-50 border-orange-200"
 
+: task.status==="verpasst"
+? "bg-red-50 border-red-200"
 : "bg-green-50 border-green-200"
 }
 `}
@@ -5932,7 +6495,22 @@ task.status==="wartet"
 · {task.repeat}
 
 </p>
-
+<p className="mt-2 font-black text-blue-700">
+  👶 {
+    children.find(c => c.id === task.childId)?.name || "Kind"
+  }
+</p>
+{task.status === "wartet" && task.submittedAt && (
+  <p className="mt-2 rounded-xl bg-yellow-100 px-3 py-2 text-sm font-black text-yellow-800">
+    ⏰ Erledigt am{" "}
+    {new Date(task.submittedAt).toLocaleDateString("de-DE")} um{" "}
+    {new Date(task.submittedAt).toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}{" "}
+    Uhr
+  </p>
+)}
 
 {task.status==="wartet" && (
 
@@ -5965,7 +6543,11 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
 </div>
 
 )}
-
+{task.status==="verpasst" && (
+  <div className="mt-4 rounded-[1rem] bg-red-200 py-2 text-center font-black text-red-900">
+    🔴 Aufgabe nicht erfüllt
+  </div>
+)}
 {task.status==="erledigt" && (
 
 <div className="mt-4 rounded-[1rem] bg-green-200 py-2 text-center font-black text-green-900">
@@ -6028,7 +6610,39 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
                     <div className="mb-5">
                       <h3 className="mb-3 text-xl font-black text-sky-950">Einlöse-Anfragen</h3>
                       {waitingRewards.length === 0 && <p className="font-bold text-sky-700">Keine offenen Einlösungen.</p>}
-                      {waitingRewards.map(r => <div key={r.id} className="mb-3 rounded-[1.8rem] bg-yellow-50 p-4"><p className="font-black text-sky-950">{r.icon} {r.title}</p><p className="font-bold text-sky-700">{r.coins} Coins</p><div className="mt-3 grid grid-cols-2 gap-2"><button onClick={() => approveReward(r)} className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 p-3 font-black text-white">Freigeben</button><button onClick={() => rejectReward(r.id)} className="rounded-[1.35rem] bg-red-400 p-3 font-black text-white">Ablehnen</button></div></div>)}
+                      {waitingRewards.map(r => (
+  <div key={r.id} className="mb-3 rounded-[1.8rem] bg-yellow-50 p-4">
+    <p className="font-black text-sky-950">
+      {r.icon} {r.title}
+    </p>
+
+    <p className="font-bold text-sky-700">
+      {r.coins} Coins
+    </p>
+
+    {r.requestedAt && (
+      <p className="mt-2 rounded-xl bg-yellow-100 px-3 py-2 text-sm font-black text-yellow-800">
+        ⏰ Angefragt am {formatDateTime(r.requestedAt)}
+      </p>
+    )}
+
+    <div className="mt-3 grid grid-cols-2 gap-2">
+      <button
+        onClick={() => approveReward(r)}
+        className="rounded-[1.35rem] bg-gradient-to-br from-emerald-400 via-lime-300 to-green-400 p-3 font-black text-white"
+      >
+        Freigeben
+      </button>
+
+      <button
+        onClick={() => rejectReward(r.id)}
+        className="rounded-[1.35rem] bg-red-400 p-3 font-black text-white"
+      >
+        Ablehnen
+      </button>
+    </div>
+  </div>
+))}
                     </div>
 
                     <div className="grid gap-2">
@@ -6126,6 +6740,11 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
                                 <p className="mt-1 text-xs font-black text-emerald-700">
                                   Eingelöst von: {item.ownedBy.length} Kind(er)
                                 </p>
+                                {item.boughtAt && (
+  <p className="mt-2 rounded-xl bg-emerald-100 px-3 py-2 text-xs font-black text-emerald-800">
+    ⏰ Zuletzt eingelöst am {formatDateTime(item.boughtAt)}
+  </p>
+)}
                               </div>
 
                               <div className="flex gap-2">
@@ -6222,6 +6841,11 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
                               <h3 className="text-xl font-black text-sky-950">{chest.title}</h3>
                               <p className="font-bold text-sky-700">{chest.tier} · {chest.price} Coins</p>
                               <p className="mt-2 rounded-[1.35rem] bg-yellow-50 p-3 font-bold text-amber-800">{chest.content}</p>
+                              {chest.openedAt && (
+  <p className="mt-2 rounded-xl bg-yellow-100 px-3 py-2 text-xs font-black text-yellow-800">
+    ⏰ Geöffnet am {formatDateTime(chest.openedAt)}
+  </p>
+)}
                             </div>
                             <button onClick={() => deleteChest(chest.id)} className="rounded-xl bg-red-100 p-3 text-red-700">
                               <Trash2 className="h-5 w-5" />
@@ -6735,10 +7359,11 @@ if(answer===currentQuestion.correctAnswer){
 
 if (mathStep >= 9) {
 
-  const updatedTask = {
-    ...activeLearningTask,
-    status: "wartet"
-  };
+const updatedTask = {
+  ...activeLearningTask,
+  status: "wartet",
+  submittedAt: Date.now(),
+};
 
   setLearningTasks(prev =>
     prev.map(task =>
@@ -6932,19 +7557,37 @@ function ChildTabs({
   );
 }
 
-function ParentTabs({ view, setView }: { view: ParentView; setView: (v: ParentView) => void }) {
+function ParentTabs({
+  view,
+  setView,
+  taskBadge = 0,
+  learningBadge = 0,
+  rewardBadge = 0,
+  chestBadge = 0,
+  shopBadge = 0,
+  familyBadge = 0,
+}: {
+  view: ParentView;
+  setView: (v: ParentView) => void;
+  taskBadge?: number;
+  learningBadge?: number;
+  rewardBadge?: number;
+  chestBadge?: number;
+  shopBadge?: number;
+  familyBadge?: number;
+}) {
   return (
     <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
       <div className="flex flex-wrap gap-2">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
-        <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" />
-        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" />
-        <Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" />
-        <Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Trophy />} label="Kisten" />
-        <Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" />
+        <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" badge={taskBadge} />
+        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" badge={learningBadge} />
+<Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" badge={rewardBadge} />
+<Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Sparkles />} label="Schatzkiste" badge={chestBadge} />
+<Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" badge={shopBadge} />
         <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
         <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
-        <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" />
+        <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" badge={familyBadge} />
         <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
         <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
         <Tab active={view === "settings"} onClick={() => setView("settings")} icon={<User />} label="Kinder" />
