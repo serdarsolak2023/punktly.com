@@ -3155,7 +3155,7 @@ if (maintenanceMode) {
         <FoxCoinImage className="mx-auto h-24 w-24" />
 
         <h1 className="mt-4 text-3xl font-black text-sky-900">
-          PunktlyCoinly
+          www.punktlycoinly.de
         </h1>
 
         <div className="mt-5 rounded-[1.5rem] bg-yellow-50 p-4">
@@ -3166,7 +3166,10 @@ if (maintenanceMode) {
           </h2>
 
           <p className="mt-3 font-bold text-slate-700">
-            Die App wird gerade verbessert, daher bitte ich um Geduld. (A)
+            Die App wird gerade verbessert, daher bitte ich um Geduld. 
+          </p>
+                    <p className="mt-3 font-bold text-slate-700">
+            Suche eine Person für den Support, bei Intresse bitte gerne melden! support@punktlycoinly.de
           </p>
         </div>
       </div>
