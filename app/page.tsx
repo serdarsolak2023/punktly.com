@@ -3166,13 +3166,22 @@ if (maintenanceMode) {
           </h2>
 
           <p className="mt-3 font-bold text-slate-700">
-            Die App wird gerade verbessert, daher bitte ich um Geduld. 
+            Die App wird gerade verbessert, daher bitte ich um Geduld.
           </p>
-<p className="mt-2 text-1xl font-extrabold text-red-300 tracking-wide">
-  Suche eine Person für den Support, bei Interesse bitte gerne melden!
-  <br />
-  support@punktlycoinly.de
-</p>
+
+          <p className="mt-2 text-1xl font-extrabold text-red-300 tracking-wide">
+            Suche eine Person für den Support, bei Interesse bitte gerne melden!
+            <br />
+            support@punktlycoinly.de
+          </p>
+
+          {/* Audio/Music */}
+          <div className="mt-6">
+            <audio controls className="w-full">
+              <source src="/music/mein-song.mp3" type="audio/mpeg" />
+              Dein Browser unterstützt kein Audio.
+            </audio>
+          </div>
         </div>
       </div>
     </div>
