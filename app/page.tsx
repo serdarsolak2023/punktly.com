@@ -3167,10 +3167,11 @@ if (maintenanceMode) {
 
           <p className="mt-3 font-bold text-slate-700">
             Die App wird gerade verbessert, daher bitte ich um Geduld. 
-          </p>
-                    <p className="mt-3 font-bold text-slate-700">
-            Suche eine Person für den Support, bei Intresse bitte gerne melden! support@punktlycoinly.de
-          </p>
+<p className="mt-3 text-3xl font-extrabold text-red-300 tracking-wide">
+  Suche eine Person für den Support, bei Interesse bitte gerne melden!
+  <br />
+  support@punktlycoinly.de
+</p>
         </div>
       </div>
     </div>
