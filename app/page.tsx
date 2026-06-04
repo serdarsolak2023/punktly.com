@@ -796,6 +796,9 @@ export default function PunktlyRoleSplit() {
   const [area, setArea] = useState<Area>("start");
   const [childView, setChildView] = useState<ChildView>("home");
   const [taskFilter, setTaskFilter] = useState<"alle"|"offen"|"wartet"|"erledigt"|"verpasst">("alle");
+  const [childTaskDayFilter, setChildTaskDayFilter] = useState<
+  "today" | "tomorrow" | "week"
+>("today");
 const [learningFilter, setLearningFilter] = useState<"alle"|"offen"|"wartet"|"erledigt"|"verpasst">("alle");
 const [parentView, setParentView] = useState<ParentView>("dashboard");
 const [dashboardDayFilter, setDashboardDayFilter] = useState<
@@ -985,14 +988,18 @@ useEffect(() => {
     achievements: [],
     profileBadges: []
   };
-  const childTasks = tasks.filter((t) => {
+const childTasks = tasks.filter((t) => {
   const belongsToChild =
     t.childId === "all" || t.childId === child.id;
 
   if (!belongsToChild) return false;
 
-  if (t.status === "offen") {
-    return isTaskForToday(t);
+  if (childTaskDayFilter === "today") {
+    return t.day === getTodayDay();
+  }
+
+  if (childTaskDayFilter === "tomorrow") {
+    return t.day === getTomorrowDay();
   }
 
   return true;
@@ -1234,7 +1241,24 @@ function getTodayDay() {
 
   return dayMap[jsDay];
 }
+function getTomorrowDay() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
+  const jsDay = tomorrow.getDay();
+
+  const dayMap: Record<number, string> = {
+    0: "So",
+    1: "Mo",
+    2: "Di",
+    3: "Mi",
+    4: "Do",
+    5: "Fr",
+    6: "Sa",
+  };
+
+  return dayMap[jsDay];
+}
 function shouldTaskBeMissed(task: Task) {
   if (task.status !== "offen") return false;
   if (task.repeat === "täglich") return false;
@@ -3489,13 +3513,10 @@ title: "👨‍👩‍👧 Elternbereich 👨‍👩‍👧",
 text: `Der Elternbereich bietet Eltern die volle Kontrolle und Übersicht über alle wichtigen Funktionen der App.
 Der Zugriff auf den Elternbereich ist zusätzlich mit einer eigenen PIN geschützt, sodass nur Eltern wichtige Bereiche und Einstellungen verwalten können.
 Eltern können tägliche und wöchentliche Aufgaben individuell erstellen, bearbeiten und an die Bedürfnisse ihrer Kinder anpassen.
-Zusätzlich können Belohnungen, Schatzkisten, Shop-Produkte und Coin-Werte flexibel festgelegt werden.
-Kinder können erledigte Aufgaben markieren, diese müssen jedoch zuerst von den Eltern bestätigt und genehmigt werden.
-Dadurch behalten Eltern jederzeit die Kontrolle über Aufgaben, Coins und Fortschritte.
-Im Kalender können Eltern alle geplanten Aufgaben, Ziele und Aktivitäten übersichtlich einsehen.
+Zusätzlich können Belohnungen, Schatzkisten, Shop-Produkte und Coin-Werte flexibel festgelegt werden. Kinder können erledigte Aufgaben markieren, diese müssen jedoch zuerst von den Eltern bestätigt und genehmigt werden.
+Dadurch behalten Eltern jederzeit die Kontrolle über Aufgaben, Coins und Fortschritte. Im Kalender können Eltern alle geplanten Aufgaben, Ziele und Aktivitäten übersichtlich einsehen.
 Zusätzlich bietet der Elternbereich verschiedene Statistiken und Übersichten über erledigte Aufgaben, Fortschritte, Level und gesammelte Coins.
-Auch individuelle Shop-Produkte können erstellt werden, damit Kinder ihre gesammelten Coins gegen persönliche Wünsche und Belohnungen eintauschen können.
-Belohnungen und Ziele können gemeinsam mit den Kindern geplant werden, um langfristige Motivation und klare Ziele zu schaffen.
+Auch individuelle Shop-Produkte können erstellt werden, damit Kinder ihre gesammelten Coins gegen persönliche Wünsche und Belohnungen eintauschen können. Belohnungen und Ziele können gemeinsam mit den Kindern geplant werden, um langfristige Motivation und klare Ziele zu schaffen.
 Durch die optische Darstellung der Fortschritte behalten Eltern jederzeit den Überblick über die Entwicklung ihrer Kinder.
 Die Kombination aus Motivation, Struktur, Kontrolle und Belohnungen sorgt für mehr Zusammenarbeit im Familienalltag und unterstützt Kinder dabei, Verantwortung zu übernehmen und langfristig eigene Ziele zu verfolgen.`,
 color: "text-purple-400",
@@ -5457,16 +5478,27 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
 </section>
 )}
 {childView === "tasks" && (
-<Panel title="📋 Deine Aufgaben">
-  {childTasks.length === 0 && (
-  <EmptyState
-    icon="📋"
-    title="Noch keine Aufgaben vorhanden"
-    text="Deine Eltern können im Elternbereich Aufgaben erstellen. Sobald Aufgaben angelegt sind, erscheinen sie hier automatisch."
-  />
-)}
+<Panel
+  title={
+    <div className="flex items-center gap-3">
+      <span>📋 Deine Aufgaben</span>
 
-<div className="mb-5 flex flex-wrap gap-2">
+      <select
+        value={childTaskDayFilter}
+        onChange={(e) =>
+          setChildTaskDayFilter(
+            e.target.value as "today" | "tomorrow" | "week"
+          )
+        }
+        className="rounded-[1.2rem] border-2 border-white bg-gradient-to-br from-yellow-200 via-sky-200 to-cyan-300 px-4 py-2 text-base font-black text-sky-950 shadow-[0_8px_20px_rgba(14,165,233,.22)] transition hover:scale-[1.03] active:scale-[.98]"
+      >
+        <option value="today">🌞 Heute</option>
+        <option value="tomorrow">🌙 Morgen</option>
+        <option value="week">📅 Woche</option>
+      </select>
+    </div>
+  }
+>
 
 {["alle","offen","wartet","erledigt"].map(status=>(
 <button
@@ -5485,7 +5517,6 @@ taskFilter===status
 </button>
 ))}
 
-</div>
 
 {[
 {
@@ -7739,7 +7770,7 @@ function Tab({
     </button>
   );
 }
-function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+function Panel({ title, children }: { title: React.ReactNode; children: React.ReactNode }) {
   return (
     <section className="rounded-[1.4rem] border-2 border-white bg-white/90 p-3 shadow-[0_14px_40px_rgba(37,99,235,.10)] backdrop-blur-xl sm:p-4 lg:p-5">
       <h2 className="mb-3 text-xl font-black tracking-tight text-sky-950 sm:text-2xl">
