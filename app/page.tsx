@@ -769,7 +769,7 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [showAppInfo, setShowAppInfo] = useState(false);
   const [messagePin, setMessagePin] = useState("");
 const [messageUnlocked, setMessageUnlocked] = useState(false);
-const [showMemoryPopup, setShowMemoryPopup] = useState(false);
+
   const [featurePopup, setFeaturePopup] = useState<{
   title: string;
   text: string;
@@ -3296,48 +3296,134 @@ Ich habe dich geliebt.
 
 Und du wirst immer
 in meinem Herzen bleiben.`}
-  </div>
-)}
-{showMemoryPopup && (
-  <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] bg-white p-5 text-center shadow-[0_25px_70px_rgba(15,23,42,.35)]">
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-black text-rose-700">
-          🖼️ Erinnerung
-        </h2>
 
-        <button
-          type="button"
-          onClick={() => setShowMemoryPopup(false)}
-          className="rounded-full bg-red-100 px-4 py-2 font-black text-red-700"
-        >
-          ✕
-        </button>
-      </div>
+    <div className="mt-8 rounded-[2rem] bg-rose-50 p-4 text-center shadow-inner">
+      <h3 className="mb-4 text-2xl font-black text-rose-700">
+        🖼️ Erinnerung
+      </h3>
 
-      <div className="overflow-hidden rounded-[1.8rem] bg-rose-50 p-3">
-        <img
-          src="/erinnerung.jpg"
-          alt="Erinnerung"
-          className="mx-auto max-h-[55vh] w-full rounded-[1.4rem] object-contain"
-        />
-      </div>
+      <img
+        src="/erinnerung.jpg"
+        alt="Erinnerung"
+        className="mx-auto max-h-[55vh] w-full rounded-[1.5rem] object-contain shadow-lg"
+      />
 
-      <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-slate-700">
-{`Hier kommt dein zusätzlicher Text rein.
+      <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-rose-800">
+{`Ich werde dir für immer dankbar sein.
+Für dein Lachen.
+Für dein Lächeln.
+Für die wenigen Momente, in denen ich wirklich glücklich war.
 
-Du kannst hier wieder mehrere Zeilen schreiben.
-Dieser Text erscheint nur im zweiten Popup.`}
+Ich wollte niemals aufhören, dich zu lieben.
+Ich wollte niemals lernen, ohne dich weiterzugehen.
+Ich wollte niemals akzeptieren, dass es ein Leben ohne dich geben könnte.
+
+Denn egal wohin ich geschaut habe —
+meine einzige Zukunft war immer nur du.
+
+Vielleicht habe ich vieles falsch gemacht.
+Vielleicht habe ich versagt.
+Aber ich weiß auch, dass Ruhm, Luxus und ein anderes Leben viele Menschen verändern können.
+Und deswegen mache ich dir keinen Vorwurf mehr.
+
+Mein Weg endet hier.
+Ich habe nur noch ein paar Dinge zu erledigen.
+Danach wirst du nie wieder etwas von mir hören.
+
+Und tief in mir weiß ich längst,
+dass du schon lange mit mir abgeschlossen hast.
+
+Früher wollte ich das nicht sehen.
+Ich wollte deine Worte nicht verstehen.
+Nicht deine Distanz.
+Nicht deine Taten.
+
+Aber irgendwann kommt der Moment,
+an dem selbst der blindeste Mensch erkennt,
+dass er loslassen muss.
+
+Du wolltest immer, dass ich es akzeptiere.
+Jetzt habe ich es akzeptiert.
+
+Deshalb gehe ich.
+Leise.
+Ohne Streit.
+Ohne Hass.
+
+Ich wünsche mir nur,
+dass du glücklich wirst.
+
+Vielleicht wusste ich schon immer,
+dass dieser Tag kommen würde.
+Der Tag, an dem dir bewusst wird,
+dass ich nichts besitze.
+Keinen Ruhm.
+Keinen Luxus.
+Keine Welt, die glänzt.
+
+Deswegen verkaufe ich alles,
+was mir aus meiner Vergangenheit geblieben ist.
+Jede Erinnerung.
+Jedes Stück meines alten Lebens.
+Alles, was sich noch in Geld verwandeln lässt.
+
+Und danach verschwinde ich.
+
+Aber wem erzähle ich das eigentlich?
+Dir bedeutet das alles wahrscheinlich längst nichts mehr.
+
+Und trotzdem liest du diese Zeilen.
+
+Früher hätte ich mich gefragt warum.
+Heute frage ich mich nichts mehr.
+
+Ich muss nur noch stark bleiben,
+solange ich es noch kann.
+
+Deswegen werde ich dich nie wieder um etwas bitten.
+Denn die letzten Wochen haben mir gezeigt,
+dass ich niemals den Platz in deinem Herzen hatte,
+von dem ich immer geträumt habe.
+
+Ich wollte nur geliebt werden.
+Von dir.
+
+Ich wollte, dass du verrückt nach mir bist.
+Dass du jeden Tag aufs Neue an meiner Tür klingelst,
+nur um mich zu sehen.
+
+Aber wir beide wissen inzwischen die Wahrheit.
+
+Es war keine Liebe.
+
+Vielleicht nur ein Gefühl.
+Ein kurzer Traum.
+Ein schöner Irrtum.
+
+Und trotzdem hat mich selbst dieser Irrtum glücklich gemacht.
+Denn allein der Gedanke,
+dass es irgendwo einen Menschen gibt,
+der mich mehr liebt als alles andere,
+hat mir Kraft gegeben.
+
+Wie auch immer unser Weg endet —
+ich werde dir mein Leben lang nur das Beste wünschen.
+
+Und vielleicht wirst du irgendwann verstehen,
+wie sehr ich dich wirklich geliebt habe.
+
+Das hier ist kein Vorwurf.
+Kein Kampf.
+Keine Bitte.
+
+Es ist nur mein letztes:
+
+Leb wohl.
+`}
       </p>
     </div>
   </div>
-)}<button
-  type="button"
-  onClick={() => setShowMemoryPopup(true)}
-  className="mt-6 w-full rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-rose-400 to-red-400 px-6 py-4 font-black text-white shadow-[0_12px_30px_rgba(244,63,94,.28)] transition hover:scale-[1.03] active:scale-[.98]"
->
-  🖼️ Erinnerung öffnen
-</button>
+)}
     </div>
   </div>
 )}
