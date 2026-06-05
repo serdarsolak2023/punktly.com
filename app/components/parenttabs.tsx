@@ -87,23 +87,23 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`relative rounded-[1.8rem] p-3 text-center font-black transition active:scale-95 ${
+      className={`relative flex h-[4.6rem] min-w-[4.9rem] flex-col items-center justify-center rounded-[1.5rem] px-2 py-2 font-black transition active:scale-95 ${
         active
           ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]"
           : "text-sky-700 hover:bg-cyan-50"
       }`}
     >
       {badge > 0 && (
-        <span className="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-black text-white shadow-lg">
+        <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-black leading-none text-white shadow-md">
           {badge}
         </span>
       )}
 
-      <div className="relative z-10 mx-auto mb-1 h-5 w-5">
+      <div className="mb-1 flex h-6 w-6 items-center justify-center">
         {icon}
       </div>
 
-      <div className="truncate text-[10px] md:text-xs">
+      <div className="max-w-[4.2rem] truncate text-center text-[10px] leading-none md:text-xs">
         {label}
       </div>
     </button>
