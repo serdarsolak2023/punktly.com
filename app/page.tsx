@@ -3060,32 +3060,177 @@ const updatedTask = {
   return () => clearTimeout(timer);
 }, [activeLearningTask, learningTimeLeft, activeReadingText, activeMathTask]);
 
-if (maintenanceMode) {
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-100 p-6">
-      <div className="max-w-lg rounded-[2rem] border-2 border-white bg-white/90 p-8 text-center shadow-[0_20px_50px_rgba(37,99,235,.18)] backdrop-blur-xl">
-        
-        <div className="mb-5 text-6xl">
-          🛠️
-        </div>
+{showAppInfo && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-[0_25px_70px_rgba(15,23,42,.35)]">
+      
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="text-2xl font-black text-sky-950">
+          💌 Eine Nachricht
+        </h2>
 
-        <h1 className="text-3xl font-black text-sky-950">
-          PunktlyCoinly wird gerade verbessert
-        </h1>
-
-        <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
-          Wir führen aktuell Wartungsarbeiten durch,
-          damit eure Familien-App noch schneller,
-          stabiler und schöner wird.
-        </p>
-
-        <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
-          Bitte versuche es in einigen Minuten erneut 💙
-        </div>
+        <button
+          onClick={() => setShowAppInfo(false)}
+          className="rounded-full bg-red-100 px-4 py-2 font-black text-red-700"
+        >
+          ✕
+        </button>
       </div>
-    </main>
-  );
-}
+
+      <div className="space-y-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-sky-800">
+{`Dieser Text ist nur für die,
+die wirklich lieben.
+Nicht für die,
+die „Ich liebe dich“ sagen,
+aber nie wirklich geliebt haben.
+Nur für die,
+die mit dem Herzen lieben.
+Nicht für die,
+die sagen:
+„Ich würde für dich sterben“,
+„ich werde ohne dich nicht leben“,
+und dabei lügen.
+
+Ich bin allein…
+Du bist gegangen,
+ohne überhaupt „Leb wohl“ zu sagen.
+Jetzt schaue ich dir nur noch hinterher
+und bleibe allein zurück.
+
+ich war morgens und abends bei dir.
+Immer an deiner Seite.
+Und ich konnte nicht glauben,
+was ich gesehen habe.
+
+Sag niemals:
+„Ich komme auch ohne dich klar.“
+
+Vergiss nicht die Tage,
+an denen du unten am Fenster auf mich gewartet hast.
+
+Vergiss diese Erinnerungen nicht.
+
+Ich liebe dich…
+mehr als alles andere.
+
+Aber ich kann nicht sagen:
+„Komm zurück.“
+
+Du warst mein Ein und Alles.
+Das Licht meiner Augen.
+
+Ich habe meinen Verstand verloren.
+
+Ohne dich zu leben
+ist schlimmer,
+als zu verbrennen.
+
+Viele haben mich gewarnt:
+„Dieses Mädchen verkauft dich irgendwann
+für Ruhm und Luxus.“
+
+Aber ich wollte es nicht glauben.
+
+Du hast mich nicht geliebt…
+du hast nur dafür gesorgt,
+dass ich dich liebe.
+
+Und ich habe dich bis zum Äußersten geliebt.
+
+Jetzt bleiben nur Erinnerungen zurück.
+
+Wenn ich den Engeln meinen Schmerz erzählen würde,
+würden selbst sie weinen.
+
+Ich schwöre,
+ich bin so hilflos.
+
+Auf den dunklen Straßen unserer Liebe,
+liebe ich dich wie ein Verrückter.
+
+Ich habe viele Trennungen gesehen.
+Viele verletzte Menschen.
+
+Doch nichts war wie dieser Schmerz.
+
+Der Boden verschwand unter meinen Füßen.
+Der Himmel brach über mir zusammen.
+
+Sie nennen mich „Opfer“…
+einen Verlorenen…
+einen Landstreicher…
+ein Obdachloser…
+hinter meinem Rücken, 
+weil ich meinen Schmerz und Leid,
+vor niemanden verbergen konnte.
+
+Und manchmal weine ich einfach.
+
+Tropfen für Tropfen
+laufen meine Tränen herunter.
+
+Meine blinden Augen vermissen dich.
+Mein Herz ist verwundet.
+
+Du bist weg…
+und nichts hat mehr einen Sinn.
+
+Dieser Körper sucht nur noch dich.
+
+Die Entscheidung liegt in deinen Händen.
+
+Doch in meinem Herzen bleibt nur eine Wunde.
+
+Und schau…
+Ich halte noch immer den Ring in meiner Hand.
+
+Sieh nur,
+was aus uns geworden ist.
+
+Wir haben Verräter gesehen.
+Wir sind ausgebrannt wie Kerzen.
+Wir wurden lebendig begraben.
+Beleidigt.
+Benutzt.
+Zerstört.
+
+Und trotzdem suche ich dich noch
+auf diesen einsamen Straßen.
+
+Und dieses Herz brennt weiter,
+solange du nicht bei mir bist.
+
+Egal wohin ich gehe,
+deine Schmerzen holen mich ein.
+
+Sobald ich den Ort sehe,
+an dem wir uns getroffen haben,
+muss ich weinen.
+
+Diese Tage der Trennung…
+sie machen einen Menschen kaputt.
+
+Du musst niemanden töten,
+um ihm die Seele zu nehmen.
+
+Du hast meine bereits genommen.
+
+Und trotzdem…
+liebe ich dich noch immer.
+
+Also geh ich…
+Packe meine Sachen
+und verschwinde weit weg.
+
+Aber vergiss niemals:
+Ich habe dich geliebt.
+
+Und du wirst immer
+in meinem Herzen bleiben.`}
+      </div>
+    </div>
+  </div>
+)}
 if (!isPurchased) {
     return (
     <main className="relative min-h-[120vh] sm:min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
