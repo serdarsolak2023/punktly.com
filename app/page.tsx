@@ -3062,41 +3062,28 @@ const updatedTask = {
 
 if (maintenanceMode) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-white to-yellow-100 p-6">
-      <div className="w-full max-w-md rounded-[2rem] bg-white/90 p-6 text-center shadow-2xl">
-        <FoxCoinImage className="mx-auto h-24 w-24" />
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-100 p-6">
+      <div className="max-w-lg rounded-[2rem] border-2 border-white bg-white/90 p-8 text-center shadow-[0_20px_50px_rgba(37,99,235,.18)] backdrop-blur-xl">
+        
+        <div className="mb-5 text-6xl">
+          🛠️
+        </div>
 
-        <h1 className="mt-4 text-3xl font-black text-sky-900">
-          www.punktlycoinly.de
+        <h1 className="text-3xl font-black text-sky-950">
+          PunktlyCoinly wird gerade verbessert
         </h1>
 
-        <div className="mt-5 rounded-[1.5rem] bg-yellow-50 p-4">
-          <div className="text-5xl">🚧</div>
+        <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
+          Wir führen aktuell Wartungsarbeiten durch,
+          damit eure Familien-App noch schneller,
+          stabiler und schöner wird.
+        </p>
 
-          <h2 className="mt-2 text-xl font-black text-orange-700">
-            Aktuell befinden sich Wartungsarbeiten. Die PunktlyCoinly App wird demnächst auf Google Play verfügbar sein.
-          </h2>
-
-          <p className="mt-3 font-bold text-slate-700">
-            Die App wird gerade verbessert, daher bitte ich um Geduld.
-          </p>
-
-          <p className="mt-2 text-1xl font-extrabold text-red-300 tracking-wide">
-            Suche eine Person für den Support, bei Interesse bitte gerne melden!
-            <br />
-            support@punktlycoinly.de
-          </p>
-
-          {/* Audio/Music */}
-          <div className="mt-6">
-            <audio controls className="w-full">
-              <source src="/music/mein-song.mp3" type="audio/mpeg" />
-              Dein Browser unterstützt kein Audio.
-            </audio>
-          </div>
+        <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
+          Bitte versuche es in einigen Minuten erneut 💙
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 if (!isPurchased) {
