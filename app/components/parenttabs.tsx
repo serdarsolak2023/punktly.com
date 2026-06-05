@@ -51,8 +51,8 @@ export default function ParentTabs({
   familyBadge?: number;
 }) {
   return (
-    <nav className="rounded-[1.8rem] border-2 border-white bg-white/90 p-3 shadow-[0_14px_35px_rgba(37,99,235,.12)] backdrop-blur-xl">
-  <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+<nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
+  <div className="flex gap-1 overflow-x-auto punktly-scrollbar-none">
         <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
         <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" badge={taskBadge} />
         <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" badge={learningBadge} />
@@ -87,7 +87,7 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`relative min-h-[4.4rem] rounded-[1.5rem] p-2 text-center font-black transition active:scale-95 sm:min-h-[4.8rem] sm:p-3 ${
+      className={`relative rounded-[1.8rem] p-3 text-center font-black transition active:scale-95 ${
         active
           ? "bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 text-white shadow-[0_10px_25px_rgba(37,99,235,.35)]"
           : "text-sky-700 hover:bg-cyan-50"
@@ -99,11 +99,11 @@ function Tab({
         </span>
       )}
 
-      <div className="relative z-10 mx-auto mb-1 h-5 w-5 sm:h-6 sm:w-6">
+      <div className="relative z-10 mx-auto mb-1 h-5 w-5">
         {icon}
       </div>
 
-      <div className="text-[10px] leading-tight sm:text-xs">
+      <div className="truncate text-[10px] md:text-xs">
         {label}
       </div>
     </button>
