@@ -1,4 +1,5 @@
 
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -24,5 +25,12 @@ description: "Kinder sammeln durch Aufgaben Punkte und Coins, schalten Belohnung
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="de"><body>{children}</body></html>;
+  return (
+    <html lang="de">
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  );
 }
