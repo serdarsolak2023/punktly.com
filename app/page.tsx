@@ -769,6 +769,7 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [showAppInfo, setShowAppInfo] = useState(false);
   const [messagePin, setMessagePin] = useState("");
 const [messageUnlocked, setMessageUnlocked] = useState(false);
+const [showMemoryPopup, setShowMemoryPopup] = useState(false);
   const [featurePopup, setFeaturePopup] = useState<{
   title: string;
   text: string;
@@ -3297,6 +3298,46 @@ Und du wirst immer
 in meinem Herzen bleiben.`}
   </div>
 )}
+{showMemoryPopup && (
+  <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] bg-white p-5 text-center shadow-[0_25px_70px_rgba(15,23,42,.35)]">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h2 className="text-2xl font-black text-rose-700">
+          🖼️ Erinnerung
+        </h2>
+
+        <button
+          type="button"
+          onClick={() => setShowMemoryPopup(false)}
+          className="rounded-full bg-red-100 px-4 py-2 font-black text-red-700"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="overflow-hidden rounded-[1.8rem] bg-rose-50 p-3">
+        <img
+          src="/erinnerung.jpg"
+          alt="Erinnerung"
+          className="mx-auto max-h-[55vh] w-full rounded-[1.4rem] object-contain"
+        />
+      </div>
+
+      <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-slate-700">
+{`Hier kommt dein zusätzlicher Text rein.
+
+Du kannst hier wieder mehrere Zeilen schreiben.
+Dieser Text erscheint nur im zweiten Popup.`}
+      </p>
+    </div>
+  </div>
+)}<button
+  type="button"
+  onClick={() => setShowMemoryPopup(true)}
+  className="mt-6 w-full rounded-[1.5rem] bg-gradient-to-br from-pink-500 via-rose-400 to-red-400 px-6 py-4 font-black text-white shadow-[0_12px_30px_rgba(244,63,94,.28)] transition hover:scale-[1.03] active:scale-[.98]"
+>
+  🖼️ Erinnerung öffnen
+</button>
     </div>
   </div>
 )}
