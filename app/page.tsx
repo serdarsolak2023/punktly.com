@@ -681,9 +681,8 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode =
-  process.env.NODE_ENV === "production";
-const [maintenancePassword, setMaintenancePassword] = useState("");
+  const maintenanceMode = (false)
+  const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
   const [newLearningMinutes, setNewLearningMinutes] = useState(3);
