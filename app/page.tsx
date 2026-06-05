@@ -1272,10 +1272,10 @@ async function saveMessageComment() {
 
     setMessageComment("");
     await loadMessageComments();
-  } catch (error) {
-    console.error(error);
-    alert("Kommentar konnte nicht gespeichert werden.");
-  } finally {
+  } catch (error: any) {
+  console.error("Kommentar Fehler:", error);
+  alert(error?.code + " - " + error?.message);
+} finally {
     setIsSavingMessageComment(false);
   }
 }
