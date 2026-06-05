@@ -1,6 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import Panel from "./components/panel";
+import EmptyState from "./components/emptystate";
+import Coin from "./components/coin";
+import FoxCoinImage from "./components/foxcoinimage";
+import LiveFox from "./components/livefox";
+import GoalProgress from "./components/goalprogress";
+import CoinlyLabel from "./components/coinlylabel";
+import ParentTabs from "./components/parenttabs";
+
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon, BookOpen } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
 import {
@@ -18,17 +28,6 @@ import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTime
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
-
-function FoxCoinImage({ className = "h-16 w-16" }: { className?: string }) {
-  
-return (
-    <img
-      src="/PunktlyLogo.png"
-      alt="Punktly Logo"
-      className={`${className} object-contain drop-shadow-xl`}
-    />
-  );
-}
 
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
@@ -125,9 +124,9 @@ impressum: {
   intro: "Angaben gemäß § 5 TMG",
   content: [
     "PunktlyCoinly",
-    "Inhaber: Serdar Solak",
+    "Inhaber: PunktlyCoinly",
     "Einzelunternehmen (Kleingewerbe)",
-    "Leipziger Straße 159",
+    "-",
     "34123 Kassel",
     "Deutschland",
     "",
@@ -138,7 +137,7 @@ impressum: {
     "",
     "Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV:",
     "Serdar Solak",
-    "Leipziger Straße 159",
+    "-",
     "34123 Kassel"
   ]
 },
@@ -153,7 +152,7 @@ datenschutz: {
 
 "PunktlyCoinly",
 "Inhaber: Serdar Solak",
-"Leipziger Straße 159",
+"-",
 "34123 Kassel",
 "Deutschland",
 "E-Mail: kontakt@punktlycoinly.de",
@@ -556,139 +555,6 @@ function getFoxMood(child: Child, waitingTasks: number) {
   if (child.completedCount === 0) return { mood: "sleepy", text: "Lass uns heute mit einer kleinen Aufgabe starten." };
   return { mood: "happy", text: "Heute schaffen wir wieder tolle Sachen!" };
 }
-
-function LiveFox({ child, waitingCount }: { child: Child; waitingCount: number }) {
-  const activeMotiv = (child.profileBadges || [])[0];
-  const message =
-    child.streak >= 5
-      ? "Deine Serie ist richtig stark! 🔥"
-      : waitingCount > 0
-      ? "Ich warte mit dir auf die Bestätigung."
-      : "Heute kannst du wieder Punkte sammeln!";
-
-  return (
-    <div className="relative overflow-hidden rounded-[1.3rem] border border-white bg-gradient-to-br from-yellow-100 via-white to-orange-100 p-3 text-center shadow-[0_14px_35px_rgba(14,165,233,.12)] sm:p-4">
-      <div className="absolute left-6 top-6 text-2xl animate-floaty">✨</div>
-      <div className="absolute right-8 top-8 text-2xl animate-floaty">⭐</div>
-
-      <div className="relative z-10 mx-auto mb-4 max-w-sm rounded-[1.8rem] bg-gradient-to-br from-white via-sky-50 to-yellow-50 p-4 shadow-sm">
-        <p className="text-lg font-black text-sky-950">„{message}“</p>
-        <p className="mt-1 text-sm font-bold text-blue-600">Dein eigenes Zimmer</p>
-      </div>
-
-      {activeMotiv ? (
-        <img
-          src={activeMotiv}
-          alt="Gewähltes Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty rounded-full bg-white/80 object-contain p-4 drop-shadow-xl"
-        />
-      ) : (
-        <img
-          src="/PunktlyLogo.png"
-          alt="Punktly Motiv"
-          className="mx-auto h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 animate-floaty drop-shadow-xl"
-        />
-      )}
-
-      <div className="mt-4 grid grid-cols-3 gap-2">
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-sky-800">Level {child.level}</div>
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-orange-700">🔥 {child.streak}</div>
-        <div className="rounded-[1.35rem] bg-white/85 p-3 text-center font-black text-amber-700">{child.coins} Coins</div>
-      </div>
-    </div>
-  );
-}
-function EmptyState({
-  icon = "✨",
-  title,
-  text,
-  action,
-}: {
-  icon?: string;
-  title: string;
-  text: string;
-  action?: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-[1.4rem] border-2 border-dashed border-sky-200 bg-white/80 p-4 text-center shadow-sm sm:p-5">
-      <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-sky-50 text-2xl">
-        {icon}
-      </div>
-
-      <h3 className="text-lg font-black text-sky-950">
-        {title}
-      </h3>
-
-      <p className="mx-auto mt-2 max-w-md text-sm font-bold leading-relaxed text-sky-700">
-        {text}
-      </p>
-
-      {action && <div className="mt-4">{action}</div>}
-    </div>
-  );
-}
-function Coin({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <img
-      src="/PunktlyLogo.png"
-      alt="Punktly Logo"
-      className={`${className} inline-block object-contain drop-shadow-[0_12px_30px_rgba(37,99,235,.22)]`}
-    />
-  );
-}
-function GoalProgress({
-  icon,
-  title,
-  name,
-  current,
-  target,
-  motivSrc,
-}: {
-  icon: string;
-  title: string;
-  name: string;
-  current: number;
-  target: number;
-  motivSrc: string;
-}) {
-  const percent =
-    target > 0
-      ? Math.min(100, Math.round((current / target) * 100))
-      : 0;
-
-  return (
-    <div className="rounded-[1.3rem] bg-white/80 p-3 shadow-sm">
-
-      <div className="flex justify-between">
-        <span className="font-black">
-          {icon} {title}: {name}
-        </span>
-
-        <span className="font-black">
-          {percent}%
-        </span>
-      </div>
-
-      <div className="mt-2 h-3 overflow-hidden rounded-full bg-sky-100">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500"
-          style={{
-            width: `${percent}%`
-          }}
-        />
-      </div>
-
-      <div className="mt-2 text-right text-sm font-black">
-        {current}/{target}{" "}
-        <CoinlyLabel
-          motivSrc={motivSrc}
-          text="Coinly"
-        />
-      </div>
-
-    </div>
-  );
-}
 const MAX_LEVEL = 100;
 
 function xpToNext(level: number) {
@@ -806,6 +672,7 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
 >("today");
   const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentTaskChildFilter, setParentTaskChildFilter] = useState<"all" | number>("all");
+  const [familyBadgeCount, setFamilyBadgeCount] = useState(0);
   const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
@@ -1259,6 +1126,25 @@ function getTomorrowDay() {
 
   return dayMap[jsDay];
 }
+function getTaskDeadlineAt() {
+  const date = new Date();
+
+  if (newTaskDeadline === "tomorrow") {
+    date.setDate(date.getDate() + 1);
+  }
+
+  if (newTaskDeadline === "threeDays") {
+    date.setDate(date.getDate() + 3);
+  }
+
+  if (newTaskDeadline === "sevenDays") {
+    date.setDate(date.getDate() + 7);
+  }
+
+  date.setHours(23, 59, 59, 999);
+
+  return date.getTime();
+}
 function shouldTaskBeMissed(task: Task) {
   if (task.status !== "offen") return false;
   if (task.repeat === "täglich") return false;
@@ -1614,6 +1500,7 @@ celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`
 
           level += 1;
           coins += 25;
+          setFamilyBadgeCount((prev) => prev + 1);
           achievements = addAchievement(achievements, `Level ${level} erreicht`);
 
           if (level === 10) achievements = addAchievement(achievements, "Silber-Rang erreicht");
@@ -1777,6 +1664,7 @@ if (newTaskTarget === "all") {
     repeat: newTaskRepeat,
     status: "offen" as Status,
     day: newTaskDay,
+    deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
   }));
 
   setTasks(prev => [...prev, ...tasksForChildren]);
@@ -1792,6 +1680,7 @@ if (newTaskTarget === "all") {
     repeat: newTaskRepeat,
     status: "offen" as Status,
     day: newTaskDay,
+    deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
   };
 
   setTasks(prev => [...prev, newTask]);
@@ -5744,13 +5633,19 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
           <>
 <ParentTabs
   view={parentView}
-  setView={setParentView}
+  setView={(view) => {
+  setParentView(view);
+
+  if (view === "family") {
+    setFamilyBadgeCount(0);
+  }
+}}
   taskBadge={tasks.filter((task) => task.status === "wartet").length}
   learningBadge={learningTasks.filter((task) => task.status === "wartet").length}
   rewardBadge={rewards.filter((reward) => reward.status === "wartet").length}
   chestBadge={chests.filter((chest) => chest.opened).length}
   shopBadge={shop.filter((item) => item.ownedBy.length > 0).length}
-  familyBadge={children.length}
+  familyBadge={familyBadgeCount}
 />
 <div className="mt-5">
 {parentView === "dashboard" && (
@@ -7094,6 +6989,62 @@ const isToday = day === todayShort;
     </div>
   </Panel>
 )}
+{parentView === "family" && (
+  <section className="grid gap-5 lg:grid-cols-2">
+    <Panel title="👨‍👩‍👧 Familie">
+      <p className="mb-4 font-bold text-sky-700">
+        Hier siehst du alle Kinderprofile deiner Familie.
+      </p>
+
+      <div className="grid gap-3">
+        {children.length === 0 ? (
+          <EmptyState
+            icon="👧"
+            title="Noch keine Kinder angelegt"
+            text="Lege zuerst ein Kind im Bereich Kinder an."
+          />
+        ) : (
+          children.map((childItem) => (
+            <div
+              key={childItem.id}
+              className="rounded-[1.5rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-md"
+            >
+              <h3 className="text-xl font-black text-sky-950">
+                👧 {childItem.name}
+              </h3>
+
+              <p className="mt-2 font-bold text-sky-700">
+                Alter: {childItem.age || "nicht angegeben"}
+              </p>
+
+              <p className="font-bold text-sky-700">
+                Lieblingsfarbe: {childItem.favoriteColor || "nicht angegeben"}
+              </p>
+
+              <p className="font-bold text-sky-700">
+                Lieblingstier: {childItem.favoriteAnimal || "nicht angegeben"}
+              </p>
+
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                <div className="rounded-[1rem] bg-white/80 p-3 text-center font-black text-amber-700">
+                  🪙 {childItem.coins}
+                </div>
+
+                <div className="rounded-[1rem] bg-white/80 p-3 text-center font-black text-sky-700">
+                  ⭐ Level {childItem.level}
+                </div>
+
+                <div className="rounded-[1rem] bg-white/80 p-3 text-center font-black text-orange-700">
+                  🔥 {childItem.streak}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </Panel>
+  </section>
+)}
               {parentView === "profile" && (
                 <section className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
                   <Panel title="👤 Eltern-Profil">
@@ -7692,46 +7643,6 @@ function ChildTabs({
   );
 }
 
-function ParentTabs({
-  view,
-  setView,
-  taskBadge = 0,
-  learningBadge = 0,
-  rewardBadge = 0,
-  chestBadge = 0,
-  shopBadge = 0,
-  familyBadge = 0,
-}: {
-  view: ParentView;
-  setView: (v: ParentView) => void;
-  taskBadge?: number;
-  learningBadge?: number;
-  rewardBadge?: number;
-  chestBadge?: number;
-  shopBadge?: number;
-  familyBadge?: number;
-}) {
-  return (
-    <nav className="rounded-[1.2rem] border-2 border-white bg-white/90 p-1.5 shadow-md backdrop-blur-xl">
-      <div className="flex flex-wrap gap-2">
-        <Tab active={view === "dashboard"} onClick={() => setView("dashboard")} icon={<Home />} label="Übersicht" />
-        <Tab active={view === "tasks"} onClick={() => setView("tasks")} icon={<ListChecks />} label="Aufgaben" badge={taskBadge} />
-        <Tab active={view === "learning"} onClick={() => setView("learning")} icon={<BookOpen />} label="Lernen" badge={learningBadge} />
-<Tab active={view === "rewards"} onClick={() => setView("rewards")} icon={<Gift />} label="Belohnung" badge={rewardBadge} />
-<Tab active={view === "chests"} onClick={() => setView("chests")} icon={<Sparkles />} label="Schatzkiste" badge={chestBadge} />
-<Tab active={view === "shop"} onClick={() => setView("shop")} icon={<ShoppingBag />} label="Shop" badge={shopBadge} />
-        <Tab active={view === "features"} onClick={() => setView("features")} icon={<BookMinusIcon />} label="Bonus" />
-        <Tab active={view === "calendar"} onClick={() => setView("calendar")} icon={<CalendarDays />} label="Kalender" />
-        <Tab active={view === "family"} onClick={() => setView("family")} icon={<Users />} label="Familie" badge={familyBadge} />
-        <Tab active={view === "stats"} onClick={() => setView("stats")} icon={<BarChart3 />} label="Statistik" />
-        <Tab active={view === "profile"} onClick={() => setView("profile")} icon={<User />} label="Profil" />
-        <Tab active={view === "settings"} onClick={() => setView("settings")} icon={<User />} label="Kinder" />
-        <Tab active={view === "coinrechner"} onClick={() => setView("coinrechner")} icon={<Coin />} label="Coinrechner" />
-      </div>
-    </nav>
-  );
-}
-
 function Tab({
   active,
   onClick,
@@ -7770,17 +7681,6 @@ function Tab({
     </button>
   );
 }
-function Panel({ title, children }: { title: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <section className="rounded-[1.4rem] border-2 border-white bg-white/90 p-3 shadow-[0_14px_40px_rgba(37,99,235,.10)] backdrop-blur-xl sm:p-4 lg:p-5">
-      <h2 className="mb-3 text-xl font-black tracking-tight text-sky-950 sm:text-2xl">
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
 function BigNumber({ value, label }: { value: number; label: string }) {
   return <div className="text-center"><div className="text-6xl font-black text-sky-950">{value}</div><div className="mt-2 font-bold text-sky-700">{label}</div></div>;
 }
@@ -7788,20 +7688,6 @@ function BigNumber({ value, label }: { value: number; label: string }) {
 function Progress({ value, max }: { value: number; max: number }) {
   const pct = Math.min(100, Math.round((value / max) * 100));
   return <div><div className="h-4 w-full overflow-hidden rounded-full border border-sky-100 bg-white/90"><div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 transition-all" style={{ width: `${pct}%` }} /></div><div className="mt-1 text-xs font-black text-sky-700">{pct}% geschafft</div></div>;
-}
-
-function CoinlyLabel({ motivSrc, text = "Coinly" }: { motivSrc: string; text?: string }) {
-  return (
-    <span className="inline-flex items-center gap-1 align-middle text-sm font-black text-slate-500">
-      <img
-        src={motivSrc}
-        alt={text}
-        className="h-5 w-5 rounded-full object-cover shadow-sm"
-        onError={(event) => { event.currentTarget.src = "/PunktlyLogo.png"; }}
-      />
-      <span>{text}</span>
-    </span>
-  );
 }
 
 function StatCard({
