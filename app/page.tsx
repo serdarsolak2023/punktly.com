@@ -3419,6 +3419,11 @@ Keine Bitte.
 Es ist nur mein letztes:
 
 Leb wohl.
+
+PS
+Ich werde dich für immer Lieben,
+egal ob ich nicht mehr lange haben werden,
+ich werde solange damit nicht aufhören!
 `}
       </p>
     </div>
