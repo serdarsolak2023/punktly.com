@@ -769,6 +769,8 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [showAppInfo, setShowAppInfo] = useState(false);
   const [messagePin, setMessagePin] = useState("");
 const [messageUnlocked, setMessageUnlocked] = useState(false);
+const [messageComment, setMessageComment] = useState("");
+const [isSavingMessageComment, setIsSavingMessageComment] = useState(false);
 
   const [featurePopup, setFeaturePopup] = useState<{
   title: string;
@@ -1031,7 +1033,29 @@ function coinsToEuroText(coins: number) {
 
   return `${coins} Coins = ${euro.toFixed(2).replace(".", ",")} €`;
 }
+async function saveMessageComment() {
+  if (!messageComment.trim()) {
+    alert("Bitte erst einen Kommentar schreiben.");
+    return;
+  }
 
+  try {
+    setIsSavingMessageComment(true);
+
+    await addDoc(collection(db, "messageComments"), {
+      text: messageComment.trim(),
+      createdAt: serverTimestamp(),
+    });
+
+    setMessageComment("");
+    alert("Kommentar wurde gespeichert.");
+  } catch (error) {
+    console.error(error);
+    alert("Kommentar konnte nicht gespeichert werden.");
+  } finally {
+    setIsSavingMessageComment(false);
+  }
+}
 async function hashPin(pin: string) {
   if (
     typeof window === "undefined" ||
@@ -3162,17 +3186,27 @@ if (maintenanceMode) {
 
       <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-rose-800">
 {` `}
-<div className="mt-8 overflow-hidden rounded-[2rem] bg-black shadow-[0_20px_50px_rgba(0,0,0,.35)]">
-  <video
-    controls
-    autoPlay
-    loop
-    className="w-full"
+<div className="mt-8 rounded-[2rem] bg-white/90 p-5 shadow-inner">
+  <h3 className="text-xl font-black text-sky-950">
+    💬 Kommentar
+  </h3>
+
+  <textarea
+    value={messageComment}
+    onChange={(e) => setMessageComment(e.target.value)}
+    placeholder="Schreib hier deine Nachricht..."
+    rows={5}
+    className="mt-4 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 p-4 font-bold text-sky-900 outline-none"
+  />
+
+  <button
+    type="button"
+    onClick={saveMessageComment}
+    disabled={isSavingMessageComment}
+    className="mt-4 w-full rounded-[1.4rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 p-4 font-black text-white disabled:opacity-50"
   >
-    <source src="/liebe.mp4" type="video/mp4" />
-    Dein Browser unterstützt dieses Video nicht.
-  </video>
-  
+    {isSavingMessageComment ? "Wird gespeichert..." : "Kommentar speichern"}
+  </button>
 </div>
       </p>
     </div>
