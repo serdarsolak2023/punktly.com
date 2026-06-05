@@ -3133,7 +3133,7 @@ if (maintenanceMode) {
 
     <button
       onClick={() => {
-        if (messagePin === "2307") {
+        if (messagePin === "28062001") {
           setMessageUnlocked(true);
         } else {
           alert("Falscher PIN");
