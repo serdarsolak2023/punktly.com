@@ -3060,7 +3060,38 @@ const updatedTask = {
   return () => clearTimeout(timer);
 }, [activeLearningTask, learningTimeLeft, activeReadingText, activeMathTask]);
 
-{showAppInfo && (
+if (maintenanceMode) {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-100 p-6">
+      <div className="max-w-lg rounded-[2rem] border-2 border-white bg-white/90 p-8 text-center shadow-[0_20px_50px_rgba(37,99,235,.18)] backdrop-blur-xl">
+        
+        <div className="mb-5 text-6xl">
+          🛠️
+        </div>
+
+        <h1 className="text-3xl font-black text-sky-950">
+          PunktlyCoinly wird gerade verbessert
+        </h1>
+
+        <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
+          Wir führen aktuell Wartungsarbeiten durch,
+          damit eure Familien-App noch schneller,
+          stabiler und schöner wird.
+        </p>
+
+        <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
+          Bitte versuche es in einigen Minuten erneut 💙
+        </div>
+        <button
+  type="button"
+  onClick={() => setShowAppInfo(true)}
+  className="mt-5 rounded-[1.5rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-6 py-3 font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.28)] transition hover:scale-[1.03] active:scale-[.98]"
+>
+  💌 Nachricht öffnen
+</button>
+
+      </div>
+      {showAppInfo && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
     <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-[0_25px_70px_rgba(15,23,42,.35)]">
       
@@ -3231,6 +3262,9 @@ in meinem Herzen bleiben.`}
     </div>
   </div>
 )}
+    </main>
+  );
+}
 if (!isPurchased) {
     return (
     <main className="relative min-h-[120vh] sm:min-h-screen bg-gradient-to-br from-[#eef7ff] via-[#f7fbff] to-white px-4 py-6 md:px-6">
