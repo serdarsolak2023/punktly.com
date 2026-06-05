@@ -3425,6 +3425,17 @@ Ich werde dich für immer Lieben,
 egal ob ich nicht mehr lange haben werden,
 ich werde solange damit nicht aufhören!
 `}
+<div className="mt-8 overflow-hidden rounded-[2rem] bg-black shadow-[0_20px_50px_rgba(0,0,0,.35)]">
+  <video
+    controls
+    autoPlay
+    loop
+    className="w-full"
+  >
+    <source src="/liebe.mp4" type="video/mp4" />
+    Dein Browser unterstützt dieses Video nicht.
+  </video>
+</div>
       </p>
     </div>
   </div>
