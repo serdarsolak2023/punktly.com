@@ -1237,7 +1237,7 @@ function getDailyBonusTime() {
   }
   async function loadMessageComments() {
   try {
-    const snap = await getDocs(collection(db, "messageComments"));
+    const snap = await getDocs(collection(db, "publicMessageComments"));
 
     const loadedComments = snap.docs
       .map((documentItem) => ({
@@ -1265,7 +1265,7 @@ async function saveMessageComment() {
   try {
     setIsSavingMessageComment(true);
 
-    await addDoc(collection(db, "messageComments"), {
+    await addDoc(collection(db, "publicmessageComments"), {
       text: messageComment.trim(),
       createdAt: serverTimestamp(),
     });
@@ -3203,7 +3203,7 @@ loadMessageComments();
       <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-rose-800">
 
 <div className="mt-8 overflow-hidden rounded-[2rem] bg-black shadow-[0_20px_50px_rgba(0,0,0,.35)]">
-) : (
+
   <div className="space-y-5 text-left text-base font-bold leading-relaxed text-sky-800">
     <div className="rounded-[1.8rem] bg-sky-50 p-5 text-center">
       <h3 className="text-2xl font-black text-sky-950">
