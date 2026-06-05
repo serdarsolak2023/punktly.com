@@ -767,6 +767,8 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAppInfo, setShowAppInfo] = useState(false);
+  const [messagePin, setMessagePin] = useState("");
+const [messageUnlocked, setMessageUnlocked] = useState(false);
   const [featurePopup, setFeaturePopup] = useState<{
   title: string;
   text: string;
@@ -3076,18 +3078,21 @@ if (maintenanceMode) {
         <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
           Wir führen aktuell Wartungsarbeiten durch,
           damit eure Familien-App noch schneller,
-          stabiler und schöner wird.
+          stabiler und schöner wird. Die Vorereitung für Google Play läuft.
         </p>
 
         <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
-          Bitte versuche es in einigen Minuten erneut 💙
+          Bitte versuche es Bald erneut 💙
         </div>
-        <button
+<button
   type="button"
-  onClick={() => setShowAppInfo(true)}
+  onClick={() => {
+    setShowAppInfo(true);
+    setMessagePin("");
+  }}
   className="mt-5 rounded-[1.5rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-6 py-3 font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.28)] transition hover:scale-[1.03] active:scale-[.98]"
 >
-  💌 Nachricht öffnen
+  🔒 Nachricht öffnen
 </button>
 
       </div>
@@ -3108,8 +3113,40 @@ if (maintenanceMode) {
         </button>
       </div>
 
-      <div className="space-y-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-sky-800">
-{`Dieser Text ist nur für die,
+     {!messageUnlocked ? (
+  <div className="space-y-4">
+    <p className="text-center text-lg font-black text-sky-900">
+      🔐 Diese Nachricht ist geschützt
+    </p>
+
+    <p className="text-center font-bold text-sky-700">
+      Bitte PIN eingeben
+    </p>
+
+    <input
+      type="password"
+      value={messagePin}
+      onChange={(e) => setMessagePin(e.target.value)}
+      placeholder="PIN eingeben"
+      className="w-full rounded-[1.3rem] border-2 border-sky-100 bg-sky-50 p-4 text-center text-xl font-black outline-none"
+    />
+
+    <button
+      onClick={() => {
+        if (messagePin === "2307") {
+          setMessageUnlocked(true);
+        } else {
+          alert("Falscher PIN");
+        }
+      }}
+      className="w-full rounded-[1.4rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 p-4 font-black text-white"
+    >
+      Nachricht entsperren
+    </button>
+  </div>
+) : (
+  <div className="space-y-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-sky-800">
+    {`Dieser Text ist nur für die,
 die wirklich lieben.
 Nicht für die,
 die „Ich liebe dich“ sagen,
@@ -3191,7 +3228,7 @@ Sie nennen mich „Opfer“…
 einen Verlorenen…
 einen Landstreicher…
 ein Obdachloser…
-hinter meinem Rücken, 
+hinter meinem Rücken,
 weil ich meinen Schmerz und Leid,
 vor niemanden verbergen konnte.
 
@@ -3258,7 +3295,8 @@ Ich habe dich geliebt.
 
 Und du wirst immer
 in meinem Herzen bleiben.`}
-      </div>
+  </div>
+)}
     </div>
   </div>
 )}
