@@ -770,6 +770,7 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [messagePin, setMessagePin] = useState("");
 const [messageUnlocked, setMessageUnlocked] = useState(false);
 const [messageComment, setMessageComment] = useState("");
+const [messageComments, setMessageComments] = useState<any[]>([]);
 const [isSavingMessageComment, setIsSavingMessageComment] = useState(false);
 
   const [featurePopup, setFeaturePopup] = useState<{
@@ -1033,29 +1034,7 @@ function coinsToEuroText(coins: number) {
 
   return `${coins} Coins = ${euro.toFixed(2).replace(".", ",")} €`;
 }
-async function saveMessageComment() {
-  if (!messageComment.trim()) {
-    alert("Bitte erst einen Kommentar schreiben.");
-    return;
-  }
 
-  try {
-    setIsSavingMessageComment(true);
-
-    await addDoc(collection(db, "messageComments"), {
-      text: messageComment.trim(),
-      createdAt: serverTimestamp(),
-    });
-
-    setMessageComment("");
-    alert("Kommentar wurde gespeichert.");
-  } catch (error) {
-    console.error(error);
-    alert("Kommentar konnte nicht gespeichert werden.");
-  } finally {
-    setIsSavingMessageComment(false);
-  }
-}
 async function hashPin(pin: string) {
   if (
     typeof window === "undefined" ||
@@ -1256,6 +1235,50 @@ function getDailyBonusTime() {
       // Sound ist optional.
     }
   }
+  async function loadMessageComments() {
+  try {
+    const snap = await getDocs(collection(db, "messageComments"));
+
+    const loadedComments = snap.docs
+      .map((documentItem) => ({
+        id: documentItem.id,
+        ...documentItem.data(),
+      }))
+      .sort((a: any, b: any) => {
+        const aTime = a.createdAt?.seconds || 0;
+        const bTime = b.createdAt?.seconds || 0;
+        return aTime - bTime;
+      });
+
+    setMessageComments(loadedComments);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function saveMessageComment() {
+  if (!messageComment.trim()) {
+    alert("Bitte erst einen Kommentar schreiben.");
+    return;
+  }
+
+  try {
+    setIsSavingMessageComment(true);
+
+    await addDoc(collection(db, "messageComments"), {
+      text: messageComment.trim(),
+      createdAt: serverTimestamp(),
+    });
+
+    setMessageComment("");
+    await loadMessageComments();
+  } catch (error) {
+    console.error(error);
+    alert("Kommentar konnte nicht gespeichert werden.");
+  } finally {
+    setIsSavingMessageComment(false);
+  }
+}
 async function sendContactMessage() {
   const user = firebaseUser || auth.currentUser;
 
@@ -3160,6 +3183,7 @@ if (maintenanceMode) {
       onClick={() => {
         if (messagePin === "28062001") {
           setMessageUnlocked(true);
+loadMessageComments();
         } else {
           alert("Falscher PIN");
         }
@@ -3174,41 +3198,64 @@ if (maintenanceMode) {
     {``}
 
     <div className="mt-8 rounded-[2rem] bg-rose-50 p-4 text-center shadow-inner">
-      <h3 className="mb-4 text-2xl font-black text-rose-700">
-        🖼️ Erinnerung
-      </h3>
 
-      <img
-        src="/erinnerung.jpg"
-        alt="Erinnerung"
-        className="mx-auto max-h-[55vh] w-full rounded-[1.5rem] object-contain shadow-lg"
-      />
 
       <p className="mt-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-rose-800">
-{` `}
-<div className="mt-8 rounded-[2rem] bg-white/90 p-5 shadow-inner">
-  <h3 className="text-xl font-black text-sky-950">
-    💬 Kommentar
-  </h3>
 
-  <textarea
-    value={messageComment}
-    onChange={(e) => setMessageComment(e.target.value)}
-    placeholder="Schreib hier deine Nachricht..."
-    rows={5}
-    className="mt-4 w-full rounded-[1.4rem] border-2 border-sky-100 bg-sky-50 p-4 font-bold text-sky-900 outline-none"
-  />
+<div className="mt-8 overflow-hidden rounded-[2rem] bg-black shadow-[0_20px_50px_rgba(0,0,0,.35)]">
+) : (
+  <div className="space-y-5 text-left text-base font-bold leading-relaxed text-sky-800">
+    <div className="rounded-[1.8rem] bg-sky-50 p-5 text-center">
+      <h3 className="text-2xl font-black text-sky-950">
+        💬 Kommentarbereich
+      </h3>
 
-  <button
-    type="button"
-    onClick={saveMessageComment}
-    disabled={isSavingMessageComment}
-    className="mt-4 w-full rounded-[1.4rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 p-4 font-black text-white disabled:opacity-50"
-  >
-    {isSavingMessageComment ? "Wird gespeichert..." : "Kommentar speichern"}
-  </button>
+      <p className="mt-2 text-sm font-bold text-sky-700">
+        Hier kann eine Nachricht geschrieben und gespeichert werden.
+      </p>
+    </div>
+
+    <div className="max-h-64 space-y-3 overflow-y-auto rounded-[1.5rem] bg-white/80 p-4 shadow-inner">
+      {messageComments.length === 0 ? (
+        <p className="text-center text-sm font-black text-sky-600">
+          Noch keine Kommentare vorhanden.
+        </p>
+      ) : (
+        messageComments.map((comment) => (
+          <div
+            key={comment.id}
+            className="rounded-[1.2rem] bg-sky-100 p-3 text-sky-900"
+          >
+            <p className="whitespace-pre-line">
+              {comment.text}
+            </p>
+          </div>
+        ))
+      )}
+    </div>
+
+    <textarea
+      value={messageComment}
+      onChange={(e) => setMessageComment(e.target.value)}
+      placeholder="Schreib hier deine Nachricht..."
+      rows={5}
+      className="w-full rounded-[1.5rem] border-2 border-sky-100 bg-sky-50 p-4 font-bold text-sky-900 outline-none"
+    />
+
+    <button
+      type="button"
+      onClick={saveMessageComment}
+      disabled={isSavingMessageComment}
+      className="w-full rounded-[1.5rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 p-4 font-black text-white shadow-lg disabled:opacity-50"
+    >
+      {isSavingMessageComment ? "Wird gespeichert..." : "Kommentar speichern"}
+    </button>
+  </div>
+)
+  
 </div>
       </p>
+      
     </div>
   </div>
 )}
