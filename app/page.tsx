@@ -255,7 +255,7 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (false)
+  const maintenanceMode = (true)
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -2793,7 +2793,27 @@ loadMessageComments();
   </div>
 ) : (
   <div className="space-y-5 whitespace-pre-line text-left text-base font-bold leading-relaxed text-sky-800">
-    {``}
+    {`„Nicht heute, sondern morgen – meine Morgen sind unvollständig.
+Ich kehr wieder dorthin zurück, wo das Gewicht meiner Waffe auf meinen Schultern ruht und die Jagd meinen Namen flüstert — denn vielleicht wurde ich nie für ein gewöhnliches Leben erschaffen, sondern nur für diesen einen endlosen Krieg in mir.
+Meine Handgelenke sind dünn, meine Narben tief.
+Erzähl mir keine weitere Lüge, denn ich würde dir glauben.
+
+Mein Telefon ist an, vielleicht rufst du ja an.
+Du bist die schönste Lüge, an die ich je geglaubt habe.
+Vielleicht verstehst du es eines Tages, bevor es zu spät ist.
+Dieses verdammte Schicksal wurde mir schon vor meiner Geburt auf die Stirn geschrieben.
+
+Schau nicht darauf, dass ich weine.
+Jeder rennt dem Licht hinterher – ich bin der Dunkelheit hinterhergerannt.
+Wenn du wüsstest, woran ich dachte, jedes Mal wenn ich nachts die Augen schloss – voller Albträume.
+
+Ich habe meinen Brüdern dort ein Versprechen gegeben —
+und seitdem ist alles, was ich noch tue, diesen Kampf auf meine Schultern zu laden,
+Tag für Tag gegen Stürme zu laufen, die andere längst gebrochen hätten.
+
+Sie meinte wohl, sie würde zurückkommen …
+Dich zu lieben bedeutete wohl, jeden Tag zu sterben,
+wie Feuer langsam zu verlöschen."`}
 
     <div className="mt-8 rounded-[2rem] bg-rose-50 p-4 text-center shadow-inner">
 
