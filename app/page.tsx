@@ -10,6 +10,7 @@ import LiveFox from "./components/livefox";
 import GoalProgress from "./components/goalprogress";
 import CoinlyLabel from "./components/coinlylabel";
 import ParentTabs from "./components/parenttabs";
+import { days } from "./components/appdata";
 
 import { BarChart3, Check, Edit3, Gift, Home, ListChecks, Lock, Palette, Plus, RefreshCcw, ShoppingBag, Sparkles, Trash2, Trophy, User, X, CalendarDays, Users, LogOut, BookMinusIcon, BookOpen } from "lucide-react";
 import type { User as FirebaseUser } from "firebase/auth";
@@ -28,6 +29,7 @@ import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTime
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
+
 
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
@@ -116,7 +118,7 @@ type Chest = {
   openedAt?: number;
 };
 
-const days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
 
 const legalPages: Record<LegalPage, { title: string; intro: string; content: string[] }> = {
 impressum: {
@@ -681,7 +683,7 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (true)
+  const maintenanceMode = (false)
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
