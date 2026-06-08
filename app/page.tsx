@@ -261,7 +261,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (false)
+  const maintenanceMode = (true)
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -2906,7 +2906,7 @@ if (maintenanceMode) {
   }}
   className="mt-5 rounded-[1.5rem] bg-gradient-to-br from-sky-500 via-cyan-400 to-blue-500 px-6 py-3 font-black text-white shadow-[0_12px_30px_rgba(37,99,235,.28)] transition hover:scale-[1.03] active:scale-[.98]"
 >
-  🔒 Nachricht öffnen
+  🔒 -
 </button>
 
       </div>
@@ -2916,7 +2916,7 @@ if (maintenanceMode) {
       
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-black text-sky-950">
-          💌 Eine Nachricht
+          -
         </h2>
 
         <button
@@ -2930,11 +2930,11 @@ if (maintenanceMode) {
      {!messageUnlocked ? (
   <div className="space-y-4">
     <p className="text-center text-lg font-black text-sky-900">
-      🔐 Diese Nachricht ist geschützt
+      🔐 -
     </p>
 
     <p className="text-center font-bold text-sky-700">
-      Bitte PIN eingeben
+      -
     </p>
 
     <input
