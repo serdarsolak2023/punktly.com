@@ -23,6 +23,9 @@ import {
   browserLocalPersistence,
   deleteUser,
   reauthenticateWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp, writeBatch } from "firebase/firestore";
@@ -246,6 +249,8 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
 >("today");
   const [parentTaskFilter, setParentTaskFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentTaskChildFilter, setParentTaskChildFilter] = useState<"all" | number>("all");
+  const [calendarChildFilter, setCalendarChildFilter] = useState<"all" | number>("all");
+const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(null);
   const [familyBadgeCount, setFamilyBadgeCount] = useState(0);
   const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
@@ -255,11 +260,12 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (true)
+  const maintenanceMode = (false)
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
   const [newLearningMinutes, setNewLearningMinutes] = useState(3);
+  const [newLearningDeadline, setNewLearningDeadline] = useState<"today" | "tomorrow" | "threeDays" | "sevenDays">("today");
   const [activeLearningTask, setActiveLearningTask] = useState<any | null>(null);
   const [learningTimeLeft, setLearningTimeLeft] = useState(0);
   const [learningPinInput, setLearningPinInput] = useState("");
@@ -270,6 +276,7 @@ const [dashboardDayFilter, setDashboardDayFilter] = useState<
   new Date().toISOString().slice(0, 10)
 );
   const [showContactPopup, setShowContactPopup] = useState(false);
+  const [showDonateOptions, setShowDonateOptions] = useState(false);
   const [contactSubject, setContactSubject] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [isSendingContact, setIsSendingContact] = useState(false);
@@ -338,6 +345,9 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [openedChestMessage, setOpenedChestMessage] = useState<string | null>(null);
   const [celebration, setCelebration] = useState<string | null>(null);
   const [showLoginWelcomePopup, setShowLoginWelcomePopup] = useState(false);
+  const [emailLogin, setEmailLogin] = useState("");
+const [passwordLogin, setPasswordLogin] = useState("");
+const [showEmailLogin, setShowEmailLogin] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAppInfo, setShowAppInfo] = useState(false);
@@ -385,32 +395,36 @@ useEffect(() => {
 
   return () => clearInterval(timer);
 }, [currentDayKey]);
-        useEffect(() => {
-  const tasksToMiss = tasks.filter(shouldTaskBeMissed);
+useEffect(() => {
+  const interval = setInterval(() => {
+    const tasksToMiss = tasks.filter(shouldTaskBeMissed);
 
-  if (tasksToMiss.length === 0) return;
+    if (tasksToMiss.length === 0) return;
 
-  const now = Date.now();
+    const now = Date.now();
 
-  const updatedTasks = tasks.map(task =>
-    shouldTaskBeMissed(task)
-      ? {
-          ...task,
-          status: "verpasst" as Status,
-          missedAt: now,
-        }
-      : task
-  );
+    const updatedTasks = tasks.map(task =>
+      shouldTaskBeMissed(task)
+        ? {
+            ...task,
+            status: "verpasst" as Status,
+            missedAt: now,
+          }
+        : task
+    );
 
-  setTasks(updatedTasks);
+    setTasks(updatedTasks);
 
-  tasksToMiss.forEach(task => {
-    saveTaskNow({
-      ...task,
-      status: "verpasst" as Status,
-      missedAt: now,
+    tasksToMiss.forEach(task => {
+      saveTaskNow({
+        ...task,
+        status: "verpasst" as Status,
+        missedAt: now,
+      });
     });
-  });
+  }, 60000);
+
+  return () => clearInterval(interval);
 }, [tasks]);
   const child = children.find((c) => c.id === selectedChildId) || children[0] || {
     id: 0,
@@ -704,14 +718,63 @@ function getTomorrowDay() {
   return dayMap[jsDay];
 }
 
-function shouldTaskBeMissed(task: Task) {
-  if (task.status !== "offen") return false;
-  if (task.repeat === "täglich") return false;
-  if (task.repeat === "einmalig") return false;
+function getTaskDayDateLabel(day: string) {
+  const order = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+  const targetIndex = order.indexOf(day);
 
-  return task.day !== getTodayDay();
+  if (targetIndex === -1) return day;
+
+  const date = new Date();
+  const todayIndex = date.getDay();
+
+  const diff = (targetIndex - todayIndex + 7) % 7;
+
+  date.setDate(date.getDate() + diff);
+
+  return `${day} ${date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  })}`;
+}
+function getCalendarDateForDay(day: string) {
+  const order = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+  const targetIndex = order.indexOf(day);
+
+  if (targetIndex === -1) return new Date();
+
+  const date = new Date();
+  const todayIndex = date.getDay();
+  const diff = (targetIndex - todayIndex + 7) % 7;
+
+  date.setDate(date.getDate() + diff);
+  date.setHours(0, 0, 0, 0);
+
+  return date;
 }
 
+function getCalendarDateLabel(day: string) {
+  const date = getCalendarDateForDay(day);
+
+  return `${day} ${date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  })}`;
+}
+function shouldTaskBeMissed(task: Task) {
+  if (task.status !== "offen") return false;
+
+  const order = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  const today = getTodayDay();
+
+  const taskIndex = order.indexOf(task.day);
+  const todayIndex = order.indexOf(today);
+
+  if (taskIndex === -1 || todayIndex === -1) return false;
+
+  return taskIndex < todayIndex;
+}
 function isTaskForToday(task: Task) {
   return task.day === getTodayDay();
 }
@@ -761,7 +824,25 @@ function getTaskDeadlineAt() {
 
   return date.getTime();
 }
+function getLearningDeadlineAt() {
+  const date = new Date();
 
+  if (newLearningDeadline === "tomorrow") {
+    date.setDate(date.getDate() + 1);
+  }
+
+  if (newLearningDeadline === "threeDays") {
+    date.setDate(date.getDate() + 3);
+  }
+
+  if (newLearningDeadline === "sevenDays") {
+    date.setDate(date.getDate() + 7);
+  }
+
+  date.setHours(23, 59, 59, 999);
+
+  return date.getTime();
+}
 function getTrialTimeLeft() {
   if (!trialEndsAt) return "";
 
@@ -1314,9 +1395,9 @@ if (newTaskTarget === "all") {
     deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
   }));
 
-  setTasks(prev => [...prev, ...tasksForChildren]);
-  tasksForChildren.forEach(taskItem => saveFamilyItem("tasks", taskItem));
-  celebrate("Aufgabe für alle Kinder einzeln angelegt!");
+setTasks(prev => [...prev, ...tasksForChildren]);
+tasksForChildren.forEach(taskItem => saveFamilyItem("tasks", taskItem));
+celebrate("Aufgabe für alle Kinder einzeln angelegt!");
 } else {
   const newTask = {
     id: Date.now(),
@@ -1871,9 +1952,67 @@ function toggleProfileBadge(badgeSrc: string) {
 
   saveFamilyItem("children", updatedChild);
 }
+async function registerWithEmail() {
+  if (!emailLogin.trim() || !passwordLogin.trim()) {
+    celebrate("Bitte E-Mail und Passwort eingeben.");
+    return;
+  }
 
+  if (passwordLogin.trim().length < 6) {
+    celebrate("Passwort muss mindestens 6 Zeichen haben.");
+    return;
+  }
 
+  try {
+    await setPersistence(auth, browserLocalPersistence);
 
+    const result = await createUserWithEmailAndPassword(
+      auth,
+      emailLogin.trim(),
+      passwordLogin.trim()
+    );
+
+setFirebaseUser(result.user);
+
+await sendEmailVerification(result.user);
+
+await loadParentProfile(result.user);
+await checkUserPaymentStatus(result.user);
+
+playSound("success");
+celebrate("Konto erstellt! Bitte bestätige deine E-Mail.");
+  } catch (error: any) {
+    console.error(error);
+    celebrate(error?.message || "Registrierung fehlgeschlagen.");
+  }
+}
+
+async function loginWithEmail() {
+  if (!emailLogin.trim() || !passwordLogin.trim()) {
+    celebrate("Bitte E-Mail und Passwort eingeben.");
+    return;
+  }
+
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+
+    const result = await signInWithEmailAndPassword(
+      auth,
+      emailLogin.trim(),
+      passwordLogin.trim()
+    );
+
+    setFirebaseUser(result.user);
+    await loadParentProfile(result.user);
+    await checkUserPaymentStatus(result.user);
+
+    playSound("success");
+    celebrate("E-Mail Login erfolgreich!");
+  } catch (error: any) {
+    console.error(error);
+    celebrate(error?.message || "E-Mail Login fehlgeschlagen.");
+  }
+}
   async function loginWithGoogle() {
     try {
       await setPersistence(auth, browserLocalPersistence);
@@ -2049,7 +2188,10 @@ if (data?.trialActive && data?.trialEndsAt > Date.now()) {
   setTrialEndsAt(data.trialEndsAt); 
   setShowLoginWelcomePopup(true);
 
-  await loadFamilyData(user);
+  if (familyDataLoadedForUid !== user.uid) {
+    await loadFamilyData(user);
+    setFamilyDataLoadedForUid(user.uid);
+  }
 
   return true;
 }
@@ -2124,10 +2266,13 @@ return false;
       { merge: true }
     );
 
-    setHasPaid(true);
-    setIsPurchased(true);
-    await loadFamilyData(user);
-setFamilyDataLoadedForUid(user.uid);
+setHasPaid(true);
+setIsPurchased(true);
+
+if (familyDataLoadedForUid !== user.uid) {
+  await loadFamilyData(user);
+  setFamilyDataLoadedForUid(user.uid);
+}
   }
 
   async function loadFamilyData(user: FirebaseUser) {
@@ -2171,7 +2316,13 @@ const syncedChildren = loadedChildren.map(
 
 setChildren(syncedChildren);
 setLearningTasks(loadedLearningTasks);
-setTasks(loadedTasks);
+const uniqueTasks = Array.from(
+  new Map(
+    loadedTasks.map((task) => [String(task.id), task])
+  ).values()
+);
+
+setTasks(uniqueTasks);
 
 
       setRewards(loadedRewards);
@@ -2360,15 +2511,16 @@ function saveLearningTask() {
     const editedTask = learningTasks.find(task => task.id === editingLearningTaskId);
     if (!editedTask) return;
 
-    const updatedTask = {
-      ...editedTask,
-      childId: selectedChildId,
-      title: newLearningTitle,
-      coins: newLearningCoins,
-      category: newLearningCategory,
-      level: newLearningLevel,
-      minutes: newLearningMinutes,
-    };
+const updatedTask = {
+  ...editedTask,
+  childId: selectedChildId,
+  title: newLearningTitle,
+  coins: newLearningCoins,
+  category: newLearningCategory,
+  level: newLearningLevel,
+  minutes: newLearningMinutes,
+  deadlineAt: getLearningDeadlineAt(),
+};
     setLearningTasks(prev =>
       prev.map(task => task.id === editingLearningTaskId ? updatedTask : task)
     );
@@ -2391,6 +2543,7 @@ const task = {
   category: newLearningCategory,
   level: newLearningLevel,
   minutes: newLearningMinutes,
+  deadlineAt: getLearningDeadlineAt(),
   status: "offen",
 };
 
@@ -2533,12 +2686,22 @@ function spinBonusWheel() {
 async function startTrial() {
   const user = firebaseUser || auth.currentUser;
 
-  if (!user) {
-    celebrate("Bitte zuerst einloggen.");
-    return;
-  }
+if (!user) {
+  celebrate("Bitte zuerst einloggen.");
+  return;
+}
 
-  try {
+await user.reload();
+
+const refreshedUser = auth.currentUser || user;
+
+if (!refreshedUser.emailVerified) {
+  setCelebration("📧 Bitte zuerst deine E-Mail-Adresse bestätigen.");
+setTimeout(() => setCelebration(null), 4000);
+  return;
+}
+
+try {
     const userRef = doc(db, "users", user.uid);
     const snap = await getDoc(userRef);
     const data = snap.data();
@@ -2563,13 +2726,17 @@ async function startTrial() {
       { merge: true }
     );
 
-    setHasPaid(true);
-    setTrialEndsAt(trialEnds);
+setHasPaid(true);
+setTrialEndsAt(trialEnds);
 setTrialIsActive(true);
-    setIsPurchased(true);
-    await loadFamilyData(user);
+setIsPurchased(true);
 
-    celebrate("🎉 48 Stunden Testphase gestartet!");
+if (familyDataLoadedForUid !== user.uid) {
+  await loadFamilyData(user);
+  setFamilyDataLoadedForUid(user.uid);
+}
+
+celebrate("🎉 48 Stunden Testphase gestartet!");
   } catch {
     celebrate("Testphase konnte nicht gestartet werden.");
   }
@@ -2779,7 +2946,7 @@ if (maintenanceMode) {
 
     <button
       onClick={() => {
-        if (messagePin === "28062001") {
+        if (messagePin === "dulügerin28") {
           setMessageUnlocked(true);
 loadMessageComments();
         } else {
@@ -3024,15 +3191,18 @@ if (!isPurchased) {
       </h2>
 
       <p className="text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-        Die Familien-App für Aufgaben, Motivation, Belohnungen und Elternkontrolle.
-        Gemeinsam Ziele erreichen und Spaß haben!
+        Die Familien-App für Aufgaben, Coins, Motivation und Belohnungen.
+Kinder sammeln spielerisch Erfolge und Verantwortung – Eltern behalten jederzeit den Überblick.
+
       </p>
 
       <p className="mt-4 text-sm font-bold leading-relaxed text-sky-950 md:text-base">
-        Mit der PunktlyCoinly App lernen Kinder spielerisch den Umgang mit Geld und Verantwortung.
-        Durch erledigte Aufgaben sammeln sie Punkte und Coins, verfolgen ihren Fortschritt durch
-        Level und können ihre Coins gegen von den Eltern festgelegte Belohnungen eintauschen –
-        ein motivierender und moderner Ersatz für Taschengeld.
+        Mit PunktlyCoinly werden Aufgaben, Lernen und Motivation zu einem spielerischen Erlebnis für die ganze Familie.
+Kinder erledigen Alltagsaufgaben, sammeln Punkte und Coins, steigen Level auf und verfolgen ihre Fortschritte durch Serien, Erfolge und Belohnungen.
+
+Eltern können individuelle Aufgaben, Lernbereiche und Belohnungen festlegen, Wochenpläne verwalten und die Entwicklung ihrer Kinder jederzeit übersichtlich begleiten.
+Die gesammelten Coins können gegen selbst festgelegte Belohnungen eingetauscht werden – als moderner, motivierender und familienfreundlicher Ersatz für klassisches Taschengeld.
+
       </p>
     </div>
   </div>
@@ -3236,7 +3406,7 @@ bg: "bg-purple-50",
           <div className="space-y-4">
 <button
   onClick={loginWithGoogle}
-  className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-sky-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
+  className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-green-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -3249,9 +3419,57 @@ bg: "bg-purple-50",
     <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.5 5.5-6.7 7.2l6.2 5.2C39.9 36.7 44 31 44 24c0-1.3-.1-2.7-.4-3.5z"/>
   </svg>
 
-  Mit Google einloggen
+  Google anmelden
+</button>
+<div className="mt-4 grid gap-3">
+<button
+  type="button"
+  onClick={() => setShowEmailLogin(!showEmailLogin)}
+  className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-white px-5 py-4 text-base font-black text-green-700 shadow-xl transition hover:scale-[1.01] md:text-lg"
+>
+  📧 E-Mail anmelden
 </button>
 
+  {showEmailLogin && (
+    <div className="grid gap-3 rounded-[1.5rem] bg-white/80 p-3">
+      <input
+        type="email"
+        placeholder="E-Mail"
+        value={emailLogin}
+        onChange={(e) => setEmailLogin(e.target.value)}
+        className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
+      />
+
+      <input
+        type="password"
+        placeholder="Passwort"
+        value={passwordLogin}
+        onChange={(e) => setPasswordLogin(e.target.value)}
+        className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
+      />
+
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={loginWithEmail}
+          className="rounded-[1.2rem] bg-sky-500 px-4 py-3 font-black text-white shadow-sm transition hover:scale-[1.02]"
+        >
+          Anmelden
+        </button>
+
+        <button
+          type="button"
+          onClick={registerWithEmail}
+          className="rounded-[1.2rem] bg-emerald-500 px-4 py-3 font-black text-white shadow-sm transition hover:scale-[1.02]"
+        >
+          Registrieren
+        </button>
+      </div>
+      Falls keine E-Mail ankommt:
+Bitte auch Spam-Ordner prüfen.
+    </div>
+  )}
+</div>
           </div>
         )}
       </section>
@@ -3290,7 +3508,7 @@ bg: "bg-purple-50",
   <button
     onClick={startTrial}
     
-    disabled={!firebaseUser}
+
     className="rounded-[1.5rem] border-2 border-emerald-200 bg-emerald-50 p-4 text-left shadow-sm transition hover:scale-[1.02] disabled:opacity-50"
   >
     <p className="text-xs font-black text-emerald-700">
@@ -3400,6 +3618,18 @@ bg: "bg-purple-50",
       </section>
     </div>
   </div>
+  {celebration && (
+  <div className="fixed inset-x-4 top-6 z-[9999] mx-auto max-w-md animate-bounce rounded-[2rem] border-4 border-sky-200 bg-gradient-to-br from-white to-sky-50 p-5 text-center shadow-2xl">
+    
+    <div className="mb-2 text-4xl">
+      📧
+    </div>
+
+    <p className="text-lg font-black text-sky-900">
+      {celebration}
+    </p>
+  </div>
+)}
 </main>
 
     );
@@ -4165,18 +4395,18 @@ während Eltern alles einfach und sicher verwalten können.
   </div>
 )}
 {area === "parent" && (
-  <button
-    type="button"
-    onClick={() =>
-window.open(
-  "https://www.paypal.com/paypalme/serdarsolak0203",
-  "_blank"
-)
-    }
-    className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-yellow-600 shadow-sm transition hover:scale-105"
-  >
-    💛 Spenden und Unterstüzung
-  </button>
+<button
+  type="button"
+  onClick={() =>
+    window.open(
+      "https://paypal.me/serdarsolak29",
+      "_blank"
+    )
+  }
+  className="rounded-full bg-white/90 px-4 py-2 text-sm font-black text-yellow-600 shadow-sm transition hover:scale-105"
+>
+  💛 Spenden und Unterstützung
+</button>
 )}
 
           </div>
@@ -5078,10 +5308,34 @@ task.status==="offen"
 {task.category}
 </p>
 
-<h3 className="line-clamp-2 text-sm font-black text-sky-950">
+<p
+  className={`mt-1 text-xs font-black ${
+    task.level === "leicht"
+      ? "text-green-600"
+      : task.level === "mittel"
+      ? "text-yellow-500"
+      : task.level === "schwer"
+      ? "text-red-600"
+      : "text-gray-500"
+  }`}
+>
+  {task.level === "leicht"
+    ? "🌱 Leicht"
+    : task.level === "mittel"
+    ? "🌼 Mittel"
+    : task.level === "schwer"
+    ? "🔥 Schwer"
+    : "Nicht angegeben"}
+</p>
+<h3 className="line-clamp-2 text-sm font-black text-sky-500">
 {task.title}
 </h3>
-
+<p className="mt-1 text-xs font-black text-red-500">
+  Frist bis:{" "}
+  {task.deadlineAt
+    ? formatDateTime(task.deadlineAt)
+    : "Keine Frist"}
+</p>
 <p className="mt-2 text-xs font-black text-amber-600">
 🪙 {task.coins}
 </p>
@@ -5152,7 +5406,8 @@ className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text
   }
 >
 
-{["alle","offen","wartet","erledigt"].map(status=>(
+<div className="mb-5 flex flex-wrap gap-2">
+{["alle","offen","wartet","erledigt", "verpasst"].map(status=>(
 <button
 key={status}
 onClick={()=>setTaskFilter(status as any)}
@@ -5166,8 +5421,9 @@ taskFilter===status
 {status==="offen" && "🟠 Offen"}
 {status==="wartet" && "⏳ Wartet"}
 {status==="erledigt" && "✅ Erledigt"}
+{status==="verpasst" && "🔴 Verpasst"}
 </button>
-))}
+))}</div>
 
 
 {[
@@ -5182,6 +5438,10 @@ status:"wartet"
 {
 title:"✅ Erledigt",
 status:"erledigt"
+},
+{
+title:"🔴 Verpasst",
+status:"verpasst"
 }
 ]
 .filter(group=>taskFilter==="alle"||group.status===taskFilter)
@@ -5217,7 +5477,10 @@ task.status==="offen"
 : task.status==="wartet"
 ? "bg-yellow-50 border-yellow-100"
 
-: "bg-green-50 border-green-100"
+: task.status==="erledigt"
+? "bg-green-50 border-green-100"
+
+: "bg-red-50 border-red-100"
 }
 `}
 >
@@ -5231,7 +5494,7 @@ task.status==="offen"
 </p>
 
 <p className="text-xs text-slate-500">
-{task.day}
+{getTaskDayDateLabel(task.day)}
 </p>
 
 {task.status==="offen" && (
@@ -5604,7 +5867,20 @@ const kidLearningWaiting = learningTasks.filter(
           value={newLearningMinutes}
           setter={(value) => setNewLearningMinutes(Number(value) || 0)}
         />
-
+<select
+  value={newLearningDeadline}
+  onChange={(e) =>
+    setNewLearningDeadline(
+      e.target.value as "today" | "tomorrow" | "threeDays" | "sevenDays"
+    )
+  }
+  className="w-full rounded-[1.5rem] border-2 border-white bg-white/90 p-4 font-bold"
+>
+  <option value="today">📅 Frist bis: Heute</option>
+  <option value="tomorrow">📅 Frist bis: Morgen</option>
+  <option value="threeDays">📅 Frist bis: In 3 Tagen</option>
+  <option value="sevenDays">📅 Frist bis: In 7 Tagen</option>
+</select>
         <select
           value={newLearningCategory}
           onChange={(e) => setNewLearningCategory(e.target.value)}
@@ -5612,8 +5888,7 @@ const kidLearningWaiting = learningTasks.filter(
         >
           <option value="📚 Lesen">📚 Lesen</option>
           <option value="➕ Mathe">➕ Mathe</option>
-          <option value="🇬🇧  Englisch">🇬🇧 Englisch</option>
-        </select>
+                </select>
 
         <select
           value={newLearningLevel}
@@ -6656,22 +6931,50 @@ className="flex-1 rounded-[1rem] bg-red-300 py-2 font-black text-red-900"
 
       <div className="rounded-[2rem] bg-gradient-to-br from-sky-100 via-cyan-50 to-white p-5 shadow-sm ring-1 ring-sky-100">
         <p className="text-2xl font-black text-sky-950">
-          📅 Wochenübersicht
+          
         </p>
 
-        <p className="mt-2 font-bold text-sky-700">
-          Hier sehen Eltern alle geplanten Aufgaben der Woche auf einen Blick.
-        </p>
+<select
+  value={calendarChildFilter}
+  onChange={(e) =>
+    setCalendarChildFilter(
+      e.target.value === "all" ? "all" : Number(e.target.value)
+    )
+  }
+  className="mt-3 w-full rounded-[1.2rem] border-2 border-white bg-white/90 px-4 py-3 font-black text-sky-900 shadow-sm"
+>
+  <option value="all">👨‍👩‍👧 Alle Kinder anzeigen</option>
+
+  {children.map((childItem) => (
+    <option key={childItem.id} value={childItem.id}>
+      👧 {childItem.name}
+    </option>
+  ))}
+</select>
       </div>
 
       <div className="grid grid-cols-1 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-7">
-        {days.map(day => {
-          const dayTasks = tasks.filter(
-            t =>
-              t.day === day ||
-              (t.repeat === "täglich" &&
-                ["Mo", "Di", "Mi", "Do", "Fr"].includes(day))
-          );
+        {[...days]
+  .sort(
+    (a, b) =>
+      getCalendarDateForDay(a).getTime() -
+      getCalendarDateForDay(b).getTime()
+  )
+  .map(day => {
+    const isWeekend = day === "Sa" || day === "So";
+const dayTasks = tasks.filter((t) => {
+  const belongsToSelectedChild =
+    calendarChildFilter === "all" ||
+    t.childId === calendarChildFilter ||
+    t.childId === "all";
+
+  const belongsToDay =
+    t.day === day ||
+    (t.repeat === "täglich" &&
+      ["Mo", "Di", "Mi", "Do", "Fr"].includes(day));
+
+  return belongsToSelectedChild && belongsToDay;
+});
 const todayShort = currentDateTime.toLocaleDateString("de-DE", {
   weekday: "short",
 }).replace(".", "");
@@ -6684,16 +6987,24 @@ const isToday = day === todayShort;
           return (
             <div
               key={day}
-              className={`min-h-[150px] rounded-[1.3rem] border-2 p-3 shadow-md ${
+className={`min-h-[150px] rounded-[1.3rem] border-2 p-3 shadow-md ${
   isToday
     ? "border-green-300 bg-green-100"
-    : "border-white bg-white/95"
+    : isWeekend
+    ? "border-slate-300 bg-slate-100"
+    : "border-sky-100 bg-sky-50/70"
 }`}
             >
               <div className="mb-3 flex items-center justify-between">
-                <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-400 text-xs font-black text-white shadow-sm">
-                  {day}
-                </div>
+<div
+  className={`grid min-h-10 min-w-16 place-items-center rounded-full px-2 text-xs font-black text-white shadow-sm ${
+    isWeekend
+      ? "bg-slate-400"
+      : "bg-gradient-to-br from-sky-400 to-cyan-400"
+  }`}
+>
+  {getCalendarDateLabel(day)}
+</div>
 
                 <div className="rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-black text-sky-700">
                   {doneCount}/{dayTasks.length}
@@ -6706,7 +7017,7 @@ const isToday = day === todayShort;
                 </div>
               ) : (
                 <div className="space-y-1.5">
-                  {dayTasks.slice(0, 5).map(t => (
+                  {(expandedCalendarDay === day ? dayTasks : dayTasks.slice(0, 5)).map(t => (
                     <div
                       key={`${day}-${t.id}`}
                       className={`rounded-[0.9rem] p-2 text-[11px] font-black shadow-sm ${
@@ -6731,17 +7042,31 @@ const isToday = day === todayShort;
                         </span>
                       </div>
 
-                      <p className="mt-0.5 text-[10px] font-black opacity-70">
-                        🪙 {t.coins} Coins
-                      </p>
+<p className="mt-0.5 text-[10px] font-black text-purple-700">
+  👧{" "}
+  {t.childId === "all"
+    ? "Alle Kinder"
+    : children.find((childItem) => childItem.id === t.childId)?.name ||
+      "Unbekanntes Kind"}
+</p>
                     </div>
                   ))}
 
-                  {dayTasks.length > 5 && (
-                    <div className="rounded-[1.2rem] bg-purple-50 p-2 text-center text-xs font-black text-purple-700">
-                      +{dayTasks.length - 5} weitere Aufgaben
-                    </div>
-                  )}
+{dayTasks.length > 5 && (
+  <button
+    type="button"
+    onClick={() =>
+      setExpandedCalendarDay(
+        expandedCalendarDay === day ? null : day
+      )
+    }
+    className="w-full rounded-[1.2rem] bg-purple-100 p-2 text-center text-xs font-black text-purple-800 transition hover:scale-[1.02]"
+  >
+    {expandedCalendarDay === day
+      ? "Weniger anzeigen"
+      : `+${dayTasks.length - 5} weitere Aufgaben anzeigen`}
+  </button>
+)}
                 </div>
               )}
             </div>
