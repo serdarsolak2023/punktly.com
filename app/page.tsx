@@ -34,6 +34,7 @@ import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
 
 
+
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features" | "learning";
@@ -132,6 +133,7 @@ function getFoxMood(child: Child, waitingTasks: number) {
   if (child.completedCount === 0) return { mood: "sleepy", text: "Lass uns heute mit einer kleinen Aufgabe starten." };
   return { mood: "happy", text: "Heute schaffen wir wieder tolle Sachen!" };
 }
+
 const MAX_LEVEL = 100;
 
 function xpToNext(level: number) {
@@ -227,7 +229,6 @@ function syncPrestigeStars(child: Child): Child {
     achievements: cleanAchievements(child.achievements || []),
   };
 }
-
 export default function PunktlyRoleSplit() {
 
   const [isPurchased, setIsPurchased] = useState(false);
@@ -260,7 +261,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (false)
+  const maintenanceMode = (true)
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);

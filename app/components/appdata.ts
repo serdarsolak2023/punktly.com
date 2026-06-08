@@ -167,19 +167,18 @@ datenschutz: {
 
 "2. Erhebung und Verarbeitung personenbezogener Daten",
 
-"Bei der Nutzung der App können personenbezogene Daten verarbeitet werden.",
+"Bei der Nutzung von PunktlyCoinly können personenbezogene Daten verarbeitet werden.",
 
 "Dazu gehören insbesondere:",
-"• E-Mail-Adresse bei Anmeldung mit Google",
+"• E-Mail-Adresse bei Anmeldung mit Google oder E-Mail-Login",
 "• Anzeigename oder Benutzername",
-"• Kinderprofile (z. B. Benutzername, Alter, Lieblingsfarbe, Lieblingstier)",
-"• Coins, Fortschritte, Aufgaben und Belohnungen",
-"• Premiumstatus",
-"• Testphasenstatus",
+"• Kinderprofile (z. B. Name, Alter, Lieblingsfarbe, Lieblingstier)",
+"• Aufgaben, Coins, Fortschritte, Level und Belohnungen",
+"• Premium- und Testphasenstatus",
 "• freiwillig eingegebene Inhalte",
-"• technische Informationen zur Nutzung der App",
+"• technische Informationen zur Nutzung und Sicherheit der App",
 
-"Die Verarbeitung erfolgt ausschließlich zum Betrieb und zur Bereitstellung der Funktionen der App.",
+"Die Verarbeitung erfolgt ausschließlich zur Bereitstellung und Verbesserung der Funktionen von PunktlyCoinly.",
 
 
 "3. Zweck der Datenverarbeitung",
@@ -202,16 +201,17 @@ datenschutz: {
 
 "5. Nutzung von Firebase und Google-Diensten",
 
-"Für Anmeldung, Datenbank und technische Infrastruktur nutzt PunktlyCoinly Dienste von Google Firebase.",
+"Für Anmeldung, Datenbank, Speicherung und technische Infrastruktur nutzt PunktlyCoinly Dienste von Google Firebase.",
 
 "Anbieter:",
 "Google Ireland Limited",
 "Gordon House, Barrow Street",
 "Dublin 4, Irland",
 
+"Die Verarbeitung personenbezogener Daten erfolgt auf sicheren Servern von Google Firebase.",
+
 "Weitere Informationen:",
-"Firebase Datenschutzhinweise:",
-"firebase.google.com/support/privacy",
+"https://firebase.google.com/support/privacy",
 
 
 "6. Google Play, Testphase und Premiumdienste",
@@ -238,7 +238,19 @@ datenschutz: {
 "Abonnements können jederzeit über Google Play verwaltet oder beendet werden.",
 
 
-"7. Speicherung und Löschung von Daten",
+"7. Kinder- und Familienschutz",
+
+"PunktlyCoinly richtet sich an Familien.",
+
+"Kinderprofile werden ausschließlich durch Eltern oder Erziehungsberechtigte verwaltet.",
+
+"Es erfolgt keine personalisierte Werbung für Kinder.",
+
+"Es erfolgt kein Verkauf personenbezogener Daten.",
+
+"PunktlyCoinly nutzt keine öffentlichen Chats oder sozialen Netzwerke für Kinder.",
+
+"8. Speicherung und Löschung von Daten",
 
 "Personenbezogene Daten werden nur so lange gespeichert, wie dies für die Nutzung der App erforderlich ist.",
 
@@ -246,7 +258,7 @@ datenschutz: {
 "Nutzer können die Datenlöschung außerdem per E-Mail an kontakt@punktlycoinly.de beantragen.",
 
 
-"8. Rechte der betroffenen Personen",
+"9. Rechte der betroffenen Personen",
 
 "Nutzer haben im Rahmen der DSGVO insbesondere folgende Rechte:",
 
@@ -260,16 +272,22 @@ datenschutz: {
 "Anfragen können per E-Mail gestellt werden.",
 
 
-"9. Datensicherheit",
+"10. Datensicherheit",
 
 "Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um personenbezogene Daten bestmöglich vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.",
 
 
-"10. Änderungen dieser Datenschutzerklärung",
+"11. Änderungen dieser Datenschutzerklärung",
 
 "Diese Datenschutzerklärung kann aktualisiert werden, um rechtliche oder technische Änderungen zu berücksichtigen.",
 
-"Stand: Mai 2026"
+
+"12. Kontakt",
+
+"Bei Fragen zum Datenschutz:",
+"E-Mail: kontakt@punktlycoinly.de",
+
+"Stand: Juni 2026"
 
 ],
 },
@@ -348,10 +366,11 @@ widerruf: {
 
 "Mit der Nutzung der App akzeptieren Nutzer diese Bedingungen.",
 
-
 "2. Leistungen der App",
 
-"PunktlyCoinly ist eine Familien- und Motivations-App zur Verwaltung von Aufgaben, Coins, Fortschritten, Lernbereichen und Belohnungen.",
+"PunktlyCoinly ist eine Familien- und Motivations-App zur Verwaltung von Aufgaben, Coins, Fortschritten, Lernbereichen, Wochenplänen und Belohnungen.",
+
+"Die App bietet Funktionen zur spielerischen Motivation und Organisation innerhalb von Familien.",
 
 "Die App kann zunächst für 48 Stunden kostenlos getestet werden.",
 
@@ -359,13 +378,11 @@ widerruf: {
 
 "Es erfolgt keine automatische Verlängerung und keine automatische Abbuchung.",
 
-
 "3. Nutzerkonten",
 
-"Für bestimmte Funktionen kann eine Anmeldung mit Google erforderlich sein.",
+"Für bestimmte Funktionen ist eine Anmeldung mit Google oder E-Mail erforderlich.",
 
-"Nutzer sind verpflichtet, ihre Zugangsdaten sicher aufzubewahren.",
-
+"Nutzer sind verpflichtet, ihre Zugangsdaten sicher aufzubewahren und nicht an Dritte weiterzugeben.",
 
 "4. Premium-Zugänge und Zahlungen",
 
@@ -384,40 +401,44 @@ widerruf: {
 
 "Abonnements können jederzeit über Google Play verwaltet oder beendet werden.",
 
+"5. Kinder- und Familienschutz",
 
-"5. Pflichten der Nutzer",
+"PunktlyCoinly richtet sich an Familien.",
 
-"Die App darf nicht missbräuchlich oder rechtswidrig verwendet werden.",
+"Kinderprofile werden ausschließlich durch Eltern oder Erziehungsberechtigte verwaltet.",
 
-"Manipulationen, Betrugsversuche oder technische Angriffe sind untersagt.",
+"Die App enthält keine öffentlichen Chats oder sozialen Netzwerke für Kinder.",
 
+"6. Pflichten der Nutzer",
 
-"6. Verfügbarkeit",
+"Die App darf nicht missbräuchlich, rechtswidrig oder manipulativ verwendet werden.",
 
-"Wir bemühen uns um eine möglichst unterbrechungsfreie Verfügbarkeit der App.",
+"Technische Angriffe, Betrugsversuche oder Manipulationen der App sind untersagt.",
+
+"7. Verfügbarkeit",
+
+"Wir bemühen uns um eine möglichst stabile und unterbrechungsfreie Verfügbarkeit der App.",
 
 "Es besteht jedoch kein Anspruch auf permanente Erreichbarkeit.",
 
-
-"7. Haftung",
+"8. Haftung",
 
 "Für Schäden haften wir nur bei Vorsatz oder grober Fahrlässigkeit.",
 
-"Für Datenverlust, technische Probleme oder Ausfälle übernehmen wir keine Haftung, soweit gesetzlich zulässig.",
+"Für technische Probleme, Datenverlust oder zeitweise Ausfälle übernehmen wir keine Haftung, soweit gesetzlich zulässig.",
 
-
-"8. Änderungen der Bedingungen",
+"9. Änderungen der Bedingungen",
 
 "Wir behalten uns vor, diese AGB jederzeit anzupassen oder zu aktualisieren.",
 
-
-"9. Schlussbestimmungen",
+"10. Schlussbestimmungen",
 
 "Es gilt das Recht der Bundesrepublik Deutschland.",
 
 "Sollten einzelne Bestimmungen dieser AGB unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
 
-"Stand: Mai 2026"
+
+"Stand: Juni 2026"
     ],
   },
 };
