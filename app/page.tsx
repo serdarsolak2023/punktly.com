@@ -261,9 +261,12 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const isLocalhost =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "10.0.2.2";
+const isLocalhost =
+  typeof window !== "undefined" &&
+  (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "10.0.2.2"
+  );
 
 const maintenanceMode = !isLocalhost;
   const [maintenancePassword, setMaintenancePassword] = useState("");
