@@ -35,6 +35,7 @@ import { mathTasks } from "./mathTasks";
 
 
 
+
 type Area = "start" | "child" | "parent";
 type LegalPage = "impressum" | "datenschutz" | "widerruf" | "agb";
 type ChildView = "home" | "tasks" | "rewards" | "chests" | "shop" | "profile" | "features" | "learning";
@@ -261,14 +262,15 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const isLocalhost =
-  typeof window !== "undefined" &&
-  (
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "10.0.2.2"
-  );
+const [maintenanceMode, setMaintenanceMode] = useState(true);
 
-const maintenanceMode = !isLocalhost;
+useEffect(() => {
+  const isLocalhost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "10.0.2.2";
+
+  setMaintenanceMode(!isLocalhost);
+}, []);
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
