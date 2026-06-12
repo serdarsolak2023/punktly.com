@@ -261,7 +261,11 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-  const maintenanceMode = (true)
+  const isLocalhost =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "10.0.2.2";
+
+const maintenanceMode = !isLocalhost;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -324,6 +328,8 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "t
   const [newTaskDay, setNewTaskDay] = useState("Mo");
   const [selectedPreset, setSelectedPreset] = useState("");
   const [selectedPremiumPlan, setSelectedPremiumPlan] = useState<"monthly" | "yearly">("yearly");
+  const [googlePlayOpen, setGooglePlayOpen] = useState(false);
+const [paypalOpen, setPaypalOpen] = useState(false);
   
   const [selectedTaskPack, setSelectedTaskPack] = useState(taskPacks[0]?.id || "");
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
@@ -3493,15 +3499,17 @@ Bitte auch Spam-Ordner prüfen.
         )}
 
         <div className="grid gap-4">
-          <button
-            onClick={() => startGooglePlayBillingCheckout(selectedPremiumPlan)}
-            disabled={isPaying || !firebaseUser}
-            className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01] disabled:text-slate-400 disabled:opacity-70"
-          >
-            💳 Über Google Play kaufen
-          </button>
+<button
+  type="button"
+  onClick={() => setGooglePlayOpen((prev) => !prev)}
+  className="w-full rounded-[1.7rem] bg-white py-5 text-xl font-black text-slate-900 shadow-xl transition hover:scale-[1.01]"
+>
+  💳 Über Google Play kaufen {googlePlayOpen ? "−" : "+"}
+</button>
         </div>
+        
         <br/>
+        
 <div id="payment-section" className="mb-6 grid gap-4">
 
 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
