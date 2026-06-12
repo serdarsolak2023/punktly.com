@@ -262,15 +262,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const [maintenanceMode, setMaintenanceMode] = useState(true);
-
-useEffect(() => {
-  const isLocalhost =
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "10.0.2.2";
-
-  setMaintenanceMode(!isLocalhost);
-}, []);
+const maintenanceMode = true;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
