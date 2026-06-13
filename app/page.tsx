@@ -3439,14 +3439,14 @@ bg: "bg-purple-50",
   value={emailLogin}
   onChange={setEmailLogin}
   placeholder="E-Mail"
-  className="rounded-[1.2rem] px-4 py-3 text-slate-800"
+  className="text-slate-800"
 />
 
 <AppInput
   value={passwordLogin}
   onChange={setPasswordLogin}
   placeholder="Passwort"
-  className="rounded-[1.2rem] px-4 py-3 text-slate-800"
+  className="text-slate-800"
 />
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
