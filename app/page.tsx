@@ -3435,21 +3435,19 @@ bg: "bg-purple-50",
 
   {showEmailLogin && (
     <div className="grid gap-3 rounded-[1.5rem] bg-white/80 p-3">
-      <input
-        type="email"
-        placeholder="E-Mail"
-        value={emailLogin}
-        onChange={(e) => setEmailLogin(e.target.value)}
-        className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
-      />
+<AppInput
+  value={emailLogin}
+  onChange={setEmailLogin}
+  placeholder="E-Mail"
+  className="rounded-[1.2rem] px-4 py-3 text-slate-800"
+/>
 
-      <input
-        type="password"
-        placeholder="Passwort"
-        value={passwordLogin}
-        onChange={(e) => setPasswordLogin(e.target.value)}
-        className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
-      />
+<AppInput
+  value={passwordLogin}
+  onChange={setPasswordLogin}
+  placeholder="Passwort"
+  className="rounded-[1.2rem] px-4 py-3 text-slate-800"
+/>
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <button
