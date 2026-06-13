@@ -453,8 +453,7 @@ useEffect(() => {
     profileBadges: []
   };
 const childTasks = tasks.filter((t) => {
-  const belongsToChild =
-    t.childId === "all" || t.childId === child.id;
+  const belongsToChild = t.childId === child.id;
 
   if (!belongsToChild) return false;
 
