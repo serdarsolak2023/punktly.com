@@ -3435,19 +3435,31 @@ bg: "bg-purple-50",
 
   {showEmailLogin && (
     <div className="grid gap-3 rounded-[1.5rem] bg-white/80 p-3">
-<AppInput
-  value={emailLogin}
-  onChange={setEmailLogin}
-  placeholder="E-Mail"
-  className="text-slate-800"
-/>
+<div
+  onClick={() => {
+    setTextKeyboardValue(emailLogin);
+    setTextKeyboardSetter(() => (value: string) => {
+      setEmailLogin(value);
+    });
+    setTextKeyboardOpen(true);
+  }}
+  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm"
+>
+  {emailLogin || "E-Mail"}
+</div>
 
-<AppInput
-  value={passwordLogin}
-  onChange={setPasswordLogin}
-  placeholder="Passwort"
-  className="text-slate-800"
-/>
+<div
+  onClick={() => {
+    setTextKeyboardValue(passwordLogin);
+    setTextKeyboardSetter(() => (value: string) => {
+      setPasswordLogin(value);
+    });
+    setTextKeyboardOpen(true);
+  }}
+  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm"
+>
+  {passwordLogin ? "•".repeat(passwordLogin.length) : "Passwort"}
+</div>
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <button
