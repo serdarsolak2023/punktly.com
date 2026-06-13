@@ -3435,31 +3435,21 @@ bg: "bg-purple-50",
 
   {showEmailLogin && (
     <div className="grid gap-3 rounded-[1.5rem] bg-white/80 p-3">
-<div
-  onClick={() => {
-    setTextKeyboardValue(emailLogin);
-    setTextKeyboardSetter(() => (value: string) => {
-      setEmailLogin(value);
-    });
-    setTextKeyboardOpen(true);
-  }}
-  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm"
->
-  {emailLogin || "E-Mail"}
-</div>
+<input
+  type="email"
+  placeholder="E-Mail"
+  value={emailLogin}
+  onChange={(e) => setEmailLogin(e.target.value)}
+  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
+/>
 
-<div
-  onClick={() => {
-    setTextKeyboardValue(passwordLogin);
-    setTextKeyboardSetter(() => (value: string) => {
-      setPasswordLogin(value);
-    });
-    setTextKeyboardOpen(true);
-  }}
-  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm"
->
-  {passwordLogin ? "•".repeat(passwordLogin.length) : "Passwort"}
-</div>
+<input
+  type="password"
+  placeholder="Passwort"
+  value={passwordLogin}
+  onChange={(e) => setPasswordLogin(e.target.value)}
+  className="rounded-[1.2rem] border-2 border-sky-100 bg-white px-4 py-3 font-bold text-slate-800 shadow-sm outline-none"
+/>
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <button
