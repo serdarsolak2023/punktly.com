@@ -6424,14 +6424,14 @@ const kidLearningWaiting = learningTasks.filter(
 
 <Panel title="📝 Aufgabenverwaltung">
 
-<div className="mb-5 flex flex-wrap gap-2">
+<div className="mb-5 grid grid-cols-2 gap-2">
 
 {["alle","wartet","offen","erledigt","verpasst"].map(status=>(
 
 <button
 key={status}
 onClick={()=>setParentTaskFilter(status as any)}
-className={`rounded-full px-4 py-2 font-black ${
+className={`flex-1 rounded-full px-4 py-2 font-black text-center ${
 parentTaskFilter===status
 ? "bg-sky-500 text-white"
 : "bg-slate-100 text-slate-700"
@@ -6459,7 +6459,7 @@ parentTaskFilter===status
         e.target.value === "all" ? "all" : Number(e.target.value)
       )
     }
-    className="w-full flex-1-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
+    className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
   >
     <option value="all">🌈 Alle Kinder anzeigen</option>
     {children.map((childItem) => (
