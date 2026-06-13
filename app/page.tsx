@@ -6459,7 +6459,7 @@ parentTaskFilter===status
         e.target.value === "all" ? "all" : Number(e.target.value)
       )
     }
-    className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
+    className="w-full flex-1-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
   >
     <option value="all">🌈 Alle Kinder anzeigen</option>
     {children.map((childItem) => (
