@@ -3095,6 +3095,13 @@ if (!isPurchased) {
 
 <div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
   <nav className="mt-4 flex flex-wrap items-center justify-center gap-2">
+  <button
+  type="button"
+  onClick={toggleSong}
+  className="rounded-full bg-yellow-100 px-3 py-1.5 text-[11px] font-black text-yellow-700 shadow-sm ring-1 ring-yellow-200 transition hover:bg-yellow-200"
+>
+  {songPlaying ? "🔇 Musik aus" : "🎵 Musik an"}
+</button>
   {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
     <button
       key={page}
