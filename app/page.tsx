@@ -880,23 +880,26 @@ function getDailyBonusTime() {
 
   return `${hours} Std ${minutes} Min`;
 }
-function toggleSong() {
-  if (typeof window === "undefined") return;
+async function toggleSong() {
+  try {
+    if (!songAudioRef.current) {
+      songAudioRef.current = new Audio("/music/punktly-song.mp3");
+      songAudioRef.current.loop = true;
+      songAudioRef.current.volume = 0.4;
+    }
 
-  if (!songAudioRef.current) {
-    songAudioRef.current = new Audio("/music/punktly-song.mp3");
-    songAudioRef.current.loop = true;
-    songAudioRef.current.volume = 0.25;
+    if (songPlaying) {
+      songAudioRef.current.pause();
+      setSongPlaying(false);
+      return;
+    }
+
+    await songAudioRef.current.play();
+    setSongPlaying(true);
+  } catch (error) {
+    console.error("Musik Fehler:", error);
+    alert("Musik konnte nicht gestartet werden.");
   }
-
-  if (songPlaying) {
-    songAudioRef.current.pause();
-    setSongPlaying(false);
-    return;
-  }
-
-  songAudioRef.current.play();
-  setSongPlaying(true);
 }
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
