@@ -3098,13 +3098,7 @@ if (!isPurchased) {
 
 <div className="relative z-10 mx-auto flex w-full max-w-[92rem] flex-col gap-4 sm:gap-5">
   <nav className="mt-4 flex flex-wrap items-center justify-center gap-2">
-  <button
-  type="button"
-  onClick={toggleSong}
-  className="rounded-full bg-yellow-100 px-3 py-1.5 text-[11px] font-black text-yellow-700 shadow-sm ring-1 ring-yellow-200 transition hover:bg-yellow-200"
->
-  {songPlaying ? "🔇 Musik aus" : "🎵 Musik an"}
-</button>
+
   {(["impressum", "datenschutz", "widerruf", "agb"] as LegalPage[]).map((page) => (
     <button
       key={page}
@@ -3672,7 +3666,13 @@ Bitte auch Spam-Ordner prüfen.
 
   return (
     <main className="relative z-10 min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:p-4 sm:pb-[calc(7rem+env(safe-area-inset-bottom))] md:p-6 md:pb-32 lg:p-8">
-      
+      <button
+  type="button"
+  onClick={toggleSong}
+  className="fixed right-4 top-4 z-[9999] rounded-full bg-yellow-100 px-3 py-2 text-xs font-black text-yellow-700 shadow-xl ring-1 ring-yellow-200 transition hover:scale-105 hover:bg-yellow-200"
+>
+  {songPlaying ? "🔇 Musik aus" : "🎵 Musik an"}
+</button>
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-35 sm:opacity-45 lg:opacity-55">
           {punktlyCoinPositions.map((coin, i) => (
             <img
