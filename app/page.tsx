@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Panel from "./components/panel";
 import EmptyState from "./components/emptystate";
@@ -262,7 +262,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const maintenanceMode = true;
+const maintenanceMode = false;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -354,6 +354,8 @@ const [passwordLogin, setPasswordLogin] = useState("");
 const [showEmailLogin, setShowEmailLogin] = useState(false);
   const [resetConfirmKind, setResetConfirmKind] = useState<"täglich" | "wöchentlich" | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const songAudioRef = useRef<HTMLAudioElement | null>(null);
+const [songPlaying, setSongPlaying] = useState(false);
   const [showAppInfo, setShowAppInfo] = useState(false);
   const [messagePin, setMessagePin] = useState("");
 const [messageUnlocked, setMessageUnlocked] = useState(false);
@@ -877,6 +879,24 @@ function getDailyBonusTime() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
   return `${hours} Std ${minutes} Min`;
+}
+function toggleSong() {
+  if (typeof window === "undefined") return;
+
+  if (!songAudioRef.current) {
+    songAudioRef.current = new Audio("/music/punktly-song.mp3");
+    songAudioRef.current.loop = true;
+    songAudioRef.current.volume = 0.25;
+  }
+
+  if (songPlaying) {
+    songAudioRef.current.pause();
+    setSongPlaying(false);
+    return;
+  }
+
+  songAudioRef.current.play();
+  setSongPlaying(true);
 }
   function playSound(type: "coin" | "success" | "level" | "chest" | "click") {
     if (!soundEnabled || typeof window === "undefined") return;
