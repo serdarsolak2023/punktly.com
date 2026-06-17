@@ -37,8 +37,29 @@ import {
   MAX_LEVEL,
   xpToNext,
   levelRank,
+  isValidAchievement,
+  cleanAchievements,
+  cleanLevelAchievements,
+  addAchievement,
+  starsFromAchievements,
+  countPrestigeStars,
+  prestigeFromStars,
+  syncPrestigeStars,
 } from "./components/gameHelpers";
-
+import {
+  formatDateTime,
+  getStartOfDay,
+  getEndOfDay,
+  getTodayDay,
+  getTomorrowDay,
+  getTaskDayDateLabel,
+  getCalendarDateForDay,
+  getCalendarDateLabel,
+  shouldTaskBeMissed,
+  isTaskForToday,
+} from "./components/dateHelpers";
+import { motivationMessages } from "./components/motivationMessages";
+import { hashPin } from "./components/securityHelpers";
 
 
 
@@ -131,86 +152,6 @@ type Chest = {
 
 
 
-
-function isValidAchievement(title: string) {
-  const lower = title.toLowerCase();
-
-  // Schatzkisten und eingelöste Belohnungen sind KEINE Abzeichen.
-  if (lower.includes("schatzkiste")) return false;
-  if (lower.includes("belohnung")) return false;
-  if (lower.includes("eingelöst")) return false;
-  if (lower.includes("geöffnet")) return false;
-
-  return true;
-}
-
-function cleanAchievements(list: string[]) {
-  return cleanLevelAchievements((list || []).filter(isValidAchievement));
-}
-
-function cleanLevelAchievements(list: string[]) {
-  const levelBadges = list
-    .filter((item) => /^Level \d+ erreicht$/.test(item))
-    .map((item) => Number(item.match(/\d+/)?.[0] || 0))
-    .filter((num) => num > 0);
-
-  const highestLevel = levelBadges.length > 0 ? Math.max(...levelBadges) : null;
-
-  const withoutOldLevels = list.filter((item) => !/^Level \d+ erreicht$/.test(item));
-
-  return highestLevel ? [...withoutOldLevels, `Level ${highestLevel} erreicht`] : withoutOldLevels;
-}
-
-function addAchievement(list: string[], title: string) {
-  let nextList = list || [];
-
-  if (/^Level \d+ erreicht$/.test(title)) {
-    nextList = nextList.filter((item) => !/^Level \d+ erreicht$/.test(item));
-  }
-
-  if (!nextList.includes(title)) {
-    nextList = [...nextList, title];
-  }
-
-  return cleanAchievements(nextList);
-}
-
-function starsFromAchievements(child: Child) {
-  return cleanAchievements(child.achievements || []).length;
-}
-
-function countPrestigeStars(child: Child) {
-  const storedStars = Number(child.prestigeStars || 0);
-
-  const equippedStars = (child.equipped || []).filter((item) =>
-    item.includes("⭐") || item.includes("🌟") || item.includes("💫")
-  ).length;
-
-  const achievementStars = (child.achievements || []).filter((item) =>
-    item.toLowerCase().includes("prestige") ||
-    item.toLowerCase().includes("stern") ||
-    item.includes("⭐") ||
-    item.includes("🌟") ||
-    item.includes("💫")
-  ).length;
-
-  return Math.max(storedStars, equippedStars + achievementStars);
-}
-
-function prestigeFromStars(child: Child) {
-  return Math.max(Number(child.prestige || 0), countPrestigeStars(child));
-}
-
-function syncPrestigeStars(child: Child): Child {
-  const syncedPrestige = prestigeFromStars(child);
-
-  return {
-    ...child,
-    prestige: syncedPrestige,
-    prestigeStars: Math.max(Number(child.prestigeStars || 0), countPrestigeStars(child)),
-    achievements: cleanAchievements(child.achievements || []),
-  };
-}
 export default function PunktlyRoleSplit() {
 
   const [isPurchased, setIsPurchased] = useState(false);
@@ -569,201 +510,7 @@ const themeClass =
 
 const selectedChildMotiv =
   (child.profileBadges || [])[0] || "/PunktlyLogo.png";
-const motivationMessages = [
-  "Super gemacht! Du kannst stolz auf dich sein.",
-  "Toll erledigt! Weiter so.",
-  "Du bist richtig fleißig.",
-  "Klasse Arbeit! Das war stark.",
-  "Du kommst deinem Ziel immer näher.",
-  "Jede Aufgabe bringt dich weiter.",
-  "Du hast heute richtig gut mitgemacht.",
-  "Stark! Deine Mühe zahlt sich aus.",
-  "Du sammelst nicht nur Coins, sondern auch Erfahrung.",
-  "Weiter so, du bist auf dem richtigen Weg.",
-  "Das hast du richtig gut gemacht.",
-  "Du wirst jeden Tag besser.",
-  "Eine Aufgabe geschafft – ein Schritt näher zur Belohnung.",
-  "Du zeigst echte Verantwortung.",
-  "Richtig stark, mach weiter so.",
-  "Du kannst stolz auf deinen Fortschritt sein.",
-  "Heute hast du wieder etwas geschafft.",
-  "Deine Coins wachsen, weil du fleißig bist.",
-  "Großartig! Du bleibst dran.",
-  "Du hast dir deine Belohnung verdient.",
-  "Mit jeder Aufgabe wirst du stärker.",
-  "Dein Einsatz lohnt sich.",
-  "Du machst das richtig klasse.",
-  "So sieht Verantwortung aus.",
-  "Du bist ein echter Aufgaben-Profi.",
-  "Ein weiterer Erfolg für dich.",
-  "Du hast gezeigt, dass du es kannst.",
-  "Bleib dran, du erreichst dein Ziel.",
-  "Du bist heute sehr motiviert.",
-  "Tolle Leistung von dir.",
-  "Deine Familie kann stolz auf dich sein.",
-  "Du sammelst Schritt für Schritt Erfolg.",
-  "Das war eine starke Aufgabe.",
-  "Du hast wieder Coins verdient.",
-  "Sehr gut gemacht.",
-  "Du bist ein echter Coin-Sammler.",
-  "Dein Fortschritt ist sichtbar.",
-  "Du lernst Verantwortung mit Spaß.",
-  "Klasse, dass du drangeblieben bist.",
-  "Das war ein super Schritt nach vorne.",
-  "Du hast heute etwas Wichtiges geschafft.",
-  "Deine Mühe bringt dich weiter.",
-  "Du bist auf dem Weg zur nächsten Belohnung.",
-  "Jede erledigte Aufgabe zählt.",
-  "Du machst PunktlyCoinly richtig stark.",
-  "Du hast dir ein Lob verdient.",
-  "So macht Aufgaben erledigen Spaß.",
-  "Deine Motivation ist richtig stark.",
-  "Du bist ein echtes Vorbild.",
-  "Mega gemacht! Weiter geht’s."
-];
 
-async function hashPin(pin: string) {
-  if (
-    typeof window === "undefined" ||
-    !window.crypto ||
-    !window.crypto.subtle
-  ) {
-    return pin;
-  }
-
-  const encoder = new TextEncoder();
-  const data = encoder.encode(pin);
-
-  const hashBuffer = await window.crypto.subtle.digest(
-    "SHA-256",
-    data
-  );
-
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
-
-function formatDateTime(timestamp?: number) {
-  if (!timestamp) return "";
-
-  return `${new Date(timestamp).toLocaleDateString("de-DE")} um ${new Date(
-    timestamp
-  ).toLocaleTimeString("de-DE", {
-    hour: "2-digit",
-    minute: "2-digit",
-  })} Uhr`;
-}
-
-function getStartOfDay(offset = 0) {
-  const date = new Date();
-  date.setDate(date.getDate() - offset);
-  date.setHours(0, 0, 0, 0);
-  return date.getTime();
-}
-
-function getEndOfDay(offset = 0) {
-  const date = new Date();
-  date.setDate(date.getDate() - offset);
-  date.setHours(23, 59, 59, 999);
-  return date.getTime();
-}
-
-function getTodayDay() {
-  const jsDay = new Date().getDay();
-
-  const dayMap: Record<number, string> = {
-    0: "So",
-    1: "Mo",
-    2: "Di",
-    3: "Mi",
-    4: "Do",
-    5: "Fr",
-    6: "Sa",
-  };
-
-  return dayMap[jsDay];
-}
-
-function getTomorrowDay() {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const jsDay = tomorrow.getDay();
-
-  const dayMap: Record<number, string> = {
-    0: "So",
-    1: "Mo",
-    2: "Di",
-    3: "Mi",
-    4: "Do",
-    5: "Fr",
-    6: "Sa",
-  };
-
-  return dayMap[jsDay];
-}
-
-function getTaskDayDateLabel(day: string) {
-  const order = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-  const targetIndex = order.indexOf(day);
-
-  if (targetIndex === -1) return day;
-
-  const date = new Date();
-  const todayIndex = date.getDay();
-
-  const diff = (targetIndex - todayIndex + 7) % 7;
-
-  date.setDate(date.getDate() + diff);
-
-  return `${day} ${date.toLocaleDateString("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  })}`;
-}
-function getCalendarDateForDay(day: string) {
-  const order = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-  const targetIndex = order.indexOf(day);
-
-  if (targetIndex === -1) return new Date();
-
-  const date = new Date();
-  const todayIndex = date.getDay();
-  const diff = (targetIndex - todayIndex + 7) % 7;
-
-  date.setDate(date.getDate() + diff);
-  date.setHours(0, 0, 0, 0);
-
-  return date;
-}
-
-function getCalendarDateLabel(day: string) {
-  const date = getCalendarDateForDay(day);
-
-  return `${day} ${date.toLocaleDateString("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  })}`;
-}
-function shouldTaskBeMissed(task: Task) {
-  if (task.status !== "offen") return false;
-
-  const order = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-  const today = getTodayDay();
-
-  const taskIndex = order.indexOf(task.day);
-  const todayIndex = order.indexOf(today);
-
-  if (taskIndex === -1 || todayIndex === -1) return false;
-
-  return taskIndex < todayIndex;
-}
-function isTaskForToday(task: Task) {
-  return task.day === getTodayDay();
-}
 function coinsToEuroText(coins: number) {
   const euro =
     coinsForOneCent > 0
