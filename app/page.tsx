@@ -262,7 +262,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const maintenanceMode = true;
+const maintenanceMode = false;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
