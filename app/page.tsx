@@ -32,6 +32,12 @@ import { collection, addDoc, deleteDoc, doc, getDoc, getDocs, setDoc, serverTime
 import { FcGoogle } from "react-icons/fc";
 import { readingTexts } from "./readingTexts";
 import { mathTasks } from "./mathTasks";
+import {
+  getFoxMood,
+  MAX_LEVEL,
+  xpToNext,
+  levelRank,
+} from "./components/gameHelpers";
 
 
 
@@ -124,31 +130,6 @@ type Chest = {
 };
 
 
-
-
-
-function getFoxMood(child: Child, waitingTasks: number) {
-  if (child.streak >= 5) return { mood: "party", text: "Wow! Deine Serie ist richtig stark! 🔥" };
-  if (child.level >= 3) return { mood: "proud", text: "Du bist schon richtig weit gekommen!" };
-  if (waitingTasks > 0) return { mood: "excited", text: "Ich warte mit dir auf die Bestätigung!" };
-  if (child.completedCount === 0) return { mood: "sleepy", text: "Lass uns heute mit einer kleinen Aufgabe starten." };
-  return { mood: "happy", text: "Heute schaffen wir wieder tolle Sachen!" };
-}
-
-const MAX_LEVEL = 100;
-
-function xpToNext(level: number) {
-  const safeLevel = Math.min(Math.max(level, 1), MAX_LEVEL);
-  return Math.max(100, safeLevel * 100);
-}
-
-function levelRank(level: number) {
-  if (level >= 100) return { title: "Legendär", emoji: "🌟", color: "text-purple-800 bg-purple-100" };
-  if (level >= 75) return { title: "Diamant", emoji: "💎", color: "text-cyan-800 bg-cyan-100" };
-  if (level >= 50) return { title: "Gold", emoji: "🏆", color: "text-amber-800 bg-amber-100" };
-  if (level >= 10) return { title: "Silber", emoji: "🥈", color: "text-slate-800 bg-slate-100" };
-  return { title: "Bronze", emoji: "🥉", color: "text-orange-800 bg-orange-100" };
-}
 
 
 function isValidAchievement(title: string) {
