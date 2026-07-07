@@ -325,6 +325,33 @@ useEffect(() => {
   return () => clearInterval(timer);
 }, [currentDayKey]);
 useEffect(() => {
+  const learningTasksToMiss = learningTasks.filter(shouldLearningTaskBeMissed);
+
+  if (learningTasksToMiss.length === 0) return;
+
+  const now = Date.now();
+
+  const updatedLearningTasks = learningTasks.map(task =>
+    shouldLearningTaskBeMissed(task)
+      ? {
+          ...task,
+          status: "verpasst",
+          missedAt: task.missedAt || now,
+        }
+      : task
+  );
+
+  setLearningTasks(updatedLearningTasks);
+
+  learningTasksToMiss.forEach(task => {
+    saveFamilyItem("learningTasks", {
+      ...task,
+      status: "verpasst",
+      missedAt: task.missedAt || now,
+    });
+  });
+}, [learningTasks]);
+useEffect(() => {
   const interval = setInterval(() => {
     const tasksToMiss = tasks.filter(shouldTaskBeMissed);
 
@@ -567,6 +594,13 @@ function getTaskDeadlineAt() {
   date.setHours(23, 59, 59, 999);
 
   return date.getTime();
+}
+function shouldLearningTaskBeMissed(task: any) {
+  return (
+    task.status === "offen" &&
+    typeof task.deadlineAt === "number" &&
+    task.deadlineAt < Date.now()
+  );
 }
 function getLearningDeadlineAt() {
   const date = new Date();
@@ -2182,6 +2216,7 @@ setTasks(uniqueTasks);
 async function saveChildNow(updatedChild: Child) {
   await saveFamilyItem("children", updatedChild);
 }
+
 function startLearningSession(task: any) {
   const category = String(task.category || "");
 
