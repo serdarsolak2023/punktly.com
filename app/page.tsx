@@ -906,24 +906,41 @@ setSavedParentPin(resetPinHash);
     setNewTaskDay(preset.day);
   }
 
-  function submitTask(taskId: number) {
+   function submitTask(taskId: number) {
     const task = tasks.find(t => t.id === taskId);
-    if (task) {
-      const waitingTask: Task = {
-  ...task,
-  status: "wartet",
-  submittedAt: Date.now(),
-};
-      setTasks(prev => prev.map(t => t.id === taskId ? waitingTask : t));
-      saveTaskNow(waitingTask);
-    }
-    const randomMessage =
-  motivationMessages[
-    Math.floor(Math.random() * motivationMessages.length)
-  ];
 
-celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`);
-  } 
+    if (!task) return;
+
+    if (shouldTaskBeMissed(task)) {
+      const missedTask: Task = {
+        ...task,
+        status: "verpasst",
+        missedAt: Date.now(),
+      };
+
+      setTasks(prev => prev.map(t => t.id === taskId ? missedTask : t));
+      saveTaskNow(missedTask);
+
+      celebrate("⏰ Die Frist ist abgelaufen. Diese Aufgabe kann nicht mehr erledigt werden.");
+      return;
+    }
+
+    const waitingTask: Task = {
+      ...task,
+      status: "wartet",
+      submittedAt: Date.now(),
+    };
+
+    setTasks(prev => prev.map(t => t.id === taskId ? waitingTask : t));
+    saveTaskNow(waitingTask);
+
+    const randomMessage =
+      motivationMessages[
+        Math.floor(Math.random() * motivationMessages.length)
+      ];
+
+    celebrate(`${randomMessage} \n\nWarte jetzt auf die Bestätigung deiner Eltern.`);
+  }
 
   function approveTask(task: Task) {
     const approvedTask: Task = {
@@ -5129,15 +5146,19 @@ task.status==="offen"
 🪙 {task.coins}
 </p>
 
-{task.status==="offen" && (
+{task.status==="offen" && !shouldTaskBeMissed(task) && (
+  <button
+    onClick={() => submitTask(task.id)}
+    className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
+  >
+    🔔 Offen
+  </button>
+)}
 
-<button
-onClick={()=>startLearningSession(task)}
-className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
->
-📚 Offen
-</button>
-
+{task.status==="offen" && shouldTaskBeMissed(task) && (
+  <p className="mt-3 rounded-[1rem] bg-red-200 py-2 text-center text-xs font-black text-red-900">
+    ⏰ Frist verpasst
+  </p>
 )}
 
 {task.status==="wartet" && (
