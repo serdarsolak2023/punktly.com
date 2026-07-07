@@ -377,21 +377,31 @@ useEffect(() => {
     achievements: [],
     profileBadges: []
   };
-const childTasks = tasks.filter((t) => {
-  const belongsToChild = t.childId === child.id;
+const childTasks = tasks
+  .map((task) =>
+    shouldTaskBeMissed(task)
+      ? {
+          ...task,
+          status: "verpasst" as Status,
+          missedAt: task.missedAt || Date.now(),
+        }
+      : task
+  )
+  .filter((t) => {
+    const belongsToChild = t.childId === child.id;
 
-  if (!belongsToChild) return false;
+    if (!belongsToChild) return false;
 
-  if (childTaskDayFilter === "today") {
-    return t.day === getTodayDay();
-  }
+    if (childTaskDayFilter === "today") {
+      return t.day === getTodayDay();
+    }
 
-  if (childTaskDayFilter === "tomorrow") {
-    return t.day === getTomorrowDay();
-  }
+    if (childTaskDayFilter === "tomorrow") {
+      return t.day === getTomorrowDay();
+    }
 
-  return true;
-});
+    return true;
+  });
 const waitingTasks = tasks.filter((t) => t.status === "wartet");
 const waitingRewards = rewards.filter((r) => r.status === "wartet");
 
@@ -5146,19 +5156,15 @@ task.status==="offen"
 🪙 {task.coins}
 </p>
 
-{task.status==="offen" && !shouldTaskBeMissed(task) && (
-  <button
-    onClick={() => submitTask(task.id)}
-    className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
-  >
-    🔔 Offen
-  </button>
-)}
+{task.status==="offen" && (
 
-{task.status==="offen" && shouldTaskBeMissed(task) && (
-  <p className="mt-3 rounded-[1rem] bg-red-200 py-2 text-center text-xs font-black text-red-900">
-    ⏰ Frist verpasst
-  </p>
+<button
+onClick={()=>startLearningSession(task)}
+className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
+>
+📚 Offen
+</button>
+
 )}
 
 {task.status==="wartet" && (
@@ -5308,11 +5314,18 @@ task.status==="offen"
 </p>
 
 {task.status==="offen" && (
-<button
-onClick={() => submitTask(task.id)}
-className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900">
-🔔 Offen
-</button>
+  <button
+    onClick={() => submitTask(task.id)}
+    className="mt-3 w-full rounded-[1rem] bg-orange-300 py-2 text-xs font-black text-orange-900"
+  >
+    🔔 Offen
+  </button>
+)}
+
+{task.status==="verpasst" && (
+  <p className="mt-3 rounded-[1rem] bg-red-200 py-2 text-center text-xs font-black text-red-900">
+    ⏰ Verpasst
+  </p>
 )}
 
 {task.status==="wartet" && (
