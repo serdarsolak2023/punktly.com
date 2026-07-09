@@ -185,7 +185,7 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const maintenanceMode = false;
+const maintenanceMode = true;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -2718,7 +2718,7 @@ if (maintenanceMode) {
         </div>
 
         <h1 className="text-3xl font-black text-sky-950">
-          PunktlyCoinly wird gerade verbessert
+          PunktlyCoinly wird gerade verbessert.
         </h1>
 
         <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
@@ -2729,6 +2729,8 @@ if (maintenanceMode) {
 
         <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
           Bitte versuche es Bald erneut 💙
+          Kontakt: Serdar S.
+          Support: Vanessa V.
         </div>
 <button
   type="button"
