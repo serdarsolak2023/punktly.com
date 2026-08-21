@@ -95,6 +95,9 @@ type Child = {
   activeBooster?: string;
   achievements: string[];
   profileBadges?: string[];
+  taskBadgeRewards?: Record<string, number>;
+claimedTaskBadges?: string[];
+paidTaskBadgeRewards?: string[];
   age?: string;
 favoriteColor?: string;
 favoriteAnimal?: string;
@@ -626,7 +629,54 @@ const completedPercent = useMemo(
       : 0,
   [childTasks]
 );
+const taskBadgeLevels = [
+  {
+    goal: 50,
+    icon: "🌱",
+    name: "Fleißiger Starter",
+  },
+  {
+    goal: 150,
+    icon: "⭐",
+    name: "Aufgaben-Profi",
+  },
+  {
+    goal: 300,
+    icon: "🥈",
+    name: "Super-Helfer",
+  },
+  {
+    goal: 500,
+    icon: "🥇",
+    name: "Alltags-Held",
+  },
+  {
+    goal: 1000,
+    icon: "💎",
+    name: "Aufgaben-Meister",
+  },
+  {
+    goal: 2000,
+    icon: "👑",
+    name: "Punktly-Legende",
+  },
+];
 
+const completedTaskCount = Number(child.completedCount || 0);
+
+const nextTaskBadge = taskBadgeLevels.find(
+  (badge) => completedTaskCount < badge.goal
+);
+
+const currentTaskBadgeGoal = nextTaskBadge?.goal || 2000;
+
+const taskBadgeProgress = Math.min(
+  100,
+  (completedTaskCount / currentTaskBadgeGoal) * 100
+);
+const currentTaskBadge = [...taskBadgeLevels]
+  .reverse()
+  .find((badge) => completedTaskCount >= badge.goal);
 const themeClass =
   child.theme === "🦁 Löwe"
     ? "from-yellow-100 to-orange-200"
@@ -1126,7 +1176,7 @@ setSavedParentPin(resetPinHash);
     saveTaskNow(approvedTask);
 
     let childToSave: Child | null = null;
-
+let unlockedBadgeMessage = "";
     setChildren(prev => {
       const nextChildren = prev.map(c => {
         const receives = task.childId === "all" ? c.id === selectedChildId : c.id === task.childId;
@@ -1137,6 +1187,41 @@ setSavedParentPin(resetPinHash);
         let level = c.level;
         let streak = c.streak + (task.repeat === "täglich" ? 1 : 0);
         let achievements = [...c.achievements];
+        const nextCompletedCount = Number(c.completedCount || 0) + 1;
+
+let claimedTaskBadges = [...(c.claimedTaskBadges || [])];
+let paidTaskBadgeRewards = [...(c.paidTaskBadgeRewards || [])];
+taskBadgeLevels.forEach((badge) => {
+  const alreadyClaimed = claimedTaskBadges.includes(badge.name);
+
+  const rewardCoins = Number(
+    c.taskBadgeRewards?.[badge.name] || 0
+  );
+
+if (
+  nextCompletedCount >= badge.goal &&
+  !alreadyClaimed
+) {
+  claimedTaskBadges.push(badge.name);
+
+  achievements = addAchievement(
+    achievements,
+    badge.name
+  );
+
+  if (rewardCoins > 0) {
+    coins += rewardCoins;
+
+    paidTaskBadgeRewards.push(badge.name);
+
+    unlockedBadgeMessage =
+      `🏆 ${badge.name} erreicht! +${rewardCoins} Bonus-Coins!`;
+  } else {
+    unlockedBadgeMessage =
+      `🏆 ${badge.name} erreicht!`;
+  }
+}
+});
 
         if (streak > 0 && streak % 3 === 0) {
           coins += 10;
@@ -1160,7 +1245,9 @@ setSavedParentPin(resetPinHash);
               prestige: nextPrestige,
               prestigeStars: nextPrestige,
               streak,
-              completedCount: c.completedCount + 1,
+              completedCount: nextCompletedCount,
+claimedTaskBadges,
+paidTaskBadgeRewards,
               weeklyPoints:
   Number(c.weeklyPoints || 0) +
   Number(task.coins || 0),
@@ -1190,7 +1277,9 @@ setSavedParentPin(resetPinHash);
           xp,
           level,
           streak,
-          completedCount: c.completedCount + 1,
+          completedCount: nextCompletedCount,
+claimedTaskBadges,
+paidTaskBadgeRewards,
           weeklyPoints:
   Number(c.weeklyPoints || 0) +
   Number(task.coins || 0),
@@ -1209,8 +1298,13 @@ setSavedParentPin(resetPinHash);
     });
 
     setChallenges(prev => prev.map(ch => ({ ...ch, current: Math.min(ch.goal, ch.current + 1) })));
-    playSound("coin");
-    celebrate("🎉 Bestätigt! Coins + XP gespeichert!");
+ playSound("coin");
+
+if (unlockedBadgeMessage) {
+  celebrate(unlockedBadgeMessage);
+} else {
+  celebrate("🎉 Bestätigt! Coins + XP gespeichert!");
+}
   }
 
   function rejectTask(taskId: number) {
@@ -5255,14 +5349,11 @@ während Eltern alles einfach und sicher verwalten können.
         ✨ Zuletzt erreicht
       </p>
 
-      <p className="mt-2 text-xl font-black text-sky-950">
-        🏅{" "}
-        {cleanAchievements(child.achievements || []).length > 0
-          ? cleanAchievements(child.achievements || [])[
-              cleanAchievements(child.achievements || []).length - 1
-            ]
-          : "Noch kein Abzeichen"}
-      </p>
+<p className="mt-2 text-xl font-black text-sky-950">
+  {currentTaskBadge
+    ? `${currentTaskBadge.icon} ${currentTaskBadge.name}`
+    : "🔒 Noch kein Aufgaben-Abzeichen"}
+</p>
     </div>
 
     {/* Nächstes Abzeichen */}
@@ -5273,31 +5364,36 @@ während Eltern alles einfach und sicher verwalten können.
 
       <div className="mt-2 flex items-center justify-between gap-3">
         <p className="font-black text-sky-950">
-          ⭐ Aufgaben-Profi
-        </p>
+  {nextTaskBadge
+    ? `${nextTaskBadge.icon} ${nextTaskBadge.name}`
+    : "👑 Punktly-Legende"}
+</p>
 
-        <span className="text-sm font-black text-sky-700">
-          {Math.min(child.completedCount || 0, 10)} / 10
-        </span>
+<span className="text-sm font-black text-sky-700">
+  {nextTaskBadge
+    ? `${completedTaskCount} / ${currentTaskBadgeGoal}`
+    : "MAX"}
+</span>
       </div>
 
       <div className="mt-3 h-3 overflow-hidden rounded-full bg-white">
         <div
           className="h-full rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 transition-all"
           style={{
-            width: `${Math.min(
-              100,
-              ((child.completedCount || 0) / 10) * 100
-            )}%`,
-          }}
+  width: `${taskBadgeProgress}%`,
+}}
         />
       </div>
 
-      <p className="mt-2 text-xs font-bold text-slate-500">
-        Noch {Math.max(0, 10 - (child.completedCount || 0))} Aufgaben bis zum Abzeichen
-      </p>
+<p className="mt-2 text-xs font-bold text-slate-500">
+  {nextTaskBadge
+    ? `Noch ${Math.max(
+        0,
+        nextTaskBadge.goal - completedTaskCount
+      )} Aufgaben bis zum Abzeichen`
+    : "Du hast die höchste Aufgaben-Stufe erreicht! 👑"}
+</p>
     </div>
-
     {/* Sammlung */}
     <div>
       <p className="mb-3 font-black text-sky-950">
@@ -5305,79 +5401,32 @@ während Eltern alles einfach und sicher verwalten können.
       </p>
 
       <div className="grid grid-cols-2 gap-3">
+        {taskBadgeLevels.map((badge) => {
+          const unlocked = completedTaskCount >= badge.goal;
 
-        <div
-          className={`rounded-[1.4rem] p-4 text-center ${
-            (child.completedCount || 0) >= 1
-              ? "bg-green-50"
-              : "bg-slate-100 opacity-60"
-          }`}
-        >
-          <div className="text-3xl">
-            {(child.completedCount || 0) >= 1 ? "🌱" : "🔒"}
-          </div>
-          <p className="mt-1 text-sm font-black">
-            Erste Aufgabe
-          </p>
-          <p className="text-xs text-slate-500">
-            1 Aufgabe
-          </p>
-        </div>
+          return (
+            <div
+              key={badge.name}
+              className={`rounded-[1.4rem] p-4 text-center ${
+                unlocked
+                  ? "bg-yellow-50"
+                  : "bg-slate-100 opacity-60"
+              }`}
+            >
+              <div className="text-3xl">
+                {unlocked ? badge.icon : "🔒"}
+              </div>
 
-        <div
-          className={`rounded-[1.4rem] p-4 text-center ${
-            (child.completedCount || 0) >= 10
-              ? "bg-yellow-50"
-              : "bg-slate-100 opacity-60"
-          }`}
-        >
-          <div className="text-3xl">
-            {(child.completedCount || 0) >= 10 ? "⭐" : "🔒"}
-          </div>
-          <p className="mt-1 text-sm font-black">
-            Aufgaben-Profi
-          </p>
-          <p className="text-xs text-slate-500">
-            10 Aufgaben
-          </p>
-        </div>
+              <p className="mt-1 text-sm font-black">
+                {badge.name}
+              </p>
 
-        <div
-          className={`rounded-[1.4rem] p-4 text-center ${
-            (child.streak || 0) >= 7
-              ? "bg-orange-50"
-              : "bg-slate-100 opacity-60"
-          }`}
-        >
-          <div className="text-3xl">
-            {(child.streak || 0) >= 7 ? "🔥" : "🔒"}
-          </div>
-          <p className="mt-1 text-sm font-black">
-            7-Tage-Serie
-          </p>
-          <p className="text-xs text-slate-500">
-            7 Tage geschafft
-          </p>
-        </div>
-
-        <div
-          className={`rounded-[1.4rem] p-4 text-center ${
-            (child.coins || 0) >= 500
-              ? "bg-amber-50"
-              : "bg-slate-100 opacity-60"
-          }`}
-        >
-          <div className="text-3xl">
-            {(child.coins || 0) >= 500 ? "💰" : "🔒"}
-          </div>
-          <p className="mt-1 text-sm font-black">
-            Coin-Sammler
-          </p>
-          <p className="text-xs text-slate-500">
-            500 Coins
-          </p>
-        </div>
-
+              <p className="text-xs text-slate-500">
+                {badge.goal} Aufgaben
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
 
@@ -7386,6 +7435,120 @@ className={`min-h-[150px] rounded-[1.3rem] border-2 p-3 shadow-md ${
                   🔥 {childItem.streak}
                 </div>
               </div>
+
+              <div className="mt-4 rounded-[1.4rem] bg-white/80 p-4">
+                <p className="mb-3 font-black text-sky-950">
+                  🏆 Abzeichen-Belohnungen
+                </p>
+
+                <div className="grid gap-3">
+                  {taskBadgeLevels.map((badge) => (
+                    <div
+                      key={badge.name}
+                      className="rounded-[1.2rem] bg-sky-50 p-3"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-black text-sky-950">
+                          {badge.icon} {badge.name}
+                        </span>
+<div className="mt-3">
+  <NumberKeypadField
+    label="🪙 Bonus-Coins"
+    value={childItem.taskBadgeRewards?.[badge.name] || 0}
+    setter={(value) => {
+      const updatedChild: Child = {
+        ...childItem,
+        taskBadgeRewards: {
+          ...(childItem.taskBadgeRewards || {}),
+          [badge.name]: value,
+        },
+      };
+
+      setChildren((prev) =>
+        prev.map((c) =>
+          c.id === childItem.id ? updatedChild : c
+        )
+      );
+
+      saveChildNow(updatedChild);
+    }}
+  />
+</div>
+                        <span className="text-xs font-bold text-sky-600">
+                          ab {badge.goal} Aufgaben
+                        </span>
+                        {(() => {
+  const reached =
+    Number(childItem.completedCount || 0) >= badge.goal;
+
+  const rewardCoins =
+    Number(childItem.taskBadgeRewards?.[badge.name] || 0);
+
+  const rewardPaid =
+    (childItem.paidTaskBadgeRewards || []).includes(badge.name);
+
+  if (!reached) {
+    return (
+      <p className="mt-3 text-xs font-bold text-slate-500">
+        🔒 Noch nicht erreicht
+      </p>
+    );
+  }
+
+  if (rewardPaid) {
+    return (
+      <p className="mt-3 text-xs font-black text-green-600">
+        ✅ Bonus bereits ausgezahlt
+      </p>
+    );
+  }
+
+  if (rewardCoins <= 0) {
+    return (
+      <p className="mt-3 text-xs font-bold text-amber-600">
+        ⚠️ Keine Bonus-Coins festgelegt
+      </p>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const updatedChild: Child = {
+          ...childItem,
+          coins:
+            Number(childItem.coins || 0) + rewardCoins,
+          paidTaskBadgeRewards: [
+            ...(childItem.paidTaskBadgeRewards || []),
+            badge.name,
+          ],
+        };
+
+        setChildren((prev) =>
+          prev.map((c) =>
+            c.id === childItem.id ? updatedChild : c
+          )
+        );
+
+        saveChildNow(updatedChild);
+
+        celebrate(
+          `🏆 ${badge.name}: +${rewardCoins} Bonus-Coins ausgezahlt!`
+        );
+      }}
+      className="mt-3 w-full rounded-[1rem] bg-yellow-400 px-3 py-2 text-sm font-black text-yellow-950"
+    >
+      🪙 {rewardCoins} Bonus-Coins auszahlen
+    </button>
+  );
+})()}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           ))
         )}
