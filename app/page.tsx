@@ -6278,52 +6278,50 @@ const kidLearningWaiting = learningTasks.filter(
                   </Panel>
 
 <Panel title="📝 Aufgabenverwaltung">
-
-<div className="mb-5 grid grid-cols-2 gap-2 md:grid-cols-5">
-
-{["alle","wartet","offen","erledigt","verpasst"].map(status=>(
-
-<button
-key={status}
-onClick={()=>setParentTaskFilter(status as any)}
-className={`rounded-full px-4 py-2 font-black text-center ${
-parentTaskFilter===status
-? "bg-sky-500 text-white"
-: "bg-slate-100 text-slate-700"
-}`}
->
-
-{status==="alle" && "📋 Alle"}
-{status==="wartet" && "🔔 Zu bestätigen"}
-{status==="offen" && "📝 Offen"}
-{status==="erledigt" && "✅ Erledigt"}
-{status==="verpasst" && "🔴 Verpasst"}
-
-</button>
-
-))}
-<div className="mt-4 w-[350px] max-w-full rounded-[1.8rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-lg">
-  <p className="mb-3 text-sm font-black text-sky-800">
-    👧 Aufgaben nach Kind filtern
-  </p>
-
-  <select
-    value={String(parentTaskChildFilter)}
-    onChange={(e) =>
-      setParentTaskChildFilter(
-        e.target.value === "all" ? "all" : Number(e.target.value)
-      )
-    }
-    className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
-  >
-    <option value="all">🌈 Alle Kinder anzeigen</option>
-    {children.map((childItem) => (
-      <option key={childItem.id} value={childItem.id}>
-        👧 Nur {childItem.name}
-      </option>
+<div className="mb-5">
+  <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
+    {["alle", "wartet", "offen", "erledigt", "verpasst"].map((status) => (
+      <button
+        key={status}
+        onClick={() => setParentTaskFilter(status as any)}
+        className={`rounded-full px-4 py-2 font-black text-center ${
+          parentTaskFilter === status
+            ? "bg-sky-500 text-white"
+            : "bg-slate-100 text-slate-700"
+        }`}
+      >
+        {status === "alle" && "📋 Alle"}
+        {status === "wartet" && "🔔 Zu bestätigen"}
+        {status === "offen" && "📝 Offen"}
+        {status === "erledigt" && "✅ Erledigt"}
+        {status === "verpasst" && "🔴 Verpasst"}
+      </button>
     ))}
-  </select>
-</div>
+  </div>
+
+  <div className="mt-4 w-full max-w-[500px] rounded-[1.8rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-lg">
+    <p className="mb-3 text-sm font-black text-sky-800">
+      👧 Aufgaben nach Kind filtern
+    </p>
+
+    <select
+      value={String(parentTaskChildFilter)}
+      onChange={(e) =>
+        setParentTaskChildFilter(
+          e.target.value === "all" ? "all" : Number(e.target.value)
+        )
+      }
+      className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
+    >
+      <option value="all">🌈 Alle Kinder anzeigen</option>
+
+      {children.map((childItem) => (
+        <option key={childItem.id} value={childItem.id}>
+          👧 Nur {childItem.name}
+        </option>
+      ))}
+    </select>
+  </div>
 </div>
 {[
 {
