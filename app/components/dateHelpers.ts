@@ -127,13 +127,25 @@ export function shouldTaskBeMissed(task: Task) {
   return taskIndex < todayIndex;
 }
 export function isTaskForToday(task: Task) {
-  // Neue Aufgaben mit konkretem Kalenderdatum
-  if (task.scheduledDate) {
-    const today = new Date().toISOString().split("T")[0];
+  // Neue einmalige Aufgaben mit Kalenderdatum
+  if (task.scheduledDate && task.repeat === "einmalig") {
+    const today = new Date();
+    const startDate = new Date(`${task.scheduledDate}T00:00:00`);
 
-    return task.scheduledDate === today;
+    // Aufgabe darf vor dem Startdatum nicht erscheinen
+    if (today < startDate) {
+      return false;
+    }
+
+    // Wenn eine Frist vorhanden ist:
+    // Aufgabe bleibt vom Startdatum bis zum Fristende sichtbar
+    if (typeof task.deadlineAt === "number") {
+      return today.getTime() <= task.deadlineAt;
+    }
+
+    return true;
   }
 
-  // Alte Aufgaben ohne Kalenderdatum funktionieren weiterhin
+  // Tägliche / wöchentliche und alte Aufgaben
   return task.day === getTodayDay();
 }

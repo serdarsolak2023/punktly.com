@@ -5292,12 +5292,13 @@ task.status==="offen"
 </p>
 <h3 className="line-clamp-2 text-sm font-black text-sky-500">
 {task.title}
-</h3>
-<p className="mt-1 text-xs font-black text-red-500">
+</h3><p className="mt-1 text-xs font-black text-red-500">
   Frist bis:{" "}
   {task.deadlineAt
     ? formatDateTime(task.deadlineAt)
     : "Keine Frist"}
+</p>
+
 <p className="mt-1 text-sm font-bold text-sky-700">
   🪙 {task.coins}
   ·{" "}
