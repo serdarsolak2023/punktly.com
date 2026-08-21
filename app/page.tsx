@@ -3385,11 +3385,11 @@ bg: "bg-purple-50",
     }`}
   >
     <p className="text-xs font-black text-pink-700">
-      🔥 Premium Monat
+      🔥 Premium 
     </p>
 
     <p className="mt-1 text-sm font-black text-gray-400 line-through">
-     -
+     Nutze 1 Monat das komplette Premium Paket
     </p>
 
     <p className="text-2xl font-black text-pink-600">
@@ -3397,7 +3397,7 @@ bg: "bg-purple-50",
     </p>
 
     <p className="text-xs font-black text-pink-700">
-      pro Monat
+      🎉 Voller Premium Zugriff pro Monat
     </p>
   </div>
 
@@ -6302,7 +6302,7 @@ parentTaskFilter===status
 </button>
 
 ))}
-<div className="mt-4 rounded-[1.8rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-lg">
+<div className="mt-4 w-[350px] max-w-full rounded-[1.8rem] bg-gradient-to-br from-yellow-100 via-sky-100 to-emerald-100 p-4 shadow-lg">
   <p className="mb-3 text-sm font-black text-sky-800">
     👧 Aufgaben nach Kind filtern
   </p>
