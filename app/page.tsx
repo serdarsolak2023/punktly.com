@@ -6350,15 +6350,24 @@ const kidLearningWaiting = learningTasks.filter(
   </select>
 )}
 
-    <select
-      value={newTaskDay}
-      onChange={(e) => setNewTaskDay(e.target.value)}
-      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-    >
-      {days.map((d) => (
-        <option key={d}>{d}</option>
-      ))}
-    </select>
+<div className="w-full rounded-[1.35rem] border bg-white px-3 py-3">
+  <label className="mb-1 block text-sm font-black text-sky-800">
+    📅 Kalender
+  </label>
+
+  <input
+    type="date"
+    value={newTaskDate}
+    min={new Date().toISOString().split("T")[0]}
+    onChange={(e) => {
+      const selectedDate = e.target.value;
+
+      setNewTaskDate(selectedDate);
+      setNewTaskDay(getDayKeyFromDate(selectedDate));
+    }}
+    className="block w-full min-w-0 border-0 bg-transparent p-0 font-bold text-slate-800 outline-none"
+  />
+</div>
 
     <select
       value={String(newTaskTarget)}
