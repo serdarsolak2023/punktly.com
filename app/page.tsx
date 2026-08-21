@@ -4115,13 +4115,36 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
     </div>
   </div>
 )}
-      {celebration && (
-        <div className="fixed inset-x-4 top-5 z-50 mx-auto max-w-md animate-pop rounded-[1.5rem] sm:rounded-[2rem] sm:rounded-[2.8rem] border-4 border-yellow-300 bg-white p-4 text-center text-xl font-black text-sky-950 shadow-[0_20px_55px_rgba(14,165,233,.15)]">
-          {celebration}
-          <div className="absolute left-8 top-12 animate-coin"><Coin className="h-10 w-10" /></div>
-          <div className="absolute right-10 top-14 animate-coin"><Coin className="h-10 w-10 object-cover" /></div>
-        </div>
-      )}
+{celebration && (
+  <div
+    className="
+      fixed left-1/2 top-5 z-50
+      w-auto min-w-[260px] max-w-[90vw]
+      -translate-x-1/2
+      animate-pop
+      rounded-[1.8rem]
+      border-4 border-yellow-300
+      bg-white
+      px-6 py-4
+      text-center
+      shadow-[0_20px_55px_rgba(14,165,233,.15)]
+      sm:max-w-xl
+      md:max-w-2xl
+    "
+  >
+    <p className="whitespace-normal break-words text-sm font-black leading-relaxed text-sky-950 sm:text-base">
+      {celebration}
+    </p>
+
+    <div className="absolute left-3 top-1/2 -translate-y-1/2 animate-coin">
+      <Coin className="h-7 w-7 sm:h-8 sm:w-8" />
+    </div>
+
+    <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-coin">
+      <Coin className="h-7 w-7 sm:h-8 sm:w-8 object-cover" />
+    </div>
+  </div>
+)}
 
       {showLoginWelcomePopup && isPurchased && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-slate-950/60 p-3 backdrop-blur-md">
