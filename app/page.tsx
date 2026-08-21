@@ -240,7 +240,9 @@ const maintenanceMode = false;
   const [editingChildId, setEditingChildId] = useState<number | null>(null);
   const [usePresetTask, setUsePresetTask] = useState(false);
 const [useCustomTask, setUseCustomTask] = useState(true);
-const [newTaskDeadline, setNewTaskDeadline] = useState<"today" | "tomorrow" | "threeDays" | "sevenDays">("today");
+const [newTaskDeadline, setNewTaskDeadline] = useState<
+  "oneDay" | "twoDays" | "threeDays" | "fourDays" | "fiveDays"
+>("oneDay");
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskCoins, setNewTaskCoins] = useState(0);
   const [newTaskRepeat, setNewTaskRepeat] = useState<Repeat>("täglich");
@@ -579,18 +581,18 @@ function isTimestampInDashboardFilter(timestamp?: number) {
 function getTaskDeadlineAt() {
   const date = new Date();
 
-  if (newTaskDeadline === "tomorrow") {
-    date.setDate(date.getDate() + 1);
-  }
+  const daysToAdd =
+    newTaskDeadline === "oneDay"
+      ? 1
+      : newTaskDeadline === "twoDays"
+      ? 2
+      : newTaskDeadline === "threeDays"
+      ? 3
+      : newTaskDeadline === "fourDays"
+      ? 4
+      : 5;
 
-  if (newTaskDeadline === "threeDays") {
-    date.setDate(date.getDate() + 3);
-  }
-
-  if (newTaskDeadline === "sevenDays") {
-    date.setDate(date.getDate() + 7);
-  }
-
+  date.setDate(date.getDate() + daysToAdd);
   date.setHours(23, 59, 59, 999);
 
   return date.getTime();
@@ -6071,26 +6073,28 @@ const kidLearningWaiting = learningTasks.filter(
       <option value="wöchentlich">Wöchentlich</option>
     </select>
 
-    {newTaskRepeat === "einmalig" && (
-      <select
-        value={newTaskDeadline}
-        onChange={(e) =>
-          setNewTaskDeadline(
-            e.target.value as
-              | "today"
-              | "tomorrow"
-              | "threeDays"
-              | "sevenDays"
-          )
-        }
-        className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-      >
-        <option value="today">Frist: Heute</option>
-        <option value="tomorrow">Frist: Morgen</option>
-        <option value="threeDays">Frist: In 3 Tagen</option>
-        <option value="sevenDays">Frist: In 7 Tagen</option>
-      </select>
-    )}
+{newTaskRepeat === "einmalig" && (
+  <select
+    value={newTaskDeadline}
+    onChange={(e) =>
+      setNewTaskDeadline(
+        e.target.value as
+          | "oneDay"
+          | "twoDays"
+          | "threeDays"
+          | "fourDays"
+          | "fiveDays"
+      )
+    }
+    className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+  >
+    <option value="oneDay">Frist: 1 Tag</option>
+    <option value="twoDays">Frist: 2 Tage</option>
+    <option value="threeDays">Frist: 3 Tage</option>
+    <option value="fourDays">Frist: 4 Tage</option>
+    <option value="fiveDays">Frist: 5 Tage</option>
+  </select>
+)}
 
     <select
       value={newTaskDay}
@@ -6183,26 +6187,28 @@ const kidLearningWaiting = learningTasks.filter(
       <option value="wöchentlich">Wöchentlich</option>
     </select>
 
-    {newTaskRepeat === "einmalig" && (
-      <select
-        value={newTaskDeadline}
-        onChange={(e) =>
-          setNewTaskDeadline(
-            e.target.value as
-              | "today"
-              | "tomorrow"
-              | "threeDays"
-              | "sevenDays"
-          )
-        }
-        className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-      >
-        <option value="today">Frist: Heute</option>
-        <option value="tomorrow">Frist: Morgen</option>
-        <option value="threeDays">Frist: In 3 Tagen</option>
-        <option value="sevenDays">Frist: In 7 Tagen</option>
-      </select>
-    )}
+{newTaskRepeat === "einmalig" && (
+  <select
+    value={newTaskDeadline}
+    onChange={(e) =>
+      setNewTaskDeadline(
+        e.target.value as
+          | "oneDay"
+          | "twoDays"
+          | "threeDays"
+          | "fourDays"
+          | "fiveDays"
+      )
+    }
+    className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
+  >
+    <option value="oneDay">Frist: 1 Tag</option>
+    <option value="twoDays">Frist: 2 Tage</option>
+    <option value="threeDays">Frist: 3 Tage</option>
+    <option value="fourDays">Frist: 4 Tage</option>
+    <option value="fiveDays">Frist: 5 Tage</option>
+  </select>
+)}
 
     <select
       value={newTaskDay}
@@ -6248,7 +6254,7 @@ const kidLearningWaiting = learningTasks.filter(
       setSelectedPreset("");
       setUsePresetTask(false);
       setUseCustomTask(true);
-      setNewTaskDeadline("today");
+      setNewTaskDeadline("oneDay");
     }}
     className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
   >
