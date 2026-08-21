@@ -5490,15 +5490,25 @@ status:"verpasst"
 const groupTasks = childTasks.filter((t) => {
   if (t.status !== group.status) return false;
 
-  // Sicherheitsprüfung:
-  // Eine Aufgabe mit Startdatum in der Zukunft
-  // darf niemals unter "Verpasst" erscheinen.
-  if (
-    group.status === "verpasst" &&
-    t.scheduledDate &&
-    new Date(`${t.scheduledDate}T00:00:00`).getTime() > Date.now()
-  ) {
-    return false;
+  if (group.status === "verpasst") {
+    // Neue Aufgaben mit echtem Kalenderdatum
+    if (
+      t.scheduledDate &&
+      new Date(`${t.scheduledDate}T00:00:00`).getTime() > Date.now()
+    ) {
+      return false;
+    }
+
+    // Alte Aufgaben ohne scheduledDate:
+    // Wenn der berechnete Wochentag noch heute oder in der Zukunft liegt,
+    // darf die Aufgabe nicht als "verpasst" angezeigt werden.
+    if (!t.scheduledDate) {
+      const taskDate = getCalendarDateForDay(t.day);
+
+      if (taskDate.getTime() >= getStartOfDay(0)) {
+        return false;
+      }
+    }
   }
 
   return true;
