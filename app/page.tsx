@@ -2368,17 +2368,21 @@ setTasks(uniqueTasks);
       return;
     }
 
-    try {
-      await setDoc(
-        doc(db, "users", user.uid, collectionName, String(item.id)),
-        {
-          ...item,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      );
+try {
+  const cleanItem = Object.fromEntries(
+    Object.entries(item).filter(([, value]) => value !== undefined)
+  );
 
-    } catch (error) {
+  await setDoc(
+    doc(db, "users", user.uid, collectionName, String(item.id)),
+    {
+      ...cleanItem,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+} catch (error) {
       console.error("Punktly Firebase Save Fehler:", error);
       celebrate("Firebase konnte Daten nicht speichern.");
     }
