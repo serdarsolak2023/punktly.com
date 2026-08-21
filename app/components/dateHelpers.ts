@@ -106,10 +106,16 @@ function getCalendarDateLabel(day: string) {
     year: "2-digit",
   })}`;
 }
-export
-function shouldTaskBeMissed(task: Task) {
+export function shouldTaskBeMissed(task: Task) {
   if (task.status !== "offen") return false;
 
+  // Neue Aufgaben mit echter Frist:
+  // Erst nach Ablauf von deadlineAt als "verpasst" markieren.
+  if (typeof task.deadlineAt === "number") {
+    return Date.now() > task.deadlineAt;
+  }
+
+  // Alte Aufgaben ohne deadlineAt weiterhin unterstützen.
   const order = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const today = getTodayDay();
 
@@ -120,7 +126,14 @@ function shouldTaskBeMissed(task: Task) {
 
   return taskIndex < todayIndex;
 }
-export
-function isTaskForToday(task: Task) {
+export function isTaskForToday(task: Task) {
+  // Neue Aufgaben mit konkretem Kalenderdatum
+  if (task.scheduledDate) {
+    const today = new Date().toISOString().split("T")[0];
+
+    return task.scheduledDate === today;
+  }
+
+  // Alte Aufgaben ohne Kalenderdatum funktionieren weiterhin
   return task.day === getTodayDay();
 }

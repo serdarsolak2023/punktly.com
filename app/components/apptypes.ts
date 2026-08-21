@@ -86,6 +86,7 @@ export type Task = {
   repeat: Repeat;
   status: Status;
   day: string;
+  scheduledDate?: string;
   completedAt?: number;
   submittedAt?: number;
   missedAt?: number;

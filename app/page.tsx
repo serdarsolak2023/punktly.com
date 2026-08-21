@@ -109,10 +109,11 @@ type Task = {
   repeat: Repeat;
   status: Status;
   day: string;
+  scheduledDate?: string;
   completedAt?: number;
-submittedAt?: number;
-missedAt?: number;
-deadlineAt?: number;
+  submittedAt?: number;
+  missedAt?: number;
+  deadlineAt?: number;
 };
 type Reward = {
   id: number;
@@ -248,6 +249,9 @@ const [newTaskDeadline, setNewTaskDeadline] = useState<
   const [newTaskRepeat, setNewTaskRepeat] = useState<Repeat>("täglich");
   const [newTaskTarget, setNewTaskTarget] = useState<number | "all">("all");
   const [newTaskDay, setNewTaskDay] = useState("Mo");
+  const [newTaskDate, setNewTaskDate] = useState(
+  new Date().toISOString().split("T")[0]
+);
   const [selectedPreset, setSelectedPreset] = useState("");
   const [selectedPremiumPlan, setSelectedPremiumPlan] = useState<"monthly" | "yearly">("yearly");
   const [googlePlayOpen, setGooglePlayOpen] = useState(false);
@@ -416,21 +420,54 @@ const childTasks = tasks
         }
       : task
   )
-  .filter((t) => {
-    const belongsToChild = t.childId === child.id;
+.filter((t) => {
+  const belongsToChild = t.childId === child.id;
 
-    if (!belongsToChild) return false;
+  if (!belongsToChild) return false;
 
-    if (childTaskDayFilter === "today") {
-      return t.day === getTodayDay();
-    }
+// Neue einmalige Aufgaben mit echtem Kalenderdatum und Frist
+if (t.scheduledDate && t.repeat === "einmalig") {
+  const startDate = new Date(`${t.scheduledDate}T00:00:00`);
 
-    if (childTaskDayFilter === "tomorrow") {
-      return t.day === getTomorrowDay();
-    }
+  const today = new Date();
+  today.setHours(12, 0, 0, 0);
 
-    return true;
-  });
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const weekEnd = new Date(today);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  weekEnd.setHours(23, 59, 59, 999);
+
+  const deadline =
+    typeof t.deadlineAt === "number"
+      ? new Date(t.deadlineAt)
+      : startDate;
+
+  if (childTaskDayFilter === "today") {
+    return today >= startDate && today <= deadline;
+  }
+
+  if (childTaskDayFilter === "tomorrow") {
+    return tomorrow >= startDate && tomorrow <= deadline;
+  }
+
+  if (childTaskDayFilter === "week") {
+    return startDate <= weekEnd && deadline >= today;
+  }
+}
+
+  // Alte Aufgaben ohne scheduledDate
+  if (childTaskDayFilter === "today") {
+    return t.day === getTodayDay();
+  }
+
+  if (childTaskDayFilter === "tomorrow") {
+    return t.day === getTomorrowDay();
+  }
+
+  return true;
+});
 const waitingTasks = tasks.filter((t) => t.status === "wartet");
 const waitingRewards = rewards.filter((r) => r.status === "wartet");
 
@@ -577,9 +614,15 @@ function isTimestampInDashboardFilter(timestamp?: number) {
 
   return timestamp >= getStartOfDay(6) && timestamp <= getEndOfDay(0);
 }
+function getDayKeyFromDate(dateString: string) {
+  const date = new Date(`${dateString}T12:00:00`);
 
+  const dayMap = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+
+  return dayMap[date.getDay()];
+}
 function getTaskDeadlineAt() {
-  const date = new Date();
+  const date = new Date(`${newTaskDate}T12:00:00`);
 
   const daysToAdd =
     newTaskDeadline === "oneDay"
@@ -942,15 +985,38 @@ setSavedParentPin(resetPinHash);
     }
   }
 
-  function applyTaskPreset(value: string) {
-    setSelectedPreset(value);
-    const preset = taskPresets.find((p) => p.title === value);
-    if (!preset) return;
-    setNewTaskTitle(preset.title);
-    setNewTaskCoins(preset.coins);
-    setNewTaskRepeat(preset.repeat);
-    setNewTaskDay(preset.day);
+ function applyTaskPreset(value: string) {
+  setSelectedPreset(value);
+
+  const preset = taskPresets.find((p) => p.title === value);
+  if (!preset) return;
+
+  setNewTaskTitle(preset.title);
+  setNewTaskCoins(preset.coins);
+  setNewTaskRepeat(preset.repeat);
+  setNewTaskDay(preset.day);
+
+  const dayOrder = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+  const targetDayIndex = dayOrder.indexOf(preset.day);
+
+  if (targetDayIndex !== -1) {
+    const date = new Date();
+    const todayIndex = date.getDay();
+
+    const diff = (targetDayIndex - todayIndex + 7) % 7;
+
+    date.setDate(date.getDate() + diff);
+
+    const dateString =
+      date.getFullYear() +
+      "-" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(date.getDate()).padStart(2, "0");
+
+    setNewTaskDate(dateString);
   }
+}
 
    function submitTask(taskId: number) {
     const task = tasks.find(t => t.id === taskId);
@@ -1193,7 +1259,20 @@ async function resetFamilyContent() {
     if (editingTaskId) {
       const editedTask = tasks.find(t => t.id === editingTaskId);
       if (editedTask) {
-        const updatedTask: Task = { ...editedTask, title: newTaskTitle, coins: Math.max(1, newTaskCoins), xp: Math.max(5, newTaskCoins * 2), repeat: newTaskRepeat, childId: newTaskTarget, day: newTaskDay };
+        const updatedTask: Task = {
+  ...editedTask,
+  title: newTaskTitle,
+  coins: Math.max(1, newTaskCoins),
+  xp: Math.max(5, newTaskCoins * 2),
+  repeat: newTaskRepeat,
+  childId: newTaskTarget,
+  day: newTaskDay,
+  scheduledDate: newTaskDate,
+  deadlineAt:
+    newTaskRepeat === "einmalig"
+      ? getTaskDeadlineAt()
+      : undefined,
+};
         setTasks(prev => prev.map(t => t.id === editingTaskId ? updatedTask : t));
         saveTaskNow(updatedTask);
       }
@@ -1201,33 +1280,35 @@ async function resetFamilyContent() {
       celebrate("Aufgabe bearbeitet!");
     } else {
 if (newTaskTarget === "all") {
-  const tasksForChildren = children.map((childItem, index) => ({
-    id: Date.now() + index,
-    childId: childItem.id,
-    title: newTaskTitle,
-    coins: Math.max(1, newTaskCoins),
-    xp: Math.max(5, newTaskCoins * 2),
-    repeat: newTaskRepeat,
-    status: "offen" as Status,
-    day: newTaskDay,
-    deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
-  }));
+const tasksForChildren = children.map((childItem, index) => ({
+  id: Date.now() + index,
+  childId: childItem.id,
+  title: newTaskTitle,
+  coins: Math.max(1, newTaskCoins),
+  xp: Math.max(5, newTaskCoins * 2),
+  repeat: newTaskRepeat,
+  status: "offen" as Status,
+  day: newTaskDay,
+  scheduledDate: newTaskDate,
+  deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
+}));
 
 setTasks(prev => [...prev, ...tasksForChildren]);
 tasksForChildren.forEach(taskItem => saveFamilyItem("tasks", taskItem));
 celebrate("Aufgabe für alle Kinder einzeln angelegt!");
 } else {
-  const newTask = {
-    id: Date.now(),
-    childId: newTaskTarget,
-    title: newTaskTitle,
-    coins: Math.max(1, newTaskCoins),
-    xp: Math.max(5, newTaskCoins * 2),
-    repeat: newTaskRepeat,
-    status: "offen" as Status,
-    day: newTaskDay,
-    deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
-  };
+const newTask = {
+  id: Date.now(),
+  childId: newTaskTarget,
+  title: newTaskTitle,
+  coins: Math.max(1, newTaskCoins),
+  xp: Math.max(5, newTaskCoins * 2),
+  repeat: newTaskRepeat,
+  status: "offen" as Status,
+  day: newTaskDay,
+  scheduledDate: newTaskDate,
+  deadlineAt: newTaskRepeat === "einmalig" ? getTaskDeadlineAt() : undefined,
+};
 
   setTasks(prev => [...prev, newTask]);
   saveFamilyItem("tasks", newTask);
@@ -1257,16 +1338,38 @@ const tasksToAdd = pack.presets.flatMap((title, index) => {
       const dedupeKey = `${preset.title}-${childItem.id}`;
       return !existingTitles.has(dedupeKey);
     })
-    .map((childItem, childIndex) => ({
-      id: Date.now() + index * 100 + childIndex,
-      childId: childItem.id,
-      title: preset.title,
-      coins: preset.coins,
-      xp: Math.max(5, preset.coins * 2),
-      repeat: preset.repeat,
-      status: "offen" as Status,
-      day: preset.day,
-    }));
+.map((childItem, childIndex) => {
+  const dayOrder = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+  const targetDayIndex = dayOrder.indexOf(preset.day);
+
+  const scheduledDate = new Date();
+
+  if (targetDayIndex !== -1) {
+    const todayIndex = scheduledDate.getDay();
+    const diff = (targetDayIndex - todayIndex + 7) % 7;
+
+    scheduledDate.setDate(scheduledDate.getDate() + diff);
+  }
+
+  const scheduledDateString =
+    scheduledDate.getFullYear() +
+    "-" +
+    String(scheduledDate.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(scheduledDate.getDate()).padStart(2, "0");
+
+  return {
+    id: Date.now() + index * 100 + childIndex,
+    childId: childItem.id,
+    title: preset.title,
+    coins: preset.coins,
+    xp: Math.max(5, preset.coins * 2),
+    repeat: preset.repeat,
+    status: "offen" as Status,
+    day: preset.day,
+    scheduledDate: scheduledDateString,
+  };
+});
 });
 
     if (tasksToAdd.length === 0) {
@@ -1307,16 +1410,21 @@ playSound("click");
 celebrate(`${tasksToAdd.length} Aufgaben aus ${pack.title} hinzugefügt!`);
   }
 
-  function editTask(task: Task) {
-    setEditingTaskId(task.id);
-    setNewTaskTitle(task.title);
-    setNewTaskCoins(task.coins);
-    setNewTaskRepeat(task.repeat);
-    setNewTaskTarget(task.childId);
-    setNewTaskDay(task.day);
-    setArea("parent");
-    setParentView("tasks");
-  }
+function editTask(task: Task) {
+  setEditingTaskId(task.id);
+  setNewTaskTitle(task.title);
+  setNewTaskCoins(task.coins);
+  setNewTaskRepeat(task.repeat);
+  setNewTaskTarget(task.childId);
+  setNewTaskDay(task.day);
+
+  setNewTaskDate(
+    task.scheduledDate || new Date().toISOString().split("T")[0]
+  );
+
+  setArea("parent");
+  setParentView("tasks");
+}
 
   function deleteTask(id: number) {
     setTasks(prev => prev.filter(t => t.id !== id));
@@ -5190,10 +5298,25 @@ task.status==="offen"
   {task.deadlineAt
     ? formatDateTime(task.deadlineAt)
     : "Keine Frist"}
+<p className="mt-1 text-sm font-bold text-sky-700">
+  🪙 {task.coins}
+  ·{" "}
+  {task.scheduledDate
+    ? new Date(`${task.scheduledDate}T12:00:00`).toLocaleDateString("de-DE", {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : task.day}
+  · {task.repeat}
 </p>
-<p className="mt-2 text-xs font-black text-amber-600">
-🪙 {task.coins}
-</p>
+
+{task.deadlineAt && (
+  <p className="mt-2 text-sm font-black text-red-600">
+    ⏰ Frist bis: {formatDateTime(task.deadlineAt)}
+  </p>
+)}
 
 {task.status==="offen" && (
 
@@ -5349,7 +5472,14 @@ task.status==="offen"
 </p>
 
 <p className="text-xs text-slate-500">
-{getTaskDayDateLabel(task.day)}
+  {task.scheduledDate
+    ? new Date(`${task.scheduledDate}T12:00:00`).toLocaleDateString("de-DE", {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : getTaskDayDateLabel(task.day)}
 </p>
 
 {task.status==="offen" && (
@@ -6096,15 +6226,24 @@ const kidLearningWaiting = learningTasks.filter(
   </select>
 )}
 
-    <select
-      value={newTaskDay}
-      onChange={(e) => setNewTaskDay(e.target.value)}
-      className="w-full rounded-[1.35rem] border bg-white p-3 font-bold"
-    >
-      {days.map((d) => (
-        <option key={d}>{d}</option>
-      ))}
-    </select>
+<div className="w-full rounded-[1.35rem] border bg-white px-3 py-3">
+  <label className="mb-1 block text-sm font-black text-sky-800">
+    📅 Kalender
+  </label>
+
+  <input
+    type="date"
+    value={newTaskDate}
+    min={new Date().toISOString().split("T")[0]}
+    onChange={(e) => {
+      const selectedDate = e.target.value;
+
+      setNewTaskDate(selectedDate);
+      setNewTaskDay(getDayKeyFromDate(selectedDate));
+    }}
+    className="block w-full min-w-0 border-0 bg-transparent p-0 font-bold text-slate-800 outline-none"
+  />
+</div>
 
     <select
       value={String(newTaskTarget)}
@@ -6243,23 +6382,24 @@ const kidLearningWaiting = learningTasks.filter(
 )}
   </div>
 
-  <button
-    type="button"
-    onClick={() => {
-      setNewTaskTitle("");
-      setNewTaskCoins(0);
-      setNewTaskRepeat("täglich");
-      setNewTaskTarget("all");
-      setNewTaskDay("Mo");
-      setSelectedPreset("");
-      setUsePresetTask(false);
-      setUseCustomTask(true);
-      setNewTaskDeadline("oneDay");
-    }}
-    className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
-  >
-    🗑️ Leeren
-  </button>
+<button
+  type="button"
+  onClick={() => {
+    setNewTaskTitle("");
+    setNewTaskCoins(0);
+    setNewTaskRepeat("täglich");
+    setNewTaskTarget("all");
+    setNewTaskDay("Mo");
+    setNewTaskDate(new Date().toISOString().split("T")[0]);
+    setSelectedPreset("");
+    setUsePresetTask(false);
+    setUseCustomTask(true);
+    setNewTaskDeadline("oneDay");
+  }}
+  className="rounded-[1.35rem] bg-red-100 px-4 py-3 font-black text-red-700"
+>
+  🗑️ Leeren
+</button>
 
   <button
     onClick={saveTask}
@@ -6355,7 +6495,10 @@ group.status===parentTaskFilter
 .map(group=>{
 
 const filteredTasks = tasks.filter(t => {
-  if (parentTaskChildFilter !== "all" && t.childId !== parentTaskChildFilter) {
+  if (
+    parentTaskChildFilter !== "all" &&
+    t.childId !== parentTaskChildFilter
+  ) {
     return false;
   }
 
@@ -6365,11 +6508,22 @@ const filteredTasks = tasks.filter(t => {
     return isTaskForToday(t);
   }
 
+  // Erledigte Aufgaben maximal 48 Stunden anzeigen
   if (t.status === "erledigt") {
     if (!t.completedAt) return true;
 
     return (
       Date.now() - t.completedAt <=
+      48 * 60 * 60 * 1000
+    );
+  }
+
+  // Verpasste Aufgaben maximal 48 Stunden anzeigen
+  if (t.status === "verpasst") {
+    if (!t.missedAt) return true;
+
+    return (
+      Date.now() - t.missedAt <=
       48 * 60 * 60 * 1000
     );
   }
@@ -6832,12 +6986,23 @@ const dayTasks = tasks.filter((t) => {
     t.childId === calendarChildFilter ||
     t.childId === "all";
 
-  const belongsToDay =
-    t.day === day ||
-    (t.repeat === "täglich" &&
-      ["Mo", "Di", "Mi", "Do", "Fr"].includes(day));
+const calendarDate = getCalendarDateForDay(day);
 
-  return belongsToSelectedChild && belongsToDay;
+const calendarDateString =
+  calendarDate.getFullYear() +
+  "-" +
+  String(calendarDate.getMonth() + 1).padStart(2, "0") +
+  "-" +
+  String(calendarDate.getDate()).padStart(2, "0");
+
+const belongsToDay =
+  t.scheduledDate && t.repeat === "einmalig"
+    ? t.scheduledDate === calendarDateString
+    : t.day === day ||
+      (t.repeat === "täglich" &&
+        ["Mo", "Di", "Mi", "Do", "Fr"].includes(day));
+
+return belongsToSelectedChild && belongsToDay;
 });
 const todayShort = currentDateTime.toLocaleDateString("de-DE", {
   weekday: "short",
