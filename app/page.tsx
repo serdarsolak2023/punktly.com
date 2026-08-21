@@ -359,30 +359,49 @@ useEffect(() => {
 }, [learningTasks]);
 useEffect(() => {
   const interval = setInterval(() => {
-    const tasksToMiss = tasks.filter(shouldTaskBeMissed);
-
-    if (tasksToMiss.length === 0) return;
-
     const now = Date.now();
 
-    const updatedTasks = tasks.map(task =>
-      shouldTaskBeMissed(task)
-        ? {
-            ...task,
-            status: "verpasst" as Status,
-            missedAt: now,
-          }
-        : task
-    );
+    const correctedTasks = tasks.map((task) => {
+      // Falsch als verpasst gespeicherte Zukunftsaufgabe korrigieren
+      if (
+        task.status === "verpasst" &&
+        task.scheduledDate &&
+        new Date(`${task.scheduledDate}T00:00:00`).getTime() > now
+      ) {
+        return {
+          ...task,
+          status: "offen" as Status,
+          missedAt: undefined,
+        };
+      }
 
-    setTasks(updatedTasks);
+      // Wirklich abgelaufene Aufgabe auf verpasst setzen
+      if (shouldTaskBeMissed(task)) {
+        return {
+          ...task,
+          status: "verpasst" as Status,
+          missedAt: task.missedAt || now,
+        };
+      }
 
-    tasksToMiss.forEach(task => {
-      saveTaskNow({
-        ...task,
-        status: "verpasst" as Status,
-        missedAt: now,
-      });
+      return task;
+    });
+
+    const changedTasks = correctedTasks.filter((task, index) => {
+      const oldTask = tasks[index];
+
+      return (
+        task.status !== oldTask.status ||
+        task.missedAt !== oldTask.missedAt
+      );
+    });
+
+    if (changedTasks.length === 0) return;
+
+    setTasks(correctedTasks);
+
+    changedTasks.forEach((task) => {
+      saveTaskNow(task);
     });
   }, 60000);
 
@@ -411,15 +430,31 @@ useEffect(() => {
     profileBadges: []
   };
 const childTasks = tasks
-  .map((task) =>
-    shouldTaskBeMissed(task)
-      ? {
-          ...task,
-          status: "verpasst" as Status,
-          missedAt: task.missedAt || Date.now(),
-        }
-      : task
-  )
+  .map((task) => {
+    // Falls eine Aufgabe fälschlich als verpasst gespeichert wurde,
+    // aber ihr Startdatum noch in der Zukunft liegt:
+    if (
+      task.status === "verpasst" &&
+      task.scheduledDate &&
+      new Date(`${task.scheduledDate}T00:00:00`).getTime() > Date.now()
+    ) {
+      return {
+        ...task,
+        status: "offen" as Status,
+        missedAt: undefined,
+      };
+    }
+
+    if (shouldTaskBeMissed(task)) {
+      return {
+        ...task,
+        status: "verpasst" as Status,
+        missedAt: task.missedAt || Date.now(),
+      };
+    }
+
+    return task;
+  })
 .filter((t) => {
   const belongsToChild = t.childId === child.id;
 
@@ -5426,10 +5461,22 @@ status:"verpasst"
 .filter(group=>taskFilter==="alle"||group.status===taskFilter)
 .map(group=>{
 
-const groupTasks=
-childTasks.filter(
-t=>t.status===group.status
-);
+const groupTasks = childTasks.filter((t) => {
+  if (t.status !== group.status) return false;
+
+  // Sicherheitsprüfung:
+  // Eine Aufgabe mit Startdatum in der Zukunft
+  // darf niemals unter "Verpasst" erscheinen.
+  if (
+    group.status === "verpasst" &&
+    t.scheduledDate &&
+    new Date(`${t.scheduledDate}T00:00:00`).getTime() > Date.now()
+  ) {
+    return false;
+  }
+
+  return true;
+});
 
 if(groupTasks.length===0)
 return null;
