@@ -4119,29 +4119,36 @@ className="rounded-[1rem] bg-red-100 p-4 text-xl font-black"
   <div
     className="
       fixed left-1/2 top-5 z-50
-      w-auto min-w-[260px] max-w-[90vw]
+      w-[90vw] max-w-2xl
       -translate-x-1/2
       animate-pop
       rounded-[1.8rem]
       border-4 border-yellow-300
       bg-white
-      px-6 py-4
-      text-center
+      px-3 py-4
       shadow-[0_20px_55px_rgba(14,165,233,.15)]
-      sm:max-w-xl
-      md:max-w-2xl
+      sm:w-auto sm:min-w-[360px] sm:px-4
     "
   >
-    <p className="whitespace-normal break-words text-sm font-black leading-relaxed text-sky-950 sm:text-base">
-      {celebration}
-    </p>
+    <div className="grid grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-2 sm:grid-cols-[52px_minmax(0,1fr)_52px] sm:gap-4">
 
-    <div className="absolute left-3 top-1/2 -translate-y-1/2 animate-coin">
-      <Coin className="h-7 w-7 sm:h-8 sm:w-8" />
-    </div>
+      {/* Logo links */}
+      <div className="flex items-center justify-center">
+        <Coin className="h-8 w-8 shrink-0 animate-coin sm:h-10 sm:w-10" />
+      </div>
 
-    <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-coin">
-      <Coin className="h-7 w-7 sm:h-8 sm:w-8 object-cover" />
+      {/* Text */}
+      <div className="min-w-0 text-center">
+        <p className="whitespace-normal break-words text-sm font-black leading-relaxed text-sky-950 sm:text-base">
+          {celebration}
+        </p>
+      </div>
+
+      {/* Logo rechts */}
+      <div className="flex items-center justify-center">
+        <Coin className="h-8 w-8 shrink-0 animate-coin sm:h-10 sm:w-10" />
+      </div>
+
     </div>
   </div>
 )}
@@ -7500,72 +7507,7 @@ className={`min-h-[150px] rounded-[1.3rem] border-2 p-3 shadow-md ${
                         <span className="text-xs font-bold text-sky-600">
                           ab {badge.goal} Aufgaben
                         </span>
-                        {(() => {
-  const reached =
-    Number(childItem.completedCount || 0) >= badge.goal;
-
-  const rewardCoins =
-    Number(childItem.taskBadgeRewards?.[badge.name] || 0);
-
-  const rewardPaid =
-    (childItem.paidTaskBadgeRewards || []).includes(badge.name);
-
-  if (!reached) {
-    return (
-      <p className="mt-3 text-xs font-bold text-slate-500">
-        🔒 Noch nicht erreicht
-      </p>
-    );
-  }
-
-  if (rewardPaid) {
-    return (
-      <p className="mt-3 text-xs font-black text-green-600">
-        ✅ Bonus bereits ausgezahlt
-      </p>
-    );
-  }
-
-  if (rewardCoins <= 0) {
-    return (
-      <p className="mt-3 text-xs font-bold text-amber-600">
-        ⚠️ Keine Bonus-Coins festgelegt
-      </p>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={() => {
-        const updatedChild: Child = {
-          ...childItem,
-          coins:
-            Number(childItem.coins || 0) + rewardCoins,
-          paidTaskBadgeRewards: [
-            ...(childItem.paidTaskBadgeRewards || []),
-            badge.name,
-          ],
-        };
-
-        setChildren((prev) =>
-          prev.map((c) =>
-            c.id === childItem.id ? updatedChild : c
-          )
-        );
-
-        saveChildNow(updatedChild);
-
-        celebrate(
-          `🏆 ${badge.name}: +${rewardCoins} Bonus-Coins ausgezahlt!`
-        );
-      }}
-      className="mt-3 w-full rounded-[1rem] bg-yellow-400 px-3 py-2 text-sm font-black text-yellow-950"
-    >
-      🪙 {rewardCoins} Bonus-Coins auszahlen
-    </button>
-  );
-})()}
+                        
                       </div>
                     </div>
                   ))}
