@@ -5246,9 +5246,143 @@ während Eltern alles einfach und sicher verwalten können.
 
                   </div>
                   <div className="space-y-5">
-                    <Panel title="🏆 Deine Abzeichen">
-                      <div className="flex flex-wrap gap-2">{cleanAchievements(child.achievements || []).map(a => <span key={a} className="rounded-full bg-yellow-100 px-3 py-2 font-black text-yellow-900">⭐ {a}</span>)}</div>
-                    </Panel>
+<Panel title="🏆 Deine Abzeichen">
+  <div className="space-y-5">
+
+    {/* Zuletzt erreicht */}
+    <div className="rounded-[1.6rem] bg-gradient-to-r from-yellow-50 to-amber-100 p-5">
+      <p className="text-sm font-black text-amber-700">
+        ✨ Zuletzt erreicht
+      </p>
+
+      <p className="mt-2 text-xl font-black text-sky-950">
+        🏅{" "}
+        {cleanAchievements(child.achievements || []).length > 0
+          ? cleanAchievements(child.achievements || [])[
+              cleanAchievements(child.achievements || []).length - 1
+            ]
+          : "Noch kein Abzeichen"}
+      </p>
+    </div>
+
+    {/* Nächstes Abzeichen */}
+    <div className="rounded-[1.6rem] bg-sky-50 p-5">
+      <p className="text-sm font-black text-sky-700">
+        🎯 Nächstes Abzeichen
+      </p>
+
+      <div className="mt-2 flex items-center justify-between gap-3">
+        <p className="font-black text-sky-950">
+          ⭐ Aufgaben-Profi
+        </p>
+
+        <span className="text-sm font-black text-sky-700">
+          {Math.min(child.completedCount || 0, 10)} / 10
+        </span>
+      </div>
+
+      <div className="mt-3 h-3 overflow-hidden rounded-full bg-white">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 transition-all"
+          style={{
+            width: `${Math.min(
+              100,
+              ((child.completedCount || 0) / 10) * 100
+            )}%`,
+          }}
+        />
+      </div>
+
+      <p className="mt-2 text-xs font-bold text-slate-500">
+        Noch {Math.max(0, 10 - (child.completedCount || 0))} Aufgaben bis zum Abzeichen
+      </p>
+    </div>
+
+    {/* Sammlung */}
+    <div>
+      <p className="mb-3 font-black text-sky-950">
+        🏅 Deine Sammlung
+      </p>
+
+      <div className="grid grid-cols-2 gap-3">
+
+        <div
+          className={`rounded-[1.4rem] p-4 text-center ${
+            (child.completedCount || 0) >= 1
+              ? "bg-green-50"
+              : "bg-slate-100 opacity-60"
+          }`}
+        >
+          <div className="text-3xl">
+            {(child.completedCount || 0) >= 1 ? "🌱" : "🔒"}
+          </div>
+          <p className="mt-1 text-sm font-black">
+            Erste Aufgabe
+          </p>
+          <p className="text-xs text-slate-500">
+            1 Aufgabe
+          </p>
+        </div>
+
+        <div
+          className={`rounded-[1.4rem] p-4 text-center ${
+            (child.completedCount || 0) >= 10
+              ? "bg-yellow-50"
+              : "bg-slate-100 opacity-60"
+          }`}
+        >
+          <div className="text-3xl">
+            {(child.completedCount || 0) >= 10 ? "⭐" : "🔒"}
+          </div>
+          <p className="mt-1 text-sm font-black">
+            Aufgaben-Profi
+          </p>
+          <p className="text-xs text-slate-500">
+            10 Aufgaben
+          </p>
+        </div>
+
+        <div
+          className={`rounded-[1.4rem] p-4 text-center ${
+            (child.streak || 0) >= 7
+              ? "bg-orange-50"
+              : "bg-slate-100 opacity-60"
+          }`}
+        >
+          <div className="text-3xl">
+            {(child.streak || 0) >= 7 ? "🔥" : "🔒"}
+          </div>
+          <p className="mt-1 text-sm font-black">
+            7-Tage-Serie
+          </p>
+          <p className="text-xs text-slate-500">
+            7 Tage geschafft
+          </p>
+        </div>
+
+        <div
+          className={`rounded-[1.4rem] p-4 text-center ${
+            (child.coins || 0) >= 500
+              ? "bg-amber-50"
+              : "bg-slate-100 opacity-60"
+          }`}
+        >
+          <div className="text-3xl">
+            {(child.coins || 0) >= 500 ? "💰" : "🔒"}
+          </div>
+          <p className="mt-1 text-sm font-black">
+            Coin-Sammler
+          </p>
+          <p className="text-xs text-slate-500">
+            500 Coins
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</Panel>
                   </div>
                 </section>
               )}
