@@ -363,17 +363,30 @@ useEffect(() => {
 
     const correctedTasks = tasks.map((task) => {
       // Falsch als verpasst gespeicherte Zukunftsaufgabe korrigieren
-      if (
-        task.status === "verpasst" &&
-        task.scheduledDate &&
-        new Date(`${task.scheduledDate}T00:00:00`).getTime() > now
-      ) {
-        return {
-          ...task,
-          status: "offen" as Status,
-          missedAt: undefined,
-        };
-      }
+if (task.status === "verpasst") {
+  // Neue Aufgabe mit echtem Kalenderdatum:
+  // Zukunft darf niemals "verpasst" sein.
+  if (
+    task.scheduledDate &&
+    new Date(`${task.scheduledDate}T00:00:00`).getTime() > Date.now()
+  ) {
+    return {
+      ...task,
+      status: "offen" as Status,
+      missedAt: undefined,
+    };
+  }
+
+  // Alte tägliche / wöchentliche Aufgabe ohne Kalenderdatum:
+  // nicht dauerhaft als verpasst behalten.
+  if (!task.scheduledDate && task.repeat !== "einmalig") {
+    return {
+      ...task,
+      status: "offen" as Status,
+      missedAt: undefined,
+    };
+  }
+}
 
       // Wirklich abgelaufene Aufgabe auf verpasst setzen
       if (shouldTaskBeMissed(task)) {
@@ -433,17 +446,30 @@ const childTasks = tasks
   .map((task) => {
     // Falls eine Aufgabe fälschlich als verpasst gespeichert wurde,
     // aber ihr Startdatum noch in der Zukunft liegt:
-    if (
-      task.status === "verpasst" &&
-      task.scheduledDate &&
-      new Date(`${task.scheduledDate}T00:00:00`).getTime() > Date.now()
-    ) {
-      return {
-        ...task,
-        status: "offen" as Status,
-        missedAt: undefined,
-      };
-    }
+if (task.status === "verpasst") {
+  // Neue Aufgabe mit echtem Kalenderdatum:
+  // Zukunft darf niemals "verpasst" sein.
+  if (
+    task.scheduledDate &&
+    new Date(`${task.scheduledDate}T00:00:00`).getTime() > Date.now()
+  ) {
+    return {
+      ...task,
+      status: "offen" as Status,
+      missedAt: undefined,
+    };
+  }
+
+  // Alte tägliche / wöchentliche Aufgabe ohne Kalenderdatum:
+  // nicht dauerhaft als verpasst behalten.
+  if (!task.scheduledDate && task.repeat !== "einmalig") {
+    return {
+      ...task,
+      status: "offen" as Status,
+      missedAt: undefined,
+    };
+  }
+}
 
     if (shouldTaskBeMissed(task)) {
       return {
