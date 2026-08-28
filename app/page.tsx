@@ -5998,7 +5998,7 @@ task.status==="offen"
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-[1.8rem] bg-gradient-to-br from-yellow-100 to-orange-200 p-5 shadow-lg">
           <p className="text-sm font-black text-orange-700">
-            ⏳ Zu bestätigen
+            ⏳ Bestätigen
           </p>
 
           <div className="mt-3 space-y-2 text-lg font-black text-slate-900">
@@ -6240,7 +6240,7 @@ const kidLearningWaiting = learningTasks.filter(
           }`}
         >
           {status === "alle" && "📋 Alle"}
-          {status === "wartet" && "🔔 Zu bestätigen"}
+          {status === "wartet" && "🔔 Bestätigen"}
           {status === "offen" && "📝 Offen"}
           {status === "erledigt" && "✅ Erledigt"}
         </button>
@@ -6248,7 +6248,7 @@ const kidLearningWaiting = learningTasks.filter(
     </div>
 
     {[
-      { title: "🔔 Zu bestätigen", status: "wartet" },
+      { title: "🔔 Bestätigen", status: "wartet" },
       { title: "📝 Offene Lernaufgaben", status: "offen" },
       { title: "✅ Erledigt", status: "erledigt" },
     ]
@@ -6747,7 +6747,7 @@ const kidLearningWaiting = learningTasks.filter(
         }`}
       >
         {status === "alle" && "📋 Alle"}
-        {status === "wartet" && "🔔 Zu bestätigen"}
+        {status === "wartet" && "🔔 Bestätigen"}
         {status === "offen" && "📝 Offen"}
         {status === "erledigt" && "✅ Erledigt"}
         {status === "verpasst" && "🔴 Verpasst"}
@@ -6769,7 +6769,7 @@ const kidLearningWaiting = learningTasks.filter(
       }
       className="w-full rounded-[1.4rem] border-2 border-white bg-white/90 p-4 text-lg font-black text-sky-900 shadow-inner"
     >
-      <option value="all">🌈 Alle Kinder anzeigen</option>
+      <option value="all">🧸 Alle Kinder anzeigen</option>
 
       {children.map((childItem) => (
         <option key={childItem.id} value={childItem.id}>
@@ -6781,7 +6781,7 @@ const kidLearningWaiting = learningTasks.filter(
 </div>
 {[
 {
-title:"🔔 Zu bestätigen",
+title:" Bestätigen",
 status:"wartet"
 },
 {
