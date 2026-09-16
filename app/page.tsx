@@ -2998,8 +2998,9 @@ if (maintenanceMode) {
 
         <div className="mt-6 rounded-[1.5rem] bg-sky-50 p-4 text-sm font-black text-sky-800">
           Bitte versuche es Bald erneut 💙
-          Kontakt: Serdar S.
-          Support: Vanessa V.
+          
+          <br>Kontakt: Serdar S.</br>
+          
         </div>
 <button
   type="button"
