@@ -899,7 +899,7 @@ async function saveMessageComment() {
   try {
     setIsSavingMessageComment(true);
 
-    await addDoc(collection(db, "publicmessageComments"), {
+   await addDoc(collection(db, "publicMessageComments"), {
       text: messageComment.trim(),
       createdAt: serverTimestamp(),
     });
@@ -1348,7 +1348,7 @@ const updatedChildren = children.map(child => ({
         doc(db, "users", user.uid, "children", String(child.id)),
         {
           ...child,
-          coins: newCoins,
+          coins: child.coins,
           updatedAt: serverTimestamp(),
         },
         { merge: true }
@@ -2992,7 +2992,7 @@ if (maintenanceMode) {
 
         <p className="mt-4 text-lg font-bold leading-relaxed text-sky-700">
           Wir führen aktuell Wartungsarbeiten durch,
-          damit eure Familien-App noch schneller,
+          damit eure Kinder und Familien -App noch schneller,
           stabiler und schöner wird. Die Vorereitung für Google Play läuft.
         </p>
 
