@@ -184,12 +184,25 @@ const [expandedCalendarDay, setExpandedCalendarDay] = useState<string | null>(nu
   const [parentLearningFilter, setParentLearningFilter] = useState<"alle"|"wartet"|"offen"|"erledigt"|"verpasst">("alle");
   const [parentUnlocked, setParentUnlocked] = useState(false);
   const [pinInput, setPinInput] = useState("");
+  const [pinFailedAttempts, setPinFailedAttempts] = useState(0);
+const [pinLockedUntil, setPinLockedUntil] = useState(0);
+useEffect(() => {
+  const savedLock = Number(
+    localStorage.getItem("punktlyParentPinLockedUntil") || 0
+  );
+
+  if (savedLock > Date.now()) {
+    setPinLockedUntil(savedLock);
+  } else {
+    localStorage.removeItem("punktlyParentPinLockedUntil");
+  }
+}, []);
   const [savedParentPin, setSavedParentPin] = useState("");
   const [showPinKeypad, setShowPinKeypad] = useState(false);
   const [parentDisplayName, setParentDisplayName] = useState("");
   const [newParentPin, setNewParentPin] = useState("");
   const [isAuthReady, setIsAuthReady] = useState(false);
-const maintenanceMode = true;
+const maintenanceMode = false;
   const [maintenancePassword, setMaintenancePassword] = useState("");
 
   const [editingLearningTaskId, setEditingLearningTaskId] = useState<number | null>(null);
@@ -966,6 +979,16 @@ function goStart() {
 }
 
  async function enterParent() {
+    if (Date.now() < pinLockedUntil) {
+    const remainingMinutes = Math.ceil(
+      (pinLockedUntil - Date.now()) / 60000
+    );
+
+    celebrate(
+      `Eltern-PIN gesperrt. Bitte noch ${remainingMinutes} Minute(n) warten.`
+    );
+    return;
+  }
     if (!savedParentPin) {
       if (pinInput.trim().length < 4) {
         celebrate("PIN muss mindestens 4 Zeichen haben.");
@@ -993,14 +1016,30 @@ setSavedParentPin(newPinHash);
     const enteredPinHash = await hashPin(pinInput.trim());
 
 if (enteredPinHash === savedParentPin || pinInput.trim() === savedParentPin) {
+  setPinFailedAttempts(0);
+setPinLockedUntil(0);
+localStorage.removeItem("punktlyParentPinLockedUntil");
       setParentUnlocked(true);
       setArea("parent");
       setParentView("dashboard");
       setPinInput("");
       celebrate("Elternbereich geöffnet!");
-    } else {
-      celebrate("PIN falsch.");
-    }
+} else {
+  const attempts = pinFailedAttempts + 1;
+
+  if (attempts >= 5) {
+    const lockUntil = Date.now() + 5 * 60 * 1000;
+setPinLockedUntil(lockUntil);
+localStorage.setItem("punktlyParentPinLockedUntil", String(lockUntil));
+    setPinFailedAttempts(0);
+    setPinInput("");
+    celebrate("Zu viele falsche Versuche. Bitte 5 Minuten warten.");
+  } else {
+    setPinFailedAttempts(attempts);
+    setPinInput("");
+    celebrate(`PIN falsch. Noch ${5 - attempts} Versuche.`);
+  }
+}
   }
 function openNumberKeypad(
   currentValue: number,
