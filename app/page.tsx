@@ -957,12 +957,13 @@ function celebrate(message: string) {
     setTimeout(() => setCelebration(null), 5000);
   }
 
-  function goStart() {
-    setArea("start");
-    setChildView("home");
-    setParentView("dashboard");
-    setPinInput("");
-  }
+function goStart() {
+  setParentUnlocked(false);
+  setArea("start");
+  setChildView("home");
+  setParentView("dashboard");
+  setPinInput("");
+}
 
  async function enterParent() {
     if (!savedParentPin) {
@@ -4519,7 +4520,7 @@ während Eltern alles einfach und sicher verwalten können.
     })}
   </span>
 </div>
-{area === "parent" && (
+{area === "parent" && parentUnlocked && (
   <button
     type="button"
     onClick={() => setShowContactPopup(true)}
@@ -4547,7 +4548,7 @@ während Eltern alles einfach und sicher verwalten können.
 
   </div>
 )}
-{area === "parent" && (
+{area === "parent" && parentUnlocked && (
 <button
   type="button"
   onClick={() =>
